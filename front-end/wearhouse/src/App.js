@@ -5,15 +5,17 @@ import { ConnectedRouter } from "connected-react-router";
 
 import Browse from "./Containers/Browse/Browse";
 
+import * as actionCreators from "./store/actions/index";
+
 import "./App.scss";
 
 function App() {
     return (
-        <BrowserRouter>
+        <ConnectedRouter history={this.props.history}>
             <Switch>
                 <Route path="/browse" exact render={() => <Browse />} />
             </Switch>
-        </BrowserRouter>
+        </ConnectedRouter>
     );
 }
 
