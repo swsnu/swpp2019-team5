@@ -15,6 +15,13 @@
         "react-scripts": "3.2.0",
         "redux": "^4.0.4"
     },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx}",
+            "!src/index.js",
+            "!src/serviceWorker.js"
+        ]
+    },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
