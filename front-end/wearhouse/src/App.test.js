@@ -15,7 +15,7 @@ const mockStore = getMockStore(
     stubNullState,
     stubNullState,
     stubNullState,
-    stubNullState
+    stubNullState,
 );
 
 describe("App", () => {

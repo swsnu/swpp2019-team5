@@ -14,14 +14,14 @@ const rootReducer = combineReducers({
     item: itemReducer,
     outfit: outfitReducer,
     tagReducer: tagReducer,
-    router: connectRouter(history)
+    router: connectRouter(history),
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(applyMiddleware(...middlewares)),
 );
 
 export default store;

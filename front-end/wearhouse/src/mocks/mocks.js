@@ -10,7 +10,7 @@ const getMockLoginReducer = jest.fn(
                 break;
         }
         return state;
-    }
+    },
 );
 
 const getMockItemReducer = jest.fn(
@@ -20,7 +20,7 @@ const getMockItemReducer = jest.fn(
                 break;
         }
         return state;
-    }
+    },
 );
 
 const getMockOutfitReducer = jest.fn(
@@ -30,7 +30,7 @@ const getMockOutfitReducer = jest.fn(
                 break;
         }
         return state;
-    }
+    },
 );
 
 const getMockTagReducer = jest.fn(
@@ -40,7 +40,7 @@ const getMockTagReducer = jest.fn(
                 break;
         }
         return state;
-    }
+    },
 );
 
 export const getMockStore = (loginState, outfitState, itemState, tagState) => {
@@ -54,14 +54,14 @@ export const getMockStore = (loginState, outfitState, itemState, tagState) => {
         item: mockItemReducer,
         outfit: mockOutfitReducer,
         tagReducer: mockTagReducer,
-        router: connectRouter(history)
+        router: connectRouter(history),
     });
     const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     const mockStore = createStore(
         rootReducer,
-        composeEnhancers(applyMiddleware(...middlewares))
+        composeEnhancers(applyMiddleware(...middlewares)),
     );
     return mockStore;
 };
