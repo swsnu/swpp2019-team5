@@ -7,14 +7,16 @@ import Browse from "./Containers/Browse/Browse";
 
 import "./App.scss";
 
-function App() {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route path="/browse" exact render={() => <Browse />} />
-            </Switch>
-        </BrowserRouter>
-    );
+class App extends React.Component {
+    render() {
+        return (
+            <ConnectedRouter history={this.props.history}>
+                <Switch>
+                    <Route path="/browse" exact render={() => <Browse />} />
+                </Switch>
+            </ConnectedRouter>
+        );
+    }
 }
 
 export default App;
