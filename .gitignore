@@ -7,8 +7,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # Byte-compiled / optimized / DLL files
+*.log
+*.pot
+*.pyc
 __pycache__/
-*.py[cod]
+local_settings.py
+db.sqlite3
 
 # Runtime data
 pids
