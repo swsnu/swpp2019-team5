@@ -11,6 +11,16 @@ matrix:
     - yarn install
     script:
     - yarn test --coverage --watchAll=false
+  - language: python
+    python:
+    - '3.7'
+    before_install:
+    - cd ./back-end/wearhouse
+    install: 
+    - pip install -r requirements.txt
+    script:
+    - coverage run --branch --source='.' manage.py test
+    - coverage report --fail-under=80 -m
     
     
     
