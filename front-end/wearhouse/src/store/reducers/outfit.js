@@ -4,5 +4,7 @@ const initialState = {
     selectedOutfit: null
 };
 
-const reducer = (state = initialState, action) => {};
+const reducer = (state = initialState, action) => {
+    return state;
+};
 export default reducer;

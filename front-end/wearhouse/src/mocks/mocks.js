@@ -43,10 +43,11 @@ const getMockTagReducer = jest.fn(
     }
 );
 
-export const getMockStore = (loginState, articleState, commentState) => {
+export const getMockStore = (loginState, outfitState, itemState, tagState) => {
     let mockLoginReducer = getMockLoginReducer(loginState);
-    let mockArticleReducer = getMockArticleReducer(articleState);
-    let mockCommentReducer = getMockCommentReducer(commentState);
+    let mockOutfitReducer = getMockOutfitReducer(outfitState);
+    let mockItemReducer = getMockItemReducer(itemState);
+    let mockTagReducer = getMockTagReducer(tagState);
 
     const rootReducer = combineReducers({
         login: mockLoginReducer,
