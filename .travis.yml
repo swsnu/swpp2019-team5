@@ -2,7 +2,7 @@
 # project_root/.travis.yml
 matrix:
   include:
-  - language: node_js # Your language e.g. node_js, python
+  - language: node_js 
     node_js:
     - '10'
     before_install:
@@ -12,6 +12,16 @@ matrix:
     script:
     - ./node_modules/.bin/eslint src
     - yarn test --coverage --watchAll=false
+  - language: python
+    python:
+    - '3.7'
+    before_install:
+    - cd ./back-end/wearhouse
+    install: 
+    - pip install -r requirements.txt
+    script:
+    - coverage run --branch --source='.' manage.py test
+    - coverage report --fail-under=80 -m
     
     
     
