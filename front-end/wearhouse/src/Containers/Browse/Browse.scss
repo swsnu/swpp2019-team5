@@ -1,7 +1,9 @@
 #browse {
+    height: 100vh;
+    background-color: rgba(211, 211, 211, 0.3);
     #search-container {
         width: fit-content;
-        margin: 0 auto;
+        margin: 15px auto;
         border: 1px lightgray solid;
         display: flex;
 
@@ -39,5 +41,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: left;
+        padding: 20px 50px;
     }
 }

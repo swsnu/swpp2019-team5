@@ -24,7 +24,11 @@ class Browse extends React.Component {
     };
     onSearchInput = e => {
         this.setState({ search_query: e.target.value });
-        if (e.target.value.length >= 1) this.setState({ mode: "search" }); //check whether search query exists
+        if (e.target.value.length >= 1) {
+            this.setState({ mode: "search" }); //check whether search query exists
+        } else {
+            this.setState({ mode: "browse" });
+        }
     };
     state = {
         mode: "browse",
@@ -45,7 +49,7 @@ class Browse extends React.Component {
             );
         });
 
-        switch (this.state.tab) {
+        switch (this.state.mode) {
             case "browse":
                 container = <div id="outfit-list">{outfits}</div>;
                 break;
@@ -61,7 +65,6 @@ class Browse extends React.Component {
                 <button id="calendar-button" onClick={this.onClickCalendar}>
                     view calendar
                 </button>
-                {container}
                 <div id="search-container">
                     <input
                         id="search-input"
@@ -73,6 +76,7 @@ class Browse extends React.Component {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
+                {container}
                 {/*To */}
                 <AddOutfit />
             </div>
