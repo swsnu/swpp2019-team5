@@ -2,7 +2,7 @@
     width: 100%;
     position: absolute;
     bottom: 0px;
-    height: 250px;
+    height: 110px;
     overflow: hidden;
     #add-outfit-button {
         width: 250px;
@@ -12,21 +12,25 @@
         //border: 2px gray solid;
         display: block;
         border-radius: 100%;
-        margin: 150px auto 0px;
+        margin: 10px auto 0px;
 
         transition: all 0.3s ease-in-out;
 
         #add-outfit-text {
             color: white;
             margin-bottom: 100px;
+            transition: all 0.3s ease-in-out;
         }
 
         &:hover {
             cursor: pointer;
-            margin-top: 135px;
+            margin-top: 0px;
             width: 260px;
             height: 260px;
             //box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 10px;
+            #add-outfit-text {
+                margin-bottom: 110px;
+            }
         }
 
         font-size: 30px;
