@@ -1,5 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Logout from "../Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -58,12 +62,17 @@ class Browse extends React.Component {
                     view calendar
                 </button>
                 {container}
-                <input
-                    id="search-input"
-                    value={this.state.search_query}
-                    onChange={e => this.onSearchInput(e)}
-                />{" "}
-                <button>search</button>
+                <div id="search-container">
+                    <input
+                        id="search-input"
+                        value={this.state.search_query}
+                        onChange={e => this.onSearchInput(e)}
+                        placeholder="Search by tag..."
+                    />{" "}
+                    <button id="search-button">
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
+                </div>
                 {/*To */}
                 <AddOutfit />
             </div>

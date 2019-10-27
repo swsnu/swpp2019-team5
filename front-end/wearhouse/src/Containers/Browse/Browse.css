@@ -1,0 +1,25 @@
+#search-input {
+    font-size: 15px;
+    margin: 0px 10px;
+    border: gray solid 1px;
+    padding: 4px 8px;
+}
+
+#search-input:focus {
+    outline: transparent auto 1px;
+    outline-offset: -2px;
+    box-shadow: rgba(0,  0,  0,  0.6)  0px 0px 5px;
+}
+
+#search-button  {
+    font-size: 15px;
+    background-color: white;
+    border: 2px gray solid;
+    border-radius: 15px;
+    padding: 3px 10px;
+}
+#outfit-list  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}

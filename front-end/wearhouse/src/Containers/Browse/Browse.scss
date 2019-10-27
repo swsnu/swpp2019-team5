@@ -1,4 +1,40 @@
 #browse {
+    #search-container {
+        width: fit-content;
+        margin: 0 auto;
+        border: 1px lightgray solid;
+        display: flex;
+
+        $fontsize: 20px;
+        $templatecolor: rgba(127, 255, 212, 0.3);
+
+        #search-input {
+            font-size: $fontsize;
+            margin: 0;
+            width: 450px;
+            border: none;
+            padding: 10px;
+
+            background-color: rgba(211, 211, 211, 0.2);
+            &:focus {
+                outline: none;
+                background-color: white;
+            }
+        }
+
+        #search-button {
+            font-size: $fontsize;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                background-color: $templatecolor;
+            }
+        }
+    }
     #outfit-list {
         display: flex;
         flex-wrap: wrap;
