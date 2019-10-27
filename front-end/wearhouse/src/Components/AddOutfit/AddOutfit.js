@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./AddOutfit.scss";
+
 class AddOutfit extends Component {
     onClickButton = () => {
         /*To Soyeong.. please implement here. as soon as user clicks Add outfit button 
@@ -9,7 +11,7 @@ class AddOutfit extends Component {
         return (
             <div id="add-outfit">
                 <button id="add-outfit-button" onClick={this.onClickButton}>
-                    Add Outfit
+                    <div id="add-outfit-text">ADD NEW</div>
                 </button>
             </div>
         );

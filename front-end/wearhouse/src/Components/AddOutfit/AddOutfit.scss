@@ -1,0 +1,34 @@
+#add-outfit {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 250px;
+    overflow: hidden;
+    #add-outfit-button {
+        width: 250px;
+        height: 250px;
+
+        background-color: rgb(54, 54, 54);
+        //border: 2px gray solid;
+        display: block;
+        border-radius: 100%;
+        margin: 150px auto 0px;
+
+        transition: all 0.3s ease-in-out;
+
+        #add-outfit-text {
+            color: white;
+            margin-bottom: 100px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            margin-top: 135px;
+            width: 260px;
+            height: 260px;
+            //box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 10px;
+        }
+
+        font-size: 30px;
+    }
+}
