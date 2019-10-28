@@ -2,23 +2,40 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Logout from "../Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
+import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
 //outfit-image : image ()
 //edit - item : EditItem button- mode controller ()
 //add - item : button - add new item ()
+//delete - item : button - delete existing item ()
 //confirm-create-button : load data to database ()
-//if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)
-
+//if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)'
+// category drop down select one - upper body, lower body, full body,
 class CreateOutfit extends Component {
-    componentDidMount() {}
     state = {
-        author_id: null,
         image: null,
         satisfactionValue: null,
-        date: outfit.date,
+        date: Date()
+            .toISOString()
+            .substr(0, 10)
+            .replace("T", " "),
         items: [{ category: "", tags: [] }],
     };
+
+    componentDidMount() {
+        this.setState({ image: this.props.image, items: this.props.items });
+    }
+
     render() {
+        const items = this.props.items.map(item => {
+            return (
+                <Outfit
+                    item={item}
+                    applyEdit={edit_item => this.onApplyEdit(edit_item)}
+                    delete={() => this.onDeleteItem(item)}
+                />
+            );
+        });
         return <div className="CreateOutfit"></div>;
     }
 }
