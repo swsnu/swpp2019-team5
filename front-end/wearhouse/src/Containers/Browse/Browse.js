@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-
-//import { faSearch } from "@fortawesome/free-solid-svg-icons";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Logout from "../Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -79,7 +77,7 @@ class Browse extends React.Component {
                         placeholder="Search by tag..."
                     />{" "}
                     <button id="search-button">
-                        {/*}<FontAwesomeIcon icon={faSearch} />{*/}
+                        <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
                 {container}
