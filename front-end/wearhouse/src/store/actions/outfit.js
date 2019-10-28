@@ -8,7 +8,7 @@ export const getOutfits_ = outfits => {
 export const getOutfits = () => {
     return dispatch => {
         return axios
-            .get("/api/outfot")
+            .get("/api/outfit")
             .then(res => dispatch(getOutfits_(res.data)));
     };
 };
@@ -16,13 +16,13 @@ export const getOutfits = () => {
 export const getSpecificOutfit_ = outfit => {
     return {
         type: actionTypes.GET_SPECIFIC_OUTFIT,
-        target: outfit
+        target: outfit,
     };
 };
 
 export const getSpecificOutfit = id => {
     return dispatch => {
-        return axios.get("/api/articles/" + id).then(res => {
+        return axios.get("/api/outfit/" + id).then(res => {
             dispatch(getSpecificOutfit_(res.data));
         });
     };
