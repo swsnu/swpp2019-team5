@@ -77,7 +77,7 @@ class Browse extends React.Component {
                         placeholder="Search by tag..."
                     />{" "}
                     <button id="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
+                        {/*}<FontAwesomeIcon icon={faSearch} />{*/}
                     </button>
                 </div>
                 {container}
