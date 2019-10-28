@@ -18,7 +18,11 @@ class Item extends Component {
     }
 
     //Delete Tag
-    onDeleteTag(tag) {}
+    onDeleteTag(tag) {
+        tags = this.state.tags;
+        tags = tags.filter(tg => tg !== tag);
+        this.setState({ tags: tags });
+    }
 
     //add Tag
     addTag(e) {
