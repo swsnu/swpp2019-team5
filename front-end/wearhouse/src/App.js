@@ -9,6 +9,12 @@ import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
 import "./App.scss";
 
 function App() {
+    let items = [
+        { category: "Top", tags: ["black", "T-shirt", "2019"] },
+        { category: "Shoes", tags: ["black", "opentoe"] },
+        { category: "Bottom", tags: ["jeans"] },
+        { category: "Accessories", tags: ["black", "golden-buckle"] },
+    ];
     return (
         <BrowserRouter>
             <Switch>
@@ -22,7 +28,7 @@ function App() {
                 <Route
                     path="/createOutfit"
                     exact
-                    render={() => <CreateOutfit image={""} items={[]} />}
+                    render={() => <CreateOutfit image={""} items={items} />}
                 />
             </Switch>
         </BrowserRouter>

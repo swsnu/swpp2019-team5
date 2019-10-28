@@ -30,12 +30,15 @@ class CreateOutfit extends Component {
         items = this.state.items;
         items = items.filter(itm => itm !== item);
     }
+
     render() {
         const items = this.props.items.map(item => {
             return (
                 <Outfit
                     item={item}
-                    applyEdit={edit_item => this.onApplyEdit(edit_item)}
+                    applyEdit={(item, edit_item) =>
+                        this.onApplyEdit(item, edit_item)
+                    }
                     delete={() => this.onDeleteItem(item)}
                 />
             );
