@@ -133,7 +133,6 @@ describe("<Browse />", () => {
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
-        console.log(CreateInstance.state);
         expect(CreateInstance.state.search_query).toEqual("black shirt");
         expect(CreateInstance.state.mode).toEqual("search");
 
