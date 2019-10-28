@@ -1,0 +1,51 @@
+#add-outfit {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 120px;
+    overflow: hidden;
+
+    #add-outfit-button {
+        width: 200px;
+        height: 200px;
+
+        background-color: rgb(54, 54, 54);
+        display: block;
+        border-radius: 100%;
+        margin: 40px auto 0px;
+        overflow: hidden;
+
+        transition: all 0.3s ease-in-out;
+
+        #add-outfit-icon {
+            color: white;
+            position: relative;
+            top: -50px;
+        }
+
+        #add-outfit-text {
+            display: none;
+            color: white;
+            position: relative;
+            top: -60px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            cursor: pointer;
+            margin-top: 10px;
+            width: 260px;
+            height: 260px;
+            //box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 10px;
+            #add-outfit-text {
+                display: block;
+                transition: all 0.3s ease-in-out;
+            }
+            #add-outfit-icon {
+                display: none;
+            }
+        }
+
+        font-size: 30px;
+    }
+}
