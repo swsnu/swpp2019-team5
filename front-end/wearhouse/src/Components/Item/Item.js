@@ -12,7 +12,14 @@ class Item extends Component {
         });
     }
 
-
+    
+    //conver #black #shirt form to ["black,"shirt"]
+    //gurantee that input form is correct
+    trimTagInputs(tags){
+        tag_strings = tags.split(" ")
+        tags = tag_strings.map(tag => tag.substring(1))
+        return tags;
+    }
 
     handleTagChange(event) {
         tags = this.trimTagInputs(event.target.value)
