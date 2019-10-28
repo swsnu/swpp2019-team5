@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//props tags array
 
 class Tag extends Component {
     render() {

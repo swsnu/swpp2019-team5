@@ -26,6 +26,10 @@ class CreateOutfit extends Component {
         this.setState({ image: this.props.image, items: this.props.items });
     }
 
+    onDeleteItem(item) {
+        items = this.state.items;
+        items = items.filter(itm => itm !== item);
+    }
     render() {
         const items = this.props.items.map(item => {
             return (
