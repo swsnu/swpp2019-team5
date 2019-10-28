@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./AddOutfit.scss";
 
 class AddOutfit extends Component {
@@ -11,7 +14,8 @@ class AddOutfit extends Component {
         return (
             <div id="add-outfit">
                 <button id="add-outfit-button" onClick={this.onClickButton}>
-                    <div id="add-outfit-text">ADD NEW</div>
+                    <FontAwesomeIcon icon={faPlus} id="add-outfit-icon" />
+                    <div id="add-outfit-text">Add New</div>
                 </button>
             </div>
         );

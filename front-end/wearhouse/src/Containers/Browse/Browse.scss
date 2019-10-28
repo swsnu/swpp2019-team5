@@ -1,14 +1,25 @@
+$fontsize: 20px;
+$templatecolor: rgba(127, 255, 212, 0.3);
+
 #browse {
+    overflow: auto;
     height: 100vh;
     background-color: rgba(211, 211, 211, 0.3);
+    #calendar-button {
+        border: none;
+        border-radius: 2px;
+        padding: 5px 10px;
+        font-size: $fontsize;
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 2px;
+        cursor: pointer;
+        margin-left: 60px;
+    }
+
     #search-container {
         width: fit-content;
         margin: 15px auto;
         border: 1px lightgray solid;
         display: flex;
-
-        $fontsize: 20px;
-        $templatecolor: rgba(127, 255, 212, 0.3);
 
         #search-input {
             font-size: $fontsize;

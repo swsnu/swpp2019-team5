@@ -38,16 +38,23 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        const outfits = this.props.outfits.map(outfit => {
-            return (
-                <Outfit
-                    key={outfit.id}
-                    image={outfit.imageUrl}
-                    satisfactionValue={outfit.satisfactionValue}
-                    clicked={() => this.onClickOutfit(outfit)}
-                />
-            );
-        });
+        // const outfits = this.props.outfits.map(outfit => {
+        //     return (
+        //         <Outfit
+        //             key={outfit.id}
+        //             image={outfit.imageUrl}
+        //             satisfactionValue={outfit.satisfactionValue}
+        //             clicked={() => this.onClickOutfit(outfit)}
+        //         />
+        //     );
+        // });
+
+        const outfits = (
+            <Outfit
+                image={"https://i.imgur.com/goA2geS.jpg"}
+                satisfactionValue={3}
+            />
+        );
 
         switch (this.state.mode) {
             case "browse":
@@ -62,9 +69,6 @@ class Browse extends React.Component {
         return (
             <div id="browse">
                 <Logout />
-                <button id="calendar-button" onClick={this.onClickCalendar}>
-                    view calendar
-                </button>
                 <div id="search-container">
                     <input
                         id="search-input"
@@ -76,6 +80,9 @@ class Browse extends React.Component {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
+                <button id="calendar-button" onClick={this.onClickCalendar}>
+                    view calendar
+                </button>
                 {container}
                 {/*To */}
                 <AddOutfit />

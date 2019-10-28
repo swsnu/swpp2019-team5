@@ -4,16 +4,50 @@
     margin: 10px;
     padding: 10px;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 0 2px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
 
     .outfit-image {
-        width: 100%;
-        background-color: blue;
+        width: 200px;
+        height: 300px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden;
     }
 
-    .satisfaction-icon {
+    // .satisfaction-icon {
+    //     position: relative;
+    //     left: 150px;
+    //     bottom: 50px;
+    // }
+
+    .outfit-info {
         position: relative;
-        left: 150px;
-        top: 240px;
+        bottom: 0px;
+        transition: all 0.3s ease-in-out;
+        padding: 10px 5px;
+        background-color: white;
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+        .outfit-date {
+            color: gray;
+        }
+    }
+
+    &:hover {
+        //margin: 5px 10px 15px 10px;
+        .outfit-image {
+            background-color: gray;
+        }
+        .outfit-info {
+            padding: 0px 5px;
+            bottom: 40px;
+        }
     }
 }

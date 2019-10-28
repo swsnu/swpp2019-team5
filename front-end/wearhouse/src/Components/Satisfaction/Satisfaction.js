@@ -11,25 +11,8 @@ import "./Satisfaction.scss";
 const Satisfaction = props => {
     let icon;
     let value = props.value; /* Default satisfaction value */
-    switch (value) {
-        case 1:
-            icon = horrible;
-            break;
-        case 2:
-            icon = bad;
-            break;
-        case 3:
-            icon = neutral;
-            break;
-        case 4:
-            icon = good;
-            break;
-        case 5:
-            icon = great;
-            break;
-        default:
-            break;
-    }
+    let iconlist = [horrible, bad, neutral, good, great];
+    icon = iconlist[value];
 
     return (
         <div className="satisfaction-icon">
