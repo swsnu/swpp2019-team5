@@ -34,7 +34,7 @@ class Item extends Component {
     addTag(e) {
         if (e.keyCode == 13) {
             let tags = this.state.tags;
-            tags = tags.concat(e.value);
+            tags = tags.concat(e.target.value);
             this.setState({ tags: tags });
             e.target.value = "";
         }
@@ -46,8 +46,14 @@ class Item extends Component {
         else this.setState({ todo: "Add tag" });
     };
     render() {
-        let tags = this.props.item.tags.map(tag => {
-            return <Tag tag={tag} delete={() => this.onDeleteTag(tag)} />;
+        let tags = this.state.tags.map(tag => {
+            return (
+                <Tag
+                    tag={tag}
+                    editMode={true}
+                    delete={() => this.onDeleteTag(tag)}
+                />
+            );
         });
         let tag_input = null;
         if (this.state.todo === "Finished")

@@ -16,7 +16,7 @@ class CreateOutfit extends Component {
         image: null,
         satisfactionValue: null,
         date: "2019.10.27",
-        items: [{ category: "", tags: [] }],
+        items: [],
     };
 
     componentDidMount() {
