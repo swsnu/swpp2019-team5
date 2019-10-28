@@ -14,6 +14,11 @@ import { SET_OUTFIT_SATISFACTION } from "../../store/actions/actionTypes";
 //outfit-preview : outfit (?)
 //함수 : isSearchMode(o), onClickOutfit(o), onSearchInput(o) , onClickCalendar(o)
 class Browse extends React.Component {
+    state = {
+        mode: "browse",
+        search_query: "",
+    };
+
     componentDidMount() {
         this.props.getAllOufits();
     }
@@ -31,10 +36,6 @@ class Browse extends React.Component {
         } else {
             this.setState({ mode: "browse" });
         }
-    };
-    state = {
-        mode: "browse",
-        search_query: "",
     };
 
     render() {
