@@ -31,6 +31,12 @@ class CreateOutfit extends Component {
         items = items.filter(itm => itm !== item);
     }
 
+    onApplyEdit(item, edit_item) {
+        items = this.state.items;
+        items = items.map(itm => {
+            return itm === item ? edit_item : itm;
+        });
+    }
     render() {
         const items = this.props.items.map(item => {
             return (
