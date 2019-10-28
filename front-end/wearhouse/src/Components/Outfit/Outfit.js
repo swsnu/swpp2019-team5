@@ -13,7 +13,6 @@ const Outfit = props => {
                 <div className="outfit-date">{props.date}</div>
                 <Satisfaction value={props.satisfactionValue} />
             </div>
-            {/* <Satisfaction value={props.satisfactionValue} /> */}
         </div>
     );
 };
