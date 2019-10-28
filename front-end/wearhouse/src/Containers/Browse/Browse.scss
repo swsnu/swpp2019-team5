@@ -1,7 +1,57 @@
+$fontsize: 20px;
+$templatecolor: rgba(127, 255, 212, 0.3);
+
 #browse {
+    overflow: auto;
+    height: 100vh;
+    background-color: rgba(211, 211, 211, 0.3);
+    #calendar-button {
+        border: none;
+        border-radius: 2px;
+        padding: 5px 10px;
+        font-size: $fontsize;
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 2px;
+        cursor: pointer;
+        margin-left: 60px;
+    }
+
+    #search-container {
+        width: fit-content;
+        margin: 15px auto;
+        border: 1px lightgray solid;
+        display: flex;
+
+        #search-input {
+            font-size: $fontsize;
+            margin: 0;
+            width: 450px;
+            border: none;
+            padding: 10px;
+
+            background-color: rgba(211, 211, 211, 0.2);
+            &:focus {
+                outline: none;
+                background-color: white;
+            }
+        }
+
+        #search-button {
+            font-size: $fontsize;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                background-color: $templatecolor;
+            }
+        }
+    }
     #outfit-list {
         display: flex;
         flex-wrap: wrap;
         justify-content: left;
+        padding: 20px 50px;
     }
 }
