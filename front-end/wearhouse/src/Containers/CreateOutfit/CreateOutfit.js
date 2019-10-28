@@ -40,7 +40,7 @@ class CreateOutfit extends Component {
     render() {
         const items = this.props.items.map(item => {
             return (
-                <Outfit
+                <Item
                     item={item}
                     applyEdit={(item, edit_item) =>
                         this.onApplyEdit(item, edit_item)
