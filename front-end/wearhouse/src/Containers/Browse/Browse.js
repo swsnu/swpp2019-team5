@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faSearch } from "@fortawesome/free-solid-svg-icons";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logout from "../Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
@@ -16,6 +16,9 @@ import { SET_OUTFIT_SATISFACTION } from "../../store/actions/actionTypes";
 //outfit-preview : outfit (?)
 //함수 : isSearchMode(o), onClickOutfit(o), onSearchInput(o) , onClickCalendar(o)
 class Browse extends React.Component {
+    componentDidMount() {
+        this.props.getAllOufits();
+    }
     onClickCalendar = () => {
         this.props.history.push("/calendar");
     };
@@ -24,6 +27,7 @@ class Browse extends React.Component {
         this.props.history.push("/outfit/" + outfit.id);
     };
     onSearchInput = e => {
+        console.log(e.target);
         this.setState({ search_query: e.target.value });
         if (e.target.value.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
@@ -75,7 +79,7 @@ class Browse extends React.Component {
                         placeholder="Search by tag..."
                     />{" "}
                     <button id="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
+                        {/*}<FontAwesomeIcon icon={faSearch} />{*/}
                     </button>
                 </div>
                 {container}
