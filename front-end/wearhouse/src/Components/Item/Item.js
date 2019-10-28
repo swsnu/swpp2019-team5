@@ -9,17 +9,23 @@ class Item extends Component {
         tags: this.props.item.tags,
         todo: "Add tag", //the mode where user enters after clicing button
     };
+    componentDidMount() {
+        this.setState({
+            category: this.props.item.category,
+            tags: this.props.item.tags,
+        });
+    }
     handleCategoryChange(event) {
         this.setState({ category: event.target.value });
         this.props.applyEdit({
             category: this.state.category,
-            tags: this.state.item.tags,
+            tags: this.state.tags,
         });
     }
 
     //Delete Tag
     onDeleteTag(tag) {
-        tags = this.state.tags;
+        let tags = this.state.tags;
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
     }
@@ -27,7 +33,7 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         if (e.keyCode == 13) {
-            tags = this.state.tags;
+            let tags = this.state.tags;
             tags = tags.concat(e.value);
             this.setState({ tags: tags });
         }
@@ -35,7 +41,7 @@ class Item extends Component {
 
     //convert the todo ("Add tag" or "Confirm")
     changeMode = () => {
-        if (this.state.todo === "Add tag") this.setState({ todo: Confirm });
+        if (this.state.todo === "Add tag") this.setState({ todo: "Confirm" });
         else this.setState({ todo: "Add tag" });
     };
     render() {
@@ -56,15 +62,15 @@ class Item extends Component {
             <div className="Item">
                 <select
                     value={this.state.category}
-                    onChange={this.handleCategoryChange}
+                    onChange={e => this.handleCategoryChange(e)}
                 >
-                    <option value="outer">Outer</option>
-                    <option value="top">Top</option>
-                    <option value="bottom">Bottom</option>
-                    <option value="dress">Dress</option>
-                    <option value="shoes">Shoes</option>
-                    <option value="bag">Bag</option>
-                    <option value="accessories">Accessories</option>
+                    <option value="Outer">Outer</option>
+                    <option value="Top">Top</option>
+                    <option value="Bottom">Bottom</option>
+                    <option value="Dress">Dress</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Bag">Bag</option>
+                    <option value="Accessories">Accessories</option>
                 </select>
                 <div className="tag-area"> {tags} </div>
                 <button onClick={this.changeMode}>{this.state.todo}</button>

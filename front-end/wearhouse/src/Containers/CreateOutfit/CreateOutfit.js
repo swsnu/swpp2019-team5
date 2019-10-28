@@ -15,10 +15,7 @@ class CreateOutfit extends Component {
     state = {
         image: null,
         satisfactionValue: null,
-        date: Date()
-            .toISOString()
-            .substr(0, 10)
-            .replace("T", " "),
+        date: "2019.10.27",
         items: [{ category: "", tags: [] }],
     };
 
@@ -27,12 +24,12 @@ class CreateOutfit extends Component {
     }
 
     onDeleteItem(item) {
-        items = this.state.items;
+        let items = this.state.items;
         items = items.filter(itm => itm !== item);
     }
 
     onApplyEditItem(item, edit_item) {
-        items = this.state.items;
+        let items = this.state.items;
         items = items.map(itm => {
             return itm === item ? edit_item : itm;
         });
@@ -42,14 +39,14 @@ class CreateOutfit extends Component {
             return (
                 <Item
                     item={item}
-                    applyEdit={(item, edit_item) =>
+                    applyEdit={edit_item =>
                         this.onApplyEditItem(item, edit_item)
                     }
                     delete={() => this.onDeleteItem(item)}
                 />
             );
         });
-        return <div className="CreateOutfit"></div>;
+        return <div className="CreateOutfit">{items}</div>;
     }
 }
 
