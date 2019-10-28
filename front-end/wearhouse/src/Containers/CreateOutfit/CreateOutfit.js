@@ -7,6 +7,7 @@ import * as actionCreators from "../../store/actions/index";
 //edit - item : EditItem button- mode controller ()
 //add - item : button - add new item ()
 //confirm-create-button : load data to database ()
+//if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)
 
 class CreateOutfit extends Component {
     componentDidMount() {}

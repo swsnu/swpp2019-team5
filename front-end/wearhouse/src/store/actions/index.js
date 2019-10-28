@@ -1,4 +1,4 @@
-export { getOutfits, getSpecificOutfit } from "./outfit";
+export { getOutfits, getSpecificOutfit, createOutfit } from "./outfit";
 
 export {} from "./login";
 
