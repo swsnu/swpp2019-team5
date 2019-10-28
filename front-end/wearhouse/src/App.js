@@ -5,6 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import Calendar from "./Containers/Calendar/Calendar";
 import Browse from "./Containers/Browse/Browse";
 import OutfitDetail from "./Containers/OutfitDetail/OutfitDetail";
+import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
 import "./App.scss";
 
 function App() {
@@ -18,6 +19,11 @@ function App() {
                     component={OutfitDetail}
                 />
                 <Route path="/calendar" exact component={Calendar} />
+                <Route
+                    path="/createOutfit"
+                    exact
+                    render={() => <CreateOutfit image={""} items={[]} />}
+                />
             </Switch>
         </BrowserRouter>
     );
