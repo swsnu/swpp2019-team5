@@ -22,7 +22,7 @@ export const getSpecificOutfit_ = outfit => {
 
 export const getSpecificOutfit = id => {
     return dispatch => {
-        return axios.get("/api/outfit" + id).then(res => {
+        return axios.get("/api/outfit/" + id).then(res => {
             dispatch(getSpecificOutfit_(res.data));
         });
     };
