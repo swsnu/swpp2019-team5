@@ -31,7 +31,7 @@ class CreateOutfit extends Component {
         items = items.filter(itm => itm !== item);
     }
 
-    onApplyEdit(item, edit_item) {
+    onApplyEditItem(item, edit_item) {
         items = this.state.items;
         items = items.map(itm => {
             return itm === item ? edit_item : itm;
@@ -43,7 +43,7 @@ class CreateOutfit extends Component {
                 <Item
                     item={item}
                     applyEdit={(item, edit_item) =>
-                        this.onApplyEdit(item, edit_item)
+                        this.onApplyEditItem(item, edit_item)
                     }
                     delete={() => this.onDeleteItem(item)}
                 />
