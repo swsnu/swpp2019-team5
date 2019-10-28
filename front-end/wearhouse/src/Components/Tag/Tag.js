@@ -16,7 +16,7 @@ class Tag extends Component {
         if (this.state.editMode)
             label = (
                 <label className="tag-in-outfit">
-                    {this.state.tag_name}
+                    #{this.state.tag_name}
                     <label onClick={this.props.delete}>X</label>
                 </label>
             );
