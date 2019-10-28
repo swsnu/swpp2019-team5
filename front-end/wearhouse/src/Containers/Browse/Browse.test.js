@@ -3,49 +3,47 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks";
 import { history } from "../../store/store";
-import * as actionCreators from "../../store/actions/article";
-import Article from "./Article";
+import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
 import axios from "axios";
+import Browse from "./Browse";
+import Outfit from "../../Components/Outfit/Outfit";
 
-const stubArticle = {
+const stubOutfit = {
     id: 0,
-    title: "title1",
-    content: "content1",
-    author_id: 1,
-};
-
-const stubComment = {
-    id: 0,
-    author_id: "author1",
-    content: "content1",
+    imgaeUrl: "image.url",
+    satisfactionValue: 4,
+    date: "2019.10.28",
+    user_id: 1,
 };
 
 let stubInitialState = {
-    articles: [stubArticle],
-    comments: [stubComment],
-    author_id: 1,
-    selected_Article: { id: "", author_id: 1, content: "", title: "" },
+    outfits: [stubOutfit],
+    user_id: 1,
+    selected_Outfit: {
+        id: "",
+        user_id: 1,
+        imageUrl: "",
+        satisfactionValue: "",
+        date: "",
+    },
     users: [
         {
             id: 1,
             email: "swpp@snu.ac.kr",
             password: "iluvswpp",
-            name: "Software Lover",
             logged_in: false,
         },
         {
             id: 2,
             email: "alan@turing.com",
             password: "iluvswpp",
-            name: "Alan Turing",
             logged_in: false,
         },
         {
             id: 3,
             email: "edsger@dijkstra.com",
             password: "iluvswpp",
-            name: "Edsger Dijkstra",
             logged_in: false,
         },
     ],
@@ -54,31 +52,24 @@ let stubInitialState = {
         id: 1,
         email: "swpp@snu.ac.kr",
         password: "iluvswpp",
-        name: "Software Lover",
         logged_in: false,
     },
 };
 
 var mockStore = getMockStore(stubInitialState);
 
-describe("<Article />", () => {
-    let articleList,
-        spyGetArticles,
-        spyHistoryPush,
-        spyAxios_put,
-        spyAxios_delete,
-        spyAxios_post,
-        spyAxios_get;
+describe("<Browse />", () => {
+    let outfitList, spyGetOutfits, spyHistoryPush, spyAxios_get;
 
     beforeEach(() => {
-        articleList = (
+        outfitList = (
             <Provider store={mockStore}>
-                <Article history={history} />
+                <Browse history={history} />
             </Provider>
         );
 
-        spyGetArticles = jest
-            .spyOn(actionCreators, "getArticles")
+        spyGetOutfits = jest
+            .spyOn(actionCreators, "getOutfits")
             .mockImplementation(() => {
                 return dispatch => {};
             });
@@ -89,84 +80,65 @@ describe("<Article />", () => {
         spyAxios_get = jest
             .spyOn(axios, "get")
             .mockImplementation(() => Promise.resolve({}));
-        spyAxios_post = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
-        spyAxios_put = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
-        spyAxios_delete = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
     });
 
-    it("should render Articles", () => {
-        const component = mount(articleList);
-        const wrapper = component.find("Artcl");
+    it("should render Outfits, Logout, AddOutfit", () => {
+        const component = mount(outfitList);
+        let wrapper = component.find("Outfit");
         expect(wrapper.length).toBe(1);
-        expect(wrapper.at(0).text()).toBe("0. title1 Author: Software Lover");
-        expect(spyGetArticles).toBeCalledTimes(1);
+        wrapper = component.find("Logout");
+        expect(wrapper.length).toBe(1);
+        wrapper = component.find("AddOutfit");
+        expect(wrapper.length).toBe(1);
+        expect(spyGetOutfits).toBeCalledTimes(1);
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        CreateInstance.setState({ mode: "?" });
+        wrapper = component.find("Outfit");
+        expect(wrapper.length).toBe(1);
     });
 
-    it(`should call 'clickTodoHandler'`, () => {
-        const spyGetComments = jest
-            .spyOn(actionCreators, "getComments")
-            .mockImplementation(() => {
+    it(`should call 'onClickOutfit'`, () => {
+        const spyGetSpecificOutfit = jest
+            .spyOn(actionCreators, "getSpecificOutfit")
+            .mockImplementation(outfit_id => {
                 return dispatch => {};
             });
-        const spyGetArticle = jest
-            .spyOn(actionCreators, "getArticle")
-            .mockImplementation(artcl => {
-                return dispatch => {};
-            });
-        const component = mount(articleList);
-        let wrapper = component.find("Artcl #title").at(0);
+        const component = mount(outfitList);
+        let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyGetComments).toHaveBeenCalledTimes(1);
-        expect(spyGetArticle).toHaveBeenCalledTimes(1);
-        wrapper = component.find(Article.WrappedComponent).instance();
-        wrapper.setState({ fortest: true });
+        expect(spyGetSpecificOutfit).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
-    it("should render redirect to detail page", () => {
-        stubInitialState = {
-            articles: [stubArticle],
-            comments: [stubComment],
-            author_id: 1,
-            selected_Article: stubArticle,
-            users: [
-                {
-                    id: 1,
-                    email: "swpp@snu.ac.kr",
-                    password: "iluvswpp",
-                    name: "Software Lover",
-                    logged_in: false,
-                },
-            ],
-            logged_in: false,
-            user1: {
-                id: 1,
-                email: "swpp@snu.ac.kr",
-                password: "iluvswpp",
-                name: "Software Lover",
-                logged_in: false,
-            },
-        };
-        mockStore = getMockStore(stubInitialState);
-        articleList = (
-            <Provider store={mockStore}>
-                <Article history={history} />
-            </Provider>
-        );
-        const component = mount(articleList);
-    });
-    it(`should move to 'create page'`, () => {
-        const spyHistoryPush = jest
-            .spyOn(history, "push")
-            .mockImplementation(path => {});
-        const component = mount(articleList);
-        const wrapper = component.find("#create-article-button").at(0);
+
+    it(`should call 'onClickCalendar'`, () => {
+        const component = mount(outfitList);
+        let wrapper = component.find("#calendar-button").at(0);
         wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledWith("/articles/create");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
+    });
+
+    it(`should click 'AddItemButton'`, () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("#add-outfit-button").at(0);
+        wrapper.simulate("click");
+        //fill expect~~ after implementing AddOutfit onclick function
+    });
+
+    it(`should set state(search_query and mode) properly on search input when writing`, () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("input");
+        wrapper.simulate("change", { target: { value: "black shirt" } });
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        console.log(CreateInstance.state);
+        expect(CreateInstance.state.search_query).toEqual("black shirt");
+        expect(CreateInstance.state.mode).toEqual("search");
+
+        wrapper.simulate("change", { target: { value: "" } });
+        expect(CreateInstance.state.search_query).toEqual("");
+        expect(CreateInstance.state.mode).toEqual("browse");
     });
 });
