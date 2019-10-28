@@ -25,7 +25,6 @@ class Browse extends React.Component {
         this.props.history.push("/outfit/" + outfit.id);
     };
     onSearchInput = e => {
-        console.log(e.target);
         this.setState({ search_query: e.target.value });
         if (e.target.value.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
