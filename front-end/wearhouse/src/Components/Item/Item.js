@@ -36,12 +36,13 @@ class Item extends Component {
             let tags = this.state.tags;
             tags = tags.concat(e.value);
             this.setState({ tags: tags });
+            e.target.value = "";
         }
     }
 
-    //convert the todo ("Add tag" or "Confirm")
+    //convert the todo ("Add tag" or "Finished")
     changeMode = () => {
-        if (this.state.todo === "Add tag") this.setState({ todo: "Confirm" });
+        if (this.state.todo === "Add tag") this.setState({ todo: "Finished" });
         else this.setState({ todo: "Add tag" });
     };
     render() {
@@ -49,7 +50,7 @@ class Item extends Component {
             return <Tag tag={tag} delete={() => this.onDeleteTag(tag)} />;
         });
         let tag_input = null;
-        if (this.state.todo === "Confirm")
+        if (this.state.todo === "Finished")
             tag_input = (
                 <input
                     type="text"
@@ -73,7 +74,13 @@ class Item extends Component {
                     <option value="Accessories">Accessories</option>
                 </select>
                 <div className="tag-area"> {tags} </div>
-                <button onClick={this.changeMode}>{this.state.todo}</button>
+                <label className="item-deleter" onClick={this.props.delete}>
+                    X
+                </label>
+                <button className="mode-controller" onClick={this.changeMode}>
+                    {this.state.todo}
+                </button>
+                {tag_input}
             </div>
         );
     }
