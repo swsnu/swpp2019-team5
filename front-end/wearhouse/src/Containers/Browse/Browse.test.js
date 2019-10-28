@@ -82,6 +82,10 @@ describe("<Browse />", () => {
             .mockImplementation(() => Promise.resolve({}));
     });
 
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     it("should render Outfits, Logout, AddOutfit", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit");
@@ -116,7 +120,7 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("#calendar-button").at(0);
         wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
     it(`should click 'AddItemButton'`, () => {
