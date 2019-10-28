@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import Tag from "../Tag/Tag";
 //props : item, applyEdit(edit_item), delete
-//check whether input tag is existing in database
+//check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
     state = {
         category: this.props.item.category,
         tags: this.props.item.tags,
-        edit_mode: false,
+        todo: "Add tag",
     };
     handleCategoryChange(event) {
         this.setState({ category: event.target.value });
@@ -16,31 +17,19 @@ class Item extends Component {
         });
     }
 
-    //conver #black #shirt form to ["black,"shirt"]
-    //gurantee that input form is correct
-    trimTagInputs(tags) {
-        tag_strings = tags.split(" ");
-        tags = tag_strings.map(tag => tag.substring(1));
-        return tags;
-    }
+    //Delete Tag
+    onDeleteTag(tag) {}
 
-    /*check whether input form is correct
-    input parameter ex) "#black #shirt"
-    */
-    checkInputForm(tags) {}
-
-    handleTagChange(event) {
-        validCheck = checkInputForm(event.target.value); //check whether input form is correct
-        if (validCheck) {
-            tags = this.trimTagInputs(event.target.value);
-            this.setState({ tags: tags });
-            this.props.applyEdit({
-                category: this.state.category,
-                tags: this.state.item.tags,
-            });
-        }
-    }
+    //convert the todo ("Add tag" or "Confirm")
+    changeMode = () => {
+        if (this.state.todo === "Add tag") this.setState({ todo: Confirm });
+        else this.setState({ todo: "Add tag" });
+    };
     render() {
+        let tags = this.props.item.tags.map(tag => {
+            return <Tag tag={tag} delete={() => this.onDeleteTag(tag)} />;
+        });
+        let tag_input = <input type="text" placeholder="Enter tag"></input>;
         return (
             <div className="Item">
                 <select
@@ -55,6 +44,8 @@ class Item extends Component {
                     <option value="bag">Bag</option>
                     <option value="accessories">Accessories</option>
                 </select>
+                <div className="tag-area"> {tags} </div>
+                <button onClick={this.changeMode}>{this.state.todo}</button>
             </div>
         );
     }
