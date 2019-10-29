@@ -2,11 +2,12 @@ import React, { Component } from "react";
 //props tag name
 
 class Tag extends Component {
-    componentDidMount() {
-        this.setState({
-            tag_name: this.props.tag,
-            editMode: this.props.editMode,
-        });
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props !== prevProps)
+            this.setState({
+                tag_name: this.props.tag,
+                editMode: "Add tag",
+            });
     }
     state = { tag_name: "", editMode: null };
     render() {
