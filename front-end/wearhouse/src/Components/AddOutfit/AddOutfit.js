@@ -15,6 +15,7 @@ class AddOutfit extends Component {
     };
 
     render() {
+        console.log(this.state.showPopUp);
         let pop_up = "";
         if (this.state.showPopUp) {
             pop_up = <UploadImage />;
