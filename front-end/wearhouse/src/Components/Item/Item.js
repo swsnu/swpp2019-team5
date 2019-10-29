@@ -26,8 +26,9 @@ class Item extends Component {
     }
     handleCategoryChange(event) {
         this.setState({ category: event.target.value });
+
         this.props.applyEdit({
-            category: this.state.category,
+            category: event.target.value,
             tags: this.state.tags,
         });
     }

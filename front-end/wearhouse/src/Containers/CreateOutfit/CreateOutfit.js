@@ -24,14 +24,13 @@ class CreateOutfit extends Component {
     }
 
     onDeleteItem(item) {
-        console.log("it is called");
         let items = this.state.items;
         items = items.filter(itm => itm !== item);
         this.setState({ items: items });
-        console.log("setState is called");
     }
 
     onApplyEditItem(item, edit_item) {
+        console.log(item, edit_item);
         let items = this.state.items;
         items = items.map(itm => {
             return itm === item ? edit_item : itm;
@@ -39,9 +38,7 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     }
     render() {
-        console.log(this.state.items, "가 반영되었을까? 여기 render인데");
         let items = this.state.items.map((item, index) => {
-            console.log(item);
             return (
                 <Item
                     item={item}
