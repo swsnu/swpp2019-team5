@@ -17,6 +17,7 @@ class Item extends Component {
         tags: this.props.item.tags,
         todo: "Add tag", //the mode where user enters after clicing button
     };
+
     componentDidMount() {
         this.setState({
             category: this.props.item.category,
@@ -46,7 +47,7 @@ class Item extends Component {
     }
     //add Tag
     addTag(e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             let tags = this.state.tags;
             tags = tags.concat(e.target.value);
             this.setState({ tags: tags });
