@@ -4,8 +4,8 @@ export const SIGN_UP = "SIGN_UP";
 //Login reducer
 
 export const GET_CLASSFICATION_DATA = "GET_CLASSFICATION_DATA";
-export const GET_OUTFITS = "GET_OUTFITS";
-export const GET_SPECIFIC_OUTFIT = "GET_SPECIFIC_OUTFIT";
+export const GET_OUTFITS = "GET_OUTFITS"; //get whole list of outfits of certain user
+export const GET_SPECIFIC_OUTFIT = "GET_SPECIFIC_OUTFIT"; //select certain outfit
 export const CREATE_OUTFIT = "CREATE_OUTFIT";
 export const DELETE_OUTFIT = "DELETE_OUTFIT";
 export const EDIT_OUTFIT = "EDIT_OUTFIT";

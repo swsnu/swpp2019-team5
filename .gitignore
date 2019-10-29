@@ -85,3 +85,12 @@ yarn-error.log*
 
 # ignore virtualenv
 venv/
+
+### Django ### 
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+*.sqlite3
+
