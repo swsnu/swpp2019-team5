@@ -10,9 +10,9 @@ import "./App.scss";
 
 function App() {
     let items = [
-        { category: "Top", tags: ["black", "T-shirt", "2019"] },
+        { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
         { category: "Shoes", tags: ["black", "opentoe"] },
-        { category: "Bottom", tags: ["jeans"] },
+        { category: "LowerBody", tags: ["jeans"] },
         { category: "Accessories", tags: ["black", "golden-buckle"] },
     ];
     return (

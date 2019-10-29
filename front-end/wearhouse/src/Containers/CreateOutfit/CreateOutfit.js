@@ -25,7 +25,6 @@ class CreateOutfit extends Component {
 
     onDeleteItem(item) {
         let items = this.state.items;
-        console.log(item);
         console.log(items);
         items = items.filter(itm => itm !== item);
         console.log(items);
@@ -40,11 +39,11 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     }
     render() {
-        const items = this.state.items.map(item => {
-            console.log(this.state.items, item);
+        let items = this.state.items.map(item => {
             return (
                 <Item
                     item={item}
+                    key={this.state.items.indexOf(item)}
                     applyEdit={edit_item =>
                         this.onApplyEditItem(item, edit_item)
                     }

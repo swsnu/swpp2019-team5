@@ -29,7 +29,13 @@ class Item extends Component {
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
     }
-
+    handleItemDelete() {
+        this.props.delete();
+        this.setState({
+            category: this.props.item.category,
+            tags: this.props.item.tags,
+        });
+    }
     //add Tag
     addTag(e) {
         if (e.keyCode == 13) {
@@ -50,6 +56,7 @@ class Item extends Component {
             return (
                 <Tag
                     tag={tag}
+                    key={this.state.tags.indexOf(tag)}
                     editMode={true}
                     delete={() => this.onDeleteTag(tag)}
                 />
@@ -72,15 +79,17 @@ class Item extends Component {
                     onChange={e => this.handleCategoryChange(e)}
                 >
                     <option value="Outer">Outer</option>
-                    <option value="Top">Top</option>
-                    <option value="Bottom">Bottom</option>
-                    <option value="Dress">Dress</option>
+                    <option value="UpperBody">UpperBody</option>
+                    <option value="LowerBody">LowerBody</option>
+                    <option value="FullBody">FullBody</option>
                     <option value="Shoes">Shoes</option>
-                    <option value="Bag">Bag</option>
                     <option value="Accessories">Accessories</option>
                 </select>
                 <div className="tag-area"> {tags} </div>
-                <label className="item-deleter" onClick={this.props.delete}>
+                <label
+                    className="item-deleter"
+                    onClick={this.handleItemDelete.bind(this)}
+                >
                     X
                 </label>
                 <button className="mode-controller" onClick={this.changeMode}>
