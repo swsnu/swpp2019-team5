@@ -5,8 +5,8 @@ import "./CreateOutfit.scss";
 import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
-//outfit-image : image ()
-//edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons.
+//outfit-image : image (o)
+//edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons. (o)
 //add - item : button - add new item ()
 //delete - item : button - delete existing item (o))
 //confirm-create-button : load data to database ()
@@ -38,6 +38,11 @@ class CreateOutfit extends Component {
         });
         this.setState({ items: items });
     }
+    addItemHandler = () => {
+        const newItem = { category: "category", tags: [] };
+        let items = this.state.items.concat(newItem);
+        this.setState({ items: items });
+    };
     render() {
         let items = this.state.items.map((item, index) => {
             return (
@@ -58,6 +63,13 @@ class CreateOutfit extends Component {
                 </div>
                 {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
                 <div id="items-info-window">{items}</div>
+                <br />
+                <button onClick={this.addItemHandler} id="add-item">
+                    Add Item
+                </button>
+                <button onClick={this.onConfirmCreate} id="add-item">
+                    Confirm
+                </button>
             </div>
         );
     }
