@@ -87,6 +87,7 @@ class Item extends Component {
         return (
             <div className="Item">
                 <select
+                    className="selector"
                     value={this.state.category}
                     onChange={e => this.handleCategoryChange(e)}
                 >
