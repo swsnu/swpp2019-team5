@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
+import "./Item.scss";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -65,6 +66,7 @@ class Item extends Component {
         let tags = this.state.tags.map((tag, index) => {
             return (
                 <Tag
+                    className="tag"
                     tag={tag}
                     key={index}
                     editMode={true}
@@ -105,7 +107,7 @@ class Item extends Component {
                 <button className="mode-controller" onClick={this.changeMode}>
                     {this.state.todo}
                 </button>
-                {tag_input}
+                <div className="tag-container">{tag_input}</div>
             </div>
         );
     }
