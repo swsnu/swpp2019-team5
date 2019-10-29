@@ -4,6 +4,14 @@ import Tag from "../Tag/Tag";
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props !== prevProps)
+            this.setState({
+                category: this.props.item.category,
+                tags: this.props.item.tags,
+            });
+    }
+
     state = {
         category: this.props.item.category,
         tags: this.props.item.tags,
@@ -52,11 +60,11 @@ class Item extends Component {
         else this.setState({ todo: "Add tag" });
     };
     render() {
-        let tags = this.state.tags.map(tag => {
+        let tags = this.state.tags.map((tag, index) => {
             return (
                 <Tag
                     tag={tag}
-                    key={this.state.tags.indexOf(tag)}
+                    key={index}
                     editMode={true}
                     delete={() => this.onDeleteTag(tag)}
                 />
