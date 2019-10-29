@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-//props tag name
+import "./Tag.scss";
+//props : tag_name  ex) "Black"
 
 class Tag extends Component {
     componentDidMount() {
@@ -25,7 +26,7 @@ class Tag extends Component {
             label = (
                 <label className="tag-in-outfit">
                     #{this.state.tag_name}
-                    <label onClick={this.props.delete}>X</label>
+                    <label onClick={this.props.delete}> X</label>
                 </label>
             );
         return <div className="Tag">{label}</div>;

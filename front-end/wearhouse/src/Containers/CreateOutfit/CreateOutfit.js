@@ -5,12 +5,12 @@ import Outfit from "../../Components/Outfit/Outfit";
 import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
 //outfit-image : image ()
-//edit - item : EditItem button- mode controller ()
+//edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons.
 //add - item : button - add new item ()
-//delete - item : button - delete existing item ()
+//delete - item : button - delete existing item (o))
 //confirm-create-button : load data to database ()
 //if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)'
-// category drop down select one - upper body, lower body, full body,
+// category drop down select one - upper body, lower body, full body, (o)
 class CreateOutfit extends Component {
     state = {
         image: null,

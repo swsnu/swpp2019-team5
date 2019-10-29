@@ -100,7 +100,7 @@ class Item extends Component {
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    X
+                    Delete Item
                 </label>
                 <button className="mode-controller" onClick={this.changeMode}>
                     {this.state.todo}
