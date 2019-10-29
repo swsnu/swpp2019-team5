@@ -86,24 +86,26 @@ class Item extends Component {
             );
         return (
             <div className="Item">
-                <select
-                    className="selector"
-                    value={this.state.category}
-                    onChange={e => this.handleCategoryChange(e)}
-                >
-                    <option value="Outer">Outer</option>
-                    <option value="UpperBody">UpperBody</option>
-                    <option value="LowerBody">LowerBody</option>
-                    <option value="FullBody">FullBody</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Accessories">Accessories</option>
-                </select>
-                <div className="tag-area"> {tags} </div>
+                <div className="item-group">
+                    <select
+                        className="selector"
+                        value={this.state.category}
+                        onChange={e => this.handleCategoryChange(e)}
+                    >
+                        <option value="Outer">Outer</option>
+                        <option value="UpperBody">UpperBody</option>
+                        <option value="LowerBody">LowerBody</option>
+                        <option value="FullBody">FullBody</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+                    <div className="tag-area"> {tags} </div>
+                </div>
                 <label
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    Delete Item
+                    X
                 </label>
                 <button className="mode-controller" onClick={this.changeMode}>
                     {this.state.todo}
