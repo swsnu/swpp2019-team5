@@ -5,6 +5,7 @@ import "./CreateOutfit.scss";
 import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+
 //outfit-image : image (o)
 //log satisfaction
 //edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons. (o)

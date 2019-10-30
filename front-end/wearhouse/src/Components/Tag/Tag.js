@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Tag.scss";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //props : tag(tag_name) ex) "Black", delete (function), edit(function)
 class Tag extends Component {
     componentDidMount() {
@@ -39,7 +41,7 @@ class Tag extends Component {
                             className="edit-tag"
                             onClick={() => this.setState({ editTag: true })}
                         >
-                            +edit+
+                            <FontAwesomeIcon icon={faPen} />
                         </div>
                     </div>
                 );
