@@ -1,6 +1,6 @@
 export { getOutfits, getSpecificOutfit } from "./outfit";
 
-export {} from "./login";
+export { logIn, logOut } from "./login";
 
 export {} from "./item";
 
