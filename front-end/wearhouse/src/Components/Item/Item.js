@@ -40,6 +40,11 @@ class Item extends Component {
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
     }
+    onEditTag(tag, edit_tag) {
+        let tags = this.state.tags;
+        tags = tags.map(tg => (tg === tag ? edit_tag : tg));
+        this.setState({ tags: tags });
+    }
     handleItemDelete() {
         this.props.delete();
         this.setState({
@@ -71,7 +76,7 @@ class Item extends Component {
                     key={index}
                     editMode={true}
                     delete={() => this.onDeleteTag(tag)}
-                    edit={() => this.onEditTag(tag)}
+                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
