@@ -10,20 +10,29 @@ class AddOutfit extends Component {
         showPopUp: false,
     };
 
-    onClickButton = () => {
+    onClickAddOutfitButton = () => {
         this.setState({ ...this.state, showPopUp: true });
+    };
+
+    onClickClosePopUpButton = () => {
+        this.setState({ ...this.state, showPopUp: false });
     };
 
     render() {
         console.log(this.state.showPopUp);
         let pop_up = "";
         if (this.state.showPopUp) {
-            pop_up = <UploadImage />;
+            pop_up = (
+                <UploadImage onClosePopUp={this.onClickClosePopUpButton} />
+            );
         }
         return (
             <div id="add-outfit">
                 {pop_up}
-                <button id="add-outfit-button" onClick={this.onClickButton}>
+                <button
+                    id="add-outfit-button"
+                    onClick={this.onClickAddOutfitButton}
+                >
                     <FontAwesomeIcon icon={faPlus} id="add-outfit-icon" />
                     <div id="add-outfit-text">Add New</div>
                 </button>

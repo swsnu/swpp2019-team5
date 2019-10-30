@@ -5,17 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./UploadImage.scss";
 
 class UploadImage extends React.Component {
-    state = {
-        showPopUp: true,
-    };
-
-    onClickCancelButton = () => {
+    onClickClosePopUpButton = () => {
         // 1. flush image from server
         // 2. doNotShowPopUp
-        this.setState({ ...this.state, showPopUp: false });
+        this.props.onClosePopUp();
     };
 
-    showPopUp = () => {
+    render() {
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
@@ -29,7 +25,7 @@ class UploadImage extends React.Component {
                         <div className="header-column">
                             <button
                                 id="cancel-upload-image"
-                                onClick={this.onClickCancelButton}
+                                onClick={this.onClickClosePopUpButton}
                             >
                                 <FontAwesomeIcon
                                     icon={faTimes}
@@ -51,21 +47,6 @@ class UploadImage extends React.Component {
                 </div>
             </div>
         );
-    };
-
-    doNotShowPopUp = () => {
-        return null;
-    };
-
-    render() {
-        console.log(this.state.showPopUp);
-        let popup = null;
-        if (this.state.showPopUp) {
-            popup = this.showPopUp();
-        } else {
-            popup = this.doNotShowPopUp();
-        }
-        return popup;
     }
 }
 
