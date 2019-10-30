@@ -39,11 +39,23 @@ class Item extends Component {
         let tags = this.state.tags;
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: tags,
+        });
     }
+
+    //Edit Tag
     onEditTag(tag, edit_tag) {
         let tags = this.state.tags;
-        tags = tags.map(tg => (tg === tag ? edit_tag : tg));
+        tags = tags.map(tg => {
+            return tg === tag ? edit_tag : tg;
+        });
         this.setState({ tags: tags });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: tags,
+        });
     }
     handleItemDelete() {
         this.props.delete();
@@ -54,12 +66,16 @@ class Item extends Component {
     }
     //add Tag
     addTag(e) {
+        let tags = this.state.tags;
         if (e.keyCode === 13) {
-            let tags = this.state.tags;
             tags = tags.concat(e.target.value);
             this.setState({ tags: tags });
             e.target.value = "";
         }
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: tags,
+        });
     }
 
     //convert the todo ("Add tag" or "Finished")

@@ -36,7 +36,7 @@ class Tag extends Component {
                             X
                         </div>
                         <div
-                            calssName="edit-tag"
+                            className="edit-tag"
                             onClick={() => this.setState({ editTag: true })}
                         >
                             +edit+

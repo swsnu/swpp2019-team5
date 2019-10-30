@@ -21,6 +21,10 @@ class CreateOutfit extends Component {
         items: [],
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return true;
+    }
+
     componentDidMount() {
         this.setState({ image: this.props.image, items: this.props.items });
     }
@@ -32,7 +36,6 @@ class CreateOutfit extends Component {
     }
 
     onApplyEditItem(item, edit_item) {
-        console.log(item, edit_item);
         let items = this.state.items;
         items = items.map(itm => {
             return itm === item ? edit_item : itm;
@@ -51,8 +54,8 @@ class CreateOutfit extends Component {
             date: this.state.date,
             items: this.state.items,
         };
+        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
-        this.props.history.push("/browse");
     };
     render() {
         let items = this.state.items.map((item, index) => {
