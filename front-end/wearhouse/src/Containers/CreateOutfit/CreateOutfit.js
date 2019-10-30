@@ -76,7 +76,7 @@ class CreateOutfit extends Component {
                 <button onClick={this.addItemHandler} id="add-item">
                     Add Item
                 </button>
-                <button onClick={this.onConfirmCreate} id="add-item">
+                <button onClick={this.onConfirmCreate} id="confirm-create-item">
                     Confirm
                 </button>
             </div>
