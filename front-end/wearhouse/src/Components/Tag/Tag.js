@@ -18,18 +18,17 @@ class Tag extends Component {
     }
     state = { tag_name: "", editMode: null };
     render() {
-        let tag = (
-            <label className="tag-in-outfit">{this.state.tag_name}</label>
-        );
+        let label = <div className="tag-in-outfit">{this.state.tag_name}</div>;
         if (this.state.editMode)
             //in case where not edit mode then props should be false.
-            tag = (
+            label = (
                 <div className="tag-in-outfit">
                     #{this.state.tag_name}
-                    <label onClick={this.props.delete}> X</label>
+                    <div onClick={this.props.delete}> X</div>
+                    <div onClick={this.props.edit}></div>
                 </div>
             );
-        return <div className="Tag">{tag}</div>;
+        return <div className="Tag">{label}</div>;
     }
 }
 export default Tag;
