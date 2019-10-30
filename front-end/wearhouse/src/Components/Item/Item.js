@@ -71,6 +71,7 @@ class Item extends Component {
                     key={index}
                     editMode={true}
                     delete={() => this.onDeleteTag(tag)}
+                    edit={() => this.onEditTag(tag)}
                 />
             );
         });
