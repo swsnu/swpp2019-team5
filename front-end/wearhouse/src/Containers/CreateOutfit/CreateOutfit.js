@@ -16,7 +16,7 @@ class CreateOutfit extends Component {
     state = {
         image: null,
         satisfactionValue: null,
-        date: "2019.10.27",
+        date: new Date(), //in sprint 4 make it changable. user can select date
         items: [],
     };
 
@@ -42,6 +42,15 @@ class CreateOutfit extends Component {
         const newItem = { category: "category", tags: [] };
         let items = this.state.items.concat(newItem);
         this.setState({ items: items });
+    };
+    onConfirmCreate = () => {
+        const newOutfit = {
+            image: this.state.image,
+            satisfactionValue: this.state.satisfactionValue,
+            date: this.state.date,
+            items: this.state.items,
+        };
+        this.props.createOutfit(newOutfit);
     };
     render() {
         let items = this.state.items.map((item, index) => {

@@ -31,7 +31,7 @@ export const getSpecificOutfit = id => {
 export const createOutfit_ = outfit => {
     return {
         type: actionTypes.CREATE_OUTFIT,
-        user_id: outfit.user_id,
+        user_id: 1, //after log in is implemented this should be changed this is temporary one
         image: outfit.image,
         satisfactionValue: outfit.satisfactionValue,
         date: outfit.date,
