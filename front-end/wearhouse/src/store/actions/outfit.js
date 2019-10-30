@@ -8,7 +8,7 @@ export const getOutfits_ = outfits => {
 export const getOutfits = () => {
     return dispatch => {
         return axios
-            .get("/api/outfit")
+            .get("outfit/")
             .then(res => dispatch(getOutfits_(res.data)));
     };
 };
@@ -22,7 +22,7 @@ export const getSpecificOutfit_ = outfit => {
 
 export const getSpecificOutfit = id => {
     return dispatch => {
-        return axios.get("/api/outfit/" + id).then(res => {
+        return axios.get("outfit/" + id).then(res => {
             dispatch(getSpecificOutfit_(res.data));
         });
     };
@@ -41,7 +41,7 @@ export const createOutfit_ = outfit => {
 };
 export const createOutfit = outfit => {
     return dispatch => {
-        return axios.post("/api/outfit", outfit).then(res => {
+        return axios.post("outfit/", outfit).then(res => {
             dispatch(createOutfit_(res.data));
         });
     };
