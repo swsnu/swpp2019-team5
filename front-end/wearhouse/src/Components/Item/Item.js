@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import "./Item.scss";
+import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        return true;
+    }
     componentDidUpdate(prevProps, prevState) {
         if (this.props !== prevProps)
             this.setState({
@@ -78,10 +83,16 @@ class Item extends Component {
         });
     }
 
-    //convert the todo ("Add tag" or "Finished")
+    //convert the todo ("Add tag" or "Finish")
     changeMode = () => {
-        if (this.state.todo === "Add tag") this.setState({ todo: "Finished" });
-        else this.setState({ todo: "Add tag" });
+        if (this.state.todo === "Finish")
+            this.setState({
+                todo: "Add tag",
+            });
+        else
+            this.setState({
+                todo: "Finish",
+            });
     };
     render() {
         let tags = this.state.tags.map((tag, index) => {
@@ -96,8 +107,9 @@ class Item extends Component {
                 />
             );
         });
+        let todo = null;
         let tag_input = null;
-        if (this.state.todo === "Finished")
+        if (this.state.todo === "Finish") {
             tag_input = (
                 <input
                     type="text"
@@ -106,6 +118,8 @@ class Item extends Component {
                     onKeyDown={e => this.addTag(e)}
                 ></input>
             );
+            todo = <FontAwesomeIcon icon={faCheck} />;
+        } else todo = <FontAwesomeIcon icon={faPlus} />;
         return (
             <div className="Item">
                 <div className="item-group">
@@ -122,6 +136,9 @@ class Item extends Component {
                         <option value="Accessories">Accessories</option>
                     </select>
                     <div className="tag-area"> {tags} </div>
+                    <div className="mode-controller" onClick={this.changeMode}>
+                        {todo}
+                    </div>
                 </div>
                 <label
                     className="item-deleter"
@@ -129,9 +146,7 @@ class Item extends Component {
                 >
                     X
                 </label>
-                <button className="mode-controller" onClick={this.changeMode}>
-                    {this.state.todo}
-                </button>
+
                 <div className="tag-container">{tag_input}</div>
             </div>
         );

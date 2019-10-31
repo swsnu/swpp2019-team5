@@ -5,6 +5,7 @@ import "./CreateOutfit.scss";
 import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+import { withRouter } from "react-router";
 
 //outfit-image : image (o)
 //log satisfaction
@@ -55,8 +56,8 @@ class CreateOutfit extends Component {
             date: this.state.date,
             items: this.state.items,
         };
-        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
+        this.props.history.push("/browse");
     };
     render() {
         let items = this.state.items.map((item, index) => {
@@ -99,4 +100,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     null,
     mapDispatchToProps,
-)(CreateOutfit);
+)(withRouter(CreateOutfit));

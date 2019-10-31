@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Tag.scss";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrashAlt, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //props : tag(tag_name) ex) "Black", delete (function), edit(function)
 class Tag extends Component {
@@ -34,14 +34,14 @@ class Tag extends Component {
                 label = (
                     <div className="tag-in-outfit">
                         #{this.state.tag_name + " "}
-                        <div className="delete-tag" onClick={this.props.delete}>
-                            X
-                        </div>
                         <div
                             className="edit-tag"
                             onClick={() => this.setState({ editTag: true })}
                         >
                             <FontAwesomeIcon icon={faPen} />
+                        </div>
+                        <div className="delete-tag" onClick={this.props.delete}>
+                            <FontAwesomeIcon icon={faTrashAlt} />
                         </div>
                     </div>
                 );
@@ -56,11 +56,11 @@ class Tag extends Component {
                                 this.setState({ tag_name: e.target.value })
                             }
                         ></input>
-                        <div className="delete-tag" onClick={this.props.delete}>
-                            X
+                        <div className="edit-tag" onClick={this.onEditTag}>
+                            <FontAwesomeIcon icon={faCheck} />
                         </div>
-                        <div calssName="edit-tag" onClick={this.onEditTag}>
-                            &#x2713;
+                        <div className="delete-tag" onClick={this.props.delete}>
+                            <FontAwesomeIcon icon={faTrashAlt} />
                         </div>
                     </div>
                 );
