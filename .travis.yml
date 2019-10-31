@@ -8,7 +8,7 @@ matrix:
     dist: trusty
     addons:
       sonarclodud:
-        organization: "9457114ddf212127511c802533403c7c502eaf1c"
+        organization: "swsnu"
         token:
           secure: "PVFizaGHpQlMFjJHB+gsoEOvybQScXc6u2b1iqaYbp8EeMHGepZwNRoII4XDG0e0YxBWiaGSGR35aF81iZ2SDpyq3JbRehYm7Omd80y2i0TsW6nb4dn+vetlmdBdN0A9fEhO1kk+3LVbBDmL62wbKIKM5iAwdTr6o803aonuUHY4qMLYL9HFang2/dEnz6j6wZm5QoQlDW7blZsf1GGSirkDoUQuZp1M5l/BAwLv1E+bXiJLbujo49r1VwL32oRplTrSYx8vr7RdMSSm36/uRDR+hEZmqz/vZb6VW2cS/jQK89iPZROBKNj1McfWppFHKc6OyebOuDxnvMqBoJw2WDhBzIL6BVPQq6SaxxuX12t/6RcR9yOrUjd1ORISMgAH6Z8hvb8/rvIlJzwPfnWPN/PAMWfSKwWRE7WZcHWcQ/OIClH5op5SR+yyCnOWAuS8KHswJlYOOdHNaQ4uGJJLkP09HVQPwL2jGXwNH9U03ie7hA+QhLcxvvJguzpqm8UuCjLRNpRqznk84NcCf72BIo/f5e7LcY/FRt9l80/ppBrJZ6k48bvVZPQKonnSUbZfpjR0LZNySAWx7TK1FWaCxcJEOvHkWmaY40BAZLnznFaBC3JZsnRl+DwmFeEwuJev2vuWXStA4xhGQ/bHaQ2PoZYXsh7NkNwOk9Z+iVvIrCg="
     before_install:
