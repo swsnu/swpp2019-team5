@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./UploadImage.scss";
 
 class UploadImage extends React.Component {
-    state = { selectedImageURL: null };
+    state = { selectedImageURL: null, isPreviewMode: false };
 
     onClickClosePopUpButton = () => {
         this.props.onClosePopUp();
@@ -24,6 +24,7 @@ class UploadImage extends React.Component {
                         selectedImageURL: URL.createObjectURL(
                             event.target.files[0],
                         ),
+                        isPreviewMode: true,
                     },
                     () => {
                         console.log(this.state.selectedImageURL);
@@ -37,8 +38,54 @@ class UploadImage extends React.Component {
         }
     };
 
+    onChooseOtherImage = () => {
+        this.setState({
+            ...this.state,
+            selectedImageURL: null,
+            isPreviewMode: false,
+        });
+    };
+
+    onConfirmImage = () => {
+        // send request to backend
+    };
+
     render() {
-        console.log(this.state.selectedImageURL);
+        let chooseOtherImageButton = null;
+        let confirmImageButton = null;
+        let chooseFileButton = null;
+        let previewImage = null;
+
+        if (this.state.isPreviewMode) {
+            chooseOtherImageButton = (
+                <button
+                    id="choose-other-image"
+                    onClick={this.onChooseOtherImage}
+                >
+                    choose other image
+                </button>
+            );
+            confirmImageButton = (
+                <button id="confirm-image" onClick={this.onConfirmImage}>
+                    confirm and proceed
+                </button>
+            );
+            previewImage = (
+                <img
+                    id="selected-image-file"
+                    src={this.state.selectedImageURL}
+                    alt="selected image file"
+                />
+            );
+        } else {
+            chooseFileButton = (
+                <input
+                    type="file"
+                    id="choose-file"
+                    onChange={this.onFileChanged}
+                />
+            );
+        }
 
         return (
             <div id="upload-image">
@@ -62,17 +109,10 @@ class UploadImage extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <input
-                        type="file"
-                        id="choose-file"
-                        onChange={this.onFileChanged}
-                    />
-
-                    <img
-                        id="selected-image-file"
-                        src={this.state.selectedImageURL}
-                        alt="selected image file"
-                    />
+                    {chooseFileButton}
+                    {previewImage}
+                    {chooseOtherImageButton}
+                    {confirmImageButton}
                 </div>
             </div>
         );
