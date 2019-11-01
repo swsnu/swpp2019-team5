@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
+import "./Login.scss";
+
 class Login extends Component {
     onLogin = () => {
         let credentials = {
@@ -11,6 +13,10 @@ class Login extends Component {
         this.props.onLogIn(credentials);
     };
 
+    onClickSignUp = () => {
+        this.props.history.push("/signup");
+    };
+
     render() {
         return (
             <div id="login">
@@ -18,9 +24,18 @@ class Login extends Component {
                     <label>E-mail</label>
                     <input type="text" name="email" id="email-input"></input>
                     <label>Password</label>
-                    <input type="text" name="password" id="pw-input"></input>
-                    <button onClick={() => this.onLogin()}>Log in</button>
+                    <input
+                        type="password"
+                        name="password"
+                        id="pw-input"
+                    ></input>
                 </form>
+                <button id="login-button" onClick={() => this.onLogin()}>
+                    Log In
+                </button>
+                <button id="signup-button" onClick={() => this.onClickSignUp()}>
+                    Sign Up
+                </button>
             </div>
         );
     }
