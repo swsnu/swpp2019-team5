@@ -38,6 +38,13 @@ describe("<Signup />", () => {
         let wrapper = component.find("#signup-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(0);
+
+        component
+            .find("#email-input")
+            .simulate("change", { target: { value: "test" } });
+
+        wrapper.simulate("click");
+        expect(spyAxios_post).toHaveBeenCalledTimes(0);
     });
 
     it("should call 'onSignup' when input is valid", () => {
