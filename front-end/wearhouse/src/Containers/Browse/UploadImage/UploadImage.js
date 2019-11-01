@@ -8,23 +8,38 @@ class UploadImage extends React.Component {
     state = { selectedImageURL: null };
 
     onClickClosePopUpButton = () => {
-        // 1. flush image from server
-        // 2. doNotShowPopUp
         this.props.onClosePopUp();
+    };
+
+    isImageFile = file => {
+        return file && file["type"].split("/")[0] === "image";
     };
 
     onFileChanged = event => {
         if (event.target.files && event.target.files[0]) {
-            this.setState({
-                selectedImageURL: URL.createObjectURL(event.target.files[0]),
-            });
+            if (this.isImageFile(event.target.files[0])) {
+                this.setState(
+                    {
+                        ...this.state,
+                        selectedImageURL: URL.createObjectURL(
+                            event.target.files[0],
+                        ),
+                    },
+                    () => {
+                        console.log(this.state.selectedImageURL);
+                    },
+                );
+            } else {
+                alert("you need to input image file");
+                console.log(event.target.files[0]);
+                console.log(this.state.selectedImageURL);
+            }
         }
     };
 
     render() {
-        let src = "#";
+        console.log(this.state.selectedImageURL);
 
-        console.log(src);
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
@@ -47,16 +62,6 @@ class UploadImage extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <button
-                        id="upload-image-button"
-                        onClick={this.onClickUploadImage}
-                    >
-                        <FontAwesomeIcon
-                            icon={faCameraRetro}
-                            size="4x"
-                            id="choose-image-icon"
-                        />
-                    </button>
                     <input
                         type="file"
                         id="choose-file"
