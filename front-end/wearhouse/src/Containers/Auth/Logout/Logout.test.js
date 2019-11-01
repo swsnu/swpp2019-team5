@@ -35,7 +35,7 @@ describe("<Signup />", () => {
 
     it("should call 'onLogout' when clicked", () => {
         const component = mount(logout);
-        let wrapper = component.find("#logout");
+        let wrapper = component.find("#logout-button");
         wrapper.simulate("click");
         expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
