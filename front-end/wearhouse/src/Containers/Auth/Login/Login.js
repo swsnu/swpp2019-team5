@@ -5,12 +5,12 @@ import * as actionCreators from "../../../store/actions/index";
 import "./Login.scss";
 
 class Login extends Component {
+    state = {
+        email: "",
+        password: "",
+    };
     onLogin = () => {
-        let credentials = {
-            email: document.getElementById("email-input").value,
-            password: document.getElementById("pw-input").value,
-        };
-        this.props.onLogIn(credentials);
+        this.props.onLogIn(this.state);
     };
 
     onClickSignUp = () => {
@@ -18,19 +18,35 @@ class Login extends Component {
     };
 
     render() {
+        let active = this.state.email !== "" && this.state.password !== "";
         return (
             <div id="login">
+                <h1>Sign Up</h1>
                 <form id="login-form">
                     <label>E-mail</label>
-                    <input type="text" name="email" id="email-input"></input>
+                    <input
+                        onChange={e => {
+                            this.setState({ email: e.target.value });
+                        }}
+                        type="text"
+                        name="email"
+                        id="email-input"
+                    ></input>
                     <label>Password</label>
                     <input
                         type="password"
                         name="password"
                         id="pw-input"
+                        onChange={e => {
+                            this.setState({ password: e.target.value });
+                        }}
                     ></input>
                 </form>
-                <button id="login-button" onClick={() => this.onLogin()}>
+                <button
+                    id="login-button"
+                    disabled={!active}
+                    onClick={() => this.onLogin()}
+                >
                     Log In
                 </button>
                 <button id="signup-button" onClick={() => this.onClickSignUp()}>

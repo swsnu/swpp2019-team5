@@ -1,8 +1,8 @@
 #login {
     width: 40%;
-    margin: 0 auto;
+    margin: 100px auto;
     #login-form {
-        margin: 100px 0 40px;
+        margin: 30px 0 40px;
         label {
             position: relative;
             color: gray;
@@ -38,6 +38,11 @@
         &#login-button {
             color: white;
             background-color: black;
+            cursor: pointer;
+            &:disabled {
+                background-color: rgb(163, 163, 163);
+                cursor: not-allowed;
+            }
         }
         &#signup-button {
             color: darkslategray;

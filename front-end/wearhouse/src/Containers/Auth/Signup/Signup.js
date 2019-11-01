@@ -5,25 +5,31 @@ import * as actionCreators from "../../../store/actions/index";
 import "./Signup.scss";
 
 class Signup extends Component {
-    state = { password: "", passwordConfirm: "" };
+    state = { email: "", password: "", passwordConfirm: "" };
     onSignUp = () => {
-        //TODO: implement axios call
+        this.props.onSignUp();
     };
 
-    // onPasswordConfirm = () => {
-    //     this.setState({
-    //         passwordMatch: this.state.password === this.state.passwordConfirm,
-    //     });
-    // };
-
     render() {
-        let visible = this.state.password === this.state.passwordConfirm;
-        console.log(this.state);
+        let pwMatch = this.state.password === this.state.passwordConfirm;
+
+        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}\.[a-z]{2,3}$/;
+        let validEmail = emailRegex.test(this.state.email);
+
+        let active = pwMatch && validEmail && this.state.password !== "";
         return (
             <div id="signup">
-                <form id="signup-form" onSubmit={this.onSignUp()}>
+                <h1>Sign Up</h1>
+                <form id="signup-form">
                     <label>E-mail</label>
-                    <input type="text" name="email" id="email-input"></input>
+                    <input
+                        onChange={e => {
+                            this.setState({ email: e.target.value });
+                        }}
+                        type="text"
+                        name="email"
+                        id="email-input"
+                    ></input>
                     <label>Password</label>
                     <input
                         onChange={e => {
@@ -42,14 +48,25 @@ class Signup extends Component {
                         name="password-confirm"
                         id="pw-confirm"
                     ></input>
-                    {!visible && (
-                        <div id="password-mismatch">Passwords don't match</div>
-                    )}
+                    <div id="error-container">
+                        {!validEmail && this.state.email !== "" && (
+                            <div className="signup-error" id="email-invalid">
+                                Must enter a valid email address
+                            </div>
+                        )}
+                        {!pwMatch && (
+                            <div
+                                className="signup-error"
+                                id="password-mismatch"
+                            >
+                                Passwords don't match
+                            </div>
+                        )}
+                    </div>
                     <button
-                        active={(
-                            !visible && this.state.password != ""
-                        ).toString()}
+                        disabled={!active}
                         id="signup-button"
+                        onClick={() => this.onSignUp()}
                     >
                         Sign up
                     </button>
@@ -58,7 +75,6 @@ class Signup extends Component {
         );
     }
 }
-const mapStateToProps = state => {};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -67,6 +83,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
 )(Signup);
