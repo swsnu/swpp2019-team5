@@ -1,0 +1,36 @@
+#edit-satisfaction {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    svg {
+        width: 20px;
+    }
+    transition: all 0.3s ease-in-out;
+
+    #current-value {
+        display: flex;
+        img,
+        svg {
+            max-width: 25px;
+            padding: 5px;
+            background-color: lightblue;
+        }
+    }
+
+    #edit-options {
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        max-width: 0;
+        overflow: hidden;
+        img {
+            max-width: 25px;
+            margin: 5px;
+        }
+        &.visible {
+            max-width: fit-content;
+            //transition: all 0.3s ease-in-out;
+        }
+    }
+}

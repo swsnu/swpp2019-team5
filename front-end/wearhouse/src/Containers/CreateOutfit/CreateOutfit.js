@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Logout from "../Logout/Logout";
-import "./CreateOutfit.scss";
-import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 import { withRouter } from "react-router";
+
+import Logout from "../Auth/Logout/Logout";
+import Item from "../../Components/Item/Item";
+import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
+import "./CreateOutfit.scss";
+
+import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
 //log satisfaction
@@ -75,6 +78,7 @@ class CreateOutfit extends Component {
         return (
             <div className="CreateOutfit">
                 <div id="image-window">
+                    <EditSatisfaction />
                     <img src={SampleImage} />
                 </div>
                 {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}

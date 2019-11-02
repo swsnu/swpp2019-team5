@@ -6,13 +6,10 @@ import { ConnectedRouter } from "connected-react-router";
 import Calendar from "./Containers/Calendar/Calendar";
 import Browse from "./Containers/Browse/Browse";
 import OutfitDetail from "./Containers/OutfitDetail/OutfitDetail";
-<<<<<<< HEAD
 import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
-=======
 import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 
->>>>>>> master
 import "./App.scss";
 
 function App() {
@@ -32,16 +29,13 @@ function App() {
                     component={OutfitDetail}
                 />
                 <Route path="/calendar" exact component={Calendar} />
-<<<<<<< HEAD
                 <Route
                     path="/createOutfit"
                     exact
                     render={() => <CreateOutfit image={""} items={items} />}
                 />
-=======
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={Signup} />
->>>>>>> master
             </Switch>
         </BrowserRouter>
     );
