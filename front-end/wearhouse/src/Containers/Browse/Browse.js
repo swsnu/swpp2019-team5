@@ -41,27 +41,17 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        // const outfits = this.props.outfits.map(outfit => {
-        //     return (
-        //         <Outfit
-        //             key={outfit.id}
-        //             image={outfit.imageUrl}
-        //             satisfactionValue={outfit.satisfactionValue}
-        //             date={outfit.date}
-        //             clicked={() => this.onClickOutfit(outfit)}
-        //         />
-        //     );
-        // });
-
-        const outfits = (
-            <Outfit
-                key={1}
-                image=""
-                satisfactionValue=""
-                date=""
-                clicked={() => this.onClickOutfit()}
-            />
-        );
+        const outfits = this.props.outfits.map(outfit => {
+            return (
+                <Outfit
+                    key={outfit.id}
+                    image={outfit.imageUrl}
+                    satisfactionValue={outfit.satisfactionValue}
+                    date={outfit.date}
+                    clicked={() => this.onClickOutfit(outfit)}
+                />
+            );
+        });
 
         switch (this.state.mode) {
             case "browse":

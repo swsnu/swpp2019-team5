@@ -17,7 +17,7 @@ import great from "../Satisfaction/icon-images/5.png";
 class EditSatisfaction extends React.Component {
     state = {
         currSatisfaction: this.props.satisfactionValue,
-        editMode: false,
+        editMode: "",
     };
 
     changeSelectedTo = number => {
@@ -49,6 +49,7 @@ class EditSatisfaction extends React.Component {
                 <img
                     src={iconlist[this.state.currSatisfaction]}
                     alt={"selected satisfaction"}
+                    id="selected-satisfaction"
                 />
             );
         } else {
@@ -65,30 +66,24 @@ class EditSatisfaction extends React.Component {
                 <div id="current-value" className="visible">
                     {selectedIcon}
                 </div>
-                <div id="edit-options">{iconOptions}</div>
+                <div id="edit-options" className={this.state.editMode}>
+                    {iconOptions}
+                </div>
                 {this.state.editMode ? (
                     <FontAwesomeIcon
                         className="satisfaction-functions"
                         icon={faChevronLeft}
                         onClick={() => {
-                            this.setState({ editMode: false });
-                            document
-                                .getElementById("edit-options")
-                                .classList.toggle("visible");
+                            this.setState({ editMode: "" });
                         }}
-                        color="white"
                     />
                 ) : (
                     <FontAwesomeIcon
                         className="satisfaction-functions"
                         icon={faPen}
                         onClick={() => {
-                            this.setState({ editMode: true });
-                            document
-                                .getElementById("edit-options")
-                                .classList.toggle("visible");
+                            this.setState({ editMode: "visible" });
                         }}
-                        color="white"
                     />
                 )}
             </div>
