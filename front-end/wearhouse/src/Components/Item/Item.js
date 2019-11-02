@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import "./Item.scss";
-import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
@@ -117,7 +117,7 @@ class Item extends Component {
                 <input
                     className="tag-input"
                     type="text"
-                    placeholder="Enter tag"
+                    placeholder="Enter tag.."
                     //onChange = further task #1
                     onKeyDown={e => this.addTag(e)}
                 ></input>
@@ -126,8 +126,8 @@ class Item extends Component {
         } else todo = <FontAwesomeIcon icon={faPlus} />;
         return (
             <div className="Item">
-                <div className="item-group">
-                    <div className="info-container">
+                <div className="info-container">
+                    <div className="position-controller">
                         <Select
                             className="Select"
                             defaultValue={itemOptions.find(
@@ -138,24 +138,26 @@ class Item extends Component {
                             styles={itemStyles}
                             onChange={e => this.handleCategoryChange(e)}
                         />
+                    </div>
 
-                        <div className="tag-area">{tags}</div>
+                    <div className="tag-area">
+                        {tags}
                         <div
                             className="mode-controller"
                             onClick={this.changeMode}
                         >
                             {todo}
                         </div>
-
-                        <div
-                            className="item-deleter"
-                            onClick={this.handleItemDelete.bind(this)}
-                        >
-                            X
-                        </div>
                     </div>
-                    <div className="tag-container">{tag_input}</div>
+
+                    <div
+                        className="item-deleter"
+                        onClick={this.handleItemDelete.bind(this)}
+                    >
+                        <FontAwesomeIcon icon={faTimes} />
+                    </div>
                 </div>
+                <div className="tag-container">{tag_input}</div>
             </div>
         );
     }

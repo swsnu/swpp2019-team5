@@ -5,7 +5,7 @@
 }
 #image-window img {
     border: 2px solid rgb(124, 112, 117);
-    border-radius: 5%;
+    border-radius: 2%;
 }
 #info-window #items-info-window {
     display: flex;
@@ -15,17 +15,49 @@
 
 #info-window #add-confirm-buttons-container {
     display: flex;
-    justify-content: center;
-    margin-top: 30px;
+    justify-content: flex-start;
+    margin-top: 10px;
 }
 #info-window {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.CreateOutfit {
+#add-item {
+    margin-left: 10px;
+    border: none;
+    padding: 5px;
+    color: white;
+    background-color: lightgray;
+    &:hover {
+        cursor: pointer;
+    }
+}
+#confirm-create-item {
+    background-color: rgb(54, 54, 54);
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    padding: 10px;
+    border: none;
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(172, 159, 159);
+    }
+}
+#create-outfit-window {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
     height: 100vh;
+}
+
+#top-container {
+    display: grid;
+    grid-template-rows: 89%;
+}
+
+#create-confirm-window {
+    display: inline-block;
 }

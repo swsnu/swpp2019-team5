@@ -76,9 +76,8 @@ class CreateOutfit extends Component {
             );
         });
         return (
-            <div>
-                <Logout />
-                <div className="CreateOutfit">
+            <div id="top-container">
+                <div id="create-outfit-window">
                     <div id="image-window">
                         <img src={SampleImage} />
                     </div>
@@ -90,14 +89,16 @@ class CreateOutfit extends Component {
                             <button onClick={this.addItemHandler} id="add-item">
                                 Add Item
                             </button>
-                            <button
-                                onClick={this.onConfirmCreate}
-                                id="confirm-create-item"
-                            >
-                                Confirm
-                            </button>
                         </div>
                     </div>
+                </div>
+                <div id="create-confirm-window">
+                    <button
+                        onClick={this.onConfirmCreate}
+                        id="confirm-create-item"
+                    >
+                        Confirm Create
+                    </button>
                 </div>
             </div>
         );
