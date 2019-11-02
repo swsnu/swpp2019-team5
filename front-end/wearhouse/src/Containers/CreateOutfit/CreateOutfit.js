@@ -46,7 +46,7 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     }
     addItemHandler = () => {
-        const newItem = { category: "category", tags: [] };
+        const newItem = { category: "default", tags: [] };
         let items = this.state.items.concat(newItem);
         this.setState({ items: items });
     };

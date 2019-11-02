@@ -3,6 +3,8 @@ import Tag from "../Tag/Tag";
 import "./Item.scss";
 import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { itemStyles, itemOptions } from "./SelectStyle";
+import Select from "react-select";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -19,7 +21,7 @@ class Item extends Component {
     }
 
     state = {
-        category: this.props.item.category,
+        category: "default",
         tags: this.props.item.tags,
         todo: "Add tag", //the mode where user enters after clicing button
     };
@@ -31,10 +33,11 @@ class Item extends Component {
         });
     }
     handleCategoryChange(event) {
-        this.setState({ category: event.target.value });
+        console.log(event);
+        this.setState({ category: event.value });
 
         this.props.applyEdit({
-            category: event.target.value,
+            category: event.value,
             tags: this.state.tags,
         });
     }
@@ -123,18 +126,15 @@ class Item extends Component {
         return (
             <div className="Item">
                 <div className="item-group">
-                    <select
-                        className="selector"
-                        value={this.state.category}
+                    <Select
+                        defaultValue={itemOptions.find(
+                            c => c.value === this.props.item.category,
+                        )}
+                        label="Category"
+                        options={itemOptions}
+                        styles={itemStyles}
                         onChange={e => this.handleCategoryChange(e)}
-                    >
-                        <option value="Outer">Outer</option>
-                        <option value="UpperBody">UpperBody</option>
-                        <option value="LowerBody">LowerBody</option>
-                        <option value="FullBody">FullBody</option>
-                        <option value="Shoes">Shoes</option>
-                        <option value="Accessories">Accessories</option>
-                    </select>
+                    />
                     <div className="tag-area"> {tags} </div>
                     <div className="mode-controller" onClick={this.changeMode}>
                         {todo}
