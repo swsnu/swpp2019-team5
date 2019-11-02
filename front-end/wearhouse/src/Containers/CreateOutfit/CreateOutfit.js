@@ -51,12 +51,14 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     };
     onConfirmCreate = () => {
+        //please add validation whether for all items category is selected in sprint 4
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
         };
+        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
         this.props.history.push("/browse");
     };

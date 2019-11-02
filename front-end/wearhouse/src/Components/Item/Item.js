@@ -127,6 +127,7 @@ class Item extends Component {
             <div className="Item">
                 <div className="item-group">
                     <Select
+                        className="Select"
                         defaultValue={itemOptions.find(
                             c => c.value === this.props.item.category,
                         )}
@@ -135,18 +136,19 @@ class Item extends Component {
                         styles={itemStyles}
                         onChange={e => this.handleCategoryChange(e)}
                     />
+
                     <div className="tag-area"> {tags} </div>
                     <div className="mode-controller" onClick={this.changeMode}>
                         {todo}
                     </div>
-                </div>
-                <label
-                    className="item-deleter"
-                    onClick={this.handleItemDelete.bind(this)}
-                >
-                    X
-                </label>
 
+                    <label
+                        className="item-deleter"
+                        onClick={this.handleItemDelete.bind(this)}
+                    >
+                        X
+                    </label>
+                </div>
                 <div className="tag-container">{tag_input}</div>
             </div>
         );

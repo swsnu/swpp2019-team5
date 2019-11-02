@@ -38,3 +38,5 @@ export const itemStyles = {
     placeholder: styles => ({ ...styles }),
     singleValue: styles => ({ ...styles }),
 };
+
+export const tagStyles = {};
