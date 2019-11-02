@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Logout from "../Logout/Logout";
-import "./CreateOutfit.scss";
-import Item from "../../Components/Item/Item";
+import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
-import { withRouter } from "react-router";
+import "./CreateOutfit.scss";
+
+import Logout from "../Logout/Logout";
+import Item from "../../Components/Item/Item";
 
 //outfit-image : image (o)
 //log satisfaction
@@ -73,19 +74,29 @@ class CreateOutfit extends Component {
             );
         });
         return (
-            <div className="CreateOutfit">
-                <div id="image-window">
-                    <img src={SampleImage} />
+            <div>
+                <Logout />
+                <div className="CreateOutfit">
+                    <div id="image-window">
+                        <img src={SampleImage} />
+                    </div>
+
+                    {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
+                    <div id="info-window">
+                        <div id="items-info-window">{items}</div>
+                        <div id="add-confirm-buttons-container">
+                            <button onClick={this.addItemHandler} id="add-item">
+                                Add Item
+                            </button>
+                            <button
+                                onClick={this.onConfirmCreate}
+                                id="confirm-create-item"
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
-                <div id="items-info-window">{items}</div>
-                <br />
-                <button onClick={this.addItemHandler} id="add-item">
-                    Add Item
-                </button>
-                <button onClick={this.onConfirmCreate} id="confirm-create-item">
-                    Confirm
-                </button>
             </div>
         );
     }

@@ -1,9 +1,30 @@
 #image-window {
-    display: inline-block;
-    margin: 9px;
-    padding: 7px;
+    padding: 70px;
+    display: flex;
+    align-items: center;
+}
+#image-window img {
+    border: 2px solid rgb(216, 206, 206);
+}
+#info-window #items-info-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-#items-info-window {
-    display: inline-block;
+#info-window #add-confirm-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+#info-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.CreateOutfit {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    height: 100vh;
 }
