@@ -27,3 +27,22 @@ export const getSpecificOutfit = id => {
         });
     };
 };
+
+export const createOutfit_ = outfit => {
+    return {
+        type: actionTypes.CREATE_OUTFIT,
+        user_id: 1, //after log in is implemented this should be changed this is temporary one
+        image: outfit.image,
+        satisfactionValue: outfit.satisfactionValue,
+        date: outfit.date,
+        id: outfit.id,
+        items: outfit.items,
+    };
+};
+export const createOutfit = outfit => {
+    return dispatch => {
+        return axios.post("outfit/", outfit).then(res => {
+            dispatch(createOutfit_(res.data));
+        });
+    };
+};

@@ -10,6 +10,18 @@ const reducer = (state = initialState, action) => {
             return { ...state, outfits: action.outfits };
         case actionTypes.GET_SPECIFIC_OUTFIT:
             return { ...state, selectedOutfit: action.target };
+        case actionTypes.CREATE_OUTFIT: {
+            const newOutfit = {
+                author_id: action.user_id,
+                image: action.image,
+                satisfactionValue: action.satisfactionValue,
+                date: action.date,
+                id: action.id,
+                items: action.items,
+            };
+            const new_outfits = state.outfits.concat(newOutfit);
+            return { ...state, outfits: new_outfits };
+        }
         default:
             break;
     }
