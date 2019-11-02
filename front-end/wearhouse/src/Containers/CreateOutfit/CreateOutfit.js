@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import * as actionCreators from "../../store/actions/index";
 import { withRouter } from "react-router";
+
 
 import Logout from "../Auth/Logout/Logout";
 import Item from "../../Components/Item/Item";
@@ -76,20 +78,30 @@ class CreateOutfit extends Component {
             );
         });
         return (
-            <div className="CreateOutfit">
-                <div id="image-window">
-                    <EditSatisfaction />
-                    <img src={SampleImage} />
+            <div>
+                <Logout />
+                <div className="CreateOutfit">
+                    <div id="image-window">
+                        <EditSatisfaction />
+                        <img src={SampleImage} />
+                    </div>
+
+                    {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
+                    <div id="info-window">
+                        <div id="items-info-window">{items}</div>
+                        <div id="add-confirm-buttons-container">
+                            <button onClick={this.addItemHandler} id="add-item">
+                                Add Item
+                            </button>
+                            <button
+                                onClick={this.onConfirmCreate}
+                                id="confirm-create-item"
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
-                <div id="items-info-window">{items}</div>
-                <br />
-                <button onClick={this.addItemHandler} id="add-item">
-                    Add Item
-                </button>
-                <button onClick={this.onConfirmCreate} id="confirm-create-item">
-                    Confirm
-                </button>
             </div>
         );
     }
