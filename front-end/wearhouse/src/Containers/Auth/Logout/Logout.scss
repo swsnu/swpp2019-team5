@@ -1,0 +1,17 @@
+#logout {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    #logout-button {
+        border: none;
+        width: 120px;
+        height: 40px;
+        border-radius: 3px;
+        font-size: 15px;
+        margin: 10px 40px 10px;
+
+        color: white;
+        background-color: darkslategray;
+        cursor: pointer;
+    }
+}

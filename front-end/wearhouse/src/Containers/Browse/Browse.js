@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Logout from "../Logout/Logout";
+import Logout from "../Auth/Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import * as actionCreators from "../../store/actions/index";
