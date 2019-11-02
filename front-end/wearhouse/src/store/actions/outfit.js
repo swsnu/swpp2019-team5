@@ -8,7 +8,11 @@ export const getOutfits_ = outfits => {
 export const getOutfits = () => {
     return dispatch => {
         return axios
+<<<<<<< HEAD
             .get("outfit/")
+=======
+            .get("/api/outfit")
+>>>>>>> 906d49dde1cd5d8be4d92c2efb49685fc09eb9ee
             .then(res => dispatch(getOutfits_(res.data)));
     };
 };
@@ -22,7 +26,11 @@ export const getSpecificOutfit_ = outfit => {
 
 export const getSpecificOutfit = id => {
     return dispatch => {
+<<<<<<< HEAD
         return axios.get("outfit/" + id).then(res => {
+=======
+        return axios.get("/api/outfit/" + id).then(res => {
+>>>>>>> 906d49dde1cd5d8be4d92c2efb49685fc09eb9ee
             dispatch(getSpecificOutfit_(res.data));
         });
     };

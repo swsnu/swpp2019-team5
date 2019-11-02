@@ -1,0 +1,59 @@
+#Main {
+    .intro-content {
+        display: grid;
+        grid-template-rows: 30% 10% 60%;
+
+        height: 85vh;
+        padding: 10px 5%;
+
+        #intro-text {
+            text-align: center;
+            width: 60%;
+            margin: 70px auto;
+            font-size: 30px;
+            span {
+                font-size: 60px;
+                font-weight: 900;
+                line-height: 100px;
+            }
+        }
+
+        #button-container {
+            margin: 20px auto;
+            button {
+                border: none;
+                width: 120px;
+                height: 40px;
+                border-radius: 3px;
+                font-size: 15px;
+                margin: 0 20px;
+                cursor: pointer;
+                &#signup-button {
+                    color: white;
+                    background-color: black;
+                }
+                &#login-button {
+                    color: darkslategray;
+                    border: 1px darkslategray solid;
+                }
+            }
+        }
+
+        #intro-image {
+            width: 70%;
+            margin: 10px auto;
+            position: relative;
+            align-self: end;
+        }
+    }
+
+    #content-2 {
+        margin-top: 40px;
+        background-color: rgba(218, 165, 32, 0.3);
+    }
+
+    footer {
+        height: 15vh;
+        background-color: rgb(25, 66, 106);
+    }
+}
