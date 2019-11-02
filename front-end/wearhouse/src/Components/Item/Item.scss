@@ -1,0 +1,43 @@
+.selector {
+    display: inline-block;
+}
+.tag-area {
+    display: inline-block;
+}
+
+.item-group {
+    background-color: wheat;
+    display: inline-block;
+    margin: 5px;
+}
+
+.item-deleter {
+    background-color: wheat;
+    display: inline-block;
+    margin: 9px;
+    padding: 7px;
+}
+
+.mode-controller {
+    background-color: cornflowerblue;
+
+    border: none;
+
+    color: #fff;
+
+    padding: 5px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 4px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
