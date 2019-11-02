@@ -21,7 +21,7 @@ class Login extends Component {
         let active = this.state.email !== "" && this.state.password !== "";
         return (
             <div id="login">
-                <h1>Sign Up</h1>
+                <h1>Log In</h1>
                 <form id="login-form">
                     <label>E-mail</label>
                     <input
