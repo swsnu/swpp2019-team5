@@ -2,12 +2,26 @@
     display: inline-block;
 }
 .tag-area {
+    margin-left: 10px;
     display: inline-block;
+}
+
+.Select {
+    height: 10px;
 }
 
 .item-group {
     display: flex;
-    margin: 5px;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.info-container {
+    display: flex;
+}
+
+.tag-input {
+    padding-left: 10px;
 }
 
 .item-group .Select {
@@ -21,7 +35,7 @@
 }
 
 .mode-controller {
-    background-color: cornflowerblue;
+    background-color: lightgray;
 
     border: none;
 

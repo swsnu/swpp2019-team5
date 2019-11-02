@@ -115,6 +115,7 @@ class Item extends Component {
         if (this.state.todo === "Finish") {
             tag_input = (
                 <input
+                    className="tag-input"
                     type="text"
                     placeholder="Enter tag"
                     //onChange = further task #1
@@ -126,30 +127,35 @@ class Item extends Component {
         return (
             <div className="Item">
                 <div className="item-group">
-                    <Select
-                        className="Select"
-                        defaultValue={itemOptions.find(
-                            c => c.value === this.props.item.category,
-                        )}
-                        label="Category"
-                        options={itemOptions}
-                        styles={itemStyles}
-                        onChange={e => this.handleCategoryChange(e)}
-                    />
+                    <div className="info-container">
+                        <Select
+                            className="Select"
+                            defaultValue={itemOptions.find(
+                                c => c.value === this.props.item.category,
+                            )}
+                            label="Category"
+                            options={itemOptions}
+                            styles={itemStyles}
+                            onChange={e => this.handleCategoryChange(e)}
+                        />
 
-                    <div className="tag-area"> {tags} </div>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
+                        <div className="tag-area">{tags}</div>
+                        <div
+                            className="mode-controller"
+                            onClick={this.changeMode}
+                        >
+                            {todo}
+                        </div>
+
+                        <div
+                            className="item-deleter"
+                            onClick={this.handleItemDelete.bind(this)}
+                        >
+                            X
+                        </div>
                     </div>
-
-                    <label
-                        className="item-deleter"
-                        onClick={this.handleItemDelete.bind(this)}
-                    >
-                        X
-                    </label>
+                    <div className="tag-container">{tag_input}</div>
                 </div>
-                <div className="tag-container">{tag_input}</div>
             </div>
         );
     }

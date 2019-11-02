@@ -1,13 +1,13 @@
 import chroma from "chroma-js";
 
 export const itemOptions = [
-    { value: "default", label: "Category", color: "#4ac7d8", isDisabled: true },
-    { value: "Outer", label: "Outer", color: "#4ac7d8" },
-    { value: "UpperBody", label: "UpperBody", color: "#4ac7d8" },
-    { value: "LowerBody", label: "LowerBody", color: "#4ac7d8" },
-    { value: "FullBody", label: "FullBody", color: "#4ac7d8" },
-    { value: "Shoes", label: "Shoes", color: "#4ac7d8" },
-    { value: "Accessories", label: "Accessories", color: "#4ac7d8" },
+    { value: "default", label: "Category", color: "#f1cfdf", isDisabled: true },
+    { value: "Outer", label: "Outer", color: "#f1cfdf" },
+    { value: "UpperBody", label: "UpperBody", color: "#f1cfdf" },
+    { value: "LowerBody", label: "LowerBody", color: "#f1cfdf" },
+    { value: "FullBody", label: "FullBody", color: "#f1cfdf" },
+    { value: "Shoes", label: "Shoes", color: "#f1cfdf" },
+    { value: "Accessories", label: "Accessories", color: "#f1cfdf" },
 ];
 
 export const itemStyles = {
@@ -21,11 +21,10 @@ export const itemStyles = {
                 : isSelected
                 ? data.color
                 : isFocused
-                ? color.alpha(0.1).css()
+                ? color.alpha(0.3).css()
                 : null,
 
             color: "#666666",
-
             ":active": {
                 ...styles[":active"],
                 backgroundColor:

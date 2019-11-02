@@ -51,6 +51,7 @@ class Tag extends Component {
                 label = (
                     <div className="tag-in-outfit">
                         <input
+                            className="edit-tag-input"
                             value={this.state.tag_name}
                             onChange={e =>
                                 this.setState({ tag_name: e.target.value })

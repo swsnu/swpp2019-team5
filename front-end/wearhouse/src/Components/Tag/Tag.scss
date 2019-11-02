@@ -1,7 +1,10 @@
 .tag-in-outfit {
-    background-color: #58c6d4;
+    background-color: #ee7185;
 
     border: none;
+
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
     color: #fff;
 
@@ -24,7 +27,12 @@
 .Tag {
     display: inline-block;
 }
-
+.edit-tag-input {
+    width: 100px;
+    border: none;
+    background-color: #f1cfdf;
+    color: black;
+}
 .delete-tag {
     display: inline-block;
 }
