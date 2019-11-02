@@ -22,7 +22,7 @@ const Satisfaction = props => {
     } else {
         icon = (
             <FontAwesomeIcon
-                class="null-icon"
+                className="null-icon"
                 icon={faMehBlank}
                 color="darkgray"
             />

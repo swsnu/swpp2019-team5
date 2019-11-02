@@ -20,23 +20,45 @@ class EditSatisfaction extends React.Component {
         editMode: false,
     };
 
+    changeSelectedTo = number => {
+        this.setState({ currSatisfaction: number });
+    };
+
     render() {
         let iconlist = [horrible, bad, neutral, good, great];
-        let iconOptions = iconlist.map(icon => {
-            return (
+        let iconOptions = [];
+        for (var i = 0; i < 5; i++) {
+            let j = i;
+            iconOptions.push(
                 <img
-                    key={icon}
-                    className="satisfaction-option"
-                    src={icon}
-                    alt={"Satisfaction level:"}
-                />
+                    key={i}
+                    className={
+                        j === this.state.currSatisfaction
+                            ? "satisfaction-option selected"
+                            : "satisfaction-option"
+                    }
+                    src={iconlist[i]}
+                    alt={"Satisfaction level: " + i}
+                    onClick={() => this.changeSelectedTo(j)}
+                />,
             );
-        });
+        }
         let selectedIcon;
         if (typeof this.state.currSatisfaction === "number") {
-            selectedIcon = iconlist[this.state.currSatisfaction];
+            selectedIcon = (
+                <img
+                    src={iconlist[this.state.currSatisfaction]}
+                    alt={"selected satisfaction"}
+                />
+            );
         } else {
-            selectedIcon = <FontAwesomeIcon icon={faMehBlank} />;
+            selectedIcon = (
+                <FontAwesomeIcon
+                    className="null-icon"
+                    color="darkgray"
+                    icon={faMehBlank}
+                />
+            );
         }
         return (
             <div id="edit-satisfaction">
@@ -46,28 +68,24 @@ class EditSatisfaction extends React.Component {
                 <div id="edit-options">{iconOptions}</div>
                 {this.state.editMode ? (
                     <FontAwesomeIcon
+                        className="satisfaction-functions"
                         icon={faChevronLeft}
                         onClick={() => {
                             this.setState({ editMode: false });
                             document
                                 .getElementById("edit-options")
                                 .classList.toggle("visible");
-                            document
-                                .getElementById("current-value")
-                                .classList.toggle("visible");
                         }}
                         color="white"
                     />
                 ) : (
                     <FontAwesomeIcon
+                        className="satisfaction-functions"
                         icon={faPen}
                         onClick={() => {
                             this.setState({ editMode: true });
                             document
                                 .getElementById("edit-options")
-                                .classList.toggle("visible");
-                            document
-                                .getElementById("current-value")
                                 .classList.toggle("visible");
                         }}
                         color="white"
