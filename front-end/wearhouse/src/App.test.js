@@ -77,7 +77,6 @@ describe("App", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
     });
-<<<<<<< HEAD
 
     it("should redirect to browse page", () => {
         history.push("/browse");
@@ -85,6 +84,4 @@ describe("App", () => {
         console.log(component);
         expect(component.find("#browse").length).toBe(1);
     });
-=======
->>>>>>> 906d49dde1cd5d8be4d92c2efb49685fc09eb9ee
 });

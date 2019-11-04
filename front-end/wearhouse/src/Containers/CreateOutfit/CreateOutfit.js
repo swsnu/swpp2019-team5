@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+<<<<<<< HEAD
 import { withRouter } from "react-router";
+=======
+import "./CreateOutfit.scss";
+import Item from "../../Components/Item/Item";
+>>>>>>> master
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 import "./CreateOutfit.scss";

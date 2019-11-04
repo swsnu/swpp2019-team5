@@ -86,6 +86,13 @@ class Item extends Component {
         });
     }
 
+    getTagContainerWitdh ()=>{
+        let width = document.getElementById("container").style.width
+        console.log()
+        document.getElementById("container").style.width = 
+        
+    }
+
     //convert the todo ("Add tag" or "Finish")
     changeMode = () => {
         if (this.state.todo === "Finish")
