@@ -15,10 +15,13 @@ matrix:
     - cd ./front-end/wearhouse
     install:
     - yarn install
+    - yarn add coveralls
     script:
     - ./node_modules/.bin/eslint src
     - yarn test --coverage --watchAll=false
     - sonar-scanner
+    after_success:
+    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin.coveralls.js
   - language: python
     python:
     - '3.7'
@@ -29,6 +32,7 @@ matrix:
     script:
     - coverage run --branch --source='./item','./outfit','./tag' manage.py test
     - coverage report --fail-under=80 -m
-    
-    
+    after_success:
+    - coveralls
+
     
