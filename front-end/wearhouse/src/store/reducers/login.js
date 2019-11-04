@@ -5,6 +5,13 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+    switch (action) {
+        case actionTypes.LOGIN:
+            return { ...state, isLoggedIn: true, user: action.id };
+        // hard-code the user id since that's all we're going to needs
+        default:
+            break;
+    }
     return state;
 };
 export default reducer;

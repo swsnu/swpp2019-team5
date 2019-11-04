@@ -1,0 +1,26 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 5%;
+    width: 90%;
+    button {
+        border: none;
+        width: 100px;
+        height: 35px;
+        border-radius: 20px;
+        font-size: 15px;
+        &#signup-button {
+            color: white;
+            background-color: black;
+            cursor: pointer;
+        }
+        &#login-button {
+            color: darkslategray;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+    }
+    // padding-bottom: 10px;
+    // border-bottom: 1px lightgray solid;
+}
