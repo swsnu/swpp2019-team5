@@ -120,3 +120,4 @@ class UploadImage extends React.Component {
 }
 
 export default UploadImage;
+
