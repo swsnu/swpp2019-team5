@@ -5,13 +5,13 @@ import { push } from "connected-react-router";
 
 export const logIn_ = user => {
     //temporary return value
-    return { type: actionTypes.LOGIN, isLoggedIn: true, userID: user.id };
+    return { type: actionTypes.LOGIN, isLoggedIn: true, userID: user };
 };
 
 export const logIn = userCredentials => {
     //userCredentials must be loaded in a {email: ~~, password: ~~} format
     return dispatch => {
-        return axios.post("api/user/login/", userCredentials).then(res => {
+        return axios.post("api/user/login/", { userCredentials }).then(res => {
             //TODO: divide cases according to login status code
             dispatch(logIn_(res.data));
             dispatch(push("/browse"));
@@ -19,8 +19,8 @@ export const logIn = userCredentials => {
     };
 };
 
-export const logOut_ = () => {
-    return { type: actionTypes.LOGOUT };
+export const logOut_ = user => {
+    return { type: actionTypes.LOGOUT, user: user };
 };
 
 export const logOut = () => {
@@ -33,8 +33,8 @@ export const logOut = () => {
     };
 };
 
-export const signUp_ = () => {
-    return { type: actionTypes.SIGN_UP };
+export const signUp_ = user => {
+    return { type: actionTypes.SIGN_UP, user: user };
 };
 
 export const signUp = () => {

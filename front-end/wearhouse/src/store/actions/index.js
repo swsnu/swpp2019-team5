@@ -2,7 +2,7 @@ export {
     getOutfits,
     getSpecificOutfit,
     createOutfit,
-    editOutfit,
+    temporaryCreateOutfit,
 } from "./outfit";
 
 export { logIn, logOut, signUp } from "./login";

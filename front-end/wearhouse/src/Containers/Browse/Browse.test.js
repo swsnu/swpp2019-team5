@@ -70,6 +70,7 @@ describe("<Browse />", () => {
             .spyOn(actionCreators, "getOutfits")
             .mockImplementation(() => {
                 return dispatch => {
+<<<<<<< HEAD
                     dispatch();
                 };
             });
@@ -79,6 +80,15 @@ describe("<Browse />", () => {
                 dispatch();
             };
         });
+=======
+                    return dispatch;
+                };
+            });
+
+        spyHistoryPush = jest
+            .spyOn(history, "push")
+            .mockImplementation(() => Promise.resolve({}));
+>>>>>>> master
     });
 
     afterEach(() => {

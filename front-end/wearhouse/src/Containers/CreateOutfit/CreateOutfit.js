@@ -25,7 +25,7 @@ class CreateOutfit extends Component {
         items: [],
     };
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate() {
         return true;
     }
 
@@ -111,7 +111,7 @@ class CreateOutfit extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         createOutfit: (id, outfit) =>
-            dispatch(actionCreators.editOutfit(id, outfit)),
+            dispatch(actionCreators.temporaryCreateOutfit(id, outfit)),
     };
 };
 

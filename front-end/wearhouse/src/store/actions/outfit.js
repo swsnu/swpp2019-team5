@@ -30,18 +30,8 @@ export const getSpecificOutfit = id => {
 };
 
 export const createOutfit_ = outfit => {
-    let items = [];
     for (let i = 0; i < outfit.items.length; i++) {
-        let response_item = actionCreators.createItem(
-            outfit.id,
-            outfit.items[i],
-        );
-        items.concat({
-            category: outfit.items[i].category,
-            outfit_id: outfit.id,
-            id: response_item.id,
-            tags: response_item.tags,
-        });
+        actionCreators.createItem(outfit.id, outfit.items[i]);
     }
     return {
         type: actionTypes.CREATE_OUTFIT,
@@ -49,7 +39,6 @@ export const createOutfit_ = outfit => {
         satisfactionValue: outfit.satisfactionValue,
         date: outfit.date,
         id: outfit.id,
-        items: items,
     };
 };
 export const createOutfit = outfit => {
@@ -60,7 +49,7 @@ export const createOutfit = outfit => {
     };
 };
 
-export const editOutfit = (outfit_id, outfit) => {
+export const temporaryCreateOutfit = (outfit_id, outfit) => {
     //this is temporary one just for mid-demo
     return dispatch => {
         return axios.put("outfit/" + outfit_id, outfit).then(() => {
