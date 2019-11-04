@@ -86,12 +86,16 @@ class Item extends Component {
         });
     }
 
-    getTagContainerWitdh ()=>{
-        let width = document.getElementById("container").style.width
-        console.log()
-        document.getElementById("container").style.width = 
-        
-    }
+    getTagContainerWitdh = () => {
+        let tag_areas = document.querySelectorAll(".tag-area");
+        let tag_inputs = document.querySelectorAll(".tag-input");
+        for (let i = 0; i < tag_areas.length; i++) {
+            let selected_width = tag_areas[i];
+
+            console.log(tag_areas[i]);
+        }
+        //document.getElementById("container").style.width = width;
+    };
 
     //convert the todo ("Add tag" or "Finish")
     changeMode = () => {
@@ -119,6 +123,7 @@ class Item extends Component {
         });
         let todo = null;
         let tag_input = null;
+        this.getTagContainerWitdh();
         if (this.state.todo === "Finish") {
             tag_input = (
                 <input
@@ -149,14 +154,14 @@ class Item extends Component {
 
                     <div className="tag-area">
                         {tags}
-                        <div
+                        {/*}<div
                             className="mode-controller"
                             onClick={this.changeMode}
                         >
                             {todo}
-                        </div>
+                            </div>{*/}
                     </div>
-
+                    <input className="tag-input" />
                     <div
                         className="item-deleter"
                         onClick={this.handleItemDelete.bind(this)}

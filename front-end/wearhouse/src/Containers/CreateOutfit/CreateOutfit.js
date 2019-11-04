@@ -16,6 +16,7 @@ import Item from "../../Components/Item/Item";
 // category drop down select one - upper body, lower body, full body, (o)
 class CreateOutfit extends Component {
     state = {
+        id: this.props.outfit_id,
         image: null,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
@@ -27,7 +28,11 @@ class CreateOutfit extends Component {
     }
 
     componentDidMount() {
-        this.setState({ image: this.props.image, items: this.props.items });
+        this.setState({
+            id: this.props.outfit_id,
+            image: this.props.image,
+            items: this.props.items,
+        });
     }
 
     onDeleteItem(item) {
@@ -56,7 +61,7 @@ class CreateOutfit extends Component {
             date: this.state.date,
             items: this.state.items,
         };
-        this.props.createOutfit(newOutfit);
+        this.props.createOutfit(this.state.id, newOutfit);
         this.props.history.push("/browse");
     };
     render() {
@@ -104,7 +109,8 @@ class CreateOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
+        createOutfit: (id, outfit) =>
+            dispatch(actionCreators.editOutfit(id, outfit)),
     };
 };
 

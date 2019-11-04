@@ -12,7 +12,6 @@ const reducer = (state = initialState, action) => {
             return { ...state, selectedOutfit: action.target };
         case actionTypes.CREATE_OUTFIT: {
             const newOutfit = {
-                author_id: action.user_id,
                 image: action.image,
                 satisfactionValue: action.satisfactionValue,
                 date: action.date,
