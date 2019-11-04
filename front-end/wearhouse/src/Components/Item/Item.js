@@ -104,13 +104,14 @@ class Item extends Component {
                     className="tag"
                     tag={tag}
                     key={index}
-                    editMode={true}
+                    editMode={this.props.editMode}
                     delete={() => this.onDeleteTag(tag)}
                     edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
         let todo = null;
+        let edit_mode_options = null;
         let tag_input = null;
         if (this.state.todo === "typeMode") {
             tag_input = (
@@ -124,6 +125,21 @@ class Item extends Component {
             );
             todo = <FontAwesomeIcon icon={faCheck} />;
         } else todo = <FontAwesomeIcon icon={faPlus} />;
+        if (this.props.editMode) {
+            edit_mode_options = (
+                <>
+                    <div className="mode-controller" onClick={this.changeMode}>
+                        {todo}
+                    </div>
+                    <div
+                        className="item-deleter"
+                        onClick={this.handleItemDelete.bind(this)}
+                    >
+                        <FontAwesomeIcon icon={faTimes} />
+                    </div>
+                </>
+            );
+        }
         return (
             <div className="Item">
                 <div className="info-container">
@@ -144,15 +160,7 @@ class Item extends Component {
                         <div className="tag-area">{tags}</div>
                         {tag_input}
                     </div>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
-                    </div>
-                    <div
-                        className="item-deleter"
-                        onClick={this.handleItemDelete.bind(this)}
-                    >
-                        <FontAwesomeIcon icon={faTimes} />
-                    </div>
+                    {edit_mode_options}
                 </div>
             </div>
         );

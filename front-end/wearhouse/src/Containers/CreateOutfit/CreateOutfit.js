@@ -76,6 +76,7 @@ class CreateOutfit extends Component {
                         this.onApplyEditItem(item, edit_item)
                     }
                     delete={() => this.onDeleteItem(item)}
+                    editMode={true}
                 />
             );
         });
