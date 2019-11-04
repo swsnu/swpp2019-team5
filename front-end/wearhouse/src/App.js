@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 
 import Calendar from "./Containers/Calendar/Calendar";

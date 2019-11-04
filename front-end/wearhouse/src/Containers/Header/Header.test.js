@@ -32,8 +32,10 @@ describe("<Header />", () => {
             </Provider>
         );
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(td => {
-            return dispatch => {};
+        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
+            return dispatch => {
+                dispatch();
+            };
         });
     });
 
