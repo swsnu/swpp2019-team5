@@ -4,8 +4,6 @@ import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 import "./CreateOutfit.scss";
-
-import Logout from "../Logout/Logout";
 import Item from "../../Components/Item/Item";
 
 //outfit-image : image (o)
@@ -58,7 +56,6 @@ class CreateOutfit extends Component {
             date: this.state.date,
             items: this.state.items,
         };
-        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
         this.props.history.push("/browse");
     };

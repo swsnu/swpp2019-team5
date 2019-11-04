@@ -7,7 +7,6 @@ import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
 import axios from "axios";
 import Browse from "./Browse";
-import Outfit from "../../Components/Outfit/Outfit";
 
 const stubOutfit = {
     id: 0,

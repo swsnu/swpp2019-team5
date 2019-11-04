@@ -16,7 +16,7 @@ export const GET_OUTFIT_BY_ITEM = "GET_OUTFIT_BY_ITEM";
 
 export const GET_ITEM_BY_TAGS = "GET_ITEM_BY_TAGS";
 export const EDIT_ITEM = "EDIT_ITEM";
-export const ADD_NEW_ITEM = "ADD_NEW_ITEM";
+export const CREATE_ITEM = "CREATE_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
 //Item reducer
 

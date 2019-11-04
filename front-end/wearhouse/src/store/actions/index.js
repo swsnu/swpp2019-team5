@@ -2,6 +2,6 @@ export { getOutfits, getSpecificOutfit, createOutfit } from "./outfit";
 
 export { logIn, logOut, signUp } from "./login";
 
-export {} from "./item";
+export { createItem } from "./item";
 
-export {} from "./tag";
+export { createTag } from "./tag";

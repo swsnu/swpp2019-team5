@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import * as actionCreators from "./item";
 import axios from "axios";
 
 export const getOutfits_ = outfits => {
@@ -8,11 +9,7 @@ export const getOutfits_ = outfits => {
 export const getOutfits = () => {
     return dispatch => {
         return axios
-<<<<<<< HEAD
-            .get("outfit/")
-=======
             .get("/api/outfit")
->>>>>>> 906d49dde1cd5d8be4d92c2efb49685fc09eb9ee
             .then(res => dispatch(getOutfits_(res.data)));
     };
 };
@@ -26,17 +23,16 @@ export const getSpecificOutfit_ = outfit => {
 
 export const getSpecificOutfit = id => {
     return dispatch => {
-<<<<<<< HEAD
-        return axios.get("outfit/" + id).then(res => {
-=======
         return axios.get("/api/outfit/" + id).then(res => {
->>>>>>> 906d49dde1cd5d8be4d92c2efb49685fc09eb9ee
             dispatch(getSpecificOutfit_(res.data));
         });
     };
 };
 
 export const createOutfit_ = outfit => {
+    for (let i = 0; i < outfit.items.length; i++) {
+        actionCreators.createItem(outfit.id, outfit.items[i]);
+    }
     return {
         type: actionTypes.CREATE_OUTFIT,
         user_id: 1, //after log in is implemented this should be changed this is temporary one
