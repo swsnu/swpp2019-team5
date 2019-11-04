@@ -18,7 +18,7 @@ def token(request):
 
 def outfit(request):
     if request.method == 'GET':
-        outfits_all_list = [outfit for outfit in Outfit.objects.all().value()]
+        outfits_all_list = [outfit for outfit in Outfit.objects.all()]
         return JsonResponse(outfits_all_list, safe=False)
     elif request.method == 'POST':
         try:
@@ -37,7 +37,8 @@ def getOutfit(reqeust, outfit_id):
     if reqeust.method == 'GET':
         outfit = Outfit.objects.get(pk = outfit_id)
      
-    return HttpResponse()
+    return JsonResponse(model_to_dict(outfit), status = 00)
+
 
 def getItemsOfOutfit(request, outfit_id):
     return HttpResponse()
