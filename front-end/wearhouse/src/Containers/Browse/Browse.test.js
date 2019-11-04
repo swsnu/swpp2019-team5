@@ -74,7 +74,7 @@ describe("<Browse />", () => {
                 return dispatch => {};
             });
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(td => {
+        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
             return dispatch => {};
         });
         spyAxios_get = jest

@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../../test-utils/mocks";
 import { history } from "../../../store/store";
-import * as actionCreators from "../../../store/actions/login";
+//import * as actionCreators from "../../../store/actions/login";
 import "../../../setupTests";
 import axios from "axios";
 import Login from "./Login";
@@ -22,8 +22,10 @@ describe("<Login />", () => {
             </Provider>
         );
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(td => {
-            return dispatch => {};
+        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
+            return dispatch => {
+                dispatch();
+            };
         });
 
         spyAxios_post = jest
