@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../../test-utils/mocks";
 import { history } from "../../../store/store";
-import * as actionCreators from "../../../store/actions/login";
+//import * as actionCreators from "../../../store/actions/login";
 import "../../../setupTests";
 import axios from "axios";
 import Logout from "./Logout";

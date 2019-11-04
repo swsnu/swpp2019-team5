@@ -59,7 +59,7 @@ class Signup extends Component {
                                 className="signup-error"
                                 id="password-mismatch"
                             >
-                                Passwords don't match
+                                Passwords don`&apos;`t match
                             </div>
                         )}
                     </div>

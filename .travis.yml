@@ -30,7 +30,7 @@ matrix:
     install: 
     - pip install -r requirements.txt
     script:
-    - coverage run --branch --source='.' manage.py test
+    - coverage run --branch --source='./item','./outfit','./tag' manage.py test
     - coverage report --fail-under=80 -m
     after_success:
     - coveralls
