@@ -58,7 +58,7 @@ let stubInitialState = {
 var mockStore = getMockStore(stubInitialState);
 
 describe("<Browse />", () => {
-    let outfitList, spyGetOutfits, spyHistoryPush, spyAxios_get;
+    let outfitList, spyGetOutfits, spyHistoryPush;
 
     beforeEach(() => {
         outfitList = (
@@ -71,17 +71,12 @@ describe("<Browse />", () => {
             .spyOn(actionCreators, "getOutfits")
             .mockImplementation(() => {
                 return dispatch => {
-                    dispatch();
+                    return dispatch;
                 };
             });
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
-        spyAxios_get = jest
-            .spyOn(axios, "get")
+        spyHistoryPush = jest
+            .spyOn(history, "push")
             .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -112,7 +107,7 @@ describe("<Browse />", () => {
             .mockImplementation(() => {
                 /* Used to take outfit_id as parameter */
                 return dispatch => {
-                    dispatch();
+                    return dispatch;
                 };
             });
         const component = mount(outfitList);
