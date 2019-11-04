@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+
 import * as actionCreators from "../../store/actions/index";
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
-import "./CreateOutfit.scss";
+import { withRouter } from "react-router";
 
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
+import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
+import "./CreateOutfit.scss";
+
+import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
 //log satisfaction
@@ -85,6 +88,7 @@ class CreateOutfit extends Component {
                 <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
+                        <EditSatisfaction />
                         <img src={SampleImage} />
                     </div>
 
