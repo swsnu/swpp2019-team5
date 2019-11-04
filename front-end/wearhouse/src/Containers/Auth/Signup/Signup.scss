@@ -1,0 +1,56 @@
+#signup {
+    width: 40%;
+    margin: 100px auto;
+    #signup-form {
+        margin: 30px 0 40px;
+        label {
+            position: relative;
+            color: gray;
+            //top: 10px;
+            margin: 0;
+            margin-left: 10px;
+            padding: 0;
+            font-size: 12px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 98%;
+            padding: 25px 10px 5px 10px;
+            font-size: 15px;
+            font-weight: 700;
+            margin: -20px 0 20px;
+            margin-right: 2%;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            &:focus {
+                outline: none;
+                border-left: deeppink 4px solid;
+            }
+        }
+        #error-container {
+            width: 100%;
+            min-height: 50px;
+            .signup-error {
+                color: rgb(196, 5, 5);
+            }
+        }
+    }
+
+    button {
+        border: none;
+        width: 120px;
+        height: 40px;
+        border-radius: 3px;
+        font-size: 15px;
+        margin-right: 40px;
+        &#signup-button {
+            color: white;
+            background-color: black;
+            cursor: pointer;
+            &:disabled {
+                background-color: rgb(163, 163, 163);
+                cursor: not-allowed;
+            }
+        }
+    }
+}

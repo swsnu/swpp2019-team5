@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Logout from "../Logout/Logout";
 import "./CreateOutfit.scss";
 import Item from "../../Components/Item/Item";
 import * as actionCreators from "../../store/actions/index";

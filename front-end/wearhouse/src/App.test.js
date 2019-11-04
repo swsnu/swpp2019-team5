@@ -1,9 +1,8 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { Provider } from "react-redux";
 
-import { connectRouter, ConnectedRouter } from "connected-react-router";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 
 import App from "./App";
 import { getMockStore } from "./mocks/mocks";
@@ -68,7 +67,9 @@ describe("App", () => {
     beforeEach(() => {
         app = (
             <Provider store={mockStore}>
-                <App history={history} />
+                <ConnectedRouter history={history}>
+                    <App history={history} />
+                </ConnectedRouter>
             </Provider>
         );
     });
@@ -76,6 +77,7 @@ describe("App", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
     });
+<<<<<<< HEAD
 
     it("should redirect to browse page", () => {
         history.push("/browse");
@@ -83,4 +85,6 @@ describe("App", () => {
         console.log(component);
         expect(component.find("#browse").length).toBe(1);
     });
+=======
+>>>>>>> e67813dc30477de97fdd99ea396316d88366f1a5
 });

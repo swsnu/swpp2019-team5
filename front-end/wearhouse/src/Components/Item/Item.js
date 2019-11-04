@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import "./Item.scss";
-import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { itemStyles, itemOptions } from "./SelectStyle";
+import Select from "react-select";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -19,7 +21,7 @@ class Item extends Component {
     }
 
     state = {
-        category: this.props.item.category,
+        category: "default",
         tags: this.props.item.tags,
         todo: "Add tag", //the mode where user enters after clicing button
     };
@@ -31,10 +33,11 @@ class Item extends Component {
         });
     }
     handleCategoryChange(event) {
-        this.setState({ category: event.target.value });
+        console.log(event);
+        this.setState({ category: event.value });
 
         this.props.applyEdit({
-            category: event.target.value,
+            category: event.value,
             tags: this.state.tags,
         });
     }
@@ -83,6 +86,13 @@ class Item extends Component {
         });
     }
 
+    getTagContainerWitdh ()=>{
+        let width = document.getElementById("container").style.width
+        console.log()
+        document.getElementById("container").style.width = 
+        
+    }
+
     //convert the todo ("Add tag" or "Finish")
     changeMode = () => {
         if (this.state.todo === "Finish")
@@ -112,8 +122,9 @@ class Item extends Component {
         if (this.state.todo === "Finish") {
             tag_input = (
                 <input
+                    className="tag-input"
                     type="text"
-                    placeholder="Enter tag"
+                    placeholder="Enter tag.."
                     //onChange = further task #1
                     onKeyDown={e => this.addTag(e)}
                 ></input>
@@ -122,31 +133,37 @@ class Item extends Component {
         } else todo = <FontAwesomeIcon icon={faPlus} />;
         return (
             <div className="Item">
-                <div className="item-group">
-                    <select
-                        className="selector"
-                        value={this.state.category}
-                        onChange={e => this.handleCategoryChange(e)}
+                <div className="info-container">
+                    <div className="position-controller">
+                        <Select
+                            className="Select"
+                            defaultValue={itemOptions.find(
+                                c => c.value === this.props.item.category,
+                            )}
+                            label="Category"
+                            options={itemOptions}
+                            styles={itemStyles}
+                            onChange={e => this.handleCategoryChange(e)}
+                        />
+                    </div>
+
+                    <div className="tag-area">
+                        {tags}
+                        <div
+                            className="mode-controller"
+                            onClick={this.changeMode}
+                        >
+                            {todo}
+                        </div>
+                    </div>
+
+                    <div
+                        className="item-deleter"
+                        onClick={this.handleItemDelete.bind(this)}
                     >
-                        <option value="Outer">Outer</option>
-                        <option value="UpperBody">UpperBody</option>
-                        <option value="LowerBody">LowerBody</option>
-                        <option value="FullBody">FullBody</option>
-                        <option value="Shoes">Shoes</option>
-                        <option value="Accessories">Accessories</option>
-                    </select>
-                    <div className="tag-area"> {tags} </div>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
+                        <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
-                <label
-                    className="item-deleter"
-                    onClick={this.handleItemDelete.bind(this)}
-                >
-                    X
-                </label>
-
                 <div className="tag-container">{tag_input}</div>
             </div>
         );
