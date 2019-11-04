@@ -23,7 +23,7 @@ class Item extends Component {
     state = {
         category: "default",
         tags: this.props.item.tags,
-        todo: "Add tag", //the mode where user enters after clicing button
+        todo: "typeMode", //the mode where user enters after clicing button
     };
 
     componentDidMount() {
@@ -86,26 +86,15 @@ class Item extends Component {
         });
     }
 
-    getTagContainerWitdh = () => {
-        let tag_areas = document.querySelectorAll(".tag-area");
-        let tag_inputs = document.querySelectorAll(".tag-input");
-        for (let i = 0; i < tag_areas.length; i++) {
-            let selected_width = tag_areas[i];
-
-            console.log(tag_areas[i]);
-        }
-        //document.getElementById("container").style.width = width;
-    };
-
     //convert the todo ("Add tag" or "Finish")
     changeMode = () => {
-        if (this.state.todo === "Finish")
+        if (this.state.todo === "typeMode")
             this.setState({
                 todo: "Add tag",
             });
         else
             this.setState({
-                todo: "Finish",
+                todo: "typeMode",
             });
     };
     render() {
@@ -123,8 +112,7 @@ class Item extends Component {
         });
         let todo = null;
         let tag_input = null;
-        this.getTagContainerWitdh();
-        if (this.state.todo === "Finish") {
+        if (this.state.todo === "typeMode") {
             tag_input = (
                 <input
                     className="tag-input"
@@ -152,16 +140,13 @@ class Item extends Component {
                         />
                     </div>
 
-                    <div className="tag-area">
-                        {tags}
-                        {/*}<div
-                            className="mode-controller"
-                            onClick={this.changeMode}
-                        >
-                            {todo}
-                            </div>{*/}
+                    <div className="tag-container">
+                        <div className="tag-area">{tags}</div>
+                        {tag_input}
                     </div>
-                    <input className="tag-input" />
+                    <div className="mode-controller" onClick={this.changeMode}>
+                        {todo}
+                    </div>
                     <div
                         className="item-deleter"
                         onClick={this.handleItemDelete.bind(this)}
@@ -169,7 +154,6 @@ class Item extends Component {
                         <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
-                <div className="tag-container">{tag_input}</div>
             </div>
         );
     }

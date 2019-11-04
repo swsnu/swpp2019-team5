@@ -30,8 +30,18 @@ export const getSpecificOutfit = id => {
 };
 
 export const createOutfit_ = outfit => {
+    let items = [];
     for (let i = 0; i < outfit.items.length; i++) {
-        actionCreators.createItem(outfit.id, outfit.items[i]);
+        let response_item = actionCreators.createItem(
+            outfit.id,
+            outfit.items[i],
+        );
+        items.concat({
+            category: outfit.items[i].category,
+            outfit_id: outfit.id,
+            id: response_item.id,
+            tags: response_item.tags,
+        });
     }
     return {
         type: actionTypes.CREATE_OUTFIT,
@@ -39,7 +49,7 @@ export const createOutfit_ = outfit => {
         satisfactionValue: outfit.satisfactionValue,
         date: outfit.date,
         id: outfit.id,
-        items: outfit.items,
+        items: items,
     };
 };
 export const createOutfit = outfit => {

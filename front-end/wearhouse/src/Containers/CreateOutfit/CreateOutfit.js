@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 import "./CreateOutfit.scss";
+
+import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 
 //outfit-image : image (o)
@@ -78,7 +80,8 @@ class CreateOutfit extends Component {
             );
         });
         return (
-            <div id="top-container">
+            <div id="create-outfit">
+                <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
                         <img src={SampleImage} />
@@ -93,8 +96,6 @@ class CreateOutfit extends Component {
                             </button>
                         </div>
                     </div>
-                </div>
-                <div id="create-confirm-window">
                     <button
                         onClick={this.onConfirmCreate}
                         id="confirm-create-item"

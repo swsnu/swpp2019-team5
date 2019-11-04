@@ -4,7 +4,8 @@ import axios from "axios";
 export const createItem_ = item => {
     return {
         type: actionTypes.CREATE_ITEM,
-        user_id: 1, //after log in is implemented this should be changed this is temporary one
+        category: item.category,
+        tags: item.tags,
     };
 };
 export const createItem = (outfit_id, item) => {
