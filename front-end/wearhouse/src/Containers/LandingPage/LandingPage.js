@@ -35,7 +35,11 @@ class LandingPage extends Component {
                             Sign Up
                         </button>
                     </div>
-                    <img id="intro-image" src={image} />
+                    <img
+                        id="intro-image"
+                        src={image}
+                        alt="Illustration of fashionably-dressed people in line"
+                    />
                 </div>
                 <div className="intro-content" id="content-2"></div>
                 <div className="intro-content" id="content-3"></div>
