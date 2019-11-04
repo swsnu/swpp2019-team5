@@ -11,7 +11,7 @@ class Tag extends Component {
             editTag: false, //it tells whether tag_name is editable.
         });
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (this.props !== prevProps)
             this.setState({
                 tag_name: this.props.tag,
@@ -51,7 +51,6 @@ class Tag extends Component {
                 label = (
                     <div className="tag-in-outfit">
                         <input
-                            className="edit-tag-input"
                             value={this.state.tag_name}
                             onChange={e =>
                                 this.setState({ tag_name: e.target.value })
