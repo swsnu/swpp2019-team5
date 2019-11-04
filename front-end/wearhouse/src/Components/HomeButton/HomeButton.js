@@ -23,4 +23,6 @@ class HomeButton extends React.Component {
     }
 }
 
+HomeButton.propTypes = {};
+
 export default withRouter(HomeButton);

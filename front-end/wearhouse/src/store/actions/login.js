@@ -4,7 +4,8 @@ import axios from "axios";
 import { push } from "connected-react-router";
 
 export const logIn_ = user => {
-    return { type: actionTypes.LOGIN };
+    //temporary return value
+    return { type: actionTypes.LOGIN, isLoggedIn: true, userID: user.id };
 };
 
 export const logIn = userCredentials => {

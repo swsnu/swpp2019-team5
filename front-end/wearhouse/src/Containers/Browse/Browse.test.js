@@ -5,7 +5,6 @@ import { getMockStore } from "../../test-utils/mocks";
 import { history } from "../../store/store";
 import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
-import axios from "axios";
 import Browse from "./Browse";
 
 const stubOutfit = {
@@ -58,7 +57,7 @@ let stubInitialState = {
 var mockStore = getMockStore(stubInitialState);
 
 describe("<Browse />", () => {
-    let outfitList, spyGetOutfits, spyHistoryPush, spyAxios_get;
+    let outfitList, spyGetOutfits, spyHistoryPush;
 
     beforeEach(() => {
         outfitList = (
@@ -70,15 +69,16 @@ describe("<Browse />", () => {
         spyGetOutfits = jest
             .spyOn(actionCreators, "getOutfits")
             .mockImplementation(() => {
-                return dispatch => {};
+                return dispatch => {
+                    dispatch();
+                };
             });
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(td => {
-            return dispatch => {};
+        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
+            return dispatch => {
+                dispatch();
+            };
         });
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -105,8 +105,10 @@ describe("<Browse />", () => {
     it(`should call 'onClickOutfit'`, () => {
         const spyGetSpecificOutfit = jest
             .spyOn(actionCreators, "getSpecificOutfit")
-            .mockImplementation(outfit_id => {
-                return dispatch => {};
+            .mockImplementation(() => {
+                return dispatch => {
+                    dispatch();
+                };
             });
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
