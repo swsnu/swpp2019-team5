@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { push } from "connected-react-router";
 
-export const logIn_ = user => {
+export const logIn_ = () => {
     return { type: actionTypes.LOGIN };
 };
 
