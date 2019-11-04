@@ -1,5 +1,7 @@
 import React from "react";
-import { faTimes, faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import {
+    faTimes /*, faCameraRetro */,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./UploadImage.scss";
@@ -74,7 +76,7 @@ class UploadImage extends React.Component {
                 <img
                     id="selected-image-file"
                     src={this.state.selectedImageURL}
-                    alt="selected image file"
+                    alt="selected file"
                 />
             );
         } else {
@@ -120,4 +122,3 @@ class UploadImage extends React.Component {
 }
 
 export default UploadImage;
-
