@@ -88,7 +88,6 @@ class CreateOutfit extends Component {
                 <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
-                        <EditSatisfaction />
                         <img src={SampleImage} />
                     </div>
 
