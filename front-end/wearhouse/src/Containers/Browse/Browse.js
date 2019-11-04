@@ -7,7 +7,7 @@ import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
-import { SET_OUTFIT_SATISFACTION } from "../../store/actions/actionTypes";
+
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)

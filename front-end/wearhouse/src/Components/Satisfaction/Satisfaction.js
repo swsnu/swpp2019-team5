@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import horrible from "./icon-images/1.png";
 import bad from "./icon-images/2.png";
