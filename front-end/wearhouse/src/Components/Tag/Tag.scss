@@ -1,37 +1,25 @@
 .tag-in-outfit {
     background-color: #ee7185;
-
     color: #fff;
-
+    font-weight: 500;
     padding: 5px;
-
     text-align: center;
-
     text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
+    display: flex;
+    font-size: 13px;
     margin: 4px;
-
-    border-radius: 10px;
-
+    border-radius: 15px;
     cursor: pointer;
 }
-.Tag {
-    display: inline-block;
-}
 .edit-tag-input {
-    width: 100px;
+    margin-left: 5px;
+    width: 50px;
+    max-width: fit-content;
     border: none;
     background-color: #f1cfdf;
     color: black;
 }
-.delete-tag {
-    display: inline-block;
-}
-
+.delete-tag,
 .edit-tag {
-    display: inline-block;
+    margin: 0 2px;
 }

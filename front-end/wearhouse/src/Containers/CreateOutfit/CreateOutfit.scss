@@ -1,63 +1,66 @@
-#image-window {
-    padding: 70px;
-    display: flex;
-    align-items: center;
-}
-#image-window img {
-    border: 2px solid rgb(124, 112, 117);
-    border-radius: 2%;
-}
-#info-window #items-info-window {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#info-window #add-confirm-buttons-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
-}
-#info-window {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-#add-item {
-    margin-left: 10px;
-    border: none;
-    padding: 5px;
-    color: white;
-    background-color: lightgray;
-    &:hover {
-        cursor: pointer;
-    }
-}
-#confirm-create-item {
-    background-color: rgb(54, 54, 54);
-    color: white;
-    font-size: 30px;
-    position: absolute;
-    left: 50%;
-    padding: 10px;
-    border: none;
-    &:hover {
-        cursor: pointer;
-        background-color: rgb(172, 159, 159);
-    }
-}
 #create-outfit-window {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 90%;
     align-items: center;
-    height: 100vh;
-}
+    height: 85vh;
 
-#top-container {
-    display: grid;
-    grid-template-rows: 89%;
-}
+    #image-window {
+        margin: 20px 40px;
+        display: flex;
+        justify-content: center;
+        background-color: rgb(66, 66, 66);
+        border: 2px solid rgb(124, 112, 117);
+        border-radius: 5px;
+        img {
+            max-width: inherit;
+        }
+        overflow: hidden;
+    }
 
-#create-confirm-window {
-    display: inline-block;
+    #info-window {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        #items-info-window {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #add-confirm-buttons-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+    }
+
+    #add-item {
+        margin-left: 10px;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        font-size: 15px;
+        background-color: black;
+        border-radius: 20px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    #confirm-create-item {
+        grid-column: 2;
+        justify-self: flex-end;
+        background-color: rgb(54, 54, 54);
+        color: white;
+        font-size: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        width: 200px;
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(172, 159, 159);
+        }
+        margin: 5px 80px;
+    }
 }
