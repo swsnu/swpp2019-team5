@@ -43,8 +43,23 @@ export const createOutfit_ = outfit => {
 };
 export const createOutfit = outfit => {
     return dispatch => {
-        return axios.post("outfit/", outfit).then(res => {
+        return axios.post("/api/outfit/", outfit).then(res => {
             dispatch(createOutfit_(res.data));
+        });
+    };
+};
+
+export const deleteOutfit_ = id => {
+    return {
+        type: actionTypes.DELETE_OUTFIT,
+        targetID: id,
+    };
+};
+
+export const deleteOutfit = id => {
+    return dispatch => {
+        return axios.delete("/api/outfit/" + id).then(() => {
+            dispatch(deleteOutfit_(id));
         });
     };
 };
@@ -52,7 +67,7 @@ export const createOutfit = outfit => {
 export const temporaryCreateOutfit = (outfit_id, outfit) => {
     //this is temporary one just for mid-demo
     return dispatch => {
-        return axios.put("outfit/" + outfit_id, outfit).then(() => {
+        return axios.put("/api/outfit/" + outfit_id, outfit).then(() => {
             dispatch(createOutfit_(outfit));
         });
     };

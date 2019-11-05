@@ -21,6 +21,12 @@ const reducer = (state = initialState, action) => {
             const new_outfits = state.outfits.concat(newOutfit);
             return { ...state, outfits: new_outfits };
         }
+        case actionTypes.DELETE_OUTFIT: {
+            const deletedOutfits = state.outfits.filter(outfit => {
+                return outfit.id !== action.targetID;
+            });
+            return { ...state, outfits: deletedOutfits };
+        }
         default:
             break;
     }

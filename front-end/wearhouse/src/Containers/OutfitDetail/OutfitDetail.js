@@ -4,6 +4,8 @@ import * as actionCreators from "../../store/actions/index";
 
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
+import AddOutfit from "../../Components/AddOutfit/AddOutfit";
+import "./OutfitDetail.scss";
 
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 class OutfitDetail extends Component {
@@ -27,23 +29,43 @@ class OutfitDetail extends Component {
         //this.props.getOutfit(this.props.match.params.id);
         //this.setState({ outfit: this.props.outfit });
     }
+    onEdit = () => {
+        this.props.history.push("/editOutfit/" + this.props.match.params.id);
+    };
+
+    onDelete = () => {
+        this.props.deleteOutfit(this.props.match.params.id);
+    };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
         console.log(this.props);
         return (
-            <div className="OutfitDetail">
+            <div id="outfit-detail">
                 <Header />
                 <div id="detail-outfit-window">
-                    <img src={SampleImage} />
+                    <div id="image-window">
+                        <img src={SampleImage} alt="outfit" />
+                    </div>
+                    {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
+
+                    <div id="info-window">
+                        <div id="items-info-window">{items}</div>
+                    </div>
+                    <div id="button-group">
+                        <button
+                            onClick={this.onDelete}
+                            id="delete-outfit-button"
+                        >
+                            Delete
+                        </button>
+                        <button onClick={this.onEdit} id="edit-outfit-button">
+                            Edit
+                        </button>
+                    </div>
+                    <AddOutfit />
                 </div>
-                <div id="info-windw">
-                    <div id="items-info-window">{items}</div>
-                </div>
-                <button onClick={this.onConfirmCreate} id="confirm-create-item">
-                    Confirm Create
-                </button>
             </div>
         );
     }
@@ -52,6 +74,7 @@ class OutfitDetail extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         getOutfit: id => dispatch(actionCreators.getSpecificOutfit(id)),
+        deleteOutfit: id => dispatch(actionCreators.deleteOutfit(id)),
     };
 };
 
