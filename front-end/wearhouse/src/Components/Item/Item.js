@@ -9,10 +9,10 @@ import Select from "react-select";
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate() {
         return true;
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (this.props !== prevProps)
             this.setState({
                 category: this.props.item.category,

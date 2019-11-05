@@ -65,4 +65,10 @@ describe("App", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
     });
+
+    it("should render", () => {
+        const component = mount(app);
+        history.push("/createOutfit");
+        expect(component.find("App").length).toBe(1);
+    });
 });
