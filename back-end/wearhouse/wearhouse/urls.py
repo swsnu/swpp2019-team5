@@ -22,7 +22,7 @@ from user import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/item', include('urls')),
-    path('api/outfit', include('urls')),
-    path('apitag', include('urls')),
+    path('api/item/', include('item.urls')),
+    path('api/outfit/', include('outfit.urls')),
+    path('api/tag/', include('tag.urls')),
 ]
