@@ -23,22 +23,14 @@ import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 class CreateOutfit extends Component {
     state = {
         id: this.props.outfit_id,
-        image: null,
+        image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
-        items: [],
+        items: this.props.items, //Made items section be props - everything should be props actually
     };
 
     shouldComponentUpdate() {
         return true;
-    }
-
-    componentDidMount() {
-        this.setState({
-            id: this.props.outfit_id,
-            image: this.props.image,
-            items: this.props.items,
-        });
     }
 
     onDeleteItem(item) {
