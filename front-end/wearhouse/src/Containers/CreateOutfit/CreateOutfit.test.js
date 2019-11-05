@@ -32,7 +32,7 @@ let stubInitialState = {
 let mockStore = getMockStore(stubInitialState);
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_put;
+    let createOutfit, spyHistoryPush, spyAxios_put;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -50,10 +50,6 @@ describe("<CreateOutfit />", () => {
                 dispatch();
             };
         });
-
-        spyAxios_post = jest
-            .spyOn(axios, "post")
-            .mockImplementation(() => Promise.resolve({}));
 
         spyAxios_put = jest
             .spyOn(axios, "put")
