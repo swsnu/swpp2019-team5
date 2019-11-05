@@ -47,7 +47,6 @@ class Tag extends Component {
                 );
             } else {
                 //tag_name is editable
-                console.log(this.state.editTag);
                 label = (
                     <div className="tag-in-outfit">
                         <input

@@ -31,7 +31,8 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
             "!src/index.js",
-            "!src/serviceWorker.js"
+            "!src/serviceWorker.js",
+            "!src/Components/Item/SelectStyle.js"
         ]
     },
     "scripts": {
