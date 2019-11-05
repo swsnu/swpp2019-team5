@@ -84,7 +84,7 @@ class CreateOutfit extends Component {
                 <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
-                        <img src={SampleImage} />
+                        <img src={SampleImage} alt="outfit" />
                     </div>
 
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
