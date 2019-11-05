@@ -34,7 +34,13 @@ class App extends React.Component {
                     <Route
                         path="/createOutfit"
                         exact
-                        render={() => <CreateOutfit image={""} items={items} />}
+                        render={() => (
+                            <CreateOutfit
+                                image={""}
+                                items={items}
+                                outfit_id={1}
+                            />
+                        )}
                     />
                     <Route path="/main" exact component={LandingPage} />
                     <Redirect exact to="/main" />
