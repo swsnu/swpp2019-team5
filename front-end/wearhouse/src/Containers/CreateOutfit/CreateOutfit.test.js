@@ -1,21 +1,32 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../../test-utils/mocks";
-import { history } from "../../../store/store";
-import "../../../setupTests";
+import { getMockStore } from "../../test-utils/mocks";
+import { history } from "../../store/store";
+import "../../setupTests";
 import axios from "axios";
 import CreateOutfit from "./CreateOutfit";
 
-let stubInitialState = {};
+let stubInitialState = {
+    id: 1,
+    image: null,
+    satisfactionValue: null,
+    date: null,
+    items: [
+        { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+        { category: "Shoes", tags: ["black", "opentoe"] },
+        { category: "LowerBody", tags: ["jeans"] },
+        { category: "Accessories", tags: ["black", "golden-buckle"] },
+    ],
+};
 
 let mockStore = getMockStore(stubInitialState);
-
+/*
 describe("<CreateOutfit />", () => {
-    let login, spyHistoryPush, spyAxios_post;
+    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_put;
 
     beforeEach(() => {
-        login = (
+        createOutfit = (
             <Provider store={mockStore}>
                 <CreateOutfit history={history} />
             </Provider>
@@ -30,6 +41,10 @@ describe("<CreateOutfit />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_put = jest
+            .spyOn(axios, "put")
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -37,36 +52,18 @@ describe("<CreateOutfit />", () => {
     });
 
     it("should load properly", () => {
-        const component = mount(login);
-        let wrapper = component.find("#login");
+        const component = mount(createOutfit);
+        let wrapper = component.find("#create-outfit");
         expect(wrapper.length).toBe(1);
     });
 
-    it("should not call 'onLogin' when input is not valid", () => {
-        const component = mount(login);
-        let wrapper = component.find("#login-button");
+    it("should put newly created outfit", () => {
+        const component = mount(createOutfit);
+        let wrapper = component.find("#confirm-create-item");
         wrapper.simulate("click");
-        expect(spyAxios_post).toHaveBeenCalledTimes(0);
-    });
-
-    it("should call 'onLogin' when clicked", () => {
-        const component = mount(login);
-        component
-            .find("#email-input")
-            .simulate("change", { target: { value: "test@gmail.com" } });
-        component
-            .find("#pw-input")
-            .simulate("change", { target: { value: "testpassword" } });
-
-        let wrapper = component.find("#login-button");
-        wrapper.simulate("click");
-        expect(spyAxios_post).toHaveBeenCalledTimes(1);
-    });
-
-    it("should redirect to /signup", () => {
-        const component = mount(login);
-        let wrapper = component.find("#signup-button");
-        wrapper.simulate("click");
+        expect(spyAxios_post).toHaveBeenCalledTimes(12);
+        //4 itmes and 8 tags are newly posted
+        expect(spyAxios_put).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
-});
+});*/

@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-export const initialState = {
+const initialState = {
     items: [],
     selectedOutfitItems: [],
     selectedItem: null,
