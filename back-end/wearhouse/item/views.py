@@ -11,13 +11,13 @@ def token(request):
         return HttpResponseNotAllowed(['GET'])
 
 def getItem(request, item_id):
-    return HttpResponse()
+    return HttpResponse(status=404)
 
 def getOutfitContainedItem(request, item_id):
-    return HttpResponse()
+    return HttpResponse(status=404)
 
 def getTagsOfItem(request, item_id):
-    return HttpResponse()
+    return HttpResponse(status=404)
 
 def getSelectedTag(request, item_id, tag_id):
-    return HttpResponse()
+    return HttpResponse(status=404)

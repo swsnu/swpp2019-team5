@@ -11,7 +11,7 @@ def token(request):
         return HttpResponseNotAllowed(['GET'])
 
 def getTag(request):
-    return HttpResponse()
+    return HttpResponse(status=404)
 
 def getItemHavingTag(reqeust, outfit_id):
-    return HttpResponse()
+    return HttpResponse(status=404)

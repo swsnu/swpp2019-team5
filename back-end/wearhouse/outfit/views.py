@@ -41,7 +41,7 @@ def getOutfit(reqeust, outfit_id):
 
 
 def getItemsOfOutfit(request, outfit_id):
-    return HttpResponse()
+    return HttpResponse(status=404)
 
 def getSpecificItemOfOutfit(request, outfit_id, item_id):
-    return HttpResponse()
+    return HttpResponse(status=404)
