@@ -6,7 +6,6 @@ import { withRouter } from "react-router";
 
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
-import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import "./CreateOutfit.scss";
 
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
@@ -67,7 +66,7 @@ class CreateOutfit extends Component {
             items: this.state.items,
         };
         this.props.createOutfit(this.state.id, newOutfit);
-        this.props.history.push("/browse");
+        this.props.history.push("/outfitDetail/" + this.state.id);
     };
     render() {
         let items = this.state.items.map((item, index) => {

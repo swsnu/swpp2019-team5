@@ -97,6 +97,7 @@ class Item extends Component {
                 todo: "typeMode",
             });
     };
+
     render() {
         let tags = this.state.tags.map((tag, index) => {
             return (
@@ -113,7 +114,7 @@ class Item extends Component {
         let todo = null;
         let edit_mode_options = null;
         let tag_input = null;
-        if (this.state.todo === "typeMode") {
+        if (this.props.editMode && this.state.todo === "typeMode") {
             tag_input = (
                 <input
                     className="tag-input"
@@ -145,6 +146,7 @@ class Item extends Component {
                 <div className="info-container">
                     <div className="position-controller">
                         <Select
+                            isDisabled={!this.props.editMode}
                             className="Select"
                             defaultValue={itemOptions.find(
                                 c => c.value === this.props.item.category,
