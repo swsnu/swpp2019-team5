@@ -39,6 +39,7 @@ export const createOutfit_ = outfit => {
         satisfactionValue: outfit.satisfactionValue,
         date: outfit.date,
         id: outfit.id,
+        items: outfit.items,
     };
 };
 export const createOutfit = outfit => {
