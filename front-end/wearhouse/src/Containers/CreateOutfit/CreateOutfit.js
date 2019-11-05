@@ -60,7 +60,7 @@ class CreateOutfit extends Component {
             items: this.state.items,
         };
         this.props.createOutfit(this.state.id, newOutfit);
-        this.props.history.push("/browse");
+        this.props.history.push("/outfitDetail/" + this.state.id);
     };
     render() {
         let items = this.state.items.map((item, index) => {
