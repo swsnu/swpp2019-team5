@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import image from "./fashion-images.svg";
 import "./LandingPage.scss";
 class LandingPage extends Component {
-    onClickLogin = () => {
+    onLogin = () => {
         this.props.history.push("/login");
     };
 
@@ -24,7 +24,7 @@ class LandingPage extends Component {
                     <div id="button-container">
                         <button
                             id="login-button"
-                            onClick={() => this.onClickLogin()}
+                            onClick={() => this.onLogin()}
                         >
                             Log In
                         </button>
@@ -38,7 +38,7 @@ class LandingPage extends Component {
                     <img
                         id="intro-image"
                         src={image}
-                        alt="Illustration of fashionably-dressed people in line"
+                        alt="Fashionable People in a list"
                     />
                 </div>
                 <div className="intro-content" id="content-2"></div>

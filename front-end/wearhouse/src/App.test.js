@@ -33,18 +33,6 @@ let outfitState = {
             password: "iluvswpp",
             logged_in: false,
         },
-        {
-            id: 2,
-            email: "alan@turing.com",
-            password: "iluvswpp",
-            logged_in: false,
-        },
-        {
-            id: 3,
-            email: "edsger@dijkstra.com",
-            password: "iluvswpp",
-            logged_in: false,
-        },
     ],
     logged_in: false,
     user1: {
@@ -76,12 +64,5 @@ describe("App", () => {
     it("should render", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
-    });
-
-    it("should redirect to browse page", () => {
-        history.push("/browse");
-        const component = mount(app);
-        console.log(component);
-        expect(component.find("#browse").length).toBe(1);
     });
 });
