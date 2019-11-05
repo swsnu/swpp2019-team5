@@ -22,18 +22,7 @@ from user import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('token/', user_views.token, name='token'),
-    path('user/login/', user_views.signin, name=''),
-    path('user/logout/', user_views.signout, name=''),
-    path('user/', user_views.createUser, name=''),
-    path('api/tag/<int:tag_id>/', tag_views.getTag, name=''),
-    path('api/tag/<int:tag_id>/item/', tag_views.getItemHavingTag, name=''),
-    path('api/outfit/', outfit_views.outfit, name=''),
-    path('api/outfit/<int:outfit_id>/', outfit_views.getOutfit, name=''),
-    path('api/outfit/<int:outfit_id/item>/', outfit_views.getItemsOfOutfit, name=''),
-    path('api/outfit/<int:outfit_id/<int:item_id>/', outfit_views.getSpecificItemOfOutfit, name=''),
-    path('api/item/<int:item_id>/', item_views.getItem, name='a'),
-    path('api/item/<int:item_id>/outfit/', item_views.getOutfitContainedItem, name=''),
-    path('api/item/<int:item_id>/tag/', item_views.getTagsOfItem, name=''),
-    path('api/item/<int:item_id>/<int:tag_id>/', item_views.getSelectedTag, name=''),
+    path('api/item', include('urls')),
+    path('api/outfit', include('urls')),
+    path('apitag', include('urls')),
 ]
