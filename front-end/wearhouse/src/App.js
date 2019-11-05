@@ -13,12 +13,6 @@ import "./App.scss";
 
 class App extends React.Component {
     render() {
-        let items = [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ];
         return (
             <ConnectedRouter history={this.props.history}>
                 <Switch>
@@ -34,13 +28,7 @@ class App extends React.Component {
                     <Route
                         path="/createOutfit"
                         exact
-                        render={() => (
-                            <CreateOutfit
-                                image={""}
-                                items={items}
-                                outfit_id={1}
-                            />
-                        )}
+                        render={() => <CreateOutfit />}
                     />
                     <Route path="/main" exact component={LandingPage} />
                     <Redirect exact to="/main" />

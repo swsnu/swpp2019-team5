@@ -15,6 +15,14 @@
         img {
             max-width: inherit;
         }
+        #date {
+            position: absolute;
+            top: 140px;
+            color: rgb(245, 241, 241);
+            background-color: mediumaquamarine;
+            padding-left: 2px;
+            padding-right: 3px;
+        }
         overflow: hidden;
     }
 

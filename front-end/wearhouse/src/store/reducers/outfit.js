@@ -1,7 +1,27 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
-    outfits: [],
-    selectedOutfit: null,
+    outfits: [
+        {
+            id: 1,
+            items: [
+                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+                { category: "Shoes", tags: ["black", "opentoe"] },
+                { category: "LowerBody", tags: ["jeans"] },
+                { category: "Accessories", tags: ["black", "golden-buckle"] },
+            ],
+        },
+    ],
+    selectedOutfit: {
+        id: 1,
+        items: [
+            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+            { category: "Shoes", tags: ["black", "opentoe"] },
+            { category: "LowerBody", tags: ["jeans"] },
+            { category: "Accessories", tags: ["black", "golden-buckle"] },
+        ],
+        satisfactionValue: 3,
+        date: "2019.11.7",
+    },
 };
 
 const reducer = (state = initialState, action) => {

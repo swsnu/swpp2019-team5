@@ -112,8 +112,15 @@ const mapDispatchToProps = dispatch => {
             dispatch(actionCreators.temporaryCreateOutfit(id, outfit)),
     };
 };
-
+const mapStateToProps = state => {
+    let outfit = state.outfit.outfits[state.outfit.outfits.length - 1];
+    return {
+        outfit_id: outfit.id,
+        image: outfit.image,
+        items: outfit.items,
+    };
+};
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(withRouter(CreateOutfit));

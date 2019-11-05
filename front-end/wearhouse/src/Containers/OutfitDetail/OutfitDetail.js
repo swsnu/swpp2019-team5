@@ -13,22 +13,17 @@ class OutfitDetail extends Component {
     state = {
         outfit: {
             image: null,
-            satisfactionValue: 3,
-            date: new Date(), //in sprint 4 make it changable. user can select date
-            items: [
-                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-                { category: "Shoes", tags: ["black", "opentoe"] },
-                { category: "LowerBody", tags: ["jeans"] },
-                { category: "Accessories", tags: ["black", "golden-buckle"] },
-            ],
+            satisfactionValue: null,
+            date: "", //in sprint 4 make it changable. user can select date
+            items: [],
         },
     };
     shouldComponentUpdate() {
         return true;
     }
     componentDidMount() {
-        //this.props.getOutfit(this.props.match.params.id);
-        //this.setState({ outfit: this.props.outfit });
+        this.props.getOutfit(this.props.match.params.id);
+        this.setState({ outfit: this.props.outfit });
     }
     onEdit = () => {
         this.props.history.push("/editOutfit/" + this.props.match.params.id);
@@ -51,6 +46,8 @@ class OutfitDetail extends Component {
                             value={this.state.outfit.satisfactionValue}
                         />
                         <img src={SampleImage} alt="outfit" />
+
+                        <label id="date">{this.state.outfit.date}</label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 
