@@ -1,8 +1,10 @@
 import React from "react";
 import { faTimes, faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as actionCreators from "../../../store/actions/index";
 
 import "./UploadImage.scss";
+import {connect} from "react-redux";
 
 class UploadImage extends React.Component {
     state = { selectedImageURL: null, isPreviewMode: false };
@@ -47,7 +49,18 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
-        // send request to backend
+        const new_outfit = {
+            items = [],
+            image = this.state.selectedImageURL,
+            date = 1,
+            satisfaction = 1
+        }
+
+        //  send image to backend
+        this.props.onCreateNewOutfit(new_outfit)
+
+        // go to CreateOutfit Page
+        this.props.history.push('/createOutfit')
     };
 
     render() {
@@ -119,5 +132,14 @@ class UploadImage extends React.Component {
     }
 }
 
-export default UploadImage;
+const mapDispatchToProps = dispatch => {
+    return {
+        onCreateNewOutfit: outfit => {
+            dispatch(actionCreators.createOutfit(outfit));
+        },
+    };
+};
 
+export default connect(
+    mapDispatchToProps,
+)(UploadImage);
