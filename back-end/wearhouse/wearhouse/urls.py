@@ -23,6 +23,9 @@ from user import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('token/', user_views.token, name='token'),
+    path('user/login/', user_views.signin, name=''),
+    path('user/logout/', user_views.signout, name=''),
+    path('user/', user_views.createUser, name=''),
     path('api/tag/<int:tag_id>/', tag_views.getTag, name=''),
     path('api/tag/<int:tag_id>/item/', tag_views.getItemHavingTag, name=''),
     path('api/outfit/', outfit_views.outfit, name=''),
