@@ -2,11 +2,8 @@ import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
 
-<<<<<<< HEAD
 import { ConnectedRouter } from "connected-react-router";
 
-=======
->>>>>>> 253e0c508c188adc0286d8cec83624a7bdb6f881
 import App from "./App";
 import { getMockStore } from "./mocks/mocks";
 import { history } from "./store/store";
@@ -33,18 +30,6 @@ let outfitState = {
         {
             id: 1,
             email: "swpp@snu.ac.kr",
-            password: "iluvswpp",
-            logged_in: false,
-        },
-        {
-            id: 2,
-            email: "alan@turing.com",
-            password: "iluvswpp",
-            logged_in: false,
-        },
-        {
-            id: 3,
-            email: "edsger@dijkstra.com",
             password: "iluvswpp",
             logged_in: false,
         },

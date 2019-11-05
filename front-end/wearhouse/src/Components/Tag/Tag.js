@@ -59,9 +59,6 @@ class Tag extends Component {
                         <div className="edit-tag" onClick={this.onEditTag}>
                             <FontAwesomeIcon icon={faCheck} />
                         </div>
-                        <div className="delete-tag" onClick={this.props.delete}>
-                            <FontAwesomeIcon icon={faTrashAlt} />
-                        </div>
                     </div>
                 );
             }

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import * as actionCreators from "../../store/actions/index";
 import { withRouter } from "react-router";
+import * as actionCreators from "../../store/actions/index";
+import "./CreateOutfit.scss";
 
 import Header from "../Header/Header";
+
 import Item from "../../Components/Item/Item";
+import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import "./CreateOutfit.scss";
 
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
@@ -21,22 +23,14 @@ import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 class CreateOutfit extends Component {
     state = {
         id: this.props.outfit_id,
-        image: null,
+        image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
-        items: [],
+        items: this.props.items, //Made items section be props - everything should be props actually
     };
 
     shouldComponentUpdate() {
         return true;
-    }
-
-    componentDidMount() {
-        this.setState({
-            id: this.props.outfit_id,
-            image: this.props.image,
-            items: this.props.items,
-        });
     }
 
     onDeleteItem(item) {
@@ -87,6 +81,7 @@ class CreateOutfit extends Component {
                 <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
+                        <EditSatisfaction />
                         <img src={SampleImage} alt="outfit" />
                     </div>
 

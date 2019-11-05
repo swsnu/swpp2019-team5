@@ -10,15 +10,16 @@
     margin: 4px;
     border-radius: 15px;
     cursor: pointer;
+    width: fit-content;
+    input {
+        margin-left: 5px;
+        width: 50px;
+        max-width: fit-content;
+        border: none;
+        color: black;
+    }
 }
-.edit-tag-input {
-    margin-left: 5px;
-    width: 50px;
-    max-width: fit-content;
-    border: none;
-    background-color: #f1cfdf;
-    color: black;
-}
+
 .delete-tag,
 .edit-tag {
     margin: 0 2px;

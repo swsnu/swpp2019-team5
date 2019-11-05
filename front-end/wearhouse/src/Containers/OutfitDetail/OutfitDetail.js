@@ -5,6 +5,7 @@ import * as actionCreators from "../../store/actions/index";
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
+import Satisfaction from "../../Components/Satisfaction/Satisfaction";
 import "./OutfitDetail.scss";
 
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
@@ -12,7 +13,7 @@ class OutfitDetail extends Component {
     state = {
         outfit: {
             image: null,
-            satisfactionValue: null,
+            satisfactionValue: 3,
             date: new Date(), //in sprint 4 make it changable. user can select date
             items: [
                 { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
@@ -46,6 +47,9 @@ class OutfitDetail extends Component {
                 <Header />
                 <div id="detail-outfit-window">
                     <div id="image-window">
+                        <Satisfaction
+                            value={this.state.outfit.satisfactionValue}
+                        />
                         <img src={SampleImage} alt="outfit" />
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
