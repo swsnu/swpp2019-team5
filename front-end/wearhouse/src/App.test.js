@@ -2,8 +2,11 @@ import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
 
+<<<<<<< HEAD
 import { ConnectedRouter } from "connected-react-router";
 
+=======
+>>>>>>> feature/satisfaction-edit-mode
 import App from "./App";
 import { getMockStore } from "./mocks/mocks";
 import { history } from "./store/store";
@@ -76,12 +79,5 @@ describe("App", () => {
     it("should render", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
-    });
-
-    it("should redirect to browse page", () => {
-        history.push("/browse");
-        const component = mount(app);
-        console.log(component);
-        expect(component.find("#browse").length).toBe(1);
     });
 });
