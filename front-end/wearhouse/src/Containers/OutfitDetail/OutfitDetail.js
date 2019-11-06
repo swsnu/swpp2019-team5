@@ -31,12 +31,12 @@ class OutfitDetail extends Component {
 
     onDelete = () => {
         this.props.deleteOutfit(this.props.match.params.id);
+        this.props.history.push("/browse");
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
-        console.log(this.props);
         return (
             <div id="outfit-detail">
                 <Header />
