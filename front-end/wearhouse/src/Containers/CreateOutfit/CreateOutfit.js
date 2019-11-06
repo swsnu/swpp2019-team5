@@ -117,7 +117,15 @@ const mapStateToProps = state => {
     return {
         outfit_id: outfit.id,
         image: outfit.image,
-        items: outfit.items,
+        items: [
+            { category: "UpperBody", tags: ["black"] },
+            { category: "Shoes", tags: ["black", "open"] },
+            { category: "LowerBody", tags: ["jeans", "blue"] },
+            { category: "Accessories", tags: ["black", "golden-buckle"] },
+            { category: "Accessories", tags: ["bag", "shoulder"] },
+        ],
+        //just for mid demo
+        // it should be -> items: outfit.items,
     };
 };
 export default connect(

@@ -1,6 +1,18 @@
 import * as actionTypes from "../actions/actionTypes";
+import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 const initialState = {
     outfits: [
+        {
+            id: 2,
+            items: [
+                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
+                { category: "UpperBody", tags: ["black", "print"] },
+                { category: "LowerBody", tags: ["jeans", "black"] },
+            ],
+            satisfactionValue: 1,
+            date: "2018.12.6",
+            image: { SampleImage },
+        },
         {
             id: 1,
             items: [
@@ -9,6 +21,9 @@ const initialState = {
                 { category: "LowerBody", tags: ["jeans"] },
                 { category: "Accessories", tags: ["black", "golden-buckle"] },
             ],
+            satisfactionValue: 3,
+            date: "2019.11.6",
+            image: { SampleImage },
         },
     ],
     selectedOutfit: {
@@ -20,7 +35,7 @@ const initialState = {
             { category: "Accessories", tags: ["black", "golden-buckle"] },
         ],
         satisfactionValue: 3,
-        date: "2019.11.7",
+        date: "2019.11.6",
     },
 };
 
