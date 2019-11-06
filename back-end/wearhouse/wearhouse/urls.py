@@ -15,10 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from outfit import  views as outfit_views
-from item import views as item_views
-from tag import views as tag_views
-from user import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
