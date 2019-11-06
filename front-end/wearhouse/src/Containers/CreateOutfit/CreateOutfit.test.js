@@ -17,16 +17,28 @@ import { ConnectedRouter } from "connected-react-router";
 // });
 
 let stubInitialState = {
-    id: 1,
-    image: null,
-    satisfactionValue: null,
-    date: null,
-    items: [
-        { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-        { category: "Shoes", tags: ["black", "opentoe"] },
-        { category: "LowerBody", tags: ["jeans"] },
-        { category: "Accessories", tags: ["black", "golden-buckle"] },
+    outfits: [
+        {
+            id: 1,
+            items: [
+                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+                { category: "Shoes", tags: ["black", "opentoe"] },
+                { category: "LowerBody", tags: ["jeans"] },
+                { category: "Accessories", tags: ["black", "golden-buckle"] },
+            ],
+        },
     ],
+    selectedOutfit: {
+        id: 1,
+        items: [
+            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+            { category: "Shoes", tags: ["black", "opentoe"] },
+            { category: "LowerBody", tags: ["jeans"] },
+            { category: "Accessories", tags: ["black", "golden-buckle"] },
+        ],
+        satisfactionValue: 3,
+        date: "2019.11.7",
+    },
 };
 
 let mockStore = getMockStore(stubInitialState);
@@ -38,8 +50,10 @@ describe("<CreateOutfit />", () => {
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
                     <CreateOutfit
-                        history={history}
                         items={stubInitialState.items}
+                        image=""
+                        outfit_id={1}
+                        history={history}
                     />
                 </ConnectedRouter>
             </Provider>

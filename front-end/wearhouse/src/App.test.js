@@ -8,45 +8,41 @@ import App from "./App";
 import { getMockStore } from "./mocks/mocks";
 import { history } from "./store/store";
 
-const stubOutfit = {
-    id: 0,
-    imgaeUrl: "image.url",
-    satisfactionValue: 4,
-    date: "2019.10.28",
-    user_id: 1,
-};
-
-let outfitState = {
-    outfits: [stubOutfit],
-    user_id: 1,
-    selected_Outfit: {
-        id: "",
-        user_id: 1,
-        imageUrl: "",
-        satisfactionValue: "",
-        date: "",
-    },
-    users: [
+const outfitState = {
+    outfits: [
         {
             id: 1,
-            email: "swpp@snu.ac.kr",
-            password: "iluvswpp",
-            logged_in: false,
+            items: [
+                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+                { category: "Shoes", tags: ["black", "opentoe"] },
+                { category: "LowerBody", tags: ["jeans"] },
+                { category: "Accessories", tags: ["black", "golden-buckle"] },
+            ],
         },
     ],
-    logged_in: false,
-    user1: {
+    selectedOutfit: {
         id: 1,
-        email: "swpp@snu.ac.kr",
-        password: "iluvswpp",
-        logged_in: false,
+        items: [
+            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+            { category: "Shoes", tags: ["black", "opentoe"] },
+            { category: "LowerBody", tags: ["jeans"] },
+            { category: "Accessories", tags: ["black", "golden-buckle"] },
+        ],
+        satisfactionValue: 3,
+        date: "2019.11.7",
     },
 };
+const itemState = {
+    items: [],
+    selectedOutfitItems: [],
+    selectedItem: null,
+};
+
 const stubNullState = {};
 const mockStore = getMockStore(
     stubNullState,
     outfitState,
-    stubNullState,
+    itemState,
     stubNullState,
 );
 

@@ -17,6 +17,7 @@ describe("<Item/>", () => {
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
                     <Item
+                        editMode={true}
                         item={{ tags: ["black", "T-shirt", "2019"] }}
                         applyEdit={deleteHandler}
                         delete={editHandler}
