@@ -96,7 +96,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
 
         let count = component.find(".Item");
-        expect(count.length).toBe(5);
+        expect(count.length).toBe(6);
     });
 
     it("should call onDeleteItem", () => {
@@ -105,7 +105,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
 
         let count = component.find(".Item");
-        expect(count.length).toBe(3);
+        expect(count.length).toBe(4);
     });
 
     it("should call onApplyEditItem", () => {
@@ -115,6 +115,6 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("keydown", { key: "Enter" });
 
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(8); //doesn't actually work but
+        expect(count.length).toBe(9); //doesn't actually work but
     });
 });
