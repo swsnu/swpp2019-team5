@@ -2,11 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Logout from "../Auth/Logout/Logout";
+
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
+import Header from "../Header/Header";
+
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
+
+import sampleImage from "../../sample/OOTD_sample.jpg";
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)
@@ -40,11 +44,13 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
+        let imageArray = [sampleImage, sampleImage];
+
         const outfits = this.props.outfits.map(outfit => {
             return (
                 <Outfit
                     key={outfit.id}
-                    image={outfit.imageUrl}
+                    image={imageArray[outfit.id - 1]} //Temp for demo
                     satisfactionValue={outfit.satisfactionValue}
                     date={outfit.date}
                     clicked={() => this.onClickOutfit(outfit)}
@@ -64,7 +70,7 @@ class Browse extends React.Component {
         }
         return (
             <div id="browse">
-                <Logout />
+                <Header />
                 <div id="search-container">
                     <input
                         id="search-input"
