@@ -11,6 +11,7 @@ import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
 
 import sampleImage from "../../sample/OOTD_sample.jpg";
+import sample2 from "../../sample/sample2.jpeg";
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)
@@ -44,7 +45,7 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        let imageArray = [sampleImage, sampleImage];
+        let imageArray = [sampleImage, sample2];
 
         const outfits = this.props.outfits.map(outfit => {
             return (
