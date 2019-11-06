@@ -7,7 +7,6 @@ import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
-
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)
@@ -27,7 +26,7 @@ class Browse extends React.Component {
     };
     onClickOutfit = outfit => {
         this.props.selectOutfit(outfit);
-        this.props.history.push("/outfit/" + outfit.id);
+        this.props.history.push("/outfitDetail/" + outfit.id);
     };
     onSearchInput = e => {
         this.setState({ search_query: e.target.value });

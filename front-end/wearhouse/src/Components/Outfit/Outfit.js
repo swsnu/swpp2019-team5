@@ -11,7 +11,10 @@ const Outfit = props => {
             <div className="outfit-image" alt="Outfit" style={style} />
             <div className="outfit-info">
                 <div className="outfit-date">{props.date}</div>
-                <Satisfaction value={props.satisfactionValue} />
+                <Satisfaction
+                    className="emoji"
+                    value={props.satisfactionValue}
+                />
             </div>
         </div>
     );

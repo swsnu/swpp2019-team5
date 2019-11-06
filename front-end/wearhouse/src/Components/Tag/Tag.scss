@@ -1,0 +1,27 @@
+.tag-in-outfit {
+    background-color: #ee7185;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    margin: 4px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: fit-content;
+    input {
+        margin-left: 5px;
+        width: 50px;
+        max-width: fit-content;
+        border: none;
+        color: black;
+    }
+}
+
+.delete-tag,
+.edit-tag {
+    margin: 0 2px;
+}
