@@ -12,6 +12,10 @@ import "./Browse.scss";
 
 import sampleImage from "../../sample/OOTD_sample.jpg";
 import sample2 from "../../sample/sample2.jpeg";
+import sample3 from "../../sample/sample3.jpg";
+import sample4 from "../../sample/sample4.jpg";
+import sample5 from "../../sample/sample5.jpg";
+
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)
@@ -45,7 +49,7 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        let imageArray = [sampleImage, sample2];
+        let imageArray = [sampleImage, sample2, sample3, sample4, sample5];
 
         const outfits = this.props.outfits.map(outfit => {
             return (

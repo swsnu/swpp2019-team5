@@ -3,15 +3,33 @@ import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 const initialState = {
     outfits: [
         {
-            id: 2,
+            id: 3,
             items: [
                 { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
                 { category: "UpperBody", tags: ["black", "print"] },
                 { category: "LowerBody", tags: ["jeans", "black"] },
             ],
-            satisfactionValue: 1,
+            satisfactionValue: 2,
             date: "2018.12.6",
             image: { SampleImage },
+        },
+        {
+            id: 4,
+            items: [
+                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
+            ],
+            satisfactionValue: 4,
+            date: "2019.5.22",
+            image: {},
+        },
+        {
+            id: 5,
+            items: [
+                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
+            ],
+            satisfactionValue: 1,
+            date: "2019.11.19",
+            image: {},
         },
         {
             id: 1,
