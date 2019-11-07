@@ -53,7 +53,7 @@ const initialState = {
             { category: "Accessories", tags: ["black", "golden-buckle"] },
         ],
         satisfactionValue: 3,
-        date: "2019.11.6",
+        date: "2019.11.7",
     },
 };
 
