@@ -122,8 +122,7 @@ const mapStateToProps = state => {
     //     items: outfit.items,
     // };
     return {
-        outfit_id: 0,
-        image: "",
+        selectedOutfit: state.outfit.selectedOutfit, // temporary code
     };
 };
 export default connect(
