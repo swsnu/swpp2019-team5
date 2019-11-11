@@ -1,60 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+
 const initialState = {
-    outfits: [
-        {
-            id: 3,
-            items: [
-                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
-                { category: "UpperBody", tags: ["black", "print"] },
-                { category: "LowerBody", tags: ["jeans", "black"] },
-            ],
-            satisfactionValue: 2,
-            date: "2018.12.6",
-            image: { SampleImage },
-        },
-        {
-            id: 4,
-            items: [
-                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
-            ],
-            satisfactionValue: 4,
-            date: "2019.5.22",
-            image: {},
-        },
-        {
-            id: 5,
-            items: [
-                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
-            ],
-            satisfactionValue: 1,
-            date: "2019.11.19",
-            image: {},
-        },
-        {
-            id: 1,
-            items: [
-                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-                { category: "Shoes", tags: ["black", "opentoe"] },
-                { category: "LowerBody", tags: ["jeans"] },
-                { category: "Accessories", tags: ["black", "golden-buckle"] },
-            ],
-            satisfactionValue: 3,
-            date: "2019.11.6",
-            image: { SampleImage },
-        },
-    ],
-    selectedOutfit: {
-        id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
-        satisfactionValue: 3,
-        date: "2019.11.7",
-    },
+    outfits: [],
+    selectedOutfit: null,
 };
 
 const reducer = (state = initialState, action) => {
