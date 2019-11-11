@@ -124,7 +124,6 @@ const mapStateToProps = state => {
     return {
         outfit_id: 0,
         image: "",
-        items: [],
     };
 };
 export default connect(

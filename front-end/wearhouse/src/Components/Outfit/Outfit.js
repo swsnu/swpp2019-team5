@@ -6,7 +6,6 @@ import "./Outfit.scss";
 
 const Outfit = props => {
     let style = { backgroundImage: "url(" + props.image + ")" };
-    console.log(props.image);
     return (
         <div className="outfit-preview" onClick={props.clicked}>
             <div className="outfit-image" alt="Outfit" style={style}>
