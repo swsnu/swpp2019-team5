@@ -45,6 +45,7 @@ let mockStore = getMockStore(stubInitialState);
 
 describe("<OutfitDetail />", () => {
     let outfitDetail, spyHistoryPush, spyAxios_delete;
+    let spyAxios_get;
     beforeEach(() => {
         outfitDetail = (
             <Provider store={mockStore}>
@@ -64,6 +65,9 @@ describe("<OutfitDetail />", () => {
         });
         spyAxios_delete = jest
             .spyOn(axios, "delete")
+            .mockImplementation(() => Promise.resolve({}));
+        spyAxios_get = jest
+            .spyOn(axios, "get")
             .mockImplementation(() => Promise.resolve({}));
     });
 
