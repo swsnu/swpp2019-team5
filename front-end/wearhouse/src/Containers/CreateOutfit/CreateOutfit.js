@@ -24,7 +24,7 @@ class CreateOutfit extends Component {
         image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
-        items: this.props.items, //Made items section be props - everything should be props actually
+        items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
     };
 
     shouldComponentUpdate() {
@@ -47,7 +47,7 @@ class CreateOutfit extends Component {
 
     addItemHandler = () => {
         const newItem = { category: "default", tags: [] };
-        let items = this.state.items.push(newItem); // was concat
+        let items = this.state.items.concat(newItem);
         this.setState({ items: items });
     };
 
@@ -121,6 +121,11 @@ const mapStateToProps = state => {
     //     image: outfit.image,
     //     items: outfit.items,
     // };
+    return {
+        outfit_id: 0,
+        image: "",
+        items: [],
+    };
 };
 export default connect(
     mapStateToProps,
