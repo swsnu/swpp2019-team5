@@ -20,10 +20,12 @@ matrix:
               - yarn test --coverage --watchAll=false
               - sonar-scanner
           after_success:
-              - cat ./coverage/lcov.info | ./node_modules/coveralls/bin.coveralls.js
+              - cat ./coverage/lcov.info | ./node_modules/coveralls/bin.coveralls.js | coveralls
         - language: python
           python:
               - "3.7"
+          env:
+              - COVERALLS_PARALLEL=true
           before_install:
               - cd ./back-end/wearhouse
           install:
