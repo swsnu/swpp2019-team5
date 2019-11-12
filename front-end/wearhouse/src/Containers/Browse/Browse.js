@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Logout from "../Auth/Logout/Logout";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
+import Recommendation from "../Recommendation/Recommendation";
+
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
 //search-input : input (o)
@@ -79,6 +82,7 @@ class Browse extends React.Component {
                 <button id="calendar-button" onClick={this.onClickCalendar}>
                     view calendar
                 </button>
+                <Recommendation />
                 {container}
                 {/*To */}
                 <AddOutfit />
