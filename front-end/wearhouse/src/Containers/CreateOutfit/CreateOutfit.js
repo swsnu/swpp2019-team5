@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
+
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
+import "./DatePicker.scss";
 
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
-import "./CreateOutfit.scss";
 import DatePicker from "react-datepicker";
-import "./DatePicker.scss";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
@@ -87,6 +89,12 @@ class CreateOutfit extends Component {
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
+                            <div>
+                                <FontAwesomeIcon
+                                    id="calendar-icon"
+                                    icon={faCalendarAlt}
+                                />
+                            </div>
                             <DatePicker
                                 id="date-picker"
                                 isClearable
