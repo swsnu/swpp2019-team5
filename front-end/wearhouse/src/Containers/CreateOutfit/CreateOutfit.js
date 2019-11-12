@@ -89,6 +89,8 @@ class CreateOutfit extends Component {
                         <div className="date-picker-container">
                             <DatePicker
                                 id="date-picker"
+                                isClearable
+                                placeholderText="Date isn't selected"
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
