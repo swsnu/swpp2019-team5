@@ -3,17 +3,6 @@ import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 const initialState = {
     outfits: [
         {
-            id: 2,
-            items: [
-                { category: "Outer", tags: ["cammel", "DoubleButton", "coat"] },
-                { category: "UpperBody", tags: ["black", "print"] },
-                { category: "LowerBody", tags: ["jeans", "black"] },
-            ],
-            satisfactionValue: 1,
-            date: "2018.12.6",
-            image: { SampleImage },
-        },
-        {
             id: 1,
             items: [
                 { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },

@@ -5,11 +5,11 @@ import * as actionCreators from "../../store/actions/index";
 import "./CreateOutfit.scss";
 
 import Header from "../Header/Header";
-
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import "./CreateOutfit.scss";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
@@ -83,6 +83,10 @@ class CreateOutfit extends Component {
                     <div id="image-window">
                         <EditSatisfaction />
                         <img src={SampleImage} alt="outfit" />
+                        <DatePicker
+                            selected={this.state.date}
+                            onChage={this.handleDateChange}
+                        />
                     </div>
 
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
