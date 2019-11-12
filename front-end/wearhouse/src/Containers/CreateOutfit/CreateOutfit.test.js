@@ -76,8 +76,16 @@ describe("<CreateOutfit />", () => {
 
     it("should load properly", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#create-outfit");
+        let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
+    });
+
+    it("set date properly after", () => {
+        const component = mount(createOutfit);
+        let wrapper = component.find("#date-picker").at(1);
+        wrapper.simulate("change", { target: { value: "2019/11/20" } });
+        wrapper = component.find(CreateOutfit.WrappedComponent).instance();
+        console.log(wrapper.state.date);
     });
 
     it("should put newly created outfit", () => {
