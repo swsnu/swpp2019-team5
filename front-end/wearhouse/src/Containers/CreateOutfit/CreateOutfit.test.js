@@ -50,7 +50,7 @@ describe("<CreateOutfit />", () => {
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
                     <CreateOutfit
-                        items={stubInitialState.items}
+                        items={stubInitialState.outfits[0].items}
                         image=""
                         outfit_id={1}
                         history={history}
@@ -80,12 +80,11 @@ describe("<CreateOutfit />", () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it("set date properly after", () => {
+    it("set date properly", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#date-picker").at(1);
-        wrapper.simulate("change", { target: { value: "2019/11/20" } });
+        wrapper.simulate("change", { target: { value: "2019/11/11" } });
         wrapper = component.find(CreateOutfit.WrappedComponent).instance();
-        console.log(wrapper.state.date);
     });
 
     it("should put newly created outfit", () => {
