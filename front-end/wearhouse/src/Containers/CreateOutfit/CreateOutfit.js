@@ -9,7 +9,7 @@ import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import "./CreateOutfit.scss";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "./DatePicker.scss";
 import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
@@ -51,6 +51,11 @@ class CreateOutfit extends Component {
         let items = this.state.items.concat(newItem);
         this.setState({ items: items });
     };
+    handleDateChange = date => {
+        this.setState({
+            date: date,
+        });
+    };
     onConfirmCreate = () => {
         //please add validation whether for all items category is selected in sprint 4
         const newOutfit = {
@@ -80,13 +85,19 @@ class CreateOutfit extends Component {
             <div id="create-outfit">
                 <Header />
                 <div id="create-outfit-window">
-                    <div id="image-window">
-                        <EditSatisfaction />
-                        <img src={SampleImage} alt="outfit" />
-                        <DatePicker
-                            selected={this.state.date}
-                            onChage={this.handleDateChange}
-                        />
+                    <div className="left-window">
+                        <div className="date-picker-container">
+                            <DatePicker
+                                id="date-picker"
+                                selected={this.state.date}
+                                onChange={this.handleDateChange}
+                                dateFormat="yyyy/MM/dd"
+                            />
+                        </div>
+                        <div id="image-window">
+                            <EditSatisfaction id="edit-satisfaction" />
+                            <img src={SampleImage} alt="outfit" />
+                        </div>
                     </div>
 
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
