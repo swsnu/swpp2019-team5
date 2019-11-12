@@ -94,6 +94,7 @@ class CreateOutfit extends Component {
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
+                                maxDate={new Date()}
                             />
                         </div>
                         <div id="image-window">
