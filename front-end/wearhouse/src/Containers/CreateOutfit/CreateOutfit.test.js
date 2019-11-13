@@ -106,6 +106,21 @@ describe("<CreateOutfit />", () => {
         expect(count.length).toBe(6);
     });
 
+    it("confirm create with empty item alert message", () => {
+        const component = mount(createOutfit);
+        let wrapper = component.find("#add-item");
+        wrapper.simulate("click");
+        let confirm = component.find("#confirm-create-item");
+        jest.spyOn(window, "alert").mockImplementation(() => {});
+        confirm.simulate("click");
+        wrapper = component.find(".Item .tag-input").at(4);
+        wrapper.simulate("change", { target: { value: "Test" } });
+        wrapper.simulate("keypress", {
+            key: "Enter",
+        });
+        confirm.simulate("click");
+    });
+
     it("should call onDeleteItem", () => {
         const component = mount(createOutfit);
         let wrapper = component.find(".Item .item-deleter").at(0);
