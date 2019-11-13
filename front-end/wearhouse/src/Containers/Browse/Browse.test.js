@@ -6,6 +6,7 @@ import { history } from "../../store/store";
 import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
 import Browse from "./Browse";
+import axios from "axios";
 
 const stubOutfit = {
     id: 0,
@@ -101,18 +102,13 @@ describe("<Browse />", () => {
     });
 
     it(`should call 'onClickOutfit'`, () => {
-        const spyGetSpecificOutfit = jest
-            .spyOn(actionCreators, "getSpecificOutfit")
-            .mockImplementation(() => {
-                /* Used to take outfit_id as parameter */
-                return dispatch => {
-                    return dispatch;
-                };
-            });
+        const spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyGetSpecificOutfit).toHaveBeenCalledTimes(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 

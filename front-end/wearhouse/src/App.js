@@ -8,7 +8,7 @@ import OutfitDetail from "./Containers/OutfitDetail/OutfitDetail";
 import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 import LandingPage from "./Containers/LandingPage/LandingPage";
-
+import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
 import "./App.scss";
 
 class App extends React.Component {
@@ -25,7 +25,11 @@ class App extends React.Component {
                     <Route path="/calendar" exact component={Calendar} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
-
+                    <Route
+                        path="/createOutfit"
+                        exact
+                        render={() => <CreateOutfit />}
+                    />
                     <Route path="/main" exact component={LandingPage} />
                     <Redirect exact to="/main" />
                 </Switch>

@@ -1,0 +1,48 @@
+#edit-satisfaction {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    .satisfaction-functions {
+        width: 20px;
+        height: 20px;
+        padding-right: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+        color: white;
+    }
+    transition: all 0.3s ease-in-out;
+
+    #current-value {
+        display: flex;
+        img,
+        .null-icon {
+            width: 28px;
+            height: 28px;
+            margin: 0 10px;
+        }
+        //margin: 0 10px;
+    }
+
+    #edit-options {
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        width: 0;
+        overflow: hidden;
+        img {
+            max-width: 28px;
+            padding: 2px;
+            margin: 3px;
+        }
+        &.visible {
+            width: 200px;
+            //transition: all 0.3s ease-in-out;
+        }
+        .selected {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 100%;
+        }
+    }
+}
