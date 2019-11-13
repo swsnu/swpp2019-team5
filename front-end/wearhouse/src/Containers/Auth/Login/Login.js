@@ -34,6 +34,11 @@ class Login extends Component {
                             type="text"
                             name="email"
                             id="email-input"
+                            onKeyDown={e => {
+                                if (e.keyCode === 13) {
+                                    this.onLogin();
+                                }
+                            }}
                         ></input>
                         <label>Password</label>
                         <input
@@ -42,6 +47,11 @@ class Login extends Component {
                             id="pw-input"
                             onChange={e => {
                                 this.setState({ password: e.target.value });
+                            }}
+                            onKeyDown={e => {
+                                if (e.keyCode === 13) {
+                                    this.onLogin();
+                                }
                             }}
                         ></input>
                     </form>
