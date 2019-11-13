@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action) {
+    switch (action.type) {
         case actionTypes.GET_WEATHER:
             return { ...state, todayWeather: action.weather };
         case actionTypes.GET_SPEC_WEATHER:
