@@ -107,10 +107,12 @@ class CreateOutfit extends Component {
                     <div className="left-window">
                         <div className="date-picker-container">
                             <div>
-                                <FontAwesomeIcon
-                                    id="calendar-icon"
-                                    icon={faCalendarAlt}
-                                />
+                                <span data-tooltip-text="Date select is optional. Without date, you simply don't get this outfit as recommendation.">
+                                    <FontAwesomeIcon
+                                        id="calendar-icon"
+                                        icon={faCalendarAlt}
+                                    />
+                                </span>
                             </div>
                             <DatePicker
                                 id="date-picker"
