@@ -5,9 +5,9 @@ import { getMockStore } from "../../test-utils/mocks";
 import { history } from "../../store/store";
 import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
-import axios from "axios";
 import Browse from "./Browse";
-import Outfit from "../../Components/Outfit/Outfit";
+import axios from "axios";
+import { ConnectedRouter } from "connected-react-router";
 
 const stubOutfit = {
     id: 0,
@@ -59,26 +59,27 @@ let stubInitialState = {
 var mockStore = getMockStore(stubInitialState);
 
 describe("<Browse />", () => {
-    let outfitList, spyGetOutfits, spyHistoryPush, spyAxios_get;
+    let outfitList, spyGetOutfits, spyHistoryPush;
 
     beforeEach(() => {
         outfitList = (
             <Provider store={mockStore}>
-                <Browse history={history} />
+                <ConnectedRouter history={history}>
+                    <Browse history={history} />
+                </ConnectedRouter>
             </Provider>
         );
 
         spyGetOutfits = jest
             .spyOn(actionCreators, "getOutfits")
             .mockImplementation(() => {
-                return dispatch => {};
+                return dispatch => {
+                    return dispatch;
+                };
             });
 
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {};
-        });
-        spyAxios_get = jest
-            .spyOn(axios, "get")
+        spyHistoryPush = jest
+            .spyOn(history, "push")
             .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -86,11 +87,11 @@ describe("<Browse />", () => {
         jest.clearAllMocks();
     });
 
-    it("should render Outfits, Logout, AddOutfit", () => {
+    it("should render Outfits, Header, AddOutfit", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit");
         expect(wrapper.length).toBe(1);
-        wrapper = component.find("Logout");
+        wrapper = component.find("Header");
         expect(wrapper.length).toBe(1);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
@@ -104,15 +105,13 @@ describe("<Browse />", () => {
     });
 
     it(`should call 'onClickOutfit'`, () => {
-        const spyGetSpecificOutfit = jest
-            .spyOn(actionCreators, "getSpecificOutfit")
-            .mockImplementation(outfit_id => {
-                return dispatch => {};
-            });
+        const spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyGetSpecificOutfit).toHaveBeenCalledTimes(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 

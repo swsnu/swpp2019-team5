@@ -1,34 +1,49 @@
- 
 # project_root/.travis.yml
+notifications:
+    webhooks: https://coveralls.io/webhook
+
 matrix:
-  include:
-  - language: node_js 
-    node_js:
-    - '10'
-    dist: trusty
-    addons:
-      sonarcloud:
-        organization: "swsnu"
-        token:
-          secure: "PVFizaGHpQlMFjJHB+gsoEOvybQScXc6u2b1iqaYbp8EeMHGepZwNRoII4XDG0e0YxBWiaGSGR35aF81iZ2SDpyq3JbRehYm7Omd80y2i0TsW6nb4dn+vetlmdBdN0A9fEhO1kk+3LVbBDmL62wbKIKM5iAwdTr6o803aonuUHY4qMLYL9HFang2/dEnz6j6wZm5QoQlDW7blZsf1GGSirkDoUQuZp1M5l/BAwLv1E+bXiJLbujo49r1VwL32oRplTrSYx8vr7RdMSSm36/uRDR+hEZmqz/vZb6VW2cS/jQK89iPZROBKNj1McfWppFHKc6OyebOuDxnvMqBoJw2WDhBzIL6BVPQq6SaxxuX12t/6RcR9yOrUjd1ORISMgAH6Z8hvb8/rvIlJzwPfnWPN/PAMWfSKwWRE7WZcHWcQ/OIClH5op5SR+yyCnOWAuS8KHswJlYOOdHNaQ4uGJJLkP09HVQPwL2jGXwNH9U03ie7hA+QhLcxvvJguzpqm8UuCjLRNpRqznk84NcCf72BIo/f5e7LcY/FRt9l80/ppBrJZ6k48bvVZPQKonnSUbZfpjR0LZNySAWx7TK1FWaCxcJEOvHkWmaY40BAZLnznFaBC3JZsnRl+DwmFeEwuJev2vuWXStA4xhGQ/bHaQ2PoZYXsh7NkNwOk9Z+iVvIrCg="
-    before_install:
-    - cd ./front-end/wearhouse
-    install:
-    - yarn install
-    script:
-    - ./node_modules/.bin/eslint src
-    - yarn test --coverage --watchAll=false
-    - sonar-scanner
-  - language: python
-    python:
-    - '3.7'
-    before_install:
-    - cd ./back-end/wearhouse
-    install: 
-    - pip install -r requirements.txt
-    script:
-    - coverage run --branch --source='./item','./outfit','./tag' manage.py test
-    - coverage report --fail-under=80 -m
-    
-    
-    
+    include:
+        - language: node_js
+          node_js:
+              - "10"
+          dist: trusty
+          addons:
+              sonarcloud:
+                  organization: "swsnu"
+                  token:
+                      secure: "PVFizaGHpQlMFjJHB+gsoEOvybQScXc6u2b1iqaYbp8EeMHGepZwNRoII4XDG0e0YxBWiaGSGR35aF81iZ2SDpyq3JbRehYm7Omd80y2i0TsW6nb4dn+vetlmdBdN0A9fEhO1kk+3LVbBDmL62wbKIKM5iAwdTr6o803aonuUHY4qMLYL9HFang2/dEnz6j6wZm5QoQlDW7blZsf1GGSirkDoUQuZp1M5l/BAwLv1E+bXiJLbujo49r1VwL32oRplTrSYx8vr7RdMSSm36/uRDR+hEZmqz/vZb6VW2cS/jQK89iPZROBKNj1McfWppFHKc6OyebOuDxnvMqBoJw2WDhBzIL6BVPQq6SaxxuX12t/6RcR9yOrUjd1ORISMgAH6Z8hvb8/rvIlJzwPfnWPN/PAMWfSKwWRE7WZcHWcQ/OIClH5op5SR+yyCnOWAuS8KHswJlYOOdHNaQ4uGJJLkP09HVQPwL2jGXwNH9U03ie7hA+QhLcxvvJguzpqm8UuCjLRNpRqznk84NcCf72BIo/f5e7LcY/FRt9l80/ppBrJZ6k48bvVZPQKonnSUbZfpjR0LZNySAWx7TK1FWaCxcJEOvHkWmaY40BAZLnznFaBC3JZsnRl+DwmFeEwuJev2vuWXStA4xhGQ/bHaQ2PoZYXsh7NkNwOk9Z+iVvIrCg="
+          env:
+              - COVERALLS_PARALLEL=true
+          before_install:
+              - cd ./front-end/wearhouse
+          install:
+              - yarn install
+              - yarn add coveralls
+          script:
+              - ./node_modules/.bin/eslint src
+              - yarn test --coverage --watchAll=false
+          after_success:
+              - sonar-scanner
+              - cat ./coverage/lcov.info | coveralls
+
+        - language: python
+          python:
+              - "3.7"
+          env:
+              - COVERALLS_PARALLEL=true
+          addons:
+              sonarcloud:
+                  organization: "swsnu"
+                  token:
+                      secure: "PVFizaGHpQlMFjJHB+gsoEOvybQScXc6u2b1iqaYbp8EeMHGepZwNRoII4XDG0e0YxBWiaGSGR35aF81iZ2SDpyq3JbRehYm7Omd80y2i0TsW6nb4dn+vetlmdBdN0A9fEhO1kk+3LVbBDmL62wbKIKM5iAwdTr6o803aonuUHY4qMLYL9HFang2/dEnz6j6wZm5QoQlDW7blZsf1GGSirkDoUQuZp1M5l/BAwLv1E+bXiJLbujo49r1VwL32oRplTrSYx8vr7RdMSSm36/uRDR+hEZmqz/vZb6VW2cS/jQK89iPZROBKNj1McfWppFHKc6OyebOuDxnvMqBoJw2WDhBzIL6BVPQq6SaxxuX12t/6RcR9yOrUjd1ORISMgAH6Z8hvb8/rvIlJzwPfnWPN/PAMWfSKwWRE7WZcHWcQ/OIClH5op5SR+yyCnOWAuS8KHswJlYOOdHNaQ4uGJJLkP09HVQPwL2jGXwNH9U03ie7hA+QhLcxvvJguzpqm8UuCjLRNpRqznk84NcCf72BIo/f5e7LcY/FRt9l80/ppBrJZ6k48bvVZPQKonnSUbZfpjR0LZNySAWx7TK1FWaCxcJEOvHkWmaY40BAZLnznFaBC3JZsnRl+DwmFeEwuJev2vuWXStA4xhGQ/bHaQ2PoZYXsh7NkNwOk9Z+iVvIrCg="
+          before_install:
+              - cd ./back-end/wearhouse
+          install:
+              - pip install -r requirements.txt
+          script:
+              - coverage run --branch --source='./item','./outfit','./tag' manage.py test --settings=wearhouse.settings.development
+              - coverage report
+          after_success:
+              - coveralls
+              - sonar-scanner
