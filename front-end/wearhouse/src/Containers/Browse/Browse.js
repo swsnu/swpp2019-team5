@@ -2,11 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Logout from "../Auth/Logout/Logout";
+
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
+import Header from "../Header/Header";
+
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
+
 //search-input : input (o)
 //search-button : button (o)
 //calendar-mode : button (o)
@@ -64,7 +67,7 @@ class Browse extends React.Component {
         }
         return (
             <div id="browse">
-                <Logout />
+                <Header />
                 <div id="search-container">
                     <input
                         id="search-input"
