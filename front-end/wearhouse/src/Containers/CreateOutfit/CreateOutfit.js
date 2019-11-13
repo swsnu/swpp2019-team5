@@ -58,7 +58,15 @@ class CreateOutfit extends Component {
             date: date,
         });
     };
+
     onConfirmCreate = () => {
+        const items = this.state.items;
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].category === "default" || items[i].tags.length === 0) {
+                alert("All itmes should have category and at least one tag");
+                return;
+            }
+        }
         //please add validation whether for all items category is selected in sprint 4
         const newOutfit = {
             image: this.state.image,
