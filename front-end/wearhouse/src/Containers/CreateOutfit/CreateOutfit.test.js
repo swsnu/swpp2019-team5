@@ -8,17 +8,26 @@ import axios from "axios";
 import CreateOutfit from "./CreateOutfit";
 import { ConnectedRouter } from "connected-react-router";
 
-let stubInitialState_outfit = {
-    outfits: {
-        id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
-    },
+// import Item from "../../Components/Item/Item";
 
+// jest.mock("../../Components/Item/Item", () => {
+//     return jest.fn(props => {
+//         return;
+//     });
+// });
+
+let stubInitialState = {
+    outfits: [
+        {
+            id: 1,
+            items: [
+                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+                { category: "Shoes", tags: ["black", "opentoe"] },
+                { category: "LowerBody", tags: ["jeans"] },
+                { category: "Accessories", tags: ["black", "golden-buckle"] },
+            ],
+        },
+    ],
     selectedOutfit: {
         id: 1,
         items: [
@@ -32,16 +41,7 @@ let stubInitialState_outfit = {
     },
 };
 
-let stubInitialState_login = {
-    isLoggedin: true,
-};
-
-let mockStore = getMockStore(
-    stubInitialState_login,
-    stubInitialState_outfit,
-    null,
-    null,
-);
+let mockStore = getMockStore(stubInitialState);
 
 describe("<CreateOutfit />", () => {
     let createOutfit, spyHistoryPush, spyAxios_put;
@@ -50,7 +50,7 @@ describe("<CreateOutfit />", () => {
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
                     <CreateOutfit
-                        items={stubInitialState_outfit.outfits.items}
+                        items={stubInitialState.items}
                         image=""
                         outfit_id={1}
                         history={history}
@@ -96,7 +96,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
 
         let count = component.find(".Item");
-        expect(count.length).toBe(5);
+        expect(count.length).toBe(6);
     });
 
     it("should call onDeleteItem", () => {
@@ -105,7 +105,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
 
         let count = component.find(".Item");
-        expect(count.length).toBe(3);
+        expect(count.length).toBe(4);
     });
 
     it("should call onApplyEditItem", () => {
@@ -115,6 +115,6 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("keydown", { key: "Enter" });
 
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(8); //doesn't actually work but
+        expect(count.length).toBe(9); //doesn't actually work but
     });
 });

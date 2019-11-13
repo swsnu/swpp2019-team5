@@ -7,7 +7,6 @@ import { history } from "../../../store/store";
 import "../../../setupTests";
 import axios from "axios";
 import Login from "./Login";
-import { ConnectedRouter } from "connected-react-router";
 
 let stubInitialState = {};
 
@@ -19,9 +18,7 @@ describe("<Login />", () => {
     beforeEach(() => {
         login = (
             <Provider store={mockStore}>
-                <ConnectedRouter history={history}>
-                    <Login history={history} />
-                </ConnectedRouter>
+                <Login history={history} />
             </Provider>
         );
 
@@ -48,7 +45,7 @@ describe("<Login />", () => {
 
     it("should not call 'onLogin' when input is not valid", () => {
         const component = mount(login);
-        let wrapper = component.find("#login-container #login-button");
+        let wrapper = component.find("#login-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(0);
     });
@@ -62,7 +59,7 @@ describe("<Login />", () => {
             .find("#pw-input")
             .simulate("change", { target: { value: "testpassword" } });
 
-        let wrapper = component.find("#login-container #login-button");
+        let wrapper = component.find("#login-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
     });
@@ -111,7 +108,7 @@ describe("<Login />", () => {
 
     it("should redirect to /signup", () => {
         const component = mount(login);
-        let wrapper = component.find("#login-container #signup-button");
+        let wrapper = component.find("#signup-button");
         wrapper.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });

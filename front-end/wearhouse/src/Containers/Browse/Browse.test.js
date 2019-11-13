@@ -7,7 +7,6 @@ import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
 import Browse from "./Browse";
 import axios from "axios";
-import { ConnectedRouter } from "connected-react-router";
 
 const stubOutfit = {
     id: 0,
@@ -64,9 +63,7 @@ describe("<Browse />", () => {
     beforeEach(() => {
         outfitList = (
             <Provider store={mockStore}>
-                <ConnectedRouter history={history}>
-                    <Browse history={history} />
-                </ConnectedRouter>
+                <Browse history={history} />
             </Provider>
         );
 
@@ -87,11 +84,11 @@ describe("<Browse />", () => {
         jest.clearAllMocks();
     });
 
-    it("should render Outfits, Header, AddOutfit", () => {
+    it("should render Outfits, Logout, AddOutfit", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit");
         expect(wrapper.length).toBe(1);
-        wrapper = component.find("Header");
+        wrapper = component.find("Logout");
         expect(wrapper.length).toBe(1);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);

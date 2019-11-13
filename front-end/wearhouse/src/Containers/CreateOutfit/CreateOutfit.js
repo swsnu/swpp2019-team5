@@ -10,6 +10,8 @@ import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import "./CreateOutfit.scss";
 
+import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+
 //outfit-image : image (o)
 //log satisfaction
 //edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons. (o)
@@ -24,7 +26,7 @@ class CreateOutfit extends Component {
         image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
-        items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
+        items: this.props.items, //Made items section be props - everything should be props actually
     };
 
     shouldComponentUpdate() {
@@ -44,13 +46,11 @@ class CreateOutfit extends Component {
         });
         this.setState({ items: items });
     }
-
     addItemHandler = () => {
         const newItem = { category: "default", tags: [] };
         let items = this.state.items.concat(newItem);
         this.setState({ items: items });
     };
-
     onConfirmCreate = () => {
         //please add validation whether for all items category is selected in sprint 4
         const newOutfit = {
@@ -62,7 +62,6 @@ class CreateOutfit extends Component {
         this.props.createOutfit(this.state.id, newOutfit);
         this.props.history.push("/outfitDetail/" + this.state.id);
     };
-
     render() {
         let items = this.state.items.map((item, index) => {
             return (
@@ -77,14 +76,13 @@ class CreateOutfit extends Component {
                 />
             );
         });
-
         return (
             <div id="create-outfit">
                 <Header />
                 <div id="create-outfit-window">
                     <div id="image-window">
                         <EditSatisfaction />
-                        <img src={this.state.image} alt="outfit" />
+                        <img src={SampleImage} alt="outfit" />
                     </div>
 
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
@@ -115,14 +113,19 @@ const mapDispatchToProps = dispatch => {
     };
 };
 const mapStateToProps = state => {
-    // let outfit = outfit
-    // return {
-    //     outfit_id: outfit.id,
-    //     image: outfit.image,
-    //     items: outfit.items,
-    // };
+    let outfit = state.outfit.outfits[state.outfit.outfits.length - 1];
     return {
-        selectedOutfit: state.outfit.selectedOutfit, // temporary code
+        outfit_id: outfit.id,
+        image: outfit.image,
+        items: [
+            { category: "UpperBody", tags: ["black"] },
+            { category: "Shoes", tags: ["black", "open"] },
+            { category: "LowerBody", tags: ["jeans", "blue"] },
+            { category: "Accessories", tags: ["black", "golden-buckle"] },
+            { category: "Accessories", tags: ["bag", "shoulder"] },
+        ],
+        //just for mid demo
+        // it should be -> items: outfit.items,
     };
 };
 export default connect(
