@@ -10,16 +10,12 @@ export const getWeather_ = weather => {
 };
 
 export const getWeather = () => {
-    let time = Date.now();
+    //let time = Date.now();
 
     return dispatch => {
-        return axios
-            .get(
-                `https://api.darksky.net/forecast/${DARK_API_KEY}/${lat},${long},${time}?exclude=[currently,minutely,hourly,alerts,flags]&lang=ko&units=auto`,
-            )
-            .then(res => {
-                dispatch(getWeather_(res.data));
-            });
+        return axios.get("api/weather").then(res => {
+            dispatch(getWeather_(res.data));
+        });
     };
 };
 
