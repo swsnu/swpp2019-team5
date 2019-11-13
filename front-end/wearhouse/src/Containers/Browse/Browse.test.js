@@ -3,7 +3,6 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../mocks/mocks";
 import { history } from "../../store/store";
-import * as actionCreators from "../../store/actions/outfit";
 import "../../setupTests";
 import Browse from "./Browse";
 import axios from "axios";
@@ -37,12 +36,10 @@ let stubWeatherState = {
     selectedWeather: null,
 };
 
-let stubNullState = {};
-
 var mockStore = getMockStore({}, {}, stubOutfitState, {}, stubWeatherState);
 
 describe("<Browse />", () => {
-    let outfitList, spyGetOutfits, spyHistoryPush;
+    let outfitList, spyAxios_get, spyHistoryPush;
 
     beforeEach(() => {
         outfitList = (
@@ -53,13 +50,9 @@ describe("<Browse />", () => {
             </Provider>
         );
 
-        spyGetOutfits = jest
-            .spyOn(actionCreators, "getOutfits")
-            .mockImplementation(() => {
-                return dispatch => {
-                    return dispatch;
-                };
-            });
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
 
         spyHistoryPush = jest
             .spyOn(history, "push")
@@ -78,7 +71,7 @@ describe("<Browse />", () => {
         expect(wrapper.length).toBe(1);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
-        expect(spyGetOutfits).toBeCalledTimes(1);
+        expect(spyAxios_get).toBeCalledTimes(2);
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
@@ -94,7 +87,7 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(3);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
