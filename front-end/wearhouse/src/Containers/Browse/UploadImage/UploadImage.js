@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as actionCreators from "../../../store/actions/index";
 
 import "./UploadImage.scss";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class UploadImage extends React.Component {
     state = { selectedImageURL: null, isPreviewMode: false };
@@ -49,18 +49,16 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
-        const new_outfit = {
-            items = [],
-            image = this.state.selectedImageURL,
-            date = 1,
-            satisfaction = 1
-        }
+        let form_data = new FormData();
+
+        form_data.append("image", this.state.image);
 
         //  send image to backend
-        this.props.onCreateNewOutfit(new_outfit)
+        this.props.onPostImage(form_data);
 
-        // go to CreateOutfit Page
-        this.props.history.push('/createOutfit')
+        // redirect to create outfit page should be proceeded
+        // after having received response from backend
+        // so redirection logic exists at actionCreator
     };
 
     render() {
@@ -134,12 +132,10 @@ class UploadImage extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCreateNewOutfit: outfit => {
-            dispatch(actionCreators.createOutfit(outfit));
+        onPostImage: image => {
+            dispatch(actionCreators.postImage(image));
         },
     };
 };
 
-export default connect(
-    mapDispatchToProps,
-)(UploadImage);
+export default connect(mapDispatchToProps)(UploadImage);
