@@ -20,6 +20,7 @@
         }
         overflow: hidden;
     }
+
     #date-picker {
         width: 120px;
         text-align: left;
@@ -51,10 +52,22 @@
             flex-direction: column;
             justify-content: center;
         }
-        #add-confirm-buttons-container {
+        .not-info {
             display: flex;
             justify-content: flex-start;
-            margin-top: 10px;
+            #add-confirm-buttons-container {
+                display: flex;
+                justify-content: flex-start;
+                margin-top: 10px;
+            }
+
+            #error-container {
+                margin-top: 15px;
+                margin-left: 65px;
+                .item-error {
+                    color: rgb(255, 2, 2);
+                }
+            }
         }
     }
 

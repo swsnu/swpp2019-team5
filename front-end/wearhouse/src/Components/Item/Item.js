@@ -33,7 +33,6 @@ class Item extends Component {
         });
     }
     handleCategoryChange(event) {
-        console.log(event);
         this.setState({ category: event.value });
 
         this.props.applyEdit({

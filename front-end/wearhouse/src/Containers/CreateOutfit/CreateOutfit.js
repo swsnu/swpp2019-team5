@@ -29,12 +29,17 @@ class CreateOutfit extends Component {
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
         items: this.props.items, //Made items section be props - everything should be props actually
+        isValid: true,
     };
 
     shouldComponentUpdate() {
         return true;
     }
-
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.items !== this.state.items) {
+            this.checkValidation();
+        }
+    }
     onDeleteItem(item) {
         let items = this.state.items;
         items = items.filter(itm => itm !== item);
@@ -58,15 +63,19 @@ class CreateOutfit extends Component {
             date: date,
         });
     };
-
-    onConfirmCreate = () => {
+    checkValidation = () => {
         const items = this.state.items;
         for (var i = 0; i < items.length; i++) {
             if (items[i].category === "default" || items[i].tags.length === 0) {
-                alert("All itmes should have category and at least one tag");
-                return;
+                this.setState({ isValid: false });
+                return false;
             }
         }
+        this.setState({ isValid: true });
+        return true;
+    };
+    onConfirmCreate = () => {
+        if (!this.checkValidation()) return;
         //please add validation whether for all items category is selected in sprint 4
         const newOutfit = {
             image: this.state.image,
@@ -122,12 +131,26 @@ class CreateOutfit extends Component {
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
-                        <div id="add-confirm-buttons-container">
-                            <button onClick={this.addItemHandler} id="add-item">
-                                Add Item
-                            </button>
+                        <div className="not-info">
+                            <div id="add-confirm-buttons-container">
+                                <button
+                                    onClick={this.addItemHandler}
+                                    id="add-item"
+                                >
+                                    Add Item
+                                </button>
+                            </div>
+                            <div id="error-container">
+                                {!this.state.isValid && (
+                                    <div className="item-error">
+                                        Please select category and add at least
+                                        one tag for each Item!
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
+
                     <button
                         onClick={this.onConfirmCreate}
                         id="confirm-create-item"

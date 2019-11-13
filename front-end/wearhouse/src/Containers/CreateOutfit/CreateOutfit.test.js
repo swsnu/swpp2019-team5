@@ -106,13 +106,14 @@ describe("<CreateOutfit />", () => {
         expect(count.length).toBe(6);
     });
 
-    it("confirm create with empty item alert message", () => {
+    it("confirm create with empty item or not empty item", () => {
         const component = mount(createOutfit);
+        let instance = component.find(CreateOutfit.WrappedComponent).instance();
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
         let confirm = component.find("#confirm-create-item");
-        jest.spyOn(window, "alert").mockImplementation(() => {});
         confirm.simulate("click");
+        expect(instance.state.isValid).toBe(false);
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keypress", {
