@@ -53,7 +53,7 @@ class Recommendation extends React.Component {
         return (
             <div id="recommendation">
                 <div id="weather-info">
-                    Today's Weather: {weatherSummary} {tempInfo}
+                    Today&apos;s Weather: {weatherSummary} {tempInfo}
                 </div>
                 <div id="recommendation-text">
                     On days like this, you enjoyed wearing these outfits:
