@@ -12,7 +12,7 @@ import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+//import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 
 //outfit-image : image (o)
 //log satisfaction
@@ -28,7 +28,7 @@ class CreateOutfit extends Component {
         image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
-        items: this.props.items, //Made items section be props - everything should be props actually
+        items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
     };
 
@@ -53,6 +53,7 @@ class CreateOutfit extends Component {
         });
         this.setState({ items: items });
     }
+
     addItemHandler = () => {
         const newItem = { category: "default", tags: [] };
         let items = this.state.items.concat(newItem);
@@ -86,6 +87,7 @@ class CreateOutfit extends Component {
         this.props.createOutfit(this.state.id, newOutfit);
         this.props.history.push("/outfitDetail/" + this.state.id);
     };
+
     render() {
         let items = this.state.items.map((item, index) => {
             return (
@@ -100,6 +102,7 @@ class CreateOutfit extends Component {
                 />
             );
         });
+
         return (
             <div id="create-outfit">
                 <Header />
@@ -126,7 +129,7 @@ class CreateOutfit extends Component {
                         </div>
                         <div id="image-window">
                             <EditSatisfaction id="edit-satisfaction" />
-                            <img src={SampleImage} alt="outfit" />
+                            <img src={this.state.image} alt="outfit" />
                         </div>
                     </div>
 
@@ -172,19 +175,14 @@ const mapDispatchToProps = dispatch => {
     };
 };
 const mapStateToProps = state => {
-    let outfit = state.outfit.outfits[state.outfit.outfits.length - 1];
+    // let outfit = outfit
+    // return {
+    //     outfit_id: outfit.id,
+    //     image: outfit.image,
+    //     items: outfit.items,
+    // };
     return {
-        outfit_id: outfit.id,
-        image: outfit.image,
-        items: [
-            { category: "UpperBody", tags: ["black"] },
-            { category: "Shoes", tags: ["black", "open"] },
-            { category: "LowerBody", tags: ["jeans", "blue"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-            { category: "Accessories", tags: ["bag", "shoulder"] },
-        ],
-        //just for mid demo
-        // it should be -> items: outfit.items,
+        selectedOutfit: state.outfit.selectedOutfit, // temporary code
     };
 };
 export default connect(

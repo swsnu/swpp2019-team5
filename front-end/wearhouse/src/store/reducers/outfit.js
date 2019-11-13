@@ -1,31 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+
 const initialState = {
-    outfits: [
-        {
-            id: 1,
-            items: [
-                { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-                { category: "Shoes", tags: ["black", "opentoe"] },
-                { category: "LowerBody", tags: ["jeans"] },
-                { category: "Accessories", tags: ["black", "golden-buckle"] },
-            ],
-            satisfactionValue: 3,
-            date: "2019.11.6",
-            image: { SampleImage },
-        },
-    ],
-    selectedOutfit: {
-        id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
-        satisfactionValue: 3,
-        date: "2019.11.6",
-    },
+    outfits: [],
+    selectedOutfit: null,
 };
 
 const reducer = (state = initialState, action) => {

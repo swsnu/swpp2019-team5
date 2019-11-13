@@ -7,6 +7,7 @@ import { history } from "../../../store/store";
 import "../../../setupTests";
 import axios from "axios";
 import Signup from "./Signup";
+import { ConnectedRouter } from "connected-react-router";
 
 let stubInitialState = {};
 
@@ -18,7 +19,9 @@ describe("<Signup />", () => {
     beforeEach(() => {
         signup = (
             <Provider store={mockStore}>
-                <Signup history={history} />
+                <ConnectedRouter history={history}>
+                    <Signup history={history} />
+                </ConnectedRouter>
             </Provider>
         );
 
@@ -35,7 +38,7 @@ describe("<Signup />", () => {
 
     it("should not call 'onSignup' when button is disabled", () => {
         const component = mount(signup);
-        let wrapper = component.find("#signup-button");
+        let wrapper = component.find("#signup-container #signup-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(0);
 
@@ -58,7 +61,7 @@ describe("<Signup />", () => {
         component
             .find("#pw-confirm")
             .simulate("change", { target: { value: "testpassword" } });
-        let wrapper = component.find("#signup-button");
+        let wrapper = component.find("#signup-container #signup-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
     });

@@ -8,7 +8,6 @@ import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Satisfaction from "../../Components/Satisfaction/Satisfaction";
 import "./OutfitDetail.scss";
 
-import SampleImage from "../../../src/sample/OOTD_sample.jpg";
 class OutfitDetail extends Component {
     state = {
         outfit: {
@@ -45,7 +44,7 @@ class OutfitDetail extends Component {
                         <Satisfaction
                             value={this.state.outfit.satisfactionValue}
                         />
-                        <img src={SampleImage} alt="outfit" />
+                        <img src={this.state.image} alt="outfit" />
 
                         <label id="date">{this.state.outfit.date}</label>
                     </div>
