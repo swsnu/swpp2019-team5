@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'tag.apps.TagConfig',
     'item.apps.ItemConfig',
     'outfit.apps.OutfitConfig',
+    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
