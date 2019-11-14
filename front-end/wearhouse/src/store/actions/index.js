@@ -2,7 +2,6 @@ export {
     getOutfits,
     getSpecificOutfit,
     createOutfit,
-    temporaryCreateOutfit,
     deleteOutfit,
 } from "./outfit";
 

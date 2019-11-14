@@ -787,16 +787,16 @@
     cursor: pointer;
     background-color: lightgray;
     color: #fff;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    padding: 2px;
-    font-size: 12px;
+    border-radius: 10%;
+    height: 10px;
+    width: 63px;
+    padding: 4px 2px 4px 1px;
+    font-size: 9px;
     line-height: 1;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
-    content: "\00d7";
+    content: "dont' save date";
 }
 
 .react-datepicker__today-button {

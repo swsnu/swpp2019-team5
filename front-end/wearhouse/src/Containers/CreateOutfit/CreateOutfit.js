@@ -24,7 +24,6 @@ import DatePicker from "react-datepicker";
 // category drop down select one - upper body, lower body, full body, (o)
 class CreateOutfit extends Component {
     state = {
-        id: this.props.outfit_id,
         image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
@@ -84,7 +83,7 @@ class CreateOutfit extends Component {
             date: this.state.date,
             items: this.state.items,
         };
-        this.props.createOutfit(this.state.id, newOutfit);
+        this.props.createOutfit(newOutfit);
         this.props.history.push("/outfitDetail/" + this.state.id);
     };
 
@@ -109,18 +108,18 @@ class CreateOutfit extends Component {
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
-                            <div>
-                                <span data-tooltip-text="Date select is optional. Without date, you simply don't get this outfit as recommendation.">
+                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it won't be recommended to you">
+                                <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
                                         icon={faCalendarAlt}
                                     />
-                                </span>
-                            </div>
+                                </div>
+                            </span>
                             <DatePicker
                                 id="date-picker"
                                 isClearable
-                                placeholderText="Date isn't selected"
+                                placeholderText="Date isn't selected  :)"
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
@@ -170,8 +169,7 @@ class CreateOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createOutfit: (id, outfit) =>
-            dispatch(actionCreators.temporaryCreateOutfit(id, outfit)),
+        createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
     };
 };
 const mapStateToProps = state => {
