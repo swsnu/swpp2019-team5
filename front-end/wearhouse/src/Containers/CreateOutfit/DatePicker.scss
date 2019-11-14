@@ -413,7 +413,7 @@
     .react-datepicker__time-box
     ul.react-datepicker__time-list
     li.react-datepicker__time-list-item--selected {
-    background-color: rgb(160, 209, 193);
+    background-color: lightgray;
     color: white;
     font-weight: bold;
 }
@@ -484,7 +484,7 @@
 .react-datepicker__quarter--in-selecting-range,
 .react-datepicker__quarter--in-range {
     border-radius: 0.3rem;
-    background-color: rgb(160, 209, 193);
+    background-color: lightgray;
     color: #fff;
 }
 
@@ -494,7 +494,7 @@
 .react-datepicker__quarter--selected:hover,
 .react-datepicker__quarter--in-selecting-range:hover,
 .react-datepicker__quarter--in-range:hover {
-    background-color: rgb(160, 209, 193);
+    background-color: lightgray;
 }
 
 .react-datepicker__month--disabled,
@@ -532,14 +532,14 @@
 .react-datepicker__month-text--highlighted,
 .react-datepicker__quarter-text--highlighted {
     border-radius: 0.3rem;
-    background-color: rgb(160, 209, 193);
+    background-color: lightgray;
     color: #fff;
 }
 
 .react-datepicker__day--highlighted:hover,
 .react-datepicker__month-text--highlighted:hover,
 .react-datepicker__quarter-text--highlighted:hover {
-    background-color: rgb(160, 209, 193);
+    background-color: lightgray;
 }
 
 .react-datepicker__day--highlighted-custom-1,
@@ -785,18 +785,18 @@
 
 .react-datepicker__close-icon::after {
     cursor: pointer;
-    background-color: lightgray;
+    background-color: rgb(230, 113, 152);
     color: #fff;
     border-radius: 10%;
     height: 10px;
     width: 63px;
-    padding: 4px 2px 4px 1px;
-    font-size: 9px;
+    padding: 4px 0px 4px 0px;
+    font-size: 10px;
     line-height: 1;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
-    content: "dont' save date";
+    content: "don't know";
 }
 
 .react-datepicker__today-button {

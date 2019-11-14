@@ -100,7 +100,7 @@ class CreateOutfit extends Component {
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
-                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it won't be recommended to you">
+                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so current outfit will not be recommended to you">
                                 <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
