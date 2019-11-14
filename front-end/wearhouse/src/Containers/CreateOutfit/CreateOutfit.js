@@ -12,16 +12,8 @@ import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
-//import SampleImage from "../../../src/sample/OOTD_sample.jpg";
+//should resolve the case where image is not porperly uploaded
 
-//outfit-image : image (o)
-//log satisfaction
-//edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons. (o)
-//add - item : button - add new item (o)
-//delete - item : button - delete existing item (o))
-//confirm-create-button : load data to database (o)
-//if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)'
-// category drop down select one - upper body, lower body, full body, (o)
 class CreateOutfit extends Component {
     state = {
         image: this.props.image,
@@ -175,7 +167,6 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     // let outfit = outfit
     // return {
-    //     outfit_id: outfit.id,
     //     image: outfit.image,
     //     items: outfit.items,
     // };

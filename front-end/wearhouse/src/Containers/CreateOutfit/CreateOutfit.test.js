@@ -44,7 +44,7 @@ let mockStore = getMockStore(
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_put;
+    let createOutfit, spyHistoryPush, spyAxios_post;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -65,8 +65,8 @@ describe("<CreateOutfit />", () => {
             };
         });
 
-        spyAxios_put = jest
-            .spyOn(axios, "put")
+        spyAxios_post = jest
+            .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -93,7 +93,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
         //expect(spyAxios_post).toHaveBeenCalledTimes(12);
         //4 itmes and 8 tags are newly posted
-        expect(spyAxios_put).toHaveBeenCalledTimes(1);
+        expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
