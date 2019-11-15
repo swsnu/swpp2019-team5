@@ -58,6 +58,7 @@ class UploadImage extends React.Component {
         //  send image to backend
         this.props.onPostImage(form_data);
 
+        //this.props.outfitData
         // redirect to create outfit page should be proceeded
         // after having received response from backend
         // so redirection logic exists at actionCreator
@@ -132,6 +133,11 @@ class UploadImage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        outfitData: state.image.outfitData,
+    };
+};
 const mapDispatchToProps = dispatch => {
     return {
         onPostImage: image => {
@@ -140,4 +146,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapDispatchToProps)(UploadImage);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(UploadImage);
