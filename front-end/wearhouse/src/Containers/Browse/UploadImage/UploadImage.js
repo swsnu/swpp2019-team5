@@ -141,8 +141,10 @@ class UploadImage extends React.Component {
                     {chooseFileButton}
                     {previewImage}
                     {alertMessage}
-                    {chooseOtherImageButton}
-                    {confirmImageButton}
+                    <div className="buttons">
+                        {chooseOtherImageButton}
+                        {confirmImageButton}
+                    </div>
                 </div>
             </div>
         );
