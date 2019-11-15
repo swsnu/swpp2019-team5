@@ -56,6 +56,7 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
+        console.log("confirm image called");
         let form_data = new FormData();
 
         form_data.append("image", this.state.image);
