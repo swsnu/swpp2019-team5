@@ -24,3 +24,7 @@ export const CREATE_TAG = "CREATE_TAG";
 export const EDIT_TAG = "EDIT_TAG";
 export const DELETE_TAG = "DELETE_TAG";
 //Tag reducer
+
+export const GET_WEATHER = "GET_WEATHER";
+export const GET_SPEC_WEATHER = "GET_SPEC_WEATHER";
+//Weather related
