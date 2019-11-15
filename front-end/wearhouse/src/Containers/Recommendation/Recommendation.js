@@ -9,7 +9,13 @@ import * as actionCreators from "../../store/actions/index";
 
 class Recommendation extends React.Component {
     componentDidMount = () => {
+        this.props.getAllOufits(); // This is a duplicate call
         this.props.getWeather();
+    };
+
+    onClickOutfit = outfit => {
+        this.props.selectOutfit(outfit);
+        this.props.history.push("/outfitDetail/" + outfit.id);
     };
 
     render() {
@@ -17,6 +23,7 @@ class Recommendation extends React.Component {
         let tempInfo;
         let tempAvg;
         let recommendationList = [];
+        let displayWeather;
 
         if (this.props.weather) {
             weatherSummary = this.props.weather.summary;
@@ -36,6 +43,9 @@ class Recommendation extends React.Component {
                     Math.abs(outfit.weather.tempAvg - tempAvg) < 3
                 );
             });
+            displayWeather = true;
+        } else {
+            displayWeather = false;
         }
 
         const recommendationItems = recommendationList.map(outfit => {
@@ -52,13 +62,20 @@ class Recommendation extends React.Component {
 
         return (
             <div id="recommendation">
-                <div id="weather-info">
-                    Today&apos;s Weather: {weatherSummary} {tempInfo}
-                </div>
-                <div id="recommendation-text">
-                    On days like this, you enjoyed wearing these outfits:
-                </div>
-                <div id="recommendation-container">{recommendationItems}</div>
+                {displayWeather && (
+                    <div id="recommendation-container">
+                        <div id="weather-info">
+                            Today&apos;s Weather: {weatherSummary} {tempInfo}
+                        </div>
+                        <div id="recommendation-text">
+                            On days like this, you enjoyed wearing these
+                            outfits:
+                        </div>
+                        <div id="recommendation-container">
+                            {recommendationItems}
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -67,6 +84,7 @@ class Recommendation extends React.Component {
 const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
+        selectedOutfit: state.outfit.selectedOutfit,
         weather: state.weather.todayWeather,
     };
 };
@@ -75,6 +93,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllOufits: () => dispatch(actionCreators.getOutfits()),
         getWeather: () => dispatch(actionCreators.getWeather()),
+        selectOutfit: outfit =>
+            dispatch(actionCreators.getSpecificOutfit(outfit.id)),
     };
 };
 
