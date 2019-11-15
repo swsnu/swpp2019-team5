@@ -9,7 +9,11 @@ import "./UploadImage.scss";
 import { connect } from "react-redux";
 
 class UploadImage extends React.Component {
-    state = { selectedImageURL: null, isPreviewMode: false };
+    state = {
+        selectedImageURL: null,
+        isPreviewMode: false,
+        showWarning: false,
+    };
 
     onClickClosePopUpButton = () => {
         this.props.onClosePopUp();
@@ -35,7 +39,8 @@ class UploadImage extends React.Component {
                     },
                 );
             } else {
-                alert("you need to input image file");
+                this.setState({ ...this.state, showWarning: true });
+                //alert("you need to input image file");
                 console.log(event.target.files[0]);
                 console.log(this.state.selectedImageURL);
             }
@@ -69,6 +74,7 @@ class UploadImage extends React.Component {
         let confirmImageButton = null;
         let chooseFileButton = null;
         let previewImage = null;
+        let alertMessage = null;
 
         if (this.state.isPreviewMode) {
             chooseOtherImageButton = (
@@ -101,6 +107,15 @@ class UploadImage extends React.Component {
             );
         }
 
+        if (this.state.showWarning) {
+            alertMessage = (
+                <div id="alert-message">
+                    Uploaded file is not a valid image. Only JPG, JPEG, and PNG
+                    are allowed
+                </div>
+            );
+        }
+
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
@@ -125,6 +140,7 @@ class UploadImage extends React.Component {
                     </div>
                     {chooseFileButton}
                     {previewImage}
+                    {alertMessage}
                     {chooseOtherImageButton}
                     {confirmImageButton}
                 </div>
