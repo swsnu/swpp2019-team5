@@ -73,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wearhouse.wsgi.application'
 
+AUTH_USER_MODEL = 'user.User' # new
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
