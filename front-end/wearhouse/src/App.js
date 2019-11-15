@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 
-import Calendar from "./Containers/Calendar/Calendar";
+import OutfitCalendar from "./Containers/OutfitCalendar/OutfitCalendar";
 import Browse from "./Containers/Browse/Browse";
 import OutfitDetail from "./Containers/OutfitDetail/OutfitDetail";
 import Login from "./Containers/Auth/Login/Login";
@@ -23,7 +23,7 @@ class App extends React.Component {
                         exact
                         component={OutfitDetail}
                     />
-                    <Route path="/calendar" exact component={Calendar} />
+                    <Route path="/calendar" exact component={OutfitCalendar} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
                     <Route
