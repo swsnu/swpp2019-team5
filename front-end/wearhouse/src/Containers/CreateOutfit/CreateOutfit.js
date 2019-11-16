@@ -21,8 +21,11 @@ class CreateOutfit extends Component {
         date: new Date(), //in sprint 4 make it changable. user can select date
         items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
+        weather: null,
     };
-
+    componentDidMount() {
+        this.props.setWeather();
+    }
     shouldComponentUpdate() {
         return true;
     }
@@ -74,6 +77,13 @@ class CreateOutfit extends Component {
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
+            weather: {
+                tempAvg:
+                    (this.props.weather.temperatureHigh +
+                        this.props.weather.temperatureLow) /
+                    2,
+                icon: this.props.weather.icon,
+            },
         };
         this.props.createOutfit(newOutfit);
         this.props.history.push("/outfitDetail/" + this.state.id);
@@ -161,6 +171,7 @@ class CreateOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setWeather: () => dispatch(actionCreators.getWeather()),
         createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
     };
 };
@@ -171,7 +182,7 @@ const mapStateToProps = state => {
     //     items: outfit.items,
     // };
     return {
-        selectedOutfit: state.outfit.selectedOutfit, // temporary code
+        weather: state.weather.todayWeather,
     };
 };
 export default connect(
