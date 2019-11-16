@@ -18,6 +18,7 @@ const reducer = (state = initialState, action) => {
                 date: action.date,
                 id: action.id,
                 items: action.items,
+                weather: action.weather,
             };
             const new_outfits = state.outfits.concat(newOutfit);
             return { ...state, outfits: new_outfits };

@@ -21,7 +21,6 @@ class CreateOutfit extends Component {
         date: new Date(), //in sprint 4 make it changable. user can select date
         items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
-        weather: null,
     };
     componentDidMount() {
         this.props.setWeather();
