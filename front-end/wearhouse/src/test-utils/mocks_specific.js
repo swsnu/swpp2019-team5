@@ -19,12 +19,14 @@ export const getMockStore = (
     outfitState,
     tagState,
     weatherState,
+    imageState,
 ) => {
     let mockLoginReducer = getMockReducer(loginState);
     let mockOutfitReducer = getMockReducer(outfitState);
     let mockItemReducer = getMockReducer(itemState);
     let mockTagReducer = getMockReducer(tagState);
     let mockWeatherReducer = getMockReducer(weatherState);
+    let mockImageReducer = getMockReducer(imageState);
 
     const rootReducer = combineReducers({
         login: mockLoginReducer,
@@ -33,6 +35,7 @@ export const getMockStore = (
         tag: mockTagReducer,
         weather: mockWeatherReducer,
         router: connectRouter(history),
+        image: mockImageReducer,
     });
     const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

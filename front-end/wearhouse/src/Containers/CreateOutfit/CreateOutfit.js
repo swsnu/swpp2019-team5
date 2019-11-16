@@ -171,6 +171,8 @@ const mapStateToProps = state => {
     //     items: outfit.items,
     // };
     return {
+        image: state.image.OutfitData.image,
+        items: state.image.OutfitData.items,
         selectedOutfit: state.outfit.selectedOutfit, // temporary code
     };
 };

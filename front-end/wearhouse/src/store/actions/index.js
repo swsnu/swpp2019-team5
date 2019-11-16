@@ -12,3 +12,5 @@ export { createItem } from "./item";
 export { createTag } from "./tag";
 
 export { getWeather, getSpecificDayWeather } from "./weather";
+
+export { postImage } from "./image";

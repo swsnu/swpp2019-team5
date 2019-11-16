@@ -28,3 +28,5 @@ export const DELETE_TAG = "DELETE_TAG";
 export const GET_WEATHER = "GET_WEATHER";
 export const GET_SPEC_WEATHER = "GET_SPEC_WEATHER";
 //Weather related
+export const POST_IMAGE = "POST_IMAGE";
+//Image reducer

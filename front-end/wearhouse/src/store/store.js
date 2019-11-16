@@ -7,6 +7,7 @@ import loginReducer from "./reducers/login";
 import itemReducer from "./reducers/item";
 import outfitReducer from "./reducers/outfit";
 import tagReducer from "./reducers/tag";
+import imageReducer from "./reducers/image";
 
 import weatherReducer from "./reducers/weather";
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     outfit: outfitReducer,
     tag: tagReducer,
     weather: weatherReducer,
+    image: imageReducer,
     router: connectRouter(history),
 });
 export const middlewares = [thunk, routerMiddleware(history)];
