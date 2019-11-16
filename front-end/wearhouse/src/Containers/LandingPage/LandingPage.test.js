@@ -1,17 +1,19 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
+import axios from "axios";
 
 import LandingPage from "./LandingPage";
 import { ConnectedRouter } from "connected-react-router";
 
-var stubInitialState = {};
-var mockStore = getMockStore(stubInitialState);
+var stubInitialState = { isLoggedIn: false, userID: null };
+
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
 
 describe("<LandingPage />", () => {
-    let spyHistoryPush;
+    let spyHistoryPush, spyAxios_get;
     let landingPage;
     beforeEach(() => {
         landingPage = (
@@ -27,6 +29,12 @@ describe("<LandingPage />", () => {
                 dispatch();
             };
         });
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
 
     afterEach(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
@@ -33,18 +33,19 @@ let stubInitialState_outfit = {
 };
 
 let stubInitialState_login = {
-    isLoggedin: true,
+    isLoggedIn: true,
 };
 
 let mockStore = getMockStore(
     stubInitialState_login,
+    null,
     stubInitialState_outfit,
     null,
     null,
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post;
+    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_get;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -68,6 +69,12 @@ describe("<CreateOutfit />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
 
     afterEach(() => {

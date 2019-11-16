@@ -8,7 +8,6 @@ import "./Signup.scss";
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
     onSignUp = userCredentials => {
-        console.log(userCredentials);
         this.props.onSignUp(userCredentials);
     };
 

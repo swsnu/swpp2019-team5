@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-
+import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 
 import App from "./App";
@@ -49,6 +49,7 @@ const mockStore = getMockStore(
 
 describe("App", () => {
     let app;
+    let spyAxios_get;
     beforeEach(() => {
         app = (
             <Provider store={mockStore}>
@@ -57,7 +58,14 @@ describe("App", () => {
                 </ConnectedRouter>
             </Provider>
         );
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
+
     it("should render", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
