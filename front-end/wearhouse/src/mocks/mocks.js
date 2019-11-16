@@ -43,17 +43,35 @@ const getMockTagReducer = jest.fn(
     },
 );
 
-export const getMockStore = (loginState, outfitState, itemState, tagState) => {
+const getMockWeatherReducer = jest.fn(
+    initialState => (state = initialState, action) => {
+        switch (action.type) {
+            default:
+                break;
+        }
+        return state;
+    },
+);
+
+export const getMockStore = (
+    loginState,
+    itemState,
+    outfitState,
+    tagState,
+    weatherState,
+) => {
     let mockLoginReducer = getMockLoginReducer(loginState);
     let mockOutfitReducer = getMockOutfitReducer(outfitState);
     let mockItemReducer = getMockItemReducer(itemState);
     let mockTagReducer = getMockTagReducer(tagState);
+    let mockWeatherReducer = getMockWeatherReducer(weatherState);
 
     const rootReducer = combineReducers({
         login: mockLoginReducer,
         item: mockItemReducer,
         outfit: mockOutfitReducer,
-        tagReducer: mockTagReducer,
+        tag: mockTagReducer,
+        weather: mockWeatherReducer,
         router: connectRouter(history),
     });
     const composeEnhancers =

@@ -8,12 +8,15 @@ import itemReducer from "./reducers/item";
 import outfitReducer from "./reducers/outfit";
 import tagReducer from "./reducers/tag";
 
+import weatherReducer from "./reducers/weather";
+
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({
     login: loginReducer,
     item: itemReducer,
     outfit: outfitReducer,
-    tagReducer: tagReducer,
+    tag: tagReducer,
+    weather: weatherReducer,
     router: connectRouter(history),
 });
 export const middlewares = [thunk, routerMiddleware(history)];

@@ -67,6 +67,48 @@ describe("<Login />", () => {
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
     });
 
+    it("should call 'onLogin' when enter key is pressed on email", () => {
+        const component = mount(login);
+
+        component
+            .find("#pw-input")
+            .simulate("change", { target: { value: "testpassword" } });
+        component
+            .find("#email-input")
+            .simulate("change", { target: { value: "test@gmail.com" } })
+            .simulate("keyDown", { keyCode: 13 });
+
+        expect(spyAxios_post).toHaveBeenCalledTimes(1);
+    });
+
+    it("should call 'onLogin' when enter key is pressed on password", () => {
+        const component = mount(login);
+        component
+            .find("#email-input")
+            .simulate("change", { target: { value: "test@gmail.com" } });
+        component
+            .find("#pw-input")
+            .simulate("change", { target: { value: "testpassword" } })
+            .simulate("keyDown", { keyCode: 13 });
+
+        expect(spyAxios_post).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not call 'onLogin' when non-enter key is pressed", () => {
+        const component = mount(login);
+
+        component
+            .find("#pw-input")
+            .simulate("change", { target: { value: "testpassword" } })
+            .simulate("keyDown", { keyCode: 12 });
+        component
+            .find("#email-input")
+            .simulate("change", { target: { value: "test@gmail.com" } })
+            .simulate("keyDown", { keyCode: 12 });
+
+        expect(spyAxios_post).toHaveBeenCalledTimes(0);
+    });
+
     it("should redirect to /signup", () => {
         const component = mount(login);
         let wrapper = component.find("#login-container #signup-button");

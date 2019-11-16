@@ -21,6 +21,29 @@
         overflow: hidden;
     }
 
+    #date-picker {
+        width: 140px;
+        text-align: left;
+        font-size: 14px;
+        border: solid rgb(210, 221, 223) 1px;
+        padding-bottom: 3px;
+        padding-top: 3px;
+        padding-left: 3px;
+        font-style: italic;
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(204, 190, 190);
+        }
+    }
+    #calendar-icon {
+        color: lightgray;
+        padding-right: 10px;
+    }
+    .date-picker-container {
+        display: flex;
+        justify-content: center;
+    }
+
     #info-window {
         display: flex;
         flex-direction: column;
@@ -30,11 +53,56 @@
             flex-direction: column;
             justify-content: center;
         }
-        #add-confirm-buttons-container {
+        .not-info {
             display: flex;
             justify-content: flex-start;
-            margin-top: 10px;
+            #add-confirm-buttons-container {
+                display: flex;
+                justify-content: flex-start;
+                margin-top: 10px;
+            }
+
+            #error-container {
+                margin-top: 15px;
+                margin-left: 65px;
+                .item-error {
+                    color: rgb(255, 2, 2);
+                }
+            }
         }
+    }
+
+    [data-tooltip-text]:hover {
+        position: relative;
+    }
+
+    [data-tooltip-text]:hover:after {
+        background-color: #000000;
+        background-color: rgba(0, 0, 0, 0.7);
+
+        -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+        -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+        box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+        color: #ffffff;
+        font-size: 12px;
+        content: attr(data-tooltip-text);
+
+        margin-bottom: 10px;
+        top: 130%;
+        left: -15px;
+        padding: 7px 12px;
+        position: absolute;
+        width: auto;
+        min-width: 300px;
+        max-width: 500px;
+        word-wrap: break-word;
+
+        z-index: 9999;
     }
 
     #add-item {

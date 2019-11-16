@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'item.apps.ItemConfig',
     'outfit.apps.OutfitConfig',
     'user.apps.UserConfig',
+    'weather.apps.WeatherConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

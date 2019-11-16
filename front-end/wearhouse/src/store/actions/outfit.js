@@ -64,12 +64,3 @@ export const deleteOutfit = id => {
         });
     };
 };
-
-export const temporaryCreateOutfit = (outfit_id, outfit) => {
-    //this is temporary one just for mid-demo
-    return dispatch => {
-        return axios.put("/api/outfit/" + outfit_id, outfit).then(() => {
-            dispatch(createOutfit_(outfit));
-        });
-    };
-};

@@ -44,7 +44,7 @@ let mockStore = getMockStore(
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_put;
+    let createOutfit, spyHistoryPush, spyAxios_post;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -65,8 +65,8 @@ describe("<CreateOutfit />", () => {
             };
         });
 
-        spyAxios_put = jest
-            .spyOn(axios, "put")
+        spyAxios_post = jest
+            .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -76,8 +76,15 @@ describe("<CreateOutfit />", () => {
 
     it("should load properly", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#create-outfit");
+        let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
+    });
+
+    it("set date properly", () => {
+        const component = mount(createOutfit);
+        let wrapper = component.find("#date-picker").at(1);
+        wrapper.simulate("change", { target: { value: "2019/11/11" } });
+        wrapper = component.find(CreateOutfit.WrappedComponent).instance();
     });
 
     it("should put newly created outfit", () => {
@@ -86,7 +93,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
         //expect(spyAxios_post).toHaveBeenCalledTimes(12);
         //4 itmes and 8 tags are newly posted
-        expect(spyAxios_put).toHaveBeenCalledTimes(1);
+        expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
@@ -97,6 +104,22 @@ describe("<CreateOutfit />", () => {
 
         let count = component.find(".Item");
         expect(count.length).toBe(5);
+    });
+
+    it("confirm create with empty item or not empty item", () => {
+        const component = mount(createOutfit);
+        let instance = component.find(CreateOutfit.WrappedComponent).instance();
+        let wrapper = component.find("#add-item");
+        wrapper.simulate("click");
+        let confirm = component.find("#confirm-create-item");
+        confirm.simulate("click");
+        expect(instance.state.isValid).toBe(false);
+        wrapper = component.find(".Item .tag-input").at(4);
+        wrapper.simulate("change", { target: { value: "Test" } });
+        wrapper.simulate("keypress", {
+            key: "Enter",
+        });
+        confirm.simulate("click");
     });
 
     it("should call onDeleteItem", () => {
