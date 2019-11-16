@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 
 import App from "./App";
-import { getMockStore } from "./mocks/mocks";
+import { getMockStore } from "./test-utils/mocks_specific";
 import { history } from "./store/store";
 
 const outfitState = {
