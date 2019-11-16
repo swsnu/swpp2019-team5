@@ -25,24 +25,18 @@ class UploadImage extends React.Component {
 
     onFileChanged = event => {
         if (event.target.files && event.target.files[0]) {
+            event.persist();
+            //console.log(event);
             if (this.isImageFile(event.target.files[0])) {
-                this.setState(
-                    {
-                        ...this.state,
-                        selectedImageURL: URL.createObjectURL(
-                            event.target.files[0],
-                        ),
-                        isPreviewMode: true,
-                    },
-                    () => {
-                        console.log(this.state.selectedImageURL);
-                    },
-                );
+                this.setState({
+                    ...this.state,
+                    selectedImageURL: URL.createObjectURL(
+                        event.target.files[0],
+                    ),
+                    isPreviewMode: true,
+                });
             } else {
                 this.setState({ ...this.state, showWarning: true });
-                //alert("you need to input image file");
-                console.log(event.target.files[0]);
-                console.log(this.state.selectedImageURL);
             }
         }
     };
@@ -56,7 +50,6 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
-        console.log("confirm image called");
         let form_data = new FormData();
 
         form_data.append("image", this.state.image);
@@ -98,6 +91,8 @@ class UploadImage extends React.Component {
                     alt="selected file"
                 />
             );
+            // console.log(this.state.isPreviewMode);
+            // console.log(previewImage);
         } else {
             chooseFileButton = (
                 <input

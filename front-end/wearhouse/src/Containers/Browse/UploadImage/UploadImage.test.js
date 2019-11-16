@@ -11,6 +11,7 @@ import axios from "axios";
 let stubInitialState = {};
 
 var mockStore = getMockStore(stubInitialState);
+var mockOnClosePopup = jest.fn();
 
 describe("<UploadImage/>", () => {
     let uploadImageContainer;
@@ -19,10 +20,15 @@ describe("<UploadImage/>", () => {
         uploadImageContainer = (
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
-                    <UploadImage history={history} />
+                    <UploadImage
+                        history={history}
+                        onClosePopUp={mockOnClosePopup}
+                    />
                 </ConnectedRouter>
             </Provider>
         );
+
+        global.URL.createObjectURL = jest.fn();
     });
 
     afterEach(() => {
@@ -37,32 +43,69 @@ describe("<UploadImage/>", () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it("handle when valid image has been chosen", () => {
-        const component = mount(uploadImageContainer);
+    it("handle when valid image has been chosen", async () => {
+        let component = mount(uploadImageContainer);
         const CreateInstance = component
             .find(UploadImage.WrappedComponent)
             .instance();
-        CreateInstance.setState({ isPreviewMode: true });
-        setTimeout(function() {
-            let wrapper = component.find("#selected-image-file");
-            expect(wrapper.length).toBe(1);
-            wrapper = component.find("#choose-other-image");
-            expect(wrapper.length).toBe(1);
-            wrapper = component.find("#confirm-image");
-            expect(wrapper.length).toBe(1);
-        }, 1000);
+        let wrapper = component.find("#choose-file");
+
+        // input valid file
+        wrapper.simulate("change", {
+            target: {
+                files: [{ name: "test_image.jpg", type: "image/jpeg" }],
+            },
+        });
+
+        // re-render component
+        component.update();
+
+        wrapper = component.find("#selected-image-file");
+        expect(wrapper.length).toBe(1);
+        wrapper = component.find("#choose-other-image");
+        expect(wrapper.length).toBe(1);
+        wrapper = component.find("#confirm-image");
+        expect(wrapper.length).toBe(1);
     });
 
-    it("handle when chosen image is not valie", () => {
+    it("handle when the file does not exist at all", () => {
         const component = mount(uploadImageContainer);
         const CreateInstance = component
             .find(UploadImage.WrappedComponent)
             .instance();
-        CreateInstance.setState({ showWarning: true });
-        setTimeout(function() {
-            let wrapper = component.find("#alert-message");
-            expect(wrapper.length).toBe(1);
-        }, 1000);
+        let wrapper = component.find("#choose-file");
+
+        // file does not exist
+        wrapper.simulate("change", {
+            target: {},
+        });
+        // re-render component
+        component.update();
+
+        wrapper = component.find("#alert-message");
+        expect(wrapper.length).toBe(0);
+        wrapper = component.find("#selected-image-file");
+        expect(wrapper.length).toBe(0);
+    });
+
+    it("handle when chosen image is not valid", () => {
+        const component = mount(uploadImageContainer);
+        const CreateInstance = component
+            .find(UploadImage.WrappedComponent)
+            .instance();
+        let wrapper = component.find("#choose-file");
+
+        // input invalid file
+        wrapper.simulate("change", {
+            target: {
+                files: [{ name: "test_image.jpg", type: "invalid-type" }],
+            },
+        });
+        // re-render component
+        component.update();
+
+        wrapper = component.find("#alert-message");
+        expect(wrapper.length).toBe(1);
     });
 
     it("send POST request when clicking confirm image", () => {
@@ -75,11 +118,36 @@ describe("<UploadImage/>", () => {
             .mockImplementation(() => Promise.resolve({}));
 
         CreateInstance.setState({ isPreviewMode: true });
-        setTimeout(function() {
-            let wrapper = component.find("#confirm-image");
-            expect(wrapper.length).toBe(0);
-            wrapper.simulate("click");
-            expect(spyAxiosPost).toBeCalledTimes(3);
-        }, 1000);
+        // re-render component
+        component.update();
+
+        let wrapper = component.find("#confirm-image");
+        expect(wrapper.length).toBe(1);
+        wrapper.simulate("click");
+        expect(spyAxiosPost).toBeCalledTimes(1);
+    });
+
+    it("handle choose-other-image button", () => {
+        const component = mount(uploadImageContainer);
+        const CreateInstance = component
+            .find(UploadImage.WrappedComponent)
+            .instance();
+        CreateInstance.setState({ isPreviewMode: true });
+        // re-render component
+        component.update();
+
+        let wrapper = component.find("#choose-other-image");
+        expect(wrapper.length).toBe(1);
+        wrapper.simulate("click");
+        wrapper = component.find("#selected-image-file");
+        expect(wrapper.length).toBe(0);
+    });
+
+    it("handle close upload-image popup", () => {
+        const component = mount(uploadImageContainer);
+
+        let wrapper = component.find("#cancel-upload-image");
+        wrapper.simulate("click");
+        expect(mockOnClosePopup).toBeCalledTimes(1);
     });
 });
