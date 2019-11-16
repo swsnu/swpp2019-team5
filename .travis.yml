@@ -42,7 +42,7 @@ matrix:
           install:
               - pip install -r requirements.txt
           script:
-              - python3 manage.py makemigrations --settings=wearhouse.settings.development
+              - python3 manage.py makemigrations user outfit item tag --settings=wearhouse.settings.development
               - python3 manage.py migrate --settings=wearhouse.settings.development
               - coverage run --branch --source='./item','./outfit','./tag','./user' manage.py test --settings=wearhouse.settings.development
               - coverage report
