@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    todayWeather: { temperatureHigh: "", temperatureLow: "" }, // this is kept in the state whenever date is loaded to
+    todayWeather: null, // this is kept in the state whenever date is loaded to
     selectedDayWeather: null,
 };
 

@@ -21,7 +21,11 @@ const reducer = (state = initialState, action) => {
                 weather: action.weather,
             };
             const new_outfits = state.outfits.concat(newOutfit);
-            return { ...state, outfits: new_outfits };
+            return {
+                ...state,
+                outfits: new_outfits,
+                selectedOutfit: newOutfit,
+            };
         }
         case actionTypes.DELETE_OUTFIT: {
             const deletedOutfits = state.outfits.filter(outfit => {

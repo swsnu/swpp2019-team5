@@ -21,7 +21,6 @@ class CreateOutfit extends Component {
         date: new Date(), //in sprint 4 make it changable. user can select date
         items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
-        id: 1,
     };
     componentDidMount() {
         this.props.setWeather();
@@ -86,7 +85,7 @@ class CreateOutfit extends Component {
             },
         };
         this.props.createOutfit(newOutfit);
-        this.props.history.push("/outfitDetail/" + this.state.id);
+        this.props.history.push("/outfitDetail/" + this.props.newOutfit.id);
     };
 
     render() {
@@ -110,7 +109,7 @@ class CreateOutfit extends Component {
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
-                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so current outfit will not be recommended to you">
+                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it will not be recommended to you">
                                 <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
@@ -159,6 +158,7 @@ class CreateOutfit extends Component {
 
                     <button
                         onClick={this.onConfirmCreate}
+                        disabled={!this.state.isValid}
                         id="confirm-create-item"
                     >
                         Confirm Create
@@ -183,6 +183,7 @@ const mapStateToProps = state => {
     // };
     return {
         weather: state.weather.todayWeather,
+        newOutfit: state.outfit.selectedOutfit,
     };
 };
 export default connect(
