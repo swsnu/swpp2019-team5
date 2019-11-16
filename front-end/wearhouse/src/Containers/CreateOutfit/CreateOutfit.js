@@ -22,7 +22,9 @@ class CreateOutfit extends Component {
         items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
     };
-
+    componentDidMount() {
+        this.props.setWeather();
+    }
     shouldComponentUpdate() {
         return true;
     }
@@ -67,16 +69,28 @@ class CreateOutfit extends Component {
         return true;
     };
     onConfirmCreate = () => {
-        if (!this.checkValidation()) return;
+        if (!this.state.isValid) {
+            console.log("일로 드러와~");
+            return;
+        }
+        console.log("너말고..");
         //please add validation whether for all items category is selected in sprint 4
+        console.log(this.props.weather);
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
+            weather: {
+                tempAvg:
+                    (this.props.weather.temperatureHigh +
+                        this.props.weather.temperatureLow) /
+                    2,
+                icon: this.props.weather.icon,
+            },
         };
         this.props.createOutfit(newOutfit);
-        this.props.history.push("/outfitDetail/" + this.state.id);
+        this.props.history.push("/outfitDetail/" + this.props.newOutfit.id);
     };
 
     render() {
@@ -100,7 +114,7 @@ class CreateOutfit extends Component {
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
-                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so current outfit will not be recommended to you">
+                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it will not be recommended to you">
                                 <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
@@ -161,6 +175,7 @@ class CreateOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setWeather: () => dispatch(actionCreators.getWeather()),
         createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
     };
 };
@@ -173,7 +188,8 @@ const mapStateToProps = state => {
     return {
         image: state.image.OutfitData.image,
         items: state.image.OutfitData.items,
-        selectedOutfit: state.outfit.selectedOutfit, // temporary code
+        weather: state.weather.todayWeather,
+        newOutfit: state.outfit.selectedOutfit,
     };
 };
 export default connect(
