@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../mocks/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import Recommendation from "./Recommendation";
 
@@ -56,8 +56,8 @@ let stubOutfitState = {
 let stubWeatherState = {
     todayWeather: {
         summary: "clear",
-        temperatureHigh: 10,
-        temperatureLow: 0,
+        temperatureHigh: 10.01,
+        temperatureLow: -0.01,
         icon: "clear",
     },
     selectedWeather: null,
