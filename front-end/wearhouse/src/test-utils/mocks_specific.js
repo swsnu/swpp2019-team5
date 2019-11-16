@@ -3,47 +3,7 @@ import { connectRouter } from "connected-react-router";
 
 import { middlewares, history } from "../store/store";
 
-const getMockLoginReducer = jest.fn(
-    initialState => (state = initialState, action) => {
-        switch (action.type) {
-            default:
-                break;
-        }
-        return state;
-    },
-);
-
-const getMockItemReducer = jest.fn(
-    initialState => (state = initialState, action) => {
-        switch (action.type) {
-            default:
-                break;
-        }
-        return state;
-    },
-);
-
-const getMockOutfitReducer = jest.fn(
-    initialState => (state = initialState, action) => {
-        switch (action.type) {
-            default:
-                break;
-        }
-        return state;
-    },
-);
-
-const getMockTagReducer = jest.fn(
-    initialState => (state = initialState, action) => {
-        switch (action.type) {
-            default:
-                break;
-        }
-        return state;
-    },
-);
-
-const getMockWeatherReducer = jest.fn(
+const getMockReducer = jest.fn(
     initialState => (state = initialState, action) => {
         switch (action.type) {
             default:
@@ -60,11 +20,11 @@ export const getMockStore = (
     tagState,
     weatherState,
 ) => {
-    let mockLoginReducer = getMockLoginReducer(loginState);
-    let mockOutfitReducer = getMockOutfitReducer(outfitState);
-    let mockItemReducer = getMockItemReducer(itemState);
-    let mockTagReducer = getMockTagReducer(tagState);
-    let mockWeatherReducer = getMockWeatherReducer(weatherState);
+    let mockLoginReducer = getMockReducer(loginState);
+    let mockOutfitReducer = getMockReducer(outfitState);
+    let mockItemReducer = getMockReducer(itemState);
+    let mockTagReducer = getMockReducer(tagState);
+    let mockWeatherReducer = getMockReducer(weatherState);
 
     const rootReducer = combineReducers({
         login: mockLoginReducer,
