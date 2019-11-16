@@ -5,10 +5,11 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action) {
+    switch (action.type) {
         case actionTypes.LOGIN:
-            return { ...state };
-        // hard-code the user id since that's all we're going to needs
+            return { ...state, isLoggedIn: true };
+        case actionTypes.GET_LOGIN:
+            return { ...state, isLoggedIn: action.login };
         default:
             break;
     }
