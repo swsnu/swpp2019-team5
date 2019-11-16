@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'tag.apps.TagConfig',
     'item.apps.ItemConfig',
     'outfit.apps.OutfitConfig',
+    'user.apps.UserConfig',
     'weather.apps.WeatherConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wearhouse.wsgi.application'
 
+AUTH_USER_MODEL = 'user.User' # new
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
