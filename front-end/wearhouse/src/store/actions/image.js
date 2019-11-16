@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { push } from "connected-react-router";
 
 export const postImage_ = outfit_metadata => {
     return {
@@ -11,8 +12,14 @@ export const postImage_ = outfit_metadata => {
 
 export const postImage = image => {
     return dispatch => {
-        return axios.post("/api/image/", image).then(res => {
-            dispatch(postImage_(res.data));
-        });
+        return axios
+            .post("/api/image/", image)
+            .then(res => {
+                dispatch(postImage_(res.data));
+            })
+            .then(() => dispatch(push("/createOutfit")))
+            .catch(err => {
+                dispatch(push("/createOutfit"));
+            });
     };
 };
