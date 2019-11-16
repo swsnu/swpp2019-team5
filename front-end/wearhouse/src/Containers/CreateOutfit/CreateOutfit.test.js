@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../mocks/mocks";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
@@ -36,11 +36,17 @@ let stubInitialState_login = {
     isLoggedin: true,
 };
 
+let stubInitialState_weather = {
+    todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
+    selectedWeather: null,
+};
+
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_outfit,
-    null,
-    null,
+    {},
+    {},
+    stubInitialState_weather,
 );
 
 describe("<CreateOutfit />", () => {
@@ -91,8 +97,6 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#confirm-create-item");
         wrapper.simulate("click");
-        //expect(spyAxios_post).toHaveBeenCalledTimes(12);
-        //4 itmes and 8 tags are newly posted
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
@@ -119,6 +123,7 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("keypress", {
             key: "Enter",
         });
+        expect(instance.state.isValid).toBe(false);
         confirm.simulate("click");
     });
 
