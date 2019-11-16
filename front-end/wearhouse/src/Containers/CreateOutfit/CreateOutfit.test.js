@@ -44,9 +44,10 @@ let stubInitialState_weather = {
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_outfit,
-    {},
-    {},
+    stubInitialState_outfit,
+    stubInitialState_outfit,
     stubInitialState_weather,
+    stubInitialState_outfit,
 );
 
 describe("<CreateOutfit />", () => {
@@ -59,6 +60,7 @@ describe("<CreateOutfit />", () => {
                         items={stubInitialState_outfit.outfits.items}
                         image=""
                         outfit_id={1}
+                        newOutfit={stubInitialState_outfit.selectedOutfit}
                         history={history}
                     />
                 </ConnectedRouter>
@@ -118,12 +120,12 @@ describe("<CreateOutfit />", () => {
         let confirm = component.find("#confirm-create-item");
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
+
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keypress", {
             key: "Enter",
         });
-        expect(instance.state.isValid).toBe(false);
         confirm.simulate("click");
     });
 

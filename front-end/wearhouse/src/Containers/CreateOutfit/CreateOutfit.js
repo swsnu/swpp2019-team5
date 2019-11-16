@@ -69,8 +69,13 @@ class CreateOutfit extends Component {
         return true;
     };
     onConfirmCreate = () => {
-        if (!this.checkValidation()) return;
+        if (!this.state.isValid) {
+            console.log("일로 드러와~");
+            return;
+        }
+        console.log("너말고..");
         //please add validation whether for all items category is selected in sprint 4
+        console.log(this.props.weather);
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
@@ -158,7 +163,6 @@ class CreateOutfit extends Component {
 
                     <button
                         onClick={this.onConfirmCreate}
-                        disabled={!this.state.isValid}
                         id="confirm-create-item"
                     >
                         Confirm Create
