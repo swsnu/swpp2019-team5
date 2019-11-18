@@ -104,12 +104,20 @@ class EditOutfit extends Component {
                             </div>
                         </div>
                     </div>
-                    <button
-                        onClick={this.onConfirmCreate}
-                        id="confirm-create-item"
-                    >
-                        Confirm Create
-                    </button>
+                    <div id="button-container">
+                        <button
+                            onClick={this.onConfirmEdit}
+                            id="confirm-create-item"
+                        >
+                            Confirm Edit
+                        </button>
+                        <button
+                            onClick={this.onCancelEdit}
+                            id="confirm-create-item"
+                        >
+                            Cancel Edit
+                        </button>
+                    </div>
                 </div>
             </div>
         );

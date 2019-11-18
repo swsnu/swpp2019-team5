@@ -7,10 +7,26 @@ const initialState = {
         satisfactionValue: 3,
         date: new Date(),
         items: [
-            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
-            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
-            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
-            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
+            {
+                id: 1,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 2,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 3,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 4,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
         ],
         weather: {
             tempAvg: 10,
