@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import authenticate, login, logout
+from django.db.utils import IntegrityError
+
 from json import JSONDecodeError
 from .models import User
 import json
@@ -54,9 +56,12 @@ def user(request):
             password = req_data['password']
         except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
-        User.objects.create_user(
-            username=email, email=email, password=password)
-        return HttpResponse(status=201)
+        try:
+            User.objects.create_user(
+                username=email, email=email, password=password)
+            return HttpResponse(status=201)
+        except(IntegrityError):
+            return HttpResponse(status=400)
     if request.method == 'GET':
         if request.user.is_authenticated:
             response_user = {
