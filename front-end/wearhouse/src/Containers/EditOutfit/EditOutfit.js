@@ -29,11 +29,20 @@ class EditOutfit extends Component {
             items: [],
             weather: {},
         },
+        isValid: true,
     };
 
     componentDidMount() {
         // this.props.getOutfit(this.props.match.params.id); before push erase //..
         this.setState({ outfit: this.props.outfit });
+    }
+    shouldComponentUpdate() {
+        return true;
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.items !== this.state.items) {
+            this.checkValidation();
+        }
     }
     render() {
         let items = this.state.outfit.items.map((item, index) => {
@@ -64,7 +73,12 @@ class EditOutfit extends Component {
                             />
                         </div>
                         <div id="image-window">
-                            <EditSatisfaction id="edit-satisfaction" />
+                            <EditSatisfaction
+                                id="edit-satisfaction"
+                                satisfactionValue={
+                                    this.props.outfit.satisfactionValue
+                                }
+                            />
                             <img src={this.state.image} alt="outfit" />
                         </div>
                     </div>
