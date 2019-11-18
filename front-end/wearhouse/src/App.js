@@ -9,6 +9,7 @@ import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 import LandingPage from "./Containers/LandingPage/LandingPage";
 import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
+import EditOutfit from "./Containers/EditOutfit/EditOutfit";
 
 import "./App.scss";
 
@@ -30,6 +31,11 @@ class App extends React.Component {
                         path="/createOutfit"
                         exact
                         render={() => <CreateOutfit />}
+                    />
+                    <Route
+                        path="/editOutfit/:id"
+                        exact
+                        component={EditOutfit}
                     />
                     <Route path="/main" exact component={LandingPage} />
                     <Redirect exact to="/main" />

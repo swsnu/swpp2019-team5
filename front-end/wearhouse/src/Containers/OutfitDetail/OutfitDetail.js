@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
-
+import moment from "moment";
 import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -21,7 +21,7 @@ class OutfitDetail extends Component {
         return true;
     }
     componentDidMount() {
-        this.props.getOutfit(this.props.match.params.id);
+        // this.props.getOutfit(this.props.match.params.id);
         this.setState({ outfit: this.props.outfit });
     }
     onEdit = () => {
@@ -36,6 +36,7 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
+
         return (
             <div id="outfit-detail">
                 <Header />
@@ -46,7 +47,9 @@ class OutfitDetail extends Component {
                         />
                         <img src={this.state.image} alt="outfit" />
 
-                        <label id="date">{this.state.outfit.date}</label>
+                        <label id="date">
+                            {moment(this.state.outfit.date).format("LL")}
+                        </label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 

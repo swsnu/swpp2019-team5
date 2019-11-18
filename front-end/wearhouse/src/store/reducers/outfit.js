@@ -2,7 +2,17 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     outfits: [],
-    selectedOutfit: null,
+    selectedOutfit: {
+        image: null,
+        satisfactionValue: 3,
+        date: new Date(),
+        items: [
+            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
+            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
+            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
+            { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
+        ],
+    },
 };
 
 const reducer = (state = initialState, action) => {
