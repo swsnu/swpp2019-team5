@@ -14,7 +14,7 @@ class Signup extends Component {
     render() {
         let pwMatch = this.state.password === this.state.passwordConfirm;
 
-        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}\.[a-z]{2,3}$/;
+        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}([-_.]?[^@\s.])*.[a-zA-Z]{2,}$/;
         let validEmail = emailRegex.test(this.state.email);
 
         let active = pwMatch && validEmail && this.state.password !== "";
