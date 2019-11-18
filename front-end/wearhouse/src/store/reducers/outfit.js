@@ -12,6 +12,10 @@ const initialState = {
             { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
             { category: "UpperBody", tags: ["red", "sheep-fur", "long"] },
         ],
+        weather: {
+            tempAvg: 10,
+            icon: "rain",
+        },
     },
 };
 
