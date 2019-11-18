@@ -36,7 +36,7 @@ class Login extends Component {
                             id="email-input"
                             onKeyDown={e => {
                                 if (e.keyCode === 13) {
-                                    this.onLogin();
+                                    this.onLogin(this.state);
                                 }
                             }}
                         ></input>
@@ -50,7 +50,8 @@ class Login extends Component {
                             }}
                             onKeyDown={e => {
                                 if (e.keyCode === 13) {
-                                    this.onLogin();
+                                    e.preventDefault();
+                                    this.onLogin(this.state);
                                 }
                             }}
                         ></input>
