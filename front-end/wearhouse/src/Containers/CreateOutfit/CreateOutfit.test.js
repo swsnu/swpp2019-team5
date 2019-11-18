@@ -36,12 +36,19 @@ let stubInitialState_login = {
     isLoggedIn: true,
 };
 
+let stubInitialState_weather = {
+    todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
+    selectedWeather: null,
+};
+
 let mockStore = getMockStore(
     stubInitialState_login,
     null,
     stubInitialState_outfit,
-    null,
-    null,
+    stubInitialState_outfit,
+    stubInitialState_outfit,
+    stubInitialState_weather,
+    stubInitialState_outfit,
 );
 
 describe("<CreateOutfit />", () => {
@@ -54,6 +61,7 @@ describe("<CreateOutfit />", () => {
                         items={stubInitialState_outfit.outfits.items}
                         image=""
                         outfit_id={1}
+                        newOutfit={stubInitialState_outfit.selectedOutfit}
                         history={history}
                     />
                 </ConnectedRouter>
@@ -99,8 +107,6 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#confirm-create-item");
         wrapper.simulate("click");
-        //expect(spyAxios_post).toHaveBeenCalledTimes(12);
-        //4 itmes and 8 tags are newly posted
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
@@ -122,6 +128,7 @@ describe("<CreateOutfit />", () => {
         let confirm = component.find("#confirm-create-item");
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
+
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keypress", {
