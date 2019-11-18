@@ -70,10 +70,8 @@ class CreateOutfit extends Component {
     };
     onConfirmCreate = () => {
         if (!this.state.isValid) {
-            console.log("일로 드러와~");
             return;
         }
-        console.log("너말고..");
         //please add validation whether for all items category is selected in sprint 4
         console.log(this.props.weather);
         const newOutfit = {
