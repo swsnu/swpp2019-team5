@@ -45,6 +45,7 @@ describe("<LandingPage />", () => {
         const component = mount(landingPage);
         let wrapper = component.find("#Main");
         expect(wrapper.length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should redirect when login button is clicked", () => {

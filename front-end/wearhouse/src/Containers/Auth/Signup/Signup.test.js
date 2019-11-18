@@ -39,6 +39,7 @@ describe("<Signup />", () => {
     it("should load properly", () => {
         const component = mount(signup);
         let wrapper = component.find("#signup");
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(wrapper.length).toBe(1);
     });
 

@@ -64,7 +64,7 @@ describe("<Header />", () => {
     });
 
     it("should call getLogin", () => {
-        const component = mount(header);
+        mount(header);
         expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 

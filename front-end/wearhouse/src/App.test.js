@@ -69,6 +69,7 @@ describe("App", () => {
     it("should render", () => {
         const component = mount(app);
         expect(component.find("App").length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should render", () => {
