@@ -40,6 +40,7 @@ export const createOutfit_ = outfit => {
         date: outfit.date,
         id: outfit.id,
         items: outfit.items,
+        weather: outfit.weather,
     };
 };
 export const createOutfit = outfit => {
