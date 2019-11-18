@@ -10,6 +10,10 @@ const reducer = (state = initialState, action) => {
             return { ...state, isLoggedIn: true };
         case actionTypes.GET_LOGIN:
             return { ...state, isLoggedIn: action.login };
+        case actionTypes.LOGOUT:
+            return { ...state, isLoggedIn: false };
+        case actionTypes.SIGN_UP:
+            return { ...state };
         default:
             break;
     }
