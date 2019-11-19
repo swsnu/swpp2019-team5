@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { getMockStore } from "../../../test-utils/mocks";
 import { history } from "../../../store/store";
 import UploadImage from "./UploadImage";
-import * as actionCreators from "../../../store/actions/index";
 import { ConnectedRouter } from "connected-react-router";
 import axios from "axios";
 
@@ -45,9 +44,6 @@ describe("<UploadImage/>", () => {
 
     it("handle when valid image has been chosen", async () => {
         let component = mount(uploadImageContainer);
-        const CreateInstance = component
-            .find(UploadImage.WrappedComponent)
-            .instance();
         let wrapper = component.find("#choose-file");
 
         // input valid file
@@ -70,9 +66,6 @@ describe("<UploadImage/>", () => {
 
     it("handle when the file does not exist at all", () => {
         const component = mount(uploadImageContainer);
-        const CreateInstance = component
-            .find(UploadImage.WrappedComponent)
-            .instance();
         let wrapper = component.find("#choose-file");
 
         // file does not exist
@@ -90,9 +83,6 @@ describe("<UploadImage/>", () => {
 
     it("handle when chosen image is not valid", () => {
         const component = mount(uploadImageContainer);
-        const CreateInstance = component
-            .find(UploadImage.WrappedComponent)
-            .instance();
         let wrapper = component.find("#choose-file");
 
         // input invalid file
