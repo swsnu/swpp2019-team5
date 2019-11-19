@@ -64,6 +64,15 @@ const reducer = (state = initialState, action) => {
             });
             return { ...state, outfits: deletedOutfits };
         }
+        case actionTypes.EDIT_OUTFIT: {
+            const edittedOutfits = state.outfits.map(oft => {
+                return oft.id === action.targetID ? action.new_outfit : oft;
+            });
+            return {
+                ...state,
+                outfit: edittedOutfits,
+            };
+        }
         default:
             break;
     }

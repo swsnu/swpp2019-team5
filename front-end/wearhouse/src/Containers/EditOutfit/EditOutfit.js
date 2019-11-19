@@ -41,7 +41,7 @@ class EditOutfit extends Component {
                 <PopUp
                     onClosePopUp={this.handlePopUpClose}
                     onProceedCancel={this.handleCancel}
-                    message="You will lose your edit data. Are you sure with cancellation?"
+                    message="You will lose your data.  Are you sure?"
                 />
             ),
         });
@@ -104,6 +104,10 @@ class EditOutfit extends Component {
         });
         this.setState({ outfit: { ...this.state.outfit, items: items } });
     }
+
+    onConfirmEdit = () => {
+        this.props.confirmEdit();
+    };
     render() {
         console.log(this.state.outfit.items);
         let items = this.state.outfit.items.map((item, index) => {
@@ -213,7 +217,7 @@ class EditOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOutfit: id => dispatch(actionCreators.getSpecificOutfit(id)),
+        confirmEdit: outfit => dispatch(actionCreators.editOutfit(outfit)),
     };
 };
 const mapStateToProps = state => {
