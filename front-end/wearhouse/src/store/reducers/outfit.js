@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     outfits: [],
     selectedOutfit: {
+        id: 1,
         image: null,
         satisfactionValue: 3,
         date: new Date(),

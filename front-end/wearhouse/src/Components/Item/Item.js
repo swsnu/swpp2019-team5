@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import "./Item.scss";
-import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
@@ -21,9 +21,8 @@ class Item extends Component {
     }
 
     state = {
-        category: "default",
+        category: this.props.item.category,
         tags: this.props.item.tags,
-        todo: "typeMode", //the mode where user enters after clicing button
     };
 
     componentDidMount() {
@@ -85,19 +84,11 @@ class Item extends Component {
         });
     }
 
-    //convert the todo ("Add tag" or "Finish")
-    changeMode = () => {
-        if (this.state.todo === "typeMode")
-            this.setState({
-                todo: "Add tag",
-            });
-        else
-            this.setState({
-                todo: "typeMode",
-            });
-    };
-
     render() {
+        let option = itemOptions.find(
+            c => c.value === this.props.item.category,
+        );
+        console.log(option.value);
         let tags = this.state.tags.map((tag, index) => {
             return (
                 <Tag
@@ -110,10 +101,9 @@ class Item extends Component {
                 />
             );
         });
-        let todo = null;
         let edit_mode_options = null;
         let tag_input = null;
-        if (this.props.editMode && this.state.todo === "typeMode") {
+        if (this.props.editMode) {
             tag_input = (
                 <input
                     className="tag-input"
@@ -123,14 +113,10 @@ class Item extends Component {
                     onKeyDown={e => this.addTag(e)}
                 ></input>
             );
-            todo = <FontAwesomeIcon icon={faCheck} />;
-        } else todo = <FontAwesomeIcon icon={faPlus} />;
+        }
         if (this.props.editMode) {
             edit_mode_options = (
                 <>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
-                    </div>
                     <div
                         className="item-deleter"
                         onClick={this.handleItemDelete.bind(this)}
@@ -147,9 +133,8 @@ class Item extends Component {
                         <Select
                             isDisabled={!this.props.editMode}
                             className="Select"
-                            defaultValue={itemOptions.find(
-                                c => c.value === this.props.item.category,
-                            )}
+                            defaultValue={option}
+                            selected={option}
                             label="Category"
                             options={itemOptions}
                             styles={itemStyles}

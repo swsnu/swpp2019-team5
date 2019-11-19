@@ -136,7 +136,6 @@ class CreateOutfit extends Component {
                         </div>
                     </div>
 
-                    {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
                         <div className="not-info">

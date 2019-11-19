@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
@@ -29,24 +29,75 @@ class EditOutfit extends Component {
             items: [],
             weather: {},
         },
+        original_outfit: this.props.outfit,
         isValid: true,
     };
 
     componentDidMount() {
-        // this.props.getOutfit(this.props.match.params.id); before push erase //..
         this.setState({ outfit: this.props.outfit });
     }
     shouldComponentUpdate() {
         return true;
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.items !== this.state.items) {
+        if (prevState.outfit.items !== this.state.outfit.items) {
             this.checkValidation();
         }
     }
+
+    onInitializeOutfit = () => {
+        this.setState({
+            outfit: this.props.outfit,
+        });
+    };
+    onDeleteItem(item) {
+        let items = this.state.outfit.items;
+        items = items.filter(itm => itm !== item);
+        this.setState({ outfit: { ...this.state.outfit, items: items } });
+    }
+    addItemHandler = () => {
+        const newItem = { category: "default", tags: [] };
+        let items = this.state.outfit.items.concat(newItem);
+        this.setState({ outfit: { ...this.state.outfit, items: items } });
+    };
+    handleDateChange = date => {
+        this.setState({
+            outfit: { ...this.state.outfit, date: date },
+        });
+    };
+    checkValidation = () => {
+        const items = this.state.outfit.items;
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].category === "default" || items[i].tags.length === 0) {
+                this.setState({ isValid: false });
+                return false;
+            }
+        }
+        this.setState({ isValid: true });
+        return true;
+    };
+
+    onApplyEditItem(item, edit_item) {
+        let items = this.state.outfit.items;
+        items = items.map(itm => {
+            return itm === item ? edit_item : itm;
+        });
+        this.setState({ outfit: { ...this.state.outfit, items: items } });
+    }
     render() {
+        console.log(this.state.outfit.items);
         let items = this.state.outfit.items.map((item, index) => {
-            return <Item item={item} key={index} editMode={true} />;
+            return (
+                <Item
+                    item={item}
+                    key={index}
+                    applyEdit={edit_item =>
+                        this.onApplyEditItem(item, edit_item)
+                    }
+                    delete={() => this.onDeleteItem(item)}
+                    editMode={true}
+                />
+            );
         });
         return (
             <div className="EditOutfit">
@@ -54,7 +105,7 @@ class EditOutfit extends Component {
                 <div id="edit-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">
-                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it will not be recommended to you">
+                            <span data-tooltip-text="Date select is optional">
                                 <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
@@ -84,12 +135,27 @@ class EditOutfit extends Component {
                     </div>
 
                     <div id="info-window">
+                        <div
+                            id="initialize-outfit-button-container"
+                            data-tooltip-text="initialize items to original state"
+                        >
+                            <button
+                                onClick={this.onInitializeOutfit}
+                                className="small-button"
+                                id="initialize-button"
+                            >
+                                <FontAwesomeIcon
+                                    id="initialize-icon"
+                                    icon={faUndo}
+                                />
+                            </button>
+                        </div>
                         <div id="items-info-window">{items}</div>
                         <div className="not-info">
-                            <div id="add-confirm-buttons-container">
+                            <div id="add-confirm-button-container">
                                 <button
                                     onClick={this.addItemHandler}
-                                    id="add-item"
+                                    id="add-item-button"
                                 >
                                     Add Item
                                 </button>
@@ -107,13 +173,13 @@ class EditOutfit extends Component {
                     <div id="button-container">
                         <button
                             onClick={this.onConfirmEdit}
-                            id="confirm-create-item"
+                            id="confirm-edit-outfit"
                         >
                             Confirm Edit
                         </button>
                         <button
                             onClick={this.onCancelEdit}
-                            id="confirm-create-item"
+                            id="cancel-edit-outfit"
                         >
                             Cancel Edit
                         </button>
