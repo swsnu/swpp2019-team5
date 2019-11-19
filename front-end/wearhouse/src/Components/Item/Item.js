@@ -133,7 +133,7 @@ class Item extends Component {
                         <Select
                             isDisabled={!this.props.editMode}
                             className="Select"
-                            defaultValue={option}
+                            value={option}
                             selected={option}
                             label="Category"
                             options={itemOptions}
