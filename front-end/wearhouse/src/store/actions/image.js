@@ -19,6 +19,7 @@ export const postImage = image => {
             })
             .then(() => dispatch(push("/createOutfit")))
             .catch(err => {
+                console.log(err);
                 dispatch(push("/createOutfit"));
             });
     };
