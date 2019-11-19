@@ -7,14 +7,14 @@ import "./Signup.scss";
 
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
-    onSignUp = () => {
-        this.props.onSignUp();
+    onSignUp = userCredentials => {
+        this.props.onSignUp(userCredentials);
     };
 
     render() {
         let pwMatch = this.state.password === this.state.passwordConfirm;
 
-        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}\.[a-z]{2,3}$/;
+        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}([-_.]?[^@\s.])*.[a-zA-Z]{2,}$/;
         let validEmail = emailRegex.test(this.state.email);
 
         let active = pwMatch && validEmail && this.state.password !== "";
@@ -74,7 +74,12 @@ class Signup extends Component {
                         <button
                             disabled={!active}
                             id="signup-button"
-                            onClick={() => this.onSignUp()}
+                            onClick={() =>
+                                this.onSignUp({
+                                    email: this.state.email,
+                                    password: this.state.password,
+                                })
+                            }
                         >
                             Sign up
                         </button>
@@ -87,7 +92,8 @@ class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignUp: () => dispatch(actionCreators.signUp()),
+        onSignUp: userCredentials =>
+            dispatch(actionCreators.signUp(userCredentials)),
     };
 };
 
