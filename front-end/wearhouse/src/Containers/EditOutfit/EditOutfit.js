@@ -12,8 +12,9 @@ import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
+import PopUp from "../../Components/PopUp/PopUp";
 
-// 1. 대략적인 design 짜기
+// 1. 대략적인 design 짜기 (o)
 // 2. Action creator 만들기
 // 3. Edit all, edit one 짜기
 // 4. state = {}
@@ -31,8 +32,27 @@ class EditOutfit extends Component {
         },
         original_outfit: this.props.outfit,
         isValid: true,
+        popUp: null,
     };
 
+    onCancelEdit = () => {
+        this.setState({
+            popUp: (
+                <PopUp
+                    onClosePopUp={this.handlePopUpClose}
+                    onProceedCancel={this.handleCancel}
+                    message="You will lose your edit data. Are you sure with cancellation?"
+                />
+            ),
+        });
+    };
+
+    handleCancel = () => {
+        this.props.history.push("/browse");
+    };
+    handlePopUpClose = () => {
+        this.setState({ popUp: null });
+    };
     componentDidMount() {
         this.setState({ outfit: this.props.outfit });
     }
@@ -102,6 +122,7 @@ class EditOutfit extends Component {
         return (
             <div className="EditOutfit">
                 <Header />
+                {this.state.popUp}
                 <div id="edit-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">

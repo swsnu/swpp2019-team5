@@ -1,0 +1,76 @@
+#popup-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    top: 30%;
+    left: 32%;
+    width: 35%;
+    height: 250px;
+    border-radius: 10px;
+    z-index: 4;
+    background-color: white;
+    opacity: 1;
+
+    #upload-image-header {
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid lightgray;
+        background-color: #e0e0e0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        #upload-image-title {
+            margin-left: 50px;
+        }
+
+        #cancel-upload-image {
+            margin-right: 10px;
+        }
+    }
+
+    #upload-image-button {
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        border: none;
+        border-radius: 20%;
+        background-color: pink;
+    }
+
+    #selected-image-file {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.7;
+    z-index: 3;
+}
+
+.button-container {
+    display: flex;
+    position: absolute;
+    top: 125px;
+    left: 130px;
+    .option-button {
+        background-color: rgb(202, 231, 248);
+        color: gray;
+        padding: 10px;
+        margin: 10px;
+        margin-right: 50px;
+        border-radius: 10%;
+        border: none;
+        &:hover {
+            background-color: rgb(233, 227, 227);
+        }
+    }
+}
