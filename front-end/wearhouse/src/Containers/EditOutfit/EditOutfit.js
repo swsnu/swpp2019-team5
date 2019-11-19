@@ -160,11 +160,9 @@ class EditOutfit extends Component {
                     </div>
 
                     <div id="info-window">
-                        <div
-                            id="initialize-outfit-button-container"
-                            data-tooltip-text="initialize outfit to original state"
-                        >
+                        <div id="initialize-outfit-button-container">
                             <button
+                                data-tooltip-text="initialize outfit to original state"
                                 onClick={this.onInitializeOutfit}
                                 className="small-button"
                                 id="initialize-button"

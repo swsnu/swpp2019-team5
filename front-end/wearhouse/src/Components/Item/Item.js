@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
+import Option from "../Option/Option";
 import "./Item.scss";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +10,7 @@ import Select from "react-select";
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
+    //props에 whole item list 있어야함
     shouldComponentUpdate() {
         return true;
     }
@@ -21,8 +23,32 @@ class Item extends Component {
     }
 
     state = {
+        show: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
+        item_list: this.props.item_list,
+        option_list: [
+            {
+                id: 1,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 2,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 3,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 4,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+        ],
     };
 
     componentDidMount() {
@@ -83,12 +109,27 @@ class Item extends Component {
             tags: tags,
         });
     }
+    handleAutoComplete = () => {
+        //get whole item lists that mathes to input ..
+        //and then set to the option_list
+        //contains 함수 써서 ~~ ^_^
+    };
 
+    setItem = op => {
+        //auto complete중의 후보로 선택한 애를 tag로 바꿔주기
+        //this.setState({ tags: op.tags });
+    };
+
+    show = false;
     render() {
+        let auto_complete = this.state.option_list.map((op, index) => {
+            return (
+                <Option key={index} onClick={this.setItem(op)} option={op} />
+            );
+        });
         let option = itemOptions.find(
             c => c.value === this.props.item.category,
         );
-        console.log(option.value);
         let tags = this.state.tags.map((tag, index) => {
             return (
                 <Tag
@@ -103,15 +144,23 @@ class Item extends Component {
         });
         let edit_mode_options = null;
         let tag_input = null;
+
         if (this.props.editMode) {
             tag_input = (
                 <input
                     className="tag-input"
                     type="text"
                     placeholder="Enter tag.."
-                    //onChange = further task #1
+                    onChange={this.handleAutoComplete}
                     onKeyDown={e => this.addTag(e)}
-                ></input>
+                    autoComplete="on"
+                    onFocus={() => {
+                        this.setState({ show: true });
+                    }}
+                    onBlur={() => {
+                        this.setState({ show: false });
+                    }}
+                />
             );
         }
         if (this.props.editMode) {
@@ -143,8 +192,14 @@ class Item extends Component {
                     </div>
 
                     <div className="tag-container">
-                        <div className="tag-area">{tags}</div>
-                        {tag_input}
+                        <div className="tag-area">
+                            {tags}
+                            {tag_input}
+                        </div>
+
+                        <div id="options">
+                            {this.state.show ? auto_complete : null}
+                        </div>
                     </div>
                     {edit_mode_options}
                 </div>
