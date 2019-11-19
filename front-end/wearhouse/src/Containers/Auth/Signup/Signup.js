@@ -7,8 +7,8 @@ import "./Signup.scss";
 
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
-    onSignUp = () => {
-        this.props.onSignUp();
+    onSignUp = userCredentials => {
+        this.props.onSignUp(userCredentials);
     };
 
     render() {
@@ -74,7 +74,12 @@ class Signup extends Component {
                         <button
                             disabled={!active}
                             id="signup-button"
-                            onClick={() => this.onSignUp()}
+                            onClick={() =>
+                                this.onSignUp({
+                                    email: this.state.email,
+                                    password: this.state.password,
+                                })
+                            }
                         >
                             Sign up
                         </button>
@@ -87,7 +92,8 @@ class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignUp: () => dispatch(actionCreators.signUp()),
+        onSignUp: userCredentials =>
+            dispatch(actionCreators.signUp(userCredentials)),
     };
 };
 

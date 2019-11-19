@@ -33,7 +33,7 @@ let stubInitialState_outfit = {
 };
 
 let stubInitialState_login = {
-    isLoggedin: true,
+    isLoggedIn: true,
 };
 
 let stubInitialState_weather = {
@@ -41,17 +41,25 @@ let stubInitialState_weather = {
     selectedWeather: null,
 };
 
+let stubInitialState_items = {
+    items: [
+        { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+        { category: "Shoes", tags: ["black", "opentoe"] },
+        { category: "LowerBody", tags: ["jeans"] },
+        { category: "Accessories", tags: ["black", "golden-buckle"] },
+    ],
+};
+
 let mockStore = getMockStore(
     stubInitialState_login,
-    stubInitialState_outfit,
+    stubInitialState_items,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
-    stubInitialState_outfit,
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post;
+    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_get;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -76,6 +84,12 @@ describe("<CreateOutfit />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true, items: [] } }),
+            );
     });
 
     afterEach(() => {
@@ -86,6 +100,7 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
     });
 
     it("set date properly", () => {

@@ -73,7 +73,7 @@ class CreateOutfit extends Component {
             return;
         }
         //please add validation whether for all items category is selected in sprint 4
-        console.log(this.props.weather);
+
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
