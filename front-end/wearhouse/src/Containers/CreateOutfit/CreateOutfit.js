@@ -160,7 +160,8 @@ class CreateOutfit extends Component {
 
                     <button
                         onClick={this.onConfirmCreate}
-                        id="confirm-create-item"
+                        id="confirm-create-outfit"
+                        disabled={!this.state.isValid}
                     >
                         Confirm Create
                     </button>
