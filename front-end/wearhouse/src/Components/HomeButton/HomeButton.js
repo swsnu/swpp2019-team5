@@ -7,12 +7,7 @@ import "./HomeButton.scss";
 class HomeButton extends React.Component {
     render() {
         return (
-            <div
-                id="homebutton"
-                onClick={() => {
-                    this.props.onClickHome();
-                }}
-            >
+            <div id="homebutton" onClick={this.props.onClick}>
                 <img src={logo} alt="Wearhouse logo button" />
             </div>
         );

@@ -16,6 +16,7 @@ class Header extends React.Component {
     shouldComponentUpdate() {
         return true;
     }
+
     onClickLogin = () => {
         this.props.history.push("/login");
     };
@@ -24,19 +25,19 @@ class Header extends React.Component {
         this.props.history.push("/signup");
     };
 
-    onClickHomeButton = () => {
-        if (this.props.loggedIn) {
+    onClickHomeButton() {
+        if (this.props.isLoggedIn) {
             this.props.history.push("/browse");
         } else {
             this.props.history.push("/main");
         }
-    };
+    }
 
     render() {
         return (
             <div id="header">
-                <HomeButton onClickHome={() => this.onClickHomeButton()} />
-                {this.props.loggedIn ? (
+                <HomeButton onClick={() => this.onClickHomeButton()} />
+                {this.props.isLoggedIn ? (
                     <Logout />
                 ) : (
                     <div id="signin-box">
