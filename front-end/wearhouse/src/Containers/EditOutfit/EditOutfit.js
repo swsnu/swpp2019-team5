@@ -109,7 +109,6 @@ class EditOutfit extends Component {
         this.props.confirmEdit();
     };
     render() {
-        console.log(this.state.outfit.items);
         let items = this.state.outfit.items.map((item, index) => {
             return (
                 <Item

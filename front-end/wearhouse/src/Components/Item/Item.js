@@ -24,6 +24,7 @@ class Item extends Component {
 
     state = {
         show: false,
+        preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
         item_list: this.props.item_list,
@@ -31,22 +32,22 @@ class Item extends Component {
             {
                 id: 1,
                 category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
+                tags: ["T-shirt", "2019"],
             },
             {
                 id: 2,
                 category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
+                tags: ["fall", "stripe", "blue"],
             },
             {
                 id: 3,
                 category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
+                tags: ["coat", "wool", "pink"],
             },
             {
                 id: 4,
                 category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
+                tags: ["mom", "hand-made", "check-shirt"],
             },
         ],
     };
@@ -115,16 +116,29 @@ class Item extends Component {
         //contains 함수 써서 ~~ ^_^
     };
 
-    setItem = op => {
-        //auto complete중의 후보로 선택한 애를 tag로 바꿔주기
-        //this.setState({ tags: op.tags });
+    handleBlur = () => {
+        if (!this.state.preventBlur) this.setState({ show: false });
     };
+
+    setItem(op) {
+        this.setState({ show: false });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: op.tags,
+        });
+        this.setState({ preventBlur: false });
+    }
 
     show = false;
     render() {
         let auto_complete = this.state.option_list.map((op, index) => {
             return (
-                <Option key={index} onClick={this.setItem(op)} option={op} />
+                <Option
+                    key={index}
+                    click={() => this.setItem(op)}
+                    option={op}
+                    preventBlur={() => this.setState({ preventBlur: true })}
+                />
             );
         });
         let option = itemOptions.find(
@@ -148,6 +162,9 @@ class Item extends Component {
         if (this.props.editMode) {
             tag_input = (
                 <input
+                    ref={input => {
+                        this.input_bar = input;
+                    }}
                     className="tag-input"
                     type="text"
                     placeholder="Enter tag.."
@@ -157,9 +174,7 @@ class Item extends Component {
                     onFocus={() => {
                         this.setState({ show: true });
                     }}
-                    onBlur={() => {
-                        this.setState({ show: false });
-                    }}
+                    onBlur={this.handleBlur}
                 />
             );
         }
