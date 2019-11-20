@@ -110,8 +110,11 @@ class Item extends Component {
             tags: tags,
         });
     }
-    handleAutoComplete = () => {
-        //get whole item lists that mathes to input ..
+    handleAutoComplete = e => {
+        let option_list = this.state.tags.concat(e.target.value);
+        console.log(option_list);
+        //아마도 actionCreator에서 get all items로 whoe list를 가져와야할듯
+        //filter whole item lists that mathes to input ..
         //and then set to the option_list
         //contains 함수 써서 ~~ ^_^
     };
@@ -137,6 +140,7 @@ class Item extends Component {
                     key={index}
                     click={() => this.setItem(op)}
                     option={op}
+                    activateBlur={() => this.setState({ preventBlur: false })}
                     preventBlur={() => this.setState({ preventBlur: true })}
                 />
             );
@@ -168,7 +172,7 @@ class Item extends Component {
                     className="tag-input"
                     type="text"
                     placeholder="Enter tag.."
-                    onChange={this.handleAutoComplete}
+                    onChange={e => this.handleAutoComplete(e)}
                     onKeyDown={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {

@@ -106,7 +106,8 @@ class EditOutfit extends Component {
     }
 
     onConfirmEdit = () => {
-        this.props.confirmEdit();
+        this.props.confirmEdit(this.state.outfit);
+        this.props.history.push("/outfitDetail/" + this.state.outfit.id);
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
@@ -214,7 +215,9 @@ class EditOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        confirmEdit: outfit => dispatch(actionCreators.editOutfit(outfit)),
+        confirmEdit: outfit => {
+            dispatch(actionCreators.editOutfit(outfit));
+        },
     };
 };
 const mapStateToProps = state => {

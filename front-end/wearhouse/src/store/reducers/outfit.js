@@ -71,6 +71,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 outfit: edittedOutfits,
+                selectedOutfit: action.new_outfit,
             };
         }
         default:

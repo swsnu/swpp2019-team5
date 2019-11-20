@@ -22,6 +22,7 @@ class Option extends Component {
                 <div
                     id="options-container"
                     onMouseOver={this.props.preventBlur}
+                    onMouseLeave={this.props.activateBlur}
                     onClick={this.props.click}
                 >
                     {tags}

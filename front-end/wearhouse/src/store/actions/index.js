@@ -4,6 +4,7 @@ export {
     createOutfit,
     deleteOutfit,
     editOutfit,
+    editOutfit_,
 } from "./outfit";
 
 export { logIn, logOut, signUp } from "./login";

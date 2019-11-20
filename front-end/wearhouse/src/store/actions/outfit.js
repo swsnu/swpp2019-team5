@@ -67,6 +67,7 @@ export const deleteOutfit = id => {
 };
 
 export const editOutfit_ = outfit => {
+    console.log(outfit);
     return {
         type: actionTypes.EDIT_OUTFIT,
         targetID: outfit.id,
