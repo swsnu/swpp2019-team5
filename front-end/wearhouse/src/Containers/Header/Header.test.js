@@ -13,7 +13,7 @@ var stubInitialState = { isLoggedIn: false, userID: null };
 var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
 
 describe("<Header />", () => {
-    let spyHistoryPush, spyAxios_get;
+    let spyHistoryPush;
     let header, header_login;
     beforeEach(() => {
         header = (
@@ -45,12 +45,6 @@ describe("<Header />", () => {
                 dispatch();
             };
         });
-
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true } }),
-            );
     });
 
     afterEach(() => {
@@ -61,11 +55,6 @@ describe("<Header />", () => {
         const component = mount(header);
         let wrapper = component.find("#header");
         expect(wrapper.length).toBe(1);
-    });
-
-    it("should call getLogin", () => {
-        mount(header);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should redirect when login button is clicked", () => {
@@ -86,5 +75,19 @@ describe("<Header />", () => {
         const component = mount(header_login);
         let wrapper = component.find("#logout");
         expect(wrapper.length).toBe(1);
+    });
+
+    it("should redirect when button is clicked and logged in", () => {
+        const component = mount(header_login);
+        let wrapper = component.find("HomeButton");
+        wrapper.simulate("click");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should redirect when button is clicked", () => {
+        const component = mount(header);
+        let wrapper = component.find("HomeButton");
+        wrapper.simulate("click");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 });

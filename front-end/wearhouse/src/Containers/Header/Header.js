@@ -9,10 +9,6 @@ import Logout from "../Auth/Logout/Logout";
 import "./Header.scss";
 
 class Header extends React.Component {
-    componentDidMount() {
-        this.props.getLogin();
-    }
-
     shouldComponentUpdate() {
         return true;
     }
@@ -70,15 +66,7 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getLogin: () => {
-            dispatch(actionCreators.getLogin());
-        },
-    };
-};
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(withRouter(Header));
