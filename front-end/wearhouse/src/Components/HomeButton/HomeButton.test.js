@@ -33,11 +33,4 @@ describe("<HomeButton />", () => {
         let wrapper = component.find("#homebutton");
         expect(wrapper.length).toBe(1);
     });
-
-    it("should redirect when  button is clicked", () => {
-        const component = mount(home);
-        let wrapper = component.find("#homebutton");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-    });
 });

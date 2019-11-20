@@ -10,6 +10,7 @@ import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 import LandingPage from "./Containers/LandingPage/LandingPage";
 import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
+import Header from "./Containers/Header/Header";
 
 import * as actionCreators from "./store/actions/index";
 
@@ -23,6 +24,7 @@ class App extends React.Component {
     render() {
         return (
             <ConnectedRouter history={this.props.history}>
+                <Header />
                 <Switch>
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
@@ -38,7 +40,7 @@ class App extends React.Component {
                     <Route
                         path="/createOutfit"
                         exact
-                        render={() => <CreateOutfit />}
+                        component={CreateOutfit}
                     />
                     {this.props.isLoggedIn && <Redirect exact to="/browse" />}
                 </Switch>

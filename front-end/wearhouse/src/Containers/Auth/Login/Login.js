@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
-import Header from "../../Header/Header";
 import "./Login.scss";
 
 class Login extends Component {
@@ -12,7 +11,6 @@ class Login extends Component {
     };
 
     componentDidMount() {
-        this.props.getLogin();
         if (this.props.isLoggedIn) {
             this.props.history.push("/browse");
         }
@@ -30,7 +28,6 @@ class Login extends Component {
         let active = this.state.email !== "" && this.state.password !== "";
         return (
             <div id="login">
-                <Header />
                 <div id="login-container">
                     <h1>Log In</h1>
                     <form id="login-form">
@@ -93,7 +90,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogIn: userCredentials =>
             dispatch(actionCreators.logIn(userCredentials)),
-        getLogin: () => dispatch(actionCreators.getLogin()),
     };
 };
 
