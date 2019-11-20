@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/index";
 
 import HomeButton from "../../Components/HomeButton/HomeButton";
 import Logout from "../Auth/Logout/Logout";

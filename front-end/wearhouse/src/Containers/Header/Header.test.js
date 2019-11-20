@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import { ConnectedRouter } from "connected-react-router";
-import axios from "axios";
 
 import Header from "./Header";
 
