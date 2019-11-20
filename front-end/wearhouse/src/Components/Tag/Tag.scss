@@ -10,7 +10,7 @@
     font-size: 13px;
     margin: 4px;
     border-radius: 15px;
-    cursor: pointer;
+    cursor: default;
     width: fit-content;
     input {
         margin-left: 5px;
@@ -24,4 +24,5 @@
 .delete-tag,
 .edit-tag {
     margin: 0 2px;
+    cursor: pointer;
 }
