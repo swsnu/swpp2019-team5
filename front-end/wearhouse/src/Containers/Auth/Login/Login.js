@@ -10,6 +10,11 @@ class Login extends Component {
         email: "",
         password: "",
     };
+
+    componentDidMount() {
+        this.props.getLogin();
+    }
+
     onLogin = userCredentials => {
         this.props.onLogIn(userCredentials);
     };
@@ -23,6 +28,7 @@ class Login extends Component {
         return (
             <div id="login">
                 <Header />
+                {this.props.isLoggedIn && this.props.history.push("/browse")}
                 <div id="login-container">
                     <h1>Log In</h1>
                     <form id="login-form">
@@ -77,7 +83,7 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.login.isLoggedIn,
+        isLoggedIn: state.login.isLoggedIn,
     };
 };
 
@@ -85,6 +91,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogIn: userCredentials =>
             dispatch(actionCreators.logIn(userCredentials)),
+        getLogin: () => dispatch(actionCreators.getLogin()),
     };
 };
 

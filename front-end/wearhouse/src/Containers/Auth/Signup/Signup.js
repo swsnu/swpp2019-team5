@@ -7,6 +7,11 @@ import "./Signup.scss";
 
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
+
+    componentDidMount() {
+        this.props.getLogin();
+    }
+
     onSignUp = userCredentials => {
         this.props.onSignUp(userCredentials);
     };
@@ -21,6 +26,7 @@ class Signup extends Component {
         return (
             <div id="signup">
                 <Header />
+                {this.props.isLoggedIn && this.props.history.push("/browse")}
                 <div id="signup-container">
                     <h1>Sign Up</h1>
                     <form id="signup-form">
@@ -90,14 +96,21 @@ class Signup extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.login.isLoggedIn,
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         onSignUp: userCredentials =>
             dispatch(actionCreators.signUp(userCredentials)),
+        getLogin: () => dispatch(actionCreators.getLogin()),
     };
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(Signup);
