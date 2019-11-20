@@ -3,7 +3,6 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
-import axios from "axios";
 
 import LandingPage from "./LandingPage";
 import { ConnectedRouter } from "connected-react-router";
@@ -13,7 +12,7 @@ var stubInitialState = { isLoggedIn: false, userID: null };
 var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
 
 describe("<LandingPage />", () => {
-    let spyHistoryPush, spyAxios_get;
+    let spyHistoryPush;
     let landingPage;
     beforeEach(() => {
         landingPage = (

@@ -11,7 +11,7 @@ var stubInitialState = {};
 var mockStore = getMockStore(stubInitialState);
 
 describe("<HomeButton />", () => {
-    let home, spyHistoryPush;
+    let home;
     beforeEach(() => {
         home = (
             <Provider store={mockStore}>
@@ -20,12 +20,6 @@ describe("<HomeButton />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
     });
 
     it("should render properly", () => {
