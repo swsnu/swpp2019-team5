@@ -13,6 +13,9 @@ class Login extends Component {
 
     componentDidMount() {
         this.props.getLogin();
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        }
     }
 
     onLogin = userCredentials => {
@@ -28,7 +31,6 @@ class Login extends Component {
         return (
             <div id="login">
                 <Header />
-                {this.props.isLoggedIn && this.props.history.push("/browse")}
                 <div id="login-container">
                     <h1>Log In</h1>
                     <form id="login-form">
