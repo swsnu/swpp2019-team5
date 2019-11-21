@@ -40,6 +40,7 @@ export const createOutfit_ = outfit => {
         date: outfit.date,
         id: outfit.id,
         items: outfit.items,
+        weather: outfit.weather,
     };
 };
 export const createOutfit = outfit => {
@@ -61,15 +62,6 @@ export const deleteOutfit = id => {
     return dispatch => {
         return axios.delete("/api/outfit/" + id).then(() => {
             dispatch(deleteOutfit_(id));
-        });
-    };
-};
-
-export const temporaryCreateOutfit = (outfit_id, outfit) => {
-    //this is temporary one just for mid-demo
-    return dispatch => {
-        return axios.put("/api/outfit/" + outfit_id, outfit).then(() => {
-            dispatch(createOutfit_(outfit));
         });
     };
 };

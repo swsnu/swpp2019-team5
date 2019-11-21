@@ -9,6 +9,7 @@ import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 import LandingPage from "./Containers/LandingPage/LandingPage";
 import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
+
 import "./App.scss";
 
 class App extends React.Component {

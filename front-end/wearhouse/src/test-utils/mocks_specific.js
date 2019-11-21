@@ -1,10 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-//import thunk from 'redux-thunk';
 import { connectRouter } from "connected-react-router";
-//import { createBrowserHistory } from 'history';
 
-import { history, middlewares } from "../store/store";
-//import * as actionTypes from '../store/actions/actionTypes';
+import { middlewares, history } from "../store/store";
 
 const getMockReducer = jest.fn(
     initialState => (state = initialState, action) => {
@@ -16,25 +13,30 @@ const getMockReducer = jest.fn(
     },
 );
 
-export const getMockStore = initialState => {
-    const mockOutfitReducer = getMockReducer(initialState);
-    const mockItemReducer = getMockReducer(initialState);
-    const mockLoginReducer = getMockReducer(initialState);
-    const mockTagReducer = getMockReducer(initialState);
-    const mockImageReducer = getMockReducer(initialState);
+export const getMockStore = (
+    loginState,
+    itemState,
+    outfitState,
+    tagState,
+    weatherState,
+) => {
+    let mockLoginReducer = getMockReducer(loginState);
+    let mockOutfitReducer = getMockReducer(outfitState);
+    let mockItemReducer = getMockReducer(itemState);
+    let mockTagReducer = getMockReducer(tagState);
+    let mockWeatherReducer = getMockReducer(weatherState);
 
-    const mockWeatherReducer = getMockReducer(initialState);
     const rootReducer = combineReducers({
-        outfit: mockOutfitReducer,
-        item: mockItemReducer,
         login: mockLoginReducer,
+        item: mockItemReducer,
+        outfit: mockOutfitReducer,
         tag: mockTagReducer,
-        image: mockImageReducer,
         weather: mockWeatherReducer,
         router: connectRouter(history),
     });
     const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
     const mockStore = createStore(
         rootReducer,
         composeEnhancers(applyMiddleware(...middlewares)),

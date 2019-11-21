@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
@@ -33,18 +33,33 @@ let stubInitialState_outfit = {
 };
 
 let stubInitialState_login = {
-    isLoggedin: true,
+    isLoggedIn: true,
+};
+
+let stubInitialState_weather = {
+    todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
+    selectedWeather: null,
+};
+
+let stubInitialState_items = {
+    items: [
+        { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
+        { category: "Shoes", tags: ["black", "opentoe"] },
+        { category: "LowerBody", tags: ["jeans"] },
+        { category: "Accessories", tags: ["black", "golden-buckle"] },
+    ],
 };
 
 let mockStore = getMockStore(
     stubInitialState_login,
+    stubInitialState_items,
     stubInitialState_outfit,
-    null,
-    null,
+    stubInitialState_outfit,
+    stubInitialState_weather,
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_put;
+    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_get;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -53,6 +68,7 @@ describe("<CreateOutfit />", () => {
                         items={stubInitialState_outfit.outfits.items}
                         image=""
                         outfit_id={1}
+                        newOutfit={stubInitialState_outfit.selectedOutfit}
                         history={history}
                     />
                 </ConnectedRouter>
@@ -65,9 +81,15 @@ describe("<CreateOutfit />", () => {
             };
         });
 
-        spyAxios_put = jest
-            .spyOn(axios, "put")
+        spyAxios_post = jest
+            .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true, items: [] } }),
+            );
     });
 
     afterEach(() => {
@@ -76,17 +98,23 @@ describe("<CreateOutfit />", () => {
 
     it("should load properly", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#create-outfit");
+        let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+    });
+
+    it("set date properly", () => {
+        const component = mount(createOutfit);
+        let wrapper = component.find("#date-picker").at(1);
+        wrapper.simulate("change", { target: { value: "2019/11/11" } });
+        wrapper = component.find(CreateOutfit.WrappedComponent).instance();
     });
 
     it("should put newly created outfit", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#confirm-create-item");
         wrapper.simulate("click");
-        //expect(spyAxios_post).toHaveBeenCalledTimes(12);
-        //4 itmes and 8 tags are newly posted
-        expect(spyAxios_put).toHaveBeenCalledTimes(1);
+        expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
@@ -97,6 +125,23 @@ describe("<CreateOutfit />", () => {
 
         let count = component.find(".Item");
         expect(count.length).toBe(5);
+    });
+
+    it("confirm create with empty item or not empty item", () => {
+        const component = mount(createOutfit);
+        let instance = component.find(CreateOutfit.WrappedComponent).instance();
+        let wrapper = component.find("#add-item");
+        wrapper.simulate("click");
+        let confirm = component.find("#confirm-create-item");
+        confirm.simulate("click");
+        expect(instance.state.isValid).toBe(false);
+
+        wrapper = component.find(".Item .tag-input").at(4);
+        wrapper.simulate("change", { target: { value: "Test" } });
+        wrapper.simulate("keypress", {
+            key: "Enter",
+        });
+        confirm.simulate("click");
     });
 
     it("should call onDeleteItem", () => {

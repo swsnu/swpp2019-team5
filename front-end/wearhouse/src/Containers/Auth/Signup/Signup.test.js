@@ -14,7 +14,7 @@ let stubInitialState = {};
 let mockStore = getMockStore(stubInitialState);
 
 describe("<Signup />", () => {
-    let signup, spyAxios_post;
+    let signup, spyAxios_post, spyAxios_get;
 
     beforeEach(() => {
         signup = (
@@ -28,11 +28,18 @@ describe("<Signup />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
 
     it("should load properly", () => {
         const component = mount(signup);
         let wrapper = component.find("#signup");
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(wrapper.length).toBe(1);
     });
 

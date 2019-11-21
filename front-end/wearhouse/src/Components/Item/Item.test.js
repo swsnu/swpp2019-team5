@@ -30,6 +30,15 @@ describe("<Item/>", () => {
         editHandler = jest.fn();
     });
 
+    it("add tag on the first item", () => {
+        const component = mount(item);
+        let wrapper = component.find(".tag-input").at(0);
+        wrapper.simulate("change", { target: { value: "new_tag" } });
+        wrapper.simulate("keypress", {
+            key: "Enter",
+        });
+    });
+
     it("should render properly", () => {
         const component = mount(item);
 

@@ -13,7 +13,7 @@ class OutfitDetail extends Component {
         outfit: {
             image: null,
             satisfactionValue: null,
-            date: "", //in sprint 4 make it changable. user can select date
+            date: "", //in sprin
             items: [],
         },
     };

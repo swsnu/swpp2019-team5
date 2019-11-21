@@ -10,8 +10,8 @@ class Login extends Component {
         email: "",
         password: "",
     };
-    onLogin = () => {
-        this.props.onLogIn(this.state);
+    onLogin = userCredentials => {
+        this.props.onLogIn(userCredentials);
     };
 
     onClickSignUp = () => {
@@ -34,6 +34,11 @@ class Login extends Component {
                             type="text"
                             name="email"
                             id="email-input"
+                            onKeyDown={e => {
+                                if (e.keyCode === 13) {
+                                    this.onLogin(this.state);
+                                }
+                            }}
                         ></input>
                         <label>Password</label>
                         <input
@@ -43,12 +48,18 @@ class Login extends Component {
                             onChange={e => {
                                 this.setState({ password: e.target.value });
                             }}
+                            onKeyDown={e => {
+                                if (e.keyCode === 13) {
+                                    e.preventDefault();
+                                    this.onLogin(this.state);
+                                }
+                            }}
                         ></input>
                     </form>
                     <button
                         id="login-button"
                         disabled={!active}
-                        onClick={() => this.onLogin()}
+                        onClick={() => this.onLogin(this.state)}
                     >
                         Log In
                     </button>
@@ -72,7 +83,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogIn: () => dispatch(actionCreators.logIn()),
+        onLogIn: userCredentials =>
+            dispatch(actionCreators.logIn(userCredentials)),
     };
 };
 

@@ -2,35 +2,37 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
+
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
+import "./DatePicker.scss";
 
 import Header from "../Header/Header";
-
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
-import "./CreateOutfit.scss";
+import DatePicker from "react-datepicker";
+//should resolve the case where image is not porperly uploaded
 
-//outfit-image : image (o)
-//log satisfaction
-//edit - item : EditItem button- mode controller ====> don't need edit mode rather implemented add tag buttons. (o)
-//add - item : button - add new item (o)
-//delete - item : button - delete existing item (o))
-//confirm-create-button : load data to database (o)
-//if this.props.image is "" alert "please upload image first", then redirect to browse(temporal)'
-// category drop down select one - upper body, lower body, full body, (o)
 class CreateOutfit extends Component {
     state = {
-        id: this.props.outfit_id,
         image: this.props.image,
         satisfactionValue: null,
         date: new Date(), //in sprint 4 make it changable. user can select date
         items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
+        isValid: true,
     };
-
+    componentDidMount() {
+        this.props.setWeather();
+    }
     shouldComponentUpdate() {
         return true;
     }
-
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.items !== this.state.items) {
+            this.checkValidation();
+        }
+    }
     onDeleteItem(item) {
         let items = this.state.items;
         items = items.filter(itm => itm !== item);
@@ -50,17 +52,43 @@ class CreateOutfit extends Component {
         let items = this.state.items.concat(newItem);
         this.setState({ items: items });
     };
-
+    handleDateChange = date => {
+        this.setState({
+            date: date,
+        });
+    };
+    checkValidation = () => {
+        const items = this.state.items;
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].category === "default" || items[i].tags.length === 0) {
+                this.setState({ isValid: false });
+                return false;
+            }
+        }
+        this.setState({ isValid: true });
+        return true;
+    };
     onConfirmCreate = () => {
+        if (!this.state.isValid) {
+            return;
+        }
         //please add validation whether for all items category is selected in sprint 4
+
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
+            weather: {
+                tempAvg:
+                    (this.props.weather.temperatureHigh +
+                        this.props.weather.temperatureLow) /
+                    2,
+                icon: this.props.weather.icon,
+            },
         };
-        this.props.createOutfit(this.state.id, newOutfit);
-        this.props.history.push("/outfitDetail/" + this.state.id);
+        this.props.createOutfit(newOutfit);
+        this.props.history.push("/outfitDetail/" + this.props.newOutfit.id);
     };
 
     render() {
@@ -82,20 +110,55 @@ class CreateOutfit extends Component {
             <div id="create-outfit">
                 <Header />
                 <div id="create-outfit-window">
-                    <div id="image-window">
-                        <EditSatisfaction />
-                        <img src={this.state.image} alt="outfit" />
+                    <div className="left-window">
+                        <div className="date-picker-container">
+                            <span data-tooltip-text="Date select is optional. Outfit saved without date is not interlocked with weather information so it will not be recommended to you">
+                                <div>
+                                    <FontAwesomeIcon
+                                        id="calendar-icon"
+                                        icon={faCalendarAlt}
+                                    />
+                                </div>
+                            </span>
+                            <DatePicker
+                                id="date-picker"
+                                isClearable
+                                placeholderText="Date isn't selected  :)"
+                                selected={this.state.date}
+                                onChange={this.handleDateChange}
+                                dateFormat="yyyy/MM/dd"
+                                maxDate={new Date()}
+                            />
+                        </div>
+                        <div id="image-window">
+                            <EditSatisfaction id="edit-satisfaction" />
+                            <img src={this.state.image} alt="outfit" />
+                        </div>
                     </div>
 
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
-                        <div id="add-confirm-buttons-container">
-                            <button onClick={this.addItemHandler} id="add-item">
-                                Add Item
-                            </button>
+                        <div className="not-info">
+                            <div id="add-confirm-buttons-container">
+                                <button
+                                    onClick={this.addItemHandler}
+                                    id="add-item"
+                                >
+                                    Add Item
+                                </button>
+                            </div>
+                            <div id="error-container">
+                                {!this.state.isValid && (
+                                    <div className="item-error">
+                                        Please select category and add at least
+                                        one tag for each Item!
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
+
                     <button
                         onClick={this.onConfirmCreate}
                         id="confirm-create-item"
@@ -110,19 +173,19 @@ class CreateOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createOutfit: (id, outfit) =>
-            dispatch(actionCreators.temporaryCreateOutfit(id, outfit)),
+        setWeather: () => dispatch(actionCreators.getWeather()),
+        createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
     };
 };
 const mapStateToProps = state => {
     // let outfit = outfit
     // return {
-    //     outfit_id: outfit.id,
     //     image: outfit.image,
     //     items: outfit.items,
     // };
     return {
-        selectedOutfit: state.outfit.selectedOutfit, // temporary code
+        weather: state.weather.todayWeather,
+        newOutfit: state.outfit.selectedOutfit,
     };
 };
 export default connect(

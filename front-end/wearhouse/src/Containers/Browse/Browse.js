@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Header from "../Header/Header";
+import Recommendation from "../Recommendation/Recommendation";
 
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
@@ -82,6 +83,7 @@ class Browse extends React.Component {
                 <button id="calendar-button" onClick={this.onClickCalendar}>
                     view calendar
                 </button>
+                <Recommendation />
                 {container}
                 {/*To */}
                 <AddOutfit />
