@@ -147,11 +147,6 @@ class UploadImage extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        outfitData: state.image.outfitData,
-    };
-};
 const mapDispatchToProps = dispatch => {
     return {
         onPostImage: image => {
@@ -161,6 +156,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
 )(UploadImage);
