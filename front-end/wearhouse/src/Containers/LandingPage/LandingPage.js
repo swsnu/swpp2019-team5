@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {
+    faTags,
+    faCloudSun,
+    faLaptopCode,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Header from "../Header/Header";
-import logo from "../../Components/HomeButton/Logo_point.png";
 
 import * as actionCreators from "../../store/actions/index";
 import image from "./fashion-images.svg";
@@ -52,7 +57,43 @@ class LandingPage extends Component {
                     />
                 </div>
                 <div className="intro-content" id="content-2">
-                    <h1>What we provide</h1>
+                    <h1>
+                        We aim to provide a comprehensive experience where your
+                        wardrobe is transformed into a database
+                    </h1>
+                    <div id="information-wrapper">
+                        <div className="features-info">
+                            <div className="features-icon">
+                                <FontAwesomeIcon icon={faTags} />
+                            </div>
+                            A 3-level classification system where users can
+                            assign and edit categories as specifically or as
+                            broadly as they want. <br />
+                            {/* Users are able to use the following classification
+                            levels to organize their wardrobe.
+                            <ul>
+                                <li>Outfits</li>
+                                <li>Items</li>
+                                <li>Tags</li>
+                            </ul> */}
+                        </div>
+                        <div className="features-info">
+                            <div className="features-icon">
+                                <FontAwesomeIcon icon={faLaptopCode} />
+                            </div>
+                            Auto-tagging and auto-characterization system
+                            provided through a Machine Learning based Image
+                            Recognition Algorithm
+                        </div>
+                        <div className="features-info">
+                            <div className="features-icon">
+                                <FontAwesomeIcon icon={faCloudSun} />
+                            </div>
+                            Weather and satisfaction-based outfit classificaton
+                            and recommendation to free you from the burden of
+                            choosing for the weather.
+                        </div>
+                    </div>
                 </div>
                 <div className="intro-content" id="content-3">
                     <h1>How WearHouse works</h1>
@@ -61,7 +102,7 @@ class LandingPage extends Component {
                     <div id="footericon"></div>
                     <div id="footertext">
                         &copy; SWPP Team WearHouse, 2019
-                        <br />
+                        {/* <br />
                         <br />
                         Image Recognition API credit:{" "}
                         <a
@@ -74,7 +115,7 @@ class LandingPage extends Component {
                         Weather API credit:{" "}
                         <a href="https://darksky.net/" target="blank">
                             DarkSky
-                        </a>
+                        </a> */}
                     </div>
                 </footer>
             </div>
