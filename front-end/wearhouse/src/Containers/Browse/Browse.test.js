@@ -112,9 +112,13 @@ describe("<Browse />", () => {
 
     it(`should click 'AddItemButton'`, () => {
         const component = mount(outfitList);
-        const wrapper = component.find("#add-outfit-button").at(0);
+        let wrapper = component.find("#add-outfit-button").at(0);
         wrapper.simulate("click");
-        //fill expect~~ after implementing AddOutfit onclick function
+
+        // re-render component
+        component.update();
+        wrapper = component.find("#upload-image");
+        expect(wrapper.length).toBe(1);
     });
 
     it(`should set state(search_query and mode) properly on search input when writing`, () => {
