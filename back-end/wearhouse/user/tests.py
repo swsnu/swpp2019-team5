@@ -4,8 +4,6 @@ from .models import User
 import json
 
 # Create your tests here.
-
-
 class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(

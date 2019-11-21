@@ -4,6 +4,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import authenticate, login, logout
 from django.db.utils import IntegrityError
 
+
 from json import JSONDecodeError
 from .models import User
 import json
@@ -37,10 +38,12 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
+
 def signout(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             logout(request)
+
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
@@ -74,3 +77,4 @@ def user(request):
         return JsonResponse(response_user, status=200)
     else:
         return HttpResponseNotAllowed(['POST'])
+
