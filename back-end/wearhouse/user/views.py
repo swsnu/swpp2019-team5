@@ -57,10 +57,12 @@ def user(request):
         except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         try:
-            User.objects.create_user(
+            user = User.objects.create_user(
                 username=email, email=email, password=password)
+            login(request, user)  # Auto login user on signup
             return HttpResponse(status=201)
         except(IntegrityError):
+            # Same id already exists - need to pre-check in front end?
             return HttpResponse(status=400)
     if request.method == 'GET':
         if request.user.is_authenticated:

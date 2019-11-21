@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/index";
 
 import HomeButton from "../../Components/HomeButton/HomeButton";
 import Logout from "../Auth/Logout/Logout";
@@ -9,13 +8,10 @@ import Logout from "../Auth/Logout/Logout";
 import "./Header.scss";
 
 class Header extends React.Component {
-    componentDidMount() {
-        this.props.getLogin();
-    }
-
     shouldComponentUpdate() {
         return true;
     }
+
     onClickLogin = () => {
         this.props.history.push("/login");
     };
@@ -24,10 +20,18 @@ class Header extends React.Component {
         this.props.history.push("/signup");
     };
 
+    onClickHomeButton() {
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        } else {
+            this.props.history.push("/main");
+        }
+    }
+
     render() {
         return (
             <div id="header">
-                <HomeButton />
+                <HomeButton onClick={() => this.onClickHomeButton()} />
                 {this.props.isLoggedIn ? (
                     <Logout />
                 ) : (
@@ -61,15 +65,7 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getLogin: () => {
-            dispatch(actionCreators.getLogin());
-        },
-    };
-};
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(withRouter(Header));

@@ -38,7 +38,7 @@ export const logOut = () => {
         return axios.get("/api/user/logout/").then(res => {
             //TODO: divide cases according to login status code
             dispatch(logOut_(res.data));
-            dispatch(push("/login"));
+            dispatch(push("/main"));
         });
     };
 };

@@ -39,7 +39,7 @@ const itemState = {
 };
 
 const stubNullState = {};
-const mockStore = getMockStore(
+var mockStore = getMockStore(
     stubNullState,
     outfitState,
     itemState,
@@ -72,9 +72,22 @@ describe("App", () => {
         expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
-    it("should render", () => {
+    it("should redirect to browse when logged in", () => {
+        mockStore = getMockStore(
+            { isLoggedIn: true },
+            outfitState,
+            itemState,
+            stubNullState,
+            stubNullState,
+        );
+        app = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <App history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
         const component = mount(app);
-        history.push("/createOutfit");
         expect(component.find("App").length).toBe(1);
     });
 });

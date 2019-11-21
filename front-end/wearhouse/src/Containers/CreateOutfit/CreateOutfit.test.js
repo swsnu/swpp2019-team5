@@ -87,9 +87,7 @@ describe("<CreateOutfit />", () => {
 
         spyAxios_get = jest
             .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true, items: [] } }),
-            );
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -100,7 +98,7 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("set date properly", () => {

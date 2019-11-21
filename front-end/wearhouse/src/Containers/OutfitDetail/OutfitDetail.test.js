@@ -69,9 +69,7 @@ describe("<OutfitDetail />", () => {
 
         spyAxios_get = jest
             .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true } }),
-            );
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -82,7 +80,7 @@ describe("<OutfitDetail />", () => {
         const component = mount(outfitDetail);
         let wrapper = component.find("#outfit-detail");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should call onEdit", () => {
