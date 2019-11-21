@@ -26,7 +26,7 @@ def getWeather(request):
 
 def getSpecificWeather(request, timestamp=time):
     response = requests.get("https://api.darksky.net/forecast/"+DARK_API_KEY+"/"+latitude +
-                            ","+longditude+","+timestamp+"?exclude=[currently,minutely,hourly,alerts,flags]&units=si")
+                            ","+longditude+","+str(timestamp)+"?exclude=[currently,minutely,hourly,alerts,flags]&units=si")
     weatherData = response.json()
     abridgedWeather = {
         "summary": weatherData['daily']['data'][0]['summary'],

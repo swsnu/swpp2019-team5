@@ -9,12 +9,12 @@ import axios from "axios";
 import Login from "./Login";
 import { ConnectedRouter } from "connected-react-router";
 
-let stubInitialState = {};
+var stubInitialState = { isLoggedIn: false, userID: null };
 
-let mockStore = getMockStore(stubInitialState);
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
 
 describe("<Login />", () => {
-    let login, spyHistoryPush, spyAxios_post;
+    let login, spyHistoryPush, spyAxios_post, spyAxios_get;
 
     beforeEach(() => {
         login = (
@@ -34,6 +34,12 @@ describe("<Login />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
 
     afterEach(() => {
@@ -43,6 +49,7 @@ describe("<Login />", () => {
     it("should load properly", () => {
         const component = mount(login);
         let wrapper = component.find("#login");
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(wrapper.length).toBe(1);
     });
 
