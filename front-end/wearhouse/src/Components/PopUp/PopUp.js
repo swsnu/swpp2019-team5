@@ -1,9 +1,4 @@
 import React from "react";
-import {
-    faTimes /*, faCameraRetro */,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import "./PopUp.scss";
 
 class PopUp extends React.Component {
@@ -20,9 +15,9 @@ class PopUp extends React.Component {
             <div id="upload-image">
                 <div className="overlay"></div>
                 <div id="popup-container">
-                    <div id="upload-image-header">
+                    <div id="header">
                         <div className="header-column">
-                            <div id="upload-image-title">
+                            <div id="title">
                                 <p>{this.props.message}</p>
                             </div>
                         </div>

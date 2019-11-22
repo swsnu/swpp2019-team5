@@ -49,7 +49,7 @@ class OutfitDetail extends Component {
         return true;
     }
     componentDidMount() {
-        // this.props.getOutfit(this.props.match.params.id); before push .. erase //!
+        this.props.getOutfit(this.props.match.params.id);
         this.setState({ outfit: this.props.outfit });
     }
     onEdit = () => {

@@ -5,30 +5,43 @@ import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
-import CreateOutfit from "./CreateOutfit";
 import { ConnectedRouter } from "connected-react-router";
+import EditOutfit from "./EditOutfit";
 
 let stubInitialState_outfit = {
-    outfits: {
-        id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
-    },
+    outfits: [],
 
     selectedOutfit: {
         id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
+        image: null,
         satisfactionValue: 3,
-        date: "2019.11.7",
+        date: new Date(),
+        items: [
+            {
+                id: 1,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 2,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 3,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+            {
+                id: 4,
+                category: "UpperBody",
+                tags: ["red", "sheep-fur", "long"],
+            },
+        ],
+        weather: {
+            tempAvg: 10,
+            icon: "rain",
+        },
     },
 };
 
@@ -50,19 +63,13 @@ let mockStore = getMockStore(
     stubInitialState_outfit,
 );
 
-describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post;
+describe("<EditOutfit />", () => {
+    let editOutfit, spyHistoryPush, spyAxios_put;
     beforeEach(() => {
-        createOutfit = (
+        editOutfit = (
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
-                    <CreateOutfit
-                        items={stubInitialState_outfit.outfits.items}
-                        image=""
-                        outfit_id={1}
-                        newOutfit={stubInitialState_outfit.selectedOutfit}
-                        history={history}
-                    />
+                    <EditOutfit history={history} />
                 </ConnectedRouter>
             </Provider>
         );
@@ -73,8 +80,8 @@ describe("<CreateOutfit />", () => {
             };
         });
 
-        spyAxios_post = jest
-            .spyOn(axios, "post")
+        spyAxios_put = jest
+            .spyOn(axios, "put")
             .mockImplementation(() => Promise.resolve({}));
     });
 
@@ -83,28 +90,29 @@ describe("<CreateOutfit />", () => {
     });
 
     it("should load properly", () => {
-        const component = mount(createOutfit);
+        const component = mount(editOutfit);
         let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
     });
 
     it("set date properly", () => {
-        const component = mount(createOutfit);
+        const component = mount(editOutfit);
         let wrapper = component.find("#date-picker").at(1);
         wrapper.simulate("change", { target: { value: "2019/11/11" } });
-        wrapper = component.find(CreateOutfit.WrappedComponent).instance();
+        wrapper = component.find(editOutfit.WrappedComponent).instance();
+        expect(wrapper.state.date).toBe("1");
     });
 
-    it("should put newly created outfit", () => {
-        const component = mount(createOutfit);
+    it("should confirm edit", () => {
+        const component = mount(editOutfit);
         let wrapper = component.find("#confirm-create-outfit");
         wrapper.simulate("click");
-        expect(spyAxios_post).toHaveBeenCalledTimes(1);
+        expect(spyAxios_put).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
     it("should add item", () => {
-        const component = mount(createOutfit);
+        const component = mount(editOutfit);
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
 

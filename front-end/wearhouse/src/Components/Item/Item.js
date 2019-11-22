@@ -145,6 +145,7 @@ class Item extends Component {
                 />
             );
         });
+        auto_complete = <div id="option-group">{auto_complete}</div>;
         let option = itemOptions.find(
             c => c.value === this.props.item.category,
         );

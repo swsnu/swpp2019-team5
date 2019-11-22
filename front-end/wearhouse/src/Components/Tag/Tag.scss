@@ -9,7 +9,7 @@
     flex-wrap: nowrap;
     font-size: 13px;
     margin: 4px;
-    border-radius: 15px;
+    border-radius: 10%;
     cursor: default;
     width: fit-content;
     input {
@@ -21,8 +21,18 @@
     }
 }
 
-.delete-tag,
+.vertical-line {
+    margin-left: 4px;
+    font-size: 15px;
+    font-weight: 100;
+    color: #f8a9b6;
+}
+.delete-tag {
+    margin-left: 1px;
+
+    cursor: pointer;
+}
 .edit-tag {
-    margin: 0 2px;
+    margin-left: -3px;
     cursor: pointer;
 }

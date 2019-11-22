@@ -38,6 +38,7 @@ let stubInitialState = {
         ],
         satisfactionValue: 3,
         date: "2019.11.7",
+        weather: { icon: "rain" },
     },
 };
 

@@ -1,13 +1,13 @@
 #options-container {
-    border: solid 1px lightgray;
-    width: 550px;
+    width: 530px;
     display: flex;
     z-index: 1;
     background-color: white;
     &:hover {
-        background-color: adjust-hue($color: #fdf5f5, $degrees: 10);
+        background-color: adjust-hue($color: rgb(255, 245, 247), $degrees: 4);
     }
     .tag-in-outfit {
-        background-color: rgb(240, 218, 245);
+        background-color: rgb(248, 211, 222);
+        color: none;
     }
 }

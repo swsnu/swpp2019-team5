@@ -39,6 +39,15 @@
         margin: 10px;
     }
 
+    #option-group {
+        width: 549px;
+        max-height: 180px;
+        border: rgb(182, 180, 180) solid 1px;
+        border-bottom-right-radius: 3%;
+        border-bottom-left-radius: 3%;
+        overflow-y: scroll;
+    }
+
     .info-container {
         display: flex;
         align-items: center;

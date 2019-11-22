@@ -97,9 +97,6 @@ describe("<Item/>", () => {
 
     it("should change state", () => {
         const component = mount(item);
-        let buttonwrapper = component.find(".mode-controller").at(0);
-        buttonwrapper.simulate("click");
-        buttonwrapper.simulate("click");
         let count = component.find(".tag-in-outfit");
         expect(count.length).toBe(3); //doesn't actually work but
     });
