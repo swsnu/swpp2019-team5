@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
-import Header from "../../Header/Header";
 import "./Signup.scss";
 
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
+
+    componentDidMount() {
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        }
+    }
+
     onSignUp = userCredentials => {
         this.props.onSignUp(userCredentials);
     };
@@ -20,7 +26,6 @@ class Signup extends Component {
         let active = pwMatch && validEmail && this.state.password !== "";
         return (
             <div id="signup">
-                <Header />
                 <div id="signup-container">
                     <h1>Sign Up</h1>
                     <form id="signup-form">
@@ -90,6 +95,12 @@ class Signup extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.login.isLoggedIn,
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         onSignUp: userCredentials =>
@@ -98,6 +109,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(Signup);

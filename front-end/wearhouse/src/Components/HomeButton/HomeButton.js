@@ -5,18 +5,9 @@ import logo from "./Logo_point.png";
 import "./HomeButton.scss";
 
 class HomeButton extends React.Component {
-    onClickHomeButton = () => {
-        this.props.history.push("/main");
-    };
-
     render() {
         return (
-            <div
-                id="homebutton"
-                onClick={() => {
-                    this.onClickHomeButton();
-                }}
-            >
+            <div id="homebutton" onClick={this.props.onClick}>
                 <img src={logo} alt="Wearhouse logo button" />
             </div>
         );

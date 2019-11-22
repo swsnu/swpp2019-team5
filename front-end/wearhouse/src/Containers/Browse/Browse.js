@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
-import Header from "../Header/Header";
 import Recommendation from "../Recommendation/Recommendation";
 
 import * as actionCreators from "../../store/actions/index";
@@ -68,7 +67,6 @@ class Browse extends React.Component {
         }
         return (
             <div id="browse">
-                <Header />
                 <div id="search-container">
                     <input
                         id="search-input"
