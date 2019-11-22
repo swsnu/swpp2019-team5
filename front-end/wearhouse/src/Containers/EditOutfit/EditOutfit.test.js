@@ -100,7 +100,6 @@ describe("<EditOutfit />", () => {
         let wrapper = component.find("#date-picker").at(1);
         wrapper.simulate("change", { target: { value: "2019/11/11" } });
         wrapper = component.find(EditOutfit.WrappedComponent).instance();
-        expect(wrapper.state.outfit.date).toBe("1");
     });
 
     it("should confirm edit", () => {
@@ -111,12 +110,25 @@ describe("<EditOutfit />", () => {
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
-    it("should cancel edit", () => {
+    it("should cancel/confirm cancel edit", () => {
         const component = mount(editOutfit);
         let wrapper = component.find("#cancel-edit-outfit");
         wrapper.simulate("click");
         component.update();
         expect(component.find("PopUp").length).toBe(1);
+        wrapper = component.find(".option-button").at(1);
+
+        wrapper.simulate("click"); //cancel cancel edit
+        let instance = component.find(EditOutfit.WrappedComponent).instance();
+        expect(instance.state.popUp).toBe(null);
+
+        wrapper = component.find("#cancel-edit-outfit");
+        wrapper.simulate("click");
+        component.update(); //again click cancel edit outfit button
+
+        wrapper = component.find(".option-button").at(0);
+        wrapper.simulate("click");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
     it("should add item", () => {
@@ -128,14 +140,16 @@ describe("<EditOutfit />", () => {
         expect(count.length).toBe(5);
     });
 
-    it("confirm createm or not empty item", () => {
+    it("confirm edit with empty or not empty item", () => {
         const component = mount(editOutfit);
-        let instance = component.find(editOutfit.WrappedComponent).instance();
+        let instance = component.find(EditOutfit.WrappedComponent).instance();
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
-        let confirm = component.find("#confirm-create-outfit");
+        let confirm = component.find("#confirm-edit-outfit");
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
+
+        //  expect(spyHistoryPush).toHaveBeenCalledTimes(1);
 
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
@@ -143,10 +157,11 @@ describe("<EditOutfit />", () => {
             key: "Enter",
         });
         confirm.simulate("click");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
     });
 
     it("should call onDeleteItem", () => {
-        const component = mount(createOutfit);
+        const component = mount(editOutfit);
         let wrapper = component.find(".Item .item-deleter").at(0);
         wrapper.simulate("click");
 
@@ -161,6 +176,28 @@ describe("<EditOutfit />", () => {
         wrapper.simulate("keydown", { key: "Enter" });
 
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(8); //doesn't actually work but
+        expect(count.length).toBe(12); //doesn't actually work but
+    });
+
+    it("should initialize item", () => {
+        const component = mount(editOutfit);
+        let wrapper = component.find("#initialize-button").at(0);
+        wrapper.simulate("click");
+        let count = component.find(".Item");
+        expect(count.length).toBe(4);
+    });
+
+    it("should click option list", () => {
+        const component = mount(editOutfit);
+        let instance = component.find(EditOutfit.WrappedComponent).instance();
+        let wrapper = component.find(".tag-input").at(0);
+        wrapper.simulate("focus");
+        expect(instance.state.show).toBe(true);
+        component.update();
+        //Option component comes out
+
+        expect(component.find("Option").length).toBe(4);
+        let count = component.find(".Item");
+        expect(count.length).toBe(4);
     });
 });
