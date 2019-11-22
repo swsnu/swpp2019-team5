@@ -24,12 +24,10 @@ describe("<AddOutfit/>", () => {
 
     it("should close", () => {
         const component = mount(addOutfit);
-        let instance = component.find(AddOutfit).instance();
         let wrapper = component.find("#add-outfit-button");
         wrapper.simulate("click");
         wrapper = component.find("#cancel-upload-image");
         wrapper.simulate("click");
-        console.log(instance);
         expect(component.find("#add-outfit").length).toBe(1);
     });
 });

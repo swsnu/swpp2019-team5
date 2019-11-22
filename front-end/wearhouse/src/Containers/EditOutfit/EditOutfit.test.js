@@ -91,7 +91,7 @@ describe("<EditOutfit />", () => {
 
     it("should load properly", () => {
         const component = mount(editOutfit);
-        let wrapper = component.find("#create-outfit").at(0);
+        let wrapper = component.find(".EditOutfit");
         expect(wrapper.length).toBe(1);
     });
 
@@ -99,16 +99,24 @@ describe("<EditOutfit />", () => {
         const component = mount(editOutfit);
         let wrapper = component.find("#date-picker").at(1);
         wrapper.simulate("change", { target: { value: "2019/11/11" } });
-        wrapper = component.find(editOutfit.WrappedComponent).instance();
-        expect(wrapper.state.date).toBe("1");
+        wrapper = component.find(EditOutfit.WrappedComponent).instance();
+        expect(wrapper.state.outfit.date).toBe("1");
     });
 
     it("should confirm edit", () => {
         const component = mount(editOutfit);
-        let wrapper = component.find("#confirm-create-outfit");
+        let wrapper = component.find("#confirm-edit-outfit");
         wrapper.simulate("click");
         expect(spyAxios_put).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should cancel edit", () => {
+        const component = mount(editOutfit);
+        let wrapper = component.find("#cancel-edit-outfit");
+        wrapper.simulate("click");
+        component.update();
+        expect(component.find("PopUp").length).toBe(1);
     });
 
     it("should add item", () => {
@@ -120,9 +128,9 @@ describe("<EditOutfit />", () => {
         expect(count.length).toBe(5);
     });
 
-    it("confirm create with empty item or not empty item", () => {
-        const component = mount(createOutfit);
-        let instance = component.find(CreateOutfit.WrappedComponent).instance();
+    it("confirm createm or not empty item", () => {
+        const component = mount(editOutfit);
+        let instance = component.find(editOutfit.WrappedComponent).instance();
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
         let confirm = component.find("#confirm-create-outfit");
@@ -147,7 +155,7 @@ describe("<EditOutfit />", () => {
     });
 
     it("should call onApplyEditItem", () => {
-        const component = mount(createOutfit);
+        const component = mount(editOutfit);
         let wrapper = component.find(".Item .tag-input").at(0);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keydown", { key: "Enter" });

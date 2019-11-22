@@ -178,7 +178,7 @@ class EditOutfit extends Component {
                             <div id="add-confirm-button-container">
                                 <button
                                     onClick={this.addItemHandler}
-                                    id="add-item-button"
+                                    id="add-item"
                                 >
                                     Add Item
                                 </button>
