@@ -66,9 +66,9 @@ class LandingPage extends Component {
                             <div className="features-icon">
                                 <FontAwesomeIcon icon={faTags} />
                             </div>
-                            A 3-level classification system where users can
-                            assign and edit categories as specifically or as
-                            broadly as they want. <br />
+                            <h4>3-level classification</h4>
+                            Users can assign and edit categories as specifically
+                            or as broadly as they want. <br />
                             {/* Users are able to use the following classification
                             levels to organize their wardrobe.
                             <ul>
@@ -81,14 +81,15 @@ class LandingPage extends Component {
                             <div className="features-icon">
                                 <FontAwesomeIcon icon={faLaptopCode} />
                             </div>
-                            Auto-tagging and auto-characterization system
-                            provided through a Machine Learning based Image
-                            Recognition Algorithm
+                            <h4>Auto-tagging</h4>
+                            Automatic characterization provided through a
+                            Machine Learning based Image Recognition Algorithm
                         </div>
                         <div className="features-info">
                             <div className="features-icon">
                                 <FontAwesomeIcon icon={faCloudSun} />
                             </div>
+                            <h4>Outfit Recommendation</h4>
                             Weather and satisfaction-based outfit classificaton
                             and recommendation to free you from the burden of
                             choosing for the weather.
