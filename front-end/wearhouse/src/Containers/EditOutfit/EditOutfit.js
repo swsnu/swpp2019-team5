@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
 
-import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
@@ -125,7 +124,6 @@ class EditOutfit extends Component {
         });
         return (
             <div className="EditOutfit">
-                <Header />
                 {this.state.popUp}
                 <div id="edit-outfit-window">
                     <div className="left-window">
