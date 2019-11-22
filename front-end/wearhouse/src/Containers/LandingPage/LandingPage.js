@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import Header from "../Header/Header";
-
 import image from "./fashion-images.svg";
 import "./LandingPage.scss";
 class LandingPage extends Component {
@@ -16,7 +14,6 @@ class LandingPage extends Component {
     render() {
         return (
             <div id="Main">
-                <Header />
                 <div className="intro-content">
                     <div id="intro-text">
                         Get your wardrobe organized with <span>WearHouse</span>

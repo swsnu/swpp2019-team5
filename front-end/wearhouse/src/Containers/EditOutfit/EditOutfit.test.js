@@ -7,7 +7,6 @@ import "../../setupTests";
 import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 import EditOutfit from "./EditOutfit";
-import Item from "../../Components/Item/Item";
 
 let stubInitialState_outfit = {
     outfits: [],

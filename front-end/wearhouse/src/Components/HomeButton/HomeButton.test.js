@@ -11,7 +11,7 @@ var stubInitialState = {};
 var mockStore = getMockStore(stubInitialState);
 
 describe("<HomeButton />", () => {
-    let home, spyHistoryPush;
+    let home;
     beforeEach(() => {
         home = (
             <Provider store={mockStore}>
@@ -20,24 +20,11 @@ describe("<HomeButton />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
     });
 
     it("should render properly", () => {
         const component = mount(home);
         let wrapper = component.find("#homebutton");
         expect(wrapper.length).toBe(1);
-    });
-
-    it("should redirect when  button is clicked", () => {
-        const component = mount(home);
-        let wrapper = component.find("#homebutton");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 });

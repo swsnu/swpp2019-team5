@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-
+import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 
 import App from "./App";
@@ -39,7 +39,7 @@ const itemState = {
 };
 
 const stubNullState = {};
-const mockStore = getMockStore(
+var mockStore = getMockStore(
     stubNullState,
     outfitState,
     itemState,
@@ -49,6 +49,7 @@ const mockStore = getMockStore(
 
 describe("App", () => {
     let app;
+    let spyAxios_get;
     beforeEach(() => {
         app = (
             <Provider store={mockStore}>
@@ -57,15 +58,36 @@ describe("App", () => {
                 </ConnectedRouter>
             </Provider>
         );
-    });
-    it("should render", () => {
-        const component = mount(app);
-        expect(component.find("App").length).toBe(1);
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() =>
+                Promise.resolve({ data: { isLoggedIn: true } }),
+            );
     });
 
     it("should render", () => {
         const component = mount(app);
-        history.push("/createOutfit");
+        expect(component.find("App").length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
+    });
+
+    it("should redirect to browse when logged in", () => {
+        mockStore = getMockStore(
+            { isLoggedIn: true },
+            outfitState,
+            itemState,
+            stubNullState,
+            stubNullState,
+        );
+        app = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <App history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        const component = mount(app);
         expect(component.find("App").length).toBe(1);
     });
 });

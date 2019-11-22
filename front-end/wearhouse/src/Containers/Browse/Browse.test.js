@@ -41,7 +41,15 @@ let stubWeatherState = {
     selectedWeather: null,
 };
 
-var mockStore = getMockStore({}, {}, stubOutfitState, {}, stubWeatherState);
+var stubLoginState = { isLoggedIn: false, userID: null };
+
+var mockStore = getMockStore(
+    stubLoginState,
+    {},
+    stubOutfitState,
+    {},
+    stubWeatherState,
+);
 
 describe("<Browse />", () => {
     let outfitList, spyAxios_get, spyHistoryPush;
@@ -72,11 +80,9 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit");
         expect(wrapper.length).toBe(1);
-        wrapper = component.find("Header");
-        expect(wrapper.length).toBe(1);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toBeCalledTimes(3);
+        expect(spyAxios_get).toHaveBeenCalledTimes(3);
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
@@ -86,9 +92,6 @@ describe("<Browse />", () => {
     });
 
     it(`should call 'onClickOutfit'`, () => {
-        const spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");

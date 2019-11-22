@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
-import Header from "../../Header/Header";
 import "./Login.scss";
 
 class Login extends Component {
@@ -10,8 +9,15 @@ class Login extends Component {
         email: "",
         password: "",
     };
-    onLogin = () => {
-        this.props.onLogIn(this.state);
+
+    componentDidMount() {
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        }
+    }
+
+    onLogin = userCredentials => {
+        this.props.onLogIn(userCredentials);
     };
 
     onClickSignUp = () => {
@@ -22,7 +28,6 @@ class Login extends Component {
         let active = this.state.email !== "" && this.state.password !== "";
         return (
             <div id="login">
-                <Header />
                 <div id="login-container">
                     <h1>Log In</h1>
                     <form id="login-form">
@@ -36,7 +41,7 @@ class Login extends Component {
                             id="email-input"
                             onKeyDown={e => {
                                 if (e.keyCode === 13) {
-                                    this.onLogin();
+                                    this.onLogin(this.state);
                                 }
                             }}
                         ></input>
@@ -50,7 +55,8 @@ class Login extends Component {
                             }}
                             onKeyDown={e => {
                                 if (e.keyCode === 13) {
-                                    this.onLogin();
+                                    e.preventDefault();
+                                    this.onLogin(this.state);
                                 }
                             }}
                         ></input>
@@ -58,7 +64,7 @@ class Login extends Component {
                     <button
                         id="login-button"
                         disabled={!active}
-                        onClick={() => this.onLogin()}
+                        onClick={() => this.onLogin(this.state)}
                     >
                         Log In
                     </button>
@@ -76,13 +82,14 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.login.isLoggedIn,
+        isLoggedIn: state.login.isLoggedIn,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogIn: () => dispatch(actionCreators.logIn()),
+        onLogIn: userCredentials =>
+            dispatch(actionCreators.logIn(userCredentials)),
     };
 };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-import Header from "../Header/Header";
+
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Satisfaction from "../../Components/Satisfaction/Satisfaction";
@@ -67,7 +67,6 @@ class OutfitDetail extends Component {
         console.log(this.state.outfit);
         return (
             <div id="outfit-detail">
-                <Header />
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <Satisfaction

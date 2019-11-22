@@ -9,9 +9,9 @@ import axios from "axios";
 import Login from "./Login";
 import { ConnectedRouter } from "connected-react-router";
 
-let stubInitialState = {};
+var stubInitialState = { isLoggedIn: false, userID: null };
 
-let mockStore = getMockStore(stubInitialState);
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
 
 describe("<Login />", () => {
     let login, spyHistoryPush, spyAxios_post;
@@ -113,6 +113,19 @@ describe("<Login />", () => {
         const component = mount(login);
         let wrapper = component.find("#login-container #signup-button");
         wrapper.simulate("click");
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should redirect to /browse", () => {
+        mockStore = getMockStore({ isLoggedIn: true }, {}, {}, {}, {});
+        login = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <Login history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        mount(login);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 });
