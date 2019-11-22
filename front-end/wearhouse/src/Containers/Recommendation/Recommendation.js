@@ -35,7 +35,6 @@ var iconText = {
 };
 class Recommendation extends React.Component {
     componentDidMount = () => {
-        this.props.getAllOufits(); // This is a duplicate call
         this.props.getWeather();
     };
 

@@ -11,7 +11,6 @@ import image from "./fashion-images.svg";
 import "./LandingPage.scss";
 class LandingPage extends Component {
     componentDidMount = () => {
-        this.props.getLogin();
         if (this.props.isLoggedIn) {
             this.props.history.push("/browse");
         }
@@ -126,15 +125,7 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getLogin: () => {
-            dispatch(actionCreators.getLogin());
-        },
-    };
-};
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(LandingPage);
