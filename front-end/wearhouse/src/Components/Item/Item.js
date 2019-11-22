@@ -113,10 +113,8 @@ class Item extends Component {
     handleAutoComplete = e => {
         let option_list = this.state.tags.concat(e.target.value);
         console.log(option_list);
-        //아마도 actionCreator에서 get all items로 whoe list를 가져와야할듯
-        //filter whole item lists that mathes to input ..
-        //and then set to the option_list
-        //contains 함수 써서 ~~ ^_^
+        //should implement autocomplete feature (from TaeWon's work)
+        //autocomplete candidates should be set in option list
     };
 
     handleBlur = () => {
