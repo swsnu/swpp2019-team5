@@ -6,10 +6,6 @@ class PopUp extends React.Component {
         this.props.onClosePopUp();
     };
 
-    onConfirmImage = () => {
-        // send request to backend
-    };
-
     render() {
         return (
             <div id="upload-image">

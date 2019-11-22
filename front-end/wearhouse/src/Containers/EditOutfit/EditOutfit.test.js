@@ -7,6 +7,7 @@ import "../../setupTests";
 import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 import EditOutfit from "./EditOutfit";
+import Item from "../../Components/Item/Item";
 
 let stubInitialState_outfit = {
     outfits: [],
@@ -189,15 +190,25 @@ describe("<EditOutfit />", () => {
 
     it("should click option list", () => {
         const component = mount(editOutfit);
-        let instance = component.find(EditOutfit.WrappedComponent).instance();
         let wrapper = component.find(".tag-input").at(0);
         wrapper.simulate("focus");
-        expect(instance.state.show).toBe(true);
         component.update();
         //Option component comes out
 
-        expect(component.find("Option").length).toBe(4);
-        let count = component.find(".Item");
-        expect(count.length).toBe(4);
+        wrapper = component.find("#initialize-button").at(0);
+        wrapper.simulate("click");
+        component.update();
+        //Option component disappear
+
+        wrapper = component.find(".tag-input").at(0);
+        wrapper.simulate("focus");
+        component.update();
+        //Option component comes out again
+
+        wrapper = component.find("Option");
+        expect(wrapper.length).toBe(4);
+        wrapper.at(0).simulate("mouseLeave");
+        wrapper.at(0).simulate("mouseOver");
+        wrapper.at(0).simulate("click");
     });
 });

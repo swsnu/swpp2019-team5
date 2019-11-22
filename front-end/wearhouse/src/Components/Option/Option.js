@@ -3,9 +3,6 @@ import Tag from "../Tag/Tag";
 import "./Option.scss";
 class Option extends Component {
     //props = onClick, option = op(item객체),
-    handleClick = () => {
-        console.log("눌림");
-    };
     render() {
         let tags = this.props.option.tags.map((tag, index) => {
             return (
