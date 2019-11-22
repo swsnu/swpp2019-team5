@@ -154,8 +154,8 @@ describe("<EditOutfit />", () => {
 
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keypress", {
-            key: "Enter",
+        wrapper.simulate("keyDown", {
+            keyCode: 13,
         });
         confirm.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(2);
@@ -174,10 +174,10 @@ describe("<EditOutfit />", () => {
         const component = mount(editOutfit);
         let wrapper = component.find(".Item .tag-input").at(0);
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", { key: "Enter" });
+        wrapper.simulate("keyDown", { keyCode: 13 });
 
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(12); //doesn't actually work but
+        expect(count.length).toBe(13); //doesn't actually work but
     });
 
     it("should initialize item", () => {
@@ -202,11 +202,14 @@ describe("<EditOutfit />", () => {
 
         wrapper = component.find(".tag-input").at(0);
         wrapper.simulate("focus");
+        wrapper.simulate("blur");
+        wrapper.simulate("focus");
         component.update();
         //Option component comes out again
 
         wrapper = component.find("Option");
         expect(wrapper.length).toBe(4);
+        wrapper = component.find("#options-container");
         wrapper.at(0).simulate("mouseLeave");
         wrapper.at(0).simulate("mouseOver");
         wrapper.at(0).simulate("click");
