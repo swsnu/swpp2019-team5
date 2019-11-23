@@ -23,7 +23,7 @@ class Item extends Component {
     state = {
         category: "default",
         tags: this.props.item.tags,
-        todo: "typeMode", //the mode where user enters after clicing button
+        todo: "editEnabled", //the mode where user enters after clicing button
     };
 
     componentDidMount() {
@@ -46,24 +46,15 @@ class Item extends Component {
         let tags = this.state.tags;
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
+        if (tags.length < 3) {
+            this.setState({ todo: "editEnabled" });
+        }
         this.props.applyEdit({
             category: this.state.category,
             tags: tags,
         });
     }
 
-    //Edit Tag
-    onEditTag(tag, edit_tag) {
-        let tags = this.state.tags;
-        tags = tags.map(tg => {
-            return tg === tag ? edit_tag : tg;
-        });
-        this.setState({ tags: tags });
-        this.props.applyEdit({
-            category: this.state.category,
-            tags: tags,
-        });
-    }
     handleItemDelete() {
         this.props.delete();
         this.setState({
@@ -74,13 +65,23 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
+        if (
+            (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&
+            e.target.value !== ""
+        ) {
             tags.push(e.target.value);
             this.setState({ tags: tags });
             e.target.value = "";
+
+            if (tags.length >= 3) {
+                this.setState({ todo: "editDisabled" });
+            }
         } else if (e.target.value === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({ tags: tags });
+            if (tags.length < 3) {
+                this.setState({ todo: "editEnabled" });
+            }
         }
         this.props.applyEdit({
             category: this.state.category,
@@ -88,15 +89,15 @@ class Item extends Component {
         });
     }
 
-    //convert the todo ("Add tag" or "Finish")
+    //convert the todo ("editDisabled" or "Finish")
     changeMode = () => {
-        if (this.state.todo === "typeMode")
+        if (this.state.todo === "editEnabled")
             this.setState({
-                todo: "Add tag",
+                todo: "editDisabled",
             });
         else
             this.setState({
-                todo: "typeMode",
+                todo: "editEnabled",
             });
     };
 
@@ -109,14 +110,13 @@ class Item extends Component {
                     key={index}
                     editMode={this.props.editMode}
                     delete={() => this.onDeleteTag(tag)}
-                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
         let todo = null;
         let edit_mode_options = null;
         let tag_input = null;
-        if (this.props.editMode && this.state.todo === "typeMode") {
+        if (this.props.editMode && this.state.todo === "editEnabled") {
             tag_input = (
                 <input
                     className="tag-input"
