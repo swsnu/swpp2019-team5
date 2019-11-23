@@ -52,8 +52,10 @@
     }
 
     #selected-image-file {
-        width: 90%;
+        width: 80%;
+        max-width: 200px;
         height: auto;
+        max-height: 280px;
         margin: 20px auto;
         margin-top: 60px;
     }
