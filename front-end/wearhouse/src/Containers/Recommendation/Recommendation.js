@@ -142,7 +142,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOufits: () => dispatch(actionCreators.getOutfits()),
         getWeather: () => dispatch(actionCreators.getWeather()),
         selectOutfit: outfit =>
             dispatch(actionCreators.getSpecificOutfit(outfit.id)),
