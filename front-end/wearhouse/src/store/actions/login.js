@@ -3,13 +3,17 @@ import axios from "axios";
 
 import { push } from "connected-react-router";
 
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.withCredentials = true;
+
 export const getLogIn_ = data => {
     return { type: actionTypes.GET_LOGIN, login: data.isLoggedIn };
 };
 
 export const getLogin = () => {
     return dispatch => {
-        return axios.get("api/user").then(res => {
+        return axios.get("api/user/").then(res => {
             dispatch(getLogIn_(res.data));
         });
     };
