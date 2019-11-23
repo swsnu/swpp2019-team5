@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+    faSearch,
+    faChevronDown,
+    faChevronUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Outfit from "../../Components/Outfit/Outfit";
@@ -15,10 +19,13 @@ import "./Browse.scss";
 //calendar-mode : button (o)
 //outfit-preview : outfit (?)
 //함수 : isSearchMode(o), onClickOutfit(o), onSearchInput(o) , onClickCalendar(o)
+
 class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
+        searchMode: "Outfit",
+        searchOptionsVisible: false,
     };
 
     componentDidMount() {
@@ -40,6 +47,23 @@ class Browse extends React.Component {
         }
     };
 
+    showSearchOptions = () => {
+        if (this.state.searchOptionsVisible) {
+            this.setState({
+                searchOptionsVisible: false,
+            });
+        } else {
+            this.setState({
+                searchOptionsVisible: true,
+            });
+        }
+    };
+
+    onSelectSearchOption = value => {
+        this.setState({ searchMode: value });
+        this.showSearchOptions();
+    };
+
     render() {
         let container = null;
 
@@ -57,9 +81,15 @@ class Browse extends React.Component {
 
         switch (this.state.mode) {
             case "browse":
-                container = <div id="outfit-list">{outfits}</div>;
+                container = (
+                    <div id="outfit-list">
+                        <Recommendation />
+                        {outfits}
+                    </div>
+                );
                 break;
             case "search":
+                container = <div id="outfit-list"></div>;
                 /*show the search result : container = ~~~ */
                 break;
             default:
@@ -68,6 +98,44 @@ class Browse extends React.Component {
         return (
             <div id="browse">
                 <div id="search-container">
+                    <div id="select-searchmode">
+                        <div id="selected-option">
+                            <div id="selected-text">
+                                {this.state.searchMode}
+                            </div>
+                            <div
+                                id="selectButton"
+                                onClick={() => this.showSearchOptions()}
+                            >
+                                {!this.state.searchOptionsVisible ? (
+                                    <FontAwesomeIcon icon={faChevronDown} />
+                                ) : (
+                                    <FontAwesomeIcon icon={faChevronUp} />
+                                )}
+                            </div>
+                        </div>
+                        <div
+                            id="dropdown-selection"
+                            className={this.state.searchOptionsVisible.toString()}
+                        >
+                            <div
+                                className="option"
+                                onClick={() =>
+                                    this.onSelectSearchOption("Outfit")
+                                }
+                            >
+                                Outfit
+                            </div>
+                            <div
+                                className="option"
+                                onClick={() =>
+                                    this.onSelectSearchOption("Item")
+                                }
+                            >
+                                Item
+                            </div>
+                        </div>
+                    </div>
                     <input
                         id="search-input"
                         value={this.state.search_query}
@@ -81,7 +149,6 @@ class Browse extends React.Component {
                 <button id="calendar-button" onClick={this.onClickCalendar}>
                     view calendar
                 </button>
-                <Recommendation />
                 {container}
                 {/*To */}
                 <AddOutfit />
