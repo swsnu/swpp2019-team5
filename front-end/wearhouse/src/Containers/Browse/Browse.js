@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Recommendation from "../Recommendation/Recommendation";
+import Tag from "../../Components/Tag/Tag";
 
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
@@ -24,6 +25,7 @@ class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
+        searchArray: [],
         searchMode: "Outfit",
         searchOptionsVisible: false,
     };
@@ -40,7 +42,7 @@ class Browse extends React.Component {
     };
     onSearchInput = e => {
         this.setState({ search_query: e.target.value });
-        if (e.target.value.length >= 1) {
+        if (e.target.value.length >= 1 || this.state.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
         } else {
             this.setState({ mode: "browse" });
@@ -64,6 +66,19 @@ class Browse extends React.Component {
         this.showSearchOptions();
     };
 
+    addTag = e => {
+        let tags = this.state.searchArray;
+        if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
+            tags.push(e.target.value);
+            this.setState({ searchArray: tags });
+            e.target.value = "";
+            this.setState({ search_query: "" });
+        } else if (this.state.search_query === "" && e.keyCode === 8) {
+            tags.pop();
+            this.setState({ searchArray: tags });
+        }
+    };
+
     render() {
         let container = null;
 
@@ -75,6 +90,19 @@ class Browse extends React.Component {
                     satisfactionValue={outfit.satisfactionValue}
                     date={outfit.date}
                     clicked={() => this.onClickOutfit(outfit)}
+                />
+            );
+        });
+
+        let searchQuery = this.state.searchArray.map((tag, index) => {
+            return (
+                <Tag
+                    className="tag"
+                    tag={tag}
+                    key={index}
+                    editMode={this.props.editMode}
+                    delete={() => this.onDeleteTag(tag)}
+                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
@@ -136,18 +164,22 @@ class Browse extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <input
-                        id="search-input"
-                        value={this.state.search_query}
-                        onChange={e => this.onSearchInput(e)}
-                        placeholder="Search by tag..."
-                    />{" "}
+                    <div id="search-input">
+                        <div id="search-input-queries">{searchQuery}</div>
+                        <input
+                            id="search-input-text"
+                            value={this.state.search_query}
+                            onKeyDown={e => this.addTag(e)}
+                            onChange={e => this.onSearchInput(e)}
+                            placeholder="Search by tag..."
+                        />
+                    </div>
                     <button id="search-button">
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
                 <button id="calendar-button" onClick={this.onClickCalendar}>
-                    view calendar
+                    Calendar
                 </button>
                 {container}
                 {/*To */}

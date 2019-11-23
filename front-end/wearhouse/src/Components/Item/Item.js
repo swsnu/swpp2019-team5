@@ -74,10 +74,13 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (e.keyCode === 13) {
-            tags = tags.concat(e.target.value);
+        if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
+            tags.push(e.target.value);
             this.setState({ tags: tags });
             e.target.value = "";
+        } else if (e.target.value === "" && e.keyCode === 8) {
+            tags.pop();
+            this.setState({ tags: tags });
         }
         this.props.applyEdit({
             category: this.state.category,

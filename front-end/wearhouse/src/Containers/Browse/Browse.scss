@@ -63,16 +63,22 @@ $templatecolor: rgba(127, 255, 212, 0.3);
             }
         }
         #search-input {
-            font-size: $fontsize;
             margin: 0;
             width: 450px;
-            border: none;
-            padding: 10px;
+            display: flex;
+            background-color: white;
+            #search-input-queries {
+                display: flex;
+                align-items: center;
+            }
+            #search-input-text {
+                font-size: $fontsize;
 
-            background-color: rgba(211, 211, 211, 0.2);
-            &:focus {
-                outline: none;
-                background-color: white;
+                border: none;
+                padding: 10px;
+                &:focus {
+                    outline: none;
+                }
             }
         }
 

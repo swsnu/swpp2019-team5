@@ -127,4 +127,33 @@ describe("<Browse />", () => {
         expect(CreateInstance.state.search_query).toEqual("");
         expect(CreateInstance.state.mode).toEqual("browse");
     });
+
+    it("should change searchOptionsVisible state", () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("#selectButton");
+        wrapper.simulate("click");
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        expect(CreateInstance.state.searchOptionsVisible).toEqual(true);
+
+        wrapper.simulate("click");
+        expect(CreateInstance.state.searchOptionsVisible).toEqual(false);
+    });
+
+    it("should change searchMode value when clicked", () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("#selectButton");
+        wrapper.simulate("click");
+
+        var clicker = component.find(".option").at(0);
+        clicker.simulate("click");
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        expect(CreateInstance.state.searchMode).toEqual("Outfit");
+        clicker = component.find(".option").at(1);
+        clicker.simulate("click");
+        expect(CreateInstance.state.searchMode).toEqual("Item");
+    });
 });
