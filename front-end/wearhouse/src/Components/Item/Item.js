@@ -89,18 +89,6 @@ class Item extends Component {
         });
     }
 
-    //convert the todo ("editDisabled" or "Finish")
-    changeMode = () => {
-        if (this.state.todo === "editEnabled")
-            this.setState({
-                todo: "editDisabled",
-            });
-        else
-            this.setState({
-                todo: "editEnabled",
-            });
-    };
-
     render() {
         let tags = this.state.tags.map((tag, index) => {
             return (
@@ -113,7 +101,6 @@ class Item extends Component {
                 />
             );
         });
-        let todo = null;
         let edit_mode_options = null;
         let tag_input = null;
         if (this.props.editMode && this.state.todo === "editEnabled") {
@@ -126,21 +113,15 @@ class Item extends Component {
                     onKeyDown={e => this.addTag(e)}
                 ></input>
             );
-            todo = <FontAwesomeIcon icon={faCheck} />;
-        } else todo = <FontAwesomeIcon icon={faPlus} />;
+        }
         if (this.props.editMode) {
             edit_mode_options = (
-                <>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
-                    </div>
-                    <div
-                        className="item-deleter"
-                        onClick={this.handleItemDelete.bind(this)}
-                    >
-                        <FontAwesomeIcon icon={faTimes} />
-                    </div>
-                </>
+                <div
+                    className="item-deleter"
+                    onClick={this.handleItemDelete.bind(this)}
+                >
+                    <FontAwesomeIcon icon={faTimes} />
+                </div>
             );
         }
         return (

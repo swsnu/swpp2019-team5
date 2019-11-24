@@ -161,6 +161,10 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         const wrapper = component.find("input");
         wrapper.simulate("change", { target: { value: "black" } });
+
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
         wrapper.simulate("keydown", {
             keyCode: 13,
         });
