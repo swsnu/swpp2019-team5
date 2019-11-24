@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import "./Item.scss";
-import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";

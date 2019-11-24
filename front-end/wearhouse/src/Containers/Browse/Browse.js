@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
+import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
 
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -15,14 +16,19 @@ import Tag from "../../Components/Tag/Tag";
 
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
-
 class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
-        searchArray: [],
-        searchMode: "Outfit",
+
         searchOptionsVisible: false,
+        searchOptions: {
+            searchMode: "Outfit",
+            searchArray: [],
+            tempMax: 50,
+            tempMin: -30,
+            satisfaction: 0,
+        },
     };
 
     componentDidMount() {
@@ -38,7 +44,10 @@ class Browse extends React.Component {
 
     onSearchInput = e => {
         this.setState({ search_query: e.target.value });
-        if (e.target.value.length >= 1 || this.state.searchArray.length >= 1) {
+        if (
+            e.target.value.length >= 1 ||
+            this.state.searchOptions.searchArray.length >= 1
+        ) {
             this.setState({ mode: "search" }); //check whether search query exists
         } else {
             this.setState({ mode: "browse" });
@@ -58,20 +67,54 @@ class Browse extends React.Component {
     };
 
     onSelectSearchOption = value => {
-        this.setState({ searchMode: value });
+        this.setState({
+            searchOptions: { ...this.state.searchOptions, searchMode: value },
+        });
         this.showSearchOptions();
     };
 
+    onTempChange = (event, value) => {
+        console.log(value);
+        this.setState({
+            searchOptions: {
+                ...this.state.searchOptions,
+                tempMax: value[0],
+                tempMin: value[1],
+            },
+        });
+    };
+
+    // const [value, setValue] = React.useState('female');
+
+    handleRadioChange = event => {
+        this.setState({
+            searchOptions: {
+                ...this.state.searchOptions,
+                satisfaction: event.target.value,
+            },
+        });
+    };
+
     addTag = e => {
-        let tags = this.state.searchArray;
+        let tags = this.state.searchOptions.searchArray;
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
             tags.push(this.state.search_query);
-            this.setState({ searchArray: tags });
+            this.setState({
+                searchOptions: {
+                    ...this.state.searchOptions,
+                    searchArray: tags,
+                },
+            });
             e.target.value = "";
             this.setState({ search_query: "" });
         } else if (this.state.search_query === "" && e.keyCode === 8) {
             tags.pop();
-            this.setState({ searchArray: tags });
+            this.setState({
+                searchOptions: {
+                    ...this.state.searchOptions,
+                    searchArray: tags,
+                },
+            });
             if (tags.length === 0) {
                 this.setState({ mode: "browse" });
             }
@@ -93,9 +136,11 @@ class Browse extends React.Component {
             );
         });
 
-        let searchQuery = this.state.searchArray.map((tag, index) => {
-            return <Tag className="tag" tag={tag} key={index} />;
-        });
+        let searchQuery = this.state.searchOptions.searchArray.map(
+            (tag, index) => {
+                return <Tag className="tag" tag={tag} key={index} />;
+            },
+        );
 
         switch (this.state.mode) {
             case "browse":
@@ -119,29 +164,52 @@ class Browse extends React.Component {
                                     min={-30}
                                     defaultValue={[-30, 50]}
                                     marks={marks}
+                                    onChangeCommitted={this.onTempChange}
+                                    valueLabelFormat={x => {
+                                        return x + "°C";
+                                    }}
                                 />
                             </div>
                             <div id="satisfaction-container">
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    value="male"
-                                />
-                                Male
-                                <br />
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    value="female"
-                                />
-                                Female
-                                <br />
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    value="other"
-                                />
-                                Other
+                                <RadioGroup
+                                    aria-label="satisfcation"
+                                    name="Satisfaction"
+                                    value={
+                                        this.state.searchOptions.satisfaction
+                                    }
+                                    onChange={this.handleRadioChange}
+                                >
+                                    <FormControlLabel
+                                        value="0"
+                                        control={<Radio />}
+                                        label="All Satisfaction"
+                                    />
+                                    <FormControlLabel
+                                        value="1"
+                                        control={<Radio />}
+                                        label="1"
+                                    />
+                                    <FormControlLabel
+                                        value="2"
+                                        control={<Radio />}
+                                        label="2"
+                                    />
+                                    <FormControlLabel
+                                        value="3"
+                                        control={<Radio />}
+                                        label="3"
+                                    />
+                                    <FormControlLabel
+                                        value="4"
+                                        control={<Radio />}
+                                        label="4"
+                                    />
+                                    <FormControlLabel
+                                        value="5"
+                                        control={<Radio />}
+                                        label="5"
+                                    />
+                                </RadioGroup>
                             </div>
                         </div>
                     </div>
@@ -157,7 +225,7 @@ class Browse extends React.Component {
                     <div id="select-searchmode">
                         <div id="selected-option">
                             <div id="selected-text">
-                                {this.state.searchMode}
+                                {this.state.searchOptions.searchMode}
                             </div>
                             <div
                                 id="selectButton"
