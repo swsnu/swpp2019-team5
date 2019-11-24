@@ -69,7 +69,7 @@ class Browse extends React.Component {
     addTag = e => {
         let tags = this.state.searchArray;
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
-            tags.push(e.target.value);
+            tags.push(this.state.search_query);
             this.setState({ searchArray: tags });
             e.target.value = "";
             this.setState({ search_query: "" });
@@ -95,16 +95,7 @@ class Browse extends React.Component {
         });
 
         let searchQuery = this.state.searchArray.map((tag, index) => {
-            return (
-                <Tag
-                    className="tag"
-                    tag={tag}
-                    key={index}
-                    editMode={this.props.editMode}
-                    delete={() => this.onDeleteTag(tag)}
-                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
-                />
-            );
+            return <Tag className="tag" tag={tag} key={index} />;
         });
 
         switch (this.state.mode) {

@@ -156,4 +156,22 @@ describe("<Browse />", () => {
         clicker.simulate("click");
         expect(CreateInstance.state.searchMode).toEqual("Item");
     });
+
+    it("should add and delete tag to and from query", () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("input");
+        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        expect(CreateInstance.state.searchArray.length).toBe(1);
+
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+        expect(CreateInstance.state.searchArray.length).toBe(0);
+    });
 });
