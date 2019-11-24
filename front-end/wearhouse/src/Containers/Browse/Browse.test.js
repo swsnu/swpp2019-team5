@@ -159,23 +159,32 @@ describe("<Browse />", () => {
 
     it("should add and delete tag to and from query", () => {
         const component = mount(outfitList);
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
         const wrapper = component.find("input");
         wrapper.simulate("change", { target: { value: "black" } });
-
         wrapper.simulate("keydown", {
             keyCode: 8,
         });
         wrapper.simulate("keydown", {
             keyCode: 13,
         });
-        const CreateInstance = component
-            .find(Browse.WrappedComponent)
-            .instance();
+
+        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+
         expect(CreateInstance.state.searchArray.length).toBe(1);
 
         wrapper.simulate("keydown", {
             keyCode: 8,
         });
         expect(CreateInstance.state.searchArray.length).toBe(0);
+        expect(CreateInstance.state.mode).toEqual("browse");
     });
 });

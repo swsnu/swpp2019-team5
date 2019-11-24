@@ -6,6 +6,7 @@ import {
     faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TempSlider, marks } from "./sliderStyles";
 
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -14,12 +15,6 @@ import Tag from "../../Components/Tag/Tag";
 
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
-
-//search-input : input (o)
-//search-button : button (o)
-//calendar-mode : button (o)
-//outfit-preview : outfit (?)
-//함수 : isSearchMode(o), onClickOutfit(o), onSearchInput(o) , onClickCalendar(o)
 
 class Browse extends React.Component {
     state = {
@@ -40,6 +35,7 @@ class Browse extends React.Component {
         this.props.selectOutfit(outfit);
         this.props.history.push("/outfitDetail/" + outfit.id);
     };
+
     onSearchInput = e => {
         this.setState({ search_query: e.target.value });
         if (e.target.value.length >= 1 || this.state.searchArray.length >= 1) {
@@ -76,6 +72,9 @@ class Browse extends React.Component {
         } else if (this.state.search_query === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({ searchArray: tags });
+            if (tags.length === 0) {
+                this.setState({ mode: "browse" });
+            }
         }
     };
 
@@ -108,7 +107,45 @@ class Browse extends React.Component {
                 );
                 break;
             case "search":
-                container = <div id="outfit-list"></div>;
+                container = (
+                    <div id="outfit-list">
+                        <div id="search-filters">
+                            <div id="slider-container">
+                                <TempSlider
+                                    id="slider"
+                                    valueLabelDisplay="auto"
+                                    orientation="vertical"
+                                    max={50}
+                                    min={-30}
+                                    defaultValue={[-30, 50]}
+                                    marks={marks}
+                                />
+                            </div>
+                            <div id="satisfaction-container">
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                />
+                                Male
+                                <br />
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                />
+                                Female
+                                <br />
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="other"
+                                />
+                                Other
+                            </div>
+                        </div>
+                    </div>
+                );
                 /*show the search result : container = ~~~ */
                 break;
             default:
