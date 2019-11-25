@@ -73,11 +73,6 @@ class CreateOutfit extends Component {
         return true;
     };
     onConfirmCreate = () => {
-        if (!this.state.isValid) {
-            return;
-        }
-        //please add validation whether for all items category is selected in sprint 4
-
         const newOutfit = {
             image: this.state.image,
             satisfactionValue: this.state.satisfactionValue,
@@ -144,7 +139,6 @@ class CreateOutfit extends Component {
                         </div>
                     </div>
 
-                    {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
                         <div className="not-info">
@@ -169,7 +163,8 @@ class CreateOutfit extends Component {
 
                     <button
                         onClick={this.onConfirmCreate}
-                        id="confirm-create-item"
+                        id="confirm-create-outfit"
+                        disabled={!this.state.isValid}
                     >
                         Confirm Create
                     </button>

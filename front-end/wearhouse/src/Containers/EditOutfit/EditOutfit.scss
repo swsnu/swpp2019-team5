@@ -1,4 +1,4 @@
-#create-outfit-window {
+#edit-outfit-window {
     display: grid;
     grid-template-columns: 40% 60%;
     grid-template-rows: 90%;
@@ -16,6 +16,7 @@
             max-width: inherit;
         }
         #edit-satisfaction {
+            height: 50px;
             left: 50px;
         }
         overflow: hidden;
@@ -98,14 +99,14 @@
         padding: 7px 12px;
         position: absolute;
         width: auto;
-        min-width: 300px;
+        min-width: 120px;
         max-width: 500px;
         word-wrap: break-word;
 
         z-index: 9999;
     }
 
-    #add-item {
+    #add-item-button {
         margin-left: 10px;
         border: none;
         color: white;
@@ -118,25 +119,37 @@
         }
     }
 
-    #confirm-create-outfit {
-        grid-column: 2;
-        justify-self: flex-end;
-        background-color: rgb(54, 54, 54);
-        color: white;
-        font-size: 20px;
-        padding: 10px;
+    #initialize-button {
+        margin-left: 10px;
         border: none;
+        color: white;
+        padding: 8px 15px;
+        font-size: 15px;
+        background-color: lightgray;
         border-radius: 20px;
-        width: 200px;
         &:hover {
             cursor: pointer;
-            background-color: lightgray;
         }
-        margin: 5px 80px;
-
-        &:disabled {
-            background-color: lightgray;
-            cursor: not-allowed;
+    }
+    #button-container {
+        display: contents;
+        justify-content: center;
+        justify-items: center;
+        button {
+            grid-column: 2;
+            justify-self: flex-end;
+            background-color: rgb(54, 54, 54);
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(172, 159, 159);
+            }
+            margin: 5px 80px;
         }
     }
 }

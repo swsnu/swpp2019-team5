@@ -1,7 +1,9 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
+import Option from "../Option/Option";
 import "./Item.scss";
-import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
@@ -9,6 +11,7 @@ import Select from "react-select";
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
 class Item extends Component {
+    //props에 whole item list 있어야함
     shouldComponentUpdate() {
         return true;
     }
@@ -21,9 +24,12 @@ class Item extends Component {
     }
 
     state = {
-        category: "default",
+        show: false,
+        preventBlur: false,
+        category: this.props.item.category,
         tags: this.props.item.tags,
-        todo: "typeMode", //the mode where user enters after clicing button
+        item_list: this.props.item_list,
+        option_list: this.props.option_list,
     };
 
     componentDidMount() {
@@ -84,20 +90,43 @@ class Item extends Component {
             tags: tags,
         });
     }
-
-    //convert the todo ("Add tag" or "Finish")
-    changeMode = () => {
-        if (this.state.todo === "typeMode")
-            this.setState({
-                todo: "Add tag",
-            });
-        else
-            this.setState({
-                todo: "typeMode",
-            });
+    handleAutoComplete = e => {
+        let option_list = this.state.tags.concat(e.target.value);
+        console.log(option_list);
+        //should implement autocomplete feature (from TaeWon's work)
+        //autocomplete candidates should be set in option list
     };
 
+    handleBlur = () => {
+        if (!this.state.preventBlur) this.setState({ show: false });
+    };
+
+    setItem(op) {
+        this.setState({ show: false });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: op.tags,
+        });
+        this.setState({ preventBlur: false });
+    }
+
+    show = false;
     render() {
+        let auto_complete = this.state.option_list.map((op, index) => {
+            return (
+                <Option
+                    key={index}
+                    click={() => this.setItem(op)}
+                    option={op}
+                    activateBlur={() => this.setState({ preventBlur: false })}
+                    preventBlur={() => this.setState({ preventBlur: true })}
+                />
+            );
+        });
+        auto_complete = <div id="option-group">{auto_complete}</div>;
+        let option = itemOptions.find(
+            c => c.value === this.props.item.category,
+        );
         let tags = this.state.tags.map((tag, index) => {
             return (
                 <Tag
@@ -110,27 +139,31 @@ class Item extends Component {
                 />
             );
         });
-        let todo = null;
         let edit_mode_options = null;
         let tag_input = null;
-        if (this.props.editMode && this.state.todo === "typeMode") {
+
+        if (this.props.editMode) {
             tag_input = (
                 <input
+                    ref={input => {
+                        this.input_bar = input;
+                    }}
                     className="tag-input"
                     type="text"
                     placeholder="Enter tag.."
-                    //onChange = further task #1
+                    onChange={e => this.handleAutoComplete(e)}
                     onKeyDown={e => this.addTag(e)}
-                ></input>
+                    autoComplete="on"
+                    onFocus={() => {
+                        this.setState({ show: true });
+                    }}
+                    onBlur={this.handleBlur}
+                />
             );
-            todo = <FontAwesomeIcon icon={faCheck} />;
-        } else todo = <FontAwesomeIcon icon={faPlus} />;
+        }
         if (this.props.editMode) {
             edit_mode_options = (
                 <>
-                    <div className="mode-controller" onClick={this.changeMode}>
-                        {todo}
-                    </div>
                     <div
                         className="item-deleter"
                         onClick={this.handleItemDelete.bind(this)}
@@ -147,9 +180,8 @@ class Item extends Component {
                         <Select
                             isDisabled={!this.props.editMode}
                             className="Select"
-                            defaultValue={itemOptions.find(
-                                c => c.value === this.props.item.category,
-                            )}
+                            value={option}
+                            selected={option}
                             label="Category"
                             options={itemOptions}
                             styles={itemStyles}
@@ -158,8 +190,14 @@ class Item extends Component {
                     </div>
 
                     <div className="tag-container">
-                        <div className="tag-area">{tags}</div>
-                        {tag_input}
+                        <div className="tag-area">
+                            {tags}
+                            {tag_input}
+                        </div>
+
+                        <div id="options">
+                            {this.state.show ? auto_complete : null}
+                        </div>
                     </div>
                     {edit_mode_options}
                 </div>
@@ -167,4 +205,13 @@ class Item extends Component {
         );
     }
 }
-export default Item;
+
+const mapStateToProps = state => {
+    return {
+        option_list: state.item.option_list,
+    };
+};
+export default connect(
+    mapStateToProps,
+    null,
+)(Item);
