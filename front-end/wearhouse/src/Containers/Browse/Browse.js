@@ -16,6 +16,7 @@ import Tag from "../../Components/Tag/Tag";
 
 import * as actionCreators from "../../store/actions/index";
 import "./Browse.scss";
+
 class Browse extends React.Component {
     state = {
         mode: "browse",
@@ -27,7 +28,7 @@ class Browse extends React.Component {
             searchArray: [],
             tempMax: 50,
             tempMin: -30,
-            satisfaction: 0,
+            satisfaction: "0",
         },
     };
 
@@ -84,13 +85,12 @@ class Browse extends React.Component {
         });
     };
 
-    // const [value, setValue] = React.useState('female');
-
     handleRadioChange = event => {
+        console.log(event.target.value);
         this.setState({
             searchOptions: {
                 ...this.state.searchOptions,
-                satisfaction: event.target.value,
+                satisfaction: event.target.value, // Saved as string, need to use parseInt() to function as search filter
             },
         });
     };
@@ -156,6 +156,9 @@ class Browse extends React.Component {
                     <div id="outfit-list">
                         <div id="search-filters">
                             <div id="slider-container">
+                                <div className="filter-label">
+                                    Temperature Range:
+                                </div>
                                 <TempSlider
                                     id="slider"
                                     valueLabelDisplay="auto"
@@ -171,9 +174,13 @@ class Browse extends React.Component {
                                 />
                             </div>
                             <div id="satisfaction-container">
+                                <div className="filter-label">
+                                    Satisfaction:
+                                </div>
                                 <RadioGroup
                                     aria-label="satisfcation"
                                     name="Satisfaction"
+                                    defaultValue="0"
                                     value={
                                         this.state.searchOptions.satisfaction
                                     }
@@ -181,32 +188,32 @@ class Browse extends React.Component {
                                 >
                                     <FormControlLabel
                                         value="0"
-                                        control={<Radio />}
-                                        label="All Satisfaction"
+                                        control={<Radio disableRipple />}
+                                        label="All Values"
                                     />
                                     <FormControlLabel
                                         value="1"
-                                        control={<Radio />}
+                                        control={<Radio disableRipple />}
                                         label="1"
                                     />
                                     <FormControlLabel
                                         value="2"
-                                        control={<Radio />}
+                                        control={<Radio disableRipple />}
                                         label="2"
                                     />
                                     <FormControlLabel
                                         value="3"
-                                        control={<Radio />}
+                                        control={<Radio disableRipple />}
                                         label="3"
                                     />
                                     <FormControlLabel
                                         value="4"
-                                        control={<Radio />}
+                                        control={<Radio disableRipple />}
                                         label="4"
                                     />
                                     <FormControlLabel
                                         value="5"
-                                        control={<Radio />}
+                                        control={<Radio disableRipple />}
                                         label="5"
                                     />
                                 </RadioGroup>

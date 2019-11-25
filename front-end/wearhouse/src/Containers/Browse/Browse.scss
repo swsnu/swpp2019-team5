@@ -103,11 +103,17 @@ $templatecolor: rgba(127, 255, 212, 0.3);
         justify-content: left;
         padding: 20px 50px;
         #search-filters {
-            width: 100%;
-            height: fit-content;
+            width: 20%;
+            height: 100%;
+            //border: gray 1px solid;
+            padding: 0 10px;
+            .filter-label {
+                font-size: 15px;
+            }
             #slider-container {
                 $slider-size: 20px;
                 height: 200px;
+                margin: 20px 0;
                 #slider-temp {
                     background-color: darkslategray;
                     width: 50px;
@@ -116,6 +122,7 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     text-align: center;
                 }
                 #slider {
+                    margin: 15px 0;
                     height: 150px;
                     width: 5px;
                     margin: 20px 0;
@@ -144,6 +151,31 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     .MuiSlider-thumb {
                         margin-left: -3px;
                     }
+                }
+            }
+            .MuiFormGroup-root {
+                margin: 15px 0;
+                $buttonsize: 18px;
+                .MuiFormControlLabel-root {
+                    margin: 3px 0;
+                }
+                .MuiFormControlLabel-label {
+                    font-size: 15px;
+                }
+                .MuiRadio-root {
+                    padding: 3px;
+                    width: $buttonsize;
+                    height: $buttonsize;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+
+                .MuiSvgIcon-root {
+                    width: $buttonsize;
+                    height: $buttonsize;
+                }
+                .MuiRadio-colorSecondary.Mui-checked,
+                .MuiIconButton-colorSecondary {
+                    fill: rgb(248, 81, 81);
                 }
             }
             #satisfaction-container {
