@@ -75,7 +75,7 @@ def outfit(request):
                 # itemExits 이미 존재하는 item이 잇는지 확인 끝
 
                 if itemExists:
-                    item_candidates = filter(lambda x: x.category == item.category and len(x.tags) == len(item.tags),
+                    item_candidates = filter(lambda x: x.category == item["category"] and len(x.tags) == len(item["tags"]),
                                              item_candidates)
                     assert len(
                         item_candidates) <= 1, "...it is literally disaster"
@@ -83,11 +83,11 @@ def outfit(request):
                         items_for_new_outfit.append(item_candidates[0])
 
                 else:
-                    new_item = Item(category=item.category,
+                    new_item = Item(category=item["category"],
                                     tags=tags_per_item, user=user1)  # check user
                     new_item.save()
                     items_for_new_outfit.append(new_item)
-                    # ture -> itmeCanditae 안에 list item id.
+                    # true -> itemCandidates 안에 list item id.
                     # category가 같은 애들 먼저 filter
                     # finally tags length equality check -> itemExtist true? 바로 그 item을 get해와서 item 배열에 넣고 : false면 새로 item생성해서 배열에 넣고
 
