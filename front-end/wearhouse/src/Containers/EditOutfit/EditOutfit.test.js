@@ -47,7 +47,7 @@ let stubInitialState_outfit = {
             {
                 id: 1,
                 category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
+                tags: ["red", "sheep-fur"],
             },
             {
                 id: 2,
@@ -176,8 +176,6 @@ describe("<EditOutfit />", () => {
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
 
-        //  expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keyDown", {
@@ -194,16 +192,6 @@ describe("<EditOutfit />", () => {
 
         let count = component.find(".Item");
         expect(count.length).toBe(3);
-    });
-
-    it("should call onApplyEditItem", () => {
-        const component = mount(editOutfit);
-        let wrapper = component.find(".Item .tag-input").at(0);
-        wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keyDown", { keyCode: 13 });
-
-        let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(13); //doesn't actually work but
     });
 
     it("should initialize item", () => {

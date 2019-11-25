@@ -9,12 +9,11 @@
 
     .tag-container {
         display: flex;
-        align-items: center;
-        //flex-direction: column;
-        width: 550px;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 400px;
         border: 1px rgb(223, 220, 220) solid;
         margin: 0 10px;
-        padding-left: 3px;
         height: 36px;
         .tag-input {
             padding-left: 5px;
@@ -43,7 +42,7 @@
     }
 
     #option-group {
-        width: 549px;
+        width: 400px;
         max-height: 180px;
         border: rgb(182, 180, 180) solid 1px;
         border-bottom-right-radius: 3%;
