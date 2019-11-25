@@ -28,28 +28,7 @@ class Item extends Component {
         category: this.props.item.category,
         tags: this.props.item.tags,
         item_list: this.props.item_list,
-        option_list: [
-            {
-                id: 1,
-                category: "UpperBody",
-                tags: ["T-shirt", "2019"],
-            },
-            {
-                id: 2,
-                category: "UpperBody",
-                tags: ["fall", "stripe", "blue"],
-            },
-            {
-                id: 3,
-                category: "UpperBody",
-                tags: ["coat", "wool", "pink"],
-            },
-            {
-                id: 4,
-                category: "UpperBody",
-                tags: ["mom", "hand-made", "check-shirt"],
-            },
-        ],
+        option_list: [],
     };
 
     componentDidMount() {

@@ -3,36 +3,12 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     outfits: [],
     selectedOutfit: {
-        id: 1,
-        image: null,
-        satisfactionValue: 3,
-        date: new Date(),
-        items: [
-            {
-                id: 1,
-                category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
-            },
-            {
-                id: 2,
-                category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
-            },
-            {
-                id: 3,
-                category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
-            },
-            {
-                id: 4,
-                category: "UpperBody",
-                tags: ["red", "sheep-fur", "long"],
-            },
-        ],
-        weather: {
-            tempAvg: 10,
-            icon: "rain",
-        },
+        id: "",
+        image: "null",
+        satisfactionValue: null,
+        date: null,
+        items: [],
+        weather: { tempAvg: "", icon: "" },
     },
 };
 
