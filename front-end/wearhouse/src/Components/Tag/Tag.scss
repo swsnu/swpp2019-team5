@@ -12,7 +12,7 @@ $fontsize: 14px;
     font-size: $fontsize;
     margin: 4px;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: default;
     width: fit-content;
     .tag-text {
         font-size: $fontsize;
@@ -29,9 +29,20 @@ $fontsize: 14px;
     }
 }
 
-.delete-tag,
+.vertical-line {
+    margin-left: 4px;
+    font-size: 15px;
+    font-weight: 100;
+    color: #f8a9b6;
+}
+.delete-tag {
+    margin-left: 1px;
+
+    cursor: pointer;
+}
 .edit-tag {
     margin: 0 2px;
     font-size: 12px;
     line-height: $fontsize;
+    cursor: pointer;
 }

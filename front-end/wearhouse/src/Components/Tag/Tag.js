@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Tag.scss";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //props : tag(tag_name) ex) "Black", delete (function), edit(function)
 class Tag extends Component {
@@ -26,9 +26,10 @@ class Tag extends Component {
             //tag_name is not editable
             label = (
                 <div className="tag-in-outfit">
-                    <div className="tag-text">#{this.state.tag_name + " "}</div>
+                    <div className="tag-text">#{this.state.tag_name}
+              <span className="vertical-line">ㅣ</span></div>
                     <div className="delete-tag" onClick={this.props.delete}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
+                        <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>
             );
