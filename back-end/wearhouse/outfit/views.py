@@ -14,6 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 
 
+user1 = User.objects.get(username="swpp@naver.com")
+
 # Create your views here.
 @ensure_csrf_cookie
 def token(request):
@@ -27,8 +29,6 @@ def token(request):
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
 def outfit(request):
-    user1 = User(email="sungyeonoo@naver.com", password="1111")
-    user1.save()
     if request.method == 'GET':
         outfits_all_list = [outfit for outfit in Outfit.objects.all()]
         return JsonResponse(outfits_all_list, safe=False)
