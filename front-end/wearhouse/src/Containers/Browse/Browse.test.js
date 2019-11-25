@@ -151,10 +151,10 @@ describe("<Browse />", () => {
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
-        expect(CreateInstance.state.searchMode).toEqual("Outfit");
+        expect(CreateInstance.state.searchOptions.searchMode).toEqual("Outfit");
         clicker = component.find(".option").at(1);
         clicker.simulate("click");
-        expect(CreateInstance.state.searchMode).toEqual("Item");
+        expect(CreateInstance.state.searchOptions.searchMode).toEqual("Item");
     });
 
     it("should add and delete tag to and from query", () => {
@@ -179,12 +179,12 @@ describe("<Browse />", () => {
             keyCode: 8,
         });
 
-        expect(CreateInstance.state.searchArray.length).toBe(1);
+        expect(CreateInstance.state.searchOptions.searchArray.length).toBe(1);
 
         wrapper.simulate("keydown", {
             keyCode: 8,
         });
-        expect(CreateInstance.state.searchArray.length).toBe(0);
+        expect(CreateInstance.state.searchOptions.searchArray.length).toBe(0);
         expect(CreateInstance.state.mode).toEqual("browse");
     });
 });

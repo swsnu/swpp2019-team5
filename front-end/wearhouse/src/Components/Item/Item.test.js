@@ -11,7 +11,7 @@ let stubInitialState = {};
 let mockStore = getMockStore(stubInitialState);
 
 describe("<Item/>", () => {
-    let item, deleteHandler, editHandler;
+    let item;
     beforeEach(() => {
         item = (
             <Provider store={mockStore}>
@@ -20,14 +20,11 @@ describe("<Item/>", () => {
                         editMode={true}
                         item={{ tags: ["black", "T-shirt"] }}
                         applyEdit={jest.fn()}
-                        delete={editHandler}
+                        delete={jest.fn()}
                     />
                 </ConnectedRouter>
             </Provider>
         );
-
-        deleteHandler = jest.fn();
-        editHandler = jest.fn();
     });
 
     afterEach(() => {
