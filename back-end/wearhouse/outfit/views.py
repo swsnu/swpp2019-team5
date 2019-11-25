@@ -14,7 +14,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 
 
-user1 = User.objects.get(username="swpp@naver.com")
+user1 = User.objects.get(username="test")
+
+'''
+    :param  YYYY-MM-DD-Time
+    :return YYYY-MM-DD
+'''
+
+
+def change_date_format(date):
+    return date[0:10]
+
 
 # Create your views here.
 @ensure_csrf_cookie
