@@ -28,7 +28,7 @@ class Item extends Component {
         preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
-        todo: "editEnabled", 
+        todo: "editEnabled",
         item_list: this.props.item_list,
         option_list: this.props.option_list,
     };
@@ -101,7 +101,6 @@ class Item extends Component {
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };
-
 
     handleBlur = () => {
         if (!this.state.preventBlur) this.setState({ show: false });
