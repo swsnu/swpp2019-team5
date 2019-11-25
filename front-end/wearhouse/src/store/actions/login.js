@@ -9,7 +9,7 @@ export const getLogIn_ = data => {
 
 export const getLogin = () => {
     return dispatch => {
-        return axios.get("api/user").then(res => {
+        return axios.get("/api/user").then(res => {
             dispatch(getLogIn_(res.data));
         });
     };
@@ -21,7 +21,7 @@ export const logIn_ = user => {
 
 export const logIn = userCredentials => {
     return dispatch => {
-        return axios.post("api/user/login/", userCredentials).then(res => {
+        return axios.post("/api/user/login/", userCredentials).then(res => {
             //TODO: divide cases according to login status code
             dispatch(logIn_(res.data));
             dispatch(push("/browse"));

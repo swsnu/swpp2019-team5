@@ -2,7 +2,14 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     outfits: [],
-    selectedOutfit: null,
+    selectedOutfit: {
+        id: "",
+        image: "null",
+        satisfactionValue: null,
+        date: null,
+        items: [],
+        weather: { tempAvg: "", icon: "" },
+    },
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +27,7 @@ const reducer = (state = initialState, action) => {
                 items: action.items,
                 weather: action.weather,
             };
+
             const new_outfits = state.outfits.concat(newOutfit);
             return {
                 ...state,
@@ -32,6 +40,16 @@ const reducer = (state = initialState, action) => {
                 return outfit.id !== action.targetID;
             });
             return { ...state, outfits: deletedOutfits };
+        }
+        case actionTypes.EDIT_OUTFIT: {
+            const edittedOutfits = state.outfits.map(oft => {
+                return oft.id === action.targetID ? action.new_outfit : oft;
+            });
+            return {
+                ...state,
+                outfit: edittedOutfits,
+                selectedOutfit: action.new_outfit,
+            };
         }
         default:
             break;

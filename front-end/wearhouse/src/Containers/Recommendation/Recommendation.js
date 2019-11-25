@@ -86,6 +86,7 @@ class Recommendation extends React.Component {
             );
         });
 
+        console.log(this.props.weather);
         return (
             <div id="recommendation">
                 {recommendationItems.length !== 0 && displayWeather && (

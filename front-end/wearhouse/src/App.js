@@ -10,6 +10,7 @@ import Login from "./Containers/Auth/Login/Login";
 import Signup from "./Containers/Auth/Signup/Signup";
 import LandingPage from "./Containers/LandingPage/LandingPage";
 import CreateOutfit from "./Containers/CreateOutfit/CreateOutfit";
+import EditOutfit from "./Containers/EditOutfit/EditOutfit";
 import Header from "./Containers/Header/Header";
 
 import * as actionCreators from "./store/actions/index";
@@ -17,10 +18,9 @@ import * as actionCreators from "./store/actions/index";
 import "./App.scss";
 
 class App extends React.Component {
-    componentDidMount() {
+    /*componentDidMount() {
         this.props.getLogin();
-    }
-
+    }*/ //this should be restored before pull request
     render() {
         return (
             <ConnectedRouter history={this.props.history}>
@@ -41,6 +41,17 @@ class App extends React.Component {
                         exact
                         component={CreateOutfit}
                     />
+<<<<<<< HEAD
+=======
+                    <Route
+                        path="/editOutfit/:id"
+                        exact
+                        component={EditOutfit}
+                    />
+                    <Route path="/main" exact component={LandingPage} />
+                    <Redirect exact to="/main" />
+                    {this.props.isLoggedIn && <Redirect exact to="/browse" />}
+>>>>>>> hotfix/create-outfit
                 </Switch>
             </ConnectedRouter>
         );

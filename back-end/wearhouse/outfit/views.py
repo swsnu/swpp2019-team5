@@ -28,6 +28,7 @@ def token(request):
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
+
 def outfit(request):
     if request.method == 'GET':
         outfits_all_list = [outfit for outfit in Outfit.objects.all()]
