@@ -65,12 +65,15 @@ $templatecolor: rgba(127, 255, 212, 0.3);
         #search-input {
             margin: 0;
             width: 450px;
+            height: 43px;
             display: flex;
             background-color: white;
             padding-left: 5px;
             #search-input-queries {
                 display: flex;
                 align-items: center;
+                height: 43px;
+                width: fit-content;
             }
             #search-input-text {
                 font-size: $fontsize;

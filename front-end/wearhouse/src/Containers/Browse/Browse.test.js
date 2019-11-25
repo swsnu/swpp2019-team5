@@ -120,10 +120,17 @@ describe("<Browse />", () => {
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
+
         expect(CreateInstance.state.search_query).toEqual("black shirt");
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
         expect(CreateInstance.state.mode).toEqual("search");
 
         wrapper.simulate("change", { target: { value: "" } });
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
         expect(CreateInstance.state.search_query).toEqual("");
         expect(CreateInstance.state.mode).toEqual("browse");
     });

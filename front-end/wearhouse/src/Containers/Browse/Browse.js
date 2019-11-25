@@ -44,11 +44,9 @@ class Browse extends React.Component {
     };
 
     onSearchInput = e => {
+        // deprecated?
         this.setState({ search_query: e.target.value });
-        if (
-            e.target.value.length >= 1 ||
-            this.state.searchOptions.searchArray.length >= 1
-        ) {
+        if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
         } else {
             this.setState({ mode: "browse" });
@@ -75,7 +73,6 @@ class Browse extends React.Component {
     };
 
     onTempChange = (event, value) => {
-        console.log(value);
         this.setState({
             searchOptions: {
                 ...this.state.searchOptions,
@@ -86,7 +83,6 @@ class Browse extends React.Component {
     };
 
     handleRadioChange = event => {
-        console.log(event.target.value);
         this.setState({
             searchOptions: {
                 ...this.state.searchOptions,
@@ -106,7 +102,7 @@ class Browse extends React.Component {
                 },
             });
             e.target.value = "";
-            this.setState({ search_query: "" });
+            this.setState({ search_query: "", mode: "search" });
         } else if (this.state.search_query === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({
