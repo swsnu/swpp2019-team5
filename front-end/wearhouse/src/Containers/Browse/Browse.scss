@@ -125,7 +125,6 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     text-align: center;
                 }
                 #slider {
-                    margin: 15px 0;
                     height: 150px;
                     width: 5px;
                     margin: 20px 0;
@@ -138,14 +137,12 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     .MuiSlider-track {
                         width: 7px;
                         margin-left: 1px;
+                        background-color: lightcoral;
                     }
                     .MuiSlider-rail {
                         width: 8px;
                         background-color: white;
                         border: 0.5px gray solid;
-                    }
-                    .MuiSlider-track {
-                        background-color: lightcoral;
                     }
                     .MuiSlider-mark {
                         display: none;
