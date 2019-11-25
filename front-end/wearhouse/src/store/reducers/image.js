@@ -11,6 +11,7 @@ const reducer = (state = initialState, action) => {
                 image: action.image,
                 items: action.items,
             };
+            console.log(outfitData);
             return { ...state, outfitData: outfitData };
         }
         default:

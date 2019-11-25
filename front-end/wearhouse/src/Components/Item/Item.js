@@ -92,7 +92,7 @@ class Item extends Component {
     }
     handleAutoComplete = e => {
         let option_list = this.state.tags.concat(e.target.value);
-        console.log(option_list);
+        option_list = option_list;
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };
@@ -196,7 +196,10 @@ class Item extends Component {
                         </div>
 
                         <div id="options">
-                            {this.state.show ? auto_complete : null}
+                            {this.state.show &&
+                            this.state.option_list.length >= 1
+                                ? auto_complete
+                                : null}
                         </div>
                     </div>
                     {edit_mode_options}

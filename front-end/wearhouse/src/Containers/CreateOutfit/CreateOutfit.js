@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
-
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+    faSun,
+    faMoon,
+    faUmbrella,
+    faSnowflake,
+    faCloudShowersHeavy,
+    faWind,
+    faSmog,
+    faCloud,
+    faCloudSun,
+    faCloudMoon,
+    faCalendarAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
 import "./DatePicker.scss";
@@ -12,6 +23,18 @@ import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 //should resolve the case where image is not porperly uploaded
+var iconText = {
+    "clear-day": <FontAwesomeIcon icon={faSun} />,
+    "clear-night": <FontAwesomeIcon icon={faMoon} />,
+    rain: <FontAwesomeIcon icon={faUmbrella} />,
+    snow: <FontAwesomeIcon icon={faSnowflake} />,
+    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
+    wind: <FontAwesomeIcon icon={faWind} />,
+    fog: <FontAwesomeIcon icon={faSmog} />,
+    cloudy: <FontAwesomeIcon icon={faCloud} />,
+    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
+    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
+};
 
 class CreateOutfit extends Component {
     state = {
@@ -20,11 +43,10 @@ class CreateOutfit extends Component {
         date: new Date(),
         items: this.props.outfit.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
-        weather: this.props.weather,
+        weather: { tempAvg: "", icon: "" },
     };
     componentDidMount() {
         this.props.setWeather();
-        this.setState({ weather: this.props.weather });
     }
     shouldComponentUpdate() {
         return true;
@@ -32,6 +54,16 @@ class CreateOutfit extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.items !== this.state.items) {
             this.checkValidation();
+        }
+        if (prevProps.weather !== this.props.weather) {
+            this.setState({ weather: this.props.weather });
+        }
+        if (
+            prevProps.selected_day_weather !== this.props.selected_day_weather
+        ) {
+            this.setState({
+                weather: this.props.selected_day_weather,
+            });
         }
     }
     onDeleteItem(item) {
@@ -54,12 +86,12 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     };
     handleDateChange = date => {
-        if (date !== null)
+        this.setState({ date: date });
+        if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
-        this.setState({
-            date: date,
-            weather: this.props.selected_day_weather,
-        });
+        } else {
+            this.setState({ weather: null });
+        }
     };
     checkValidation = () => {
         const items = this.state.items;
@@ -72,6 +104,10 @@ class CreateOutfit extends Component {
         this.setState({ isValid: true });
         return true;
     };
+
+    handleSatisfactionEdit(num) {
+        this.setState({ satisfactionValue: num });
+    }
     onConfirmCreate = () => {
         const newOutfit = {
             image: this.state.image,
@@ -87,10 +123,9 @@ class CreateOutfit extends Component {
                               2,
                           icon: this.props.weather.icon,
                       }
-                    : null,
+                    : { tempAvg: "", icon: "" },
         };
         this.props.createOutfit(newOutfit);
-        this.props.history.push("/outfitDetail/" + this.props.newOutfit.id);
     };
 
     render() {
@@ -108,8 +143,6 @@ class CreateOutfit extends Component {
             );
         });
 
-        console.log(this.props.weather, this.props.selected_day_weather);
-        console.log(this.state.date, Date.parse(this.state.date) / 1000);
         return (
             <div id="create-outfit">
                 <div id="create-outfit-window">
@@ -120,7 +153,7 @@ class CreateOutfit extends Component {
                                     <FontAwesomeIcon
                                         id="calendar-icon"
                                         icon={faCalendarAlt}
-                                    />
+                                    />{" "}
                                 </div>
                             </span>
                             <DatePicker
@@ -132,9 +165,17 @@ class CreateOutfit extends Component {
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
                             />
+                            <div id="weather-icon">
+                                {this.state.weather !== null
+                                    ? iconText[this.state.weather.icon]
+                                    : null}
+                            </div>
                         </div>
                         <div id="image-window">
-                            <EditSatisfaction id="edit-satisfaction" />
+                            <EditSatisfaction
+                                id="edit-satisfaction"
+                                change={num => this.handleSatisfactionEdit(num)}
+                            />
                             <img src={this.state.image} alt="outfit" />
                         </div>
                     </div>

@@ -20,8 +20,7 @@ import "./App.scss";
 class App extends React.Component {
     /*componentDidMount() {
         this.props.getLogin();
-    }*/ //should restore before push
-
+    }*/ //this should be restored before pull request
     render() {
         return (
             <ConnectedRouter history={this.props.history}>

@@ -10,7 +10,7 @@ export const createTag_ = tag => {
 };
 export const createTag = (item_id, tag) => {
     return dispatch => {
-        return axios.post("item/" + item_id + "/tag", tag).then(res => {
+        return axios.post("/item/" + item_id + "/tag", tag).then(res => {
             dispatch(createTag_(res.data));
         });
     };
