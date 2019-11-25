@@ -41,8 +41,6 @@ class App extends React.Component {
                         exact
                         component={CreateOutfit}
                     />
-<<<<<<< HEAD
-=======
                     <Route
                         path="/editOutfit/:id"
                         exact
@@ -51,7 +49,6 @@ class App extends React.Component {
                     <Route path="/main" exact component={LandingPage} />
                     <Redirect exact to="/main" />
                     {this.props.isLoggedIn && <Redirect exact to="/browse" />}
->>>>>>> hotfix/create-outfit
                 </Switch>
             </ConnectedRouter>
         );
