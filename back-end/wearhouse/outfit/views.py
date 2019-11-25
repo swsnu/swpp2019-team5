@@ -44,24 +44,24 @@ def outfit(request):
             items = json.loads(body)["items"]
             items_for_new_outfit = []
             for item in items:
-                tags = []
+                tags_per_item = []
                 itemExists = True
-                item_candidate = []
+                item_candidates = []
                 i = 0
-                for tag_name in item.tags:
+                for tag_name in item["tags"]:  # tags=["black", "white", "2019"]
                     try:
                         tag = Tag.objects.get(name=tag_name)
-                        tags.append(tag)
+                        tags_per_item.append(tag)
                         if itemExists:
                             if i is 0:
-                                item_candidate = [
+                                item_candidates = [
                                     item for item in tag.items_with_this_tag]
                                 i = 1
                             else:
-                                for item in item_candidate:
-                                    itemExists = tag in item.tags
+                                for item_candidate in item_candidates:
+                                    itemExists = tag in item_candidate.tags
                                     if not itemExists:
-                                        item_candidate.remove(item)
+                                        item_candidates.remove(item_candidate)
                             # 지금 보고있는 tag의 itmes들을 가져온다
                             # 이전에 저장되어 있던 item_candidate와의 교집합을 찾는다 (?)
                             # 교집한 없으면 itemExists 에 false를 넣는다
@@ -70,21 +70,21 @@ def outfit(request):
                         itemExists = False
                         new_tag = Tag(name=tag_name, user=user1)
                         new_tag.save()
-                        tags.append(new_tag)
-                # tag 없는 애는 생성, 있는애는 id 받아서 tags안에 다 들어있음
+                        tags_per_item.append(new_tag)
+                # tag 없는 애는 생성, 있는애는 객체로 받아서 받아서 tags안에 다 들어있음
                 # itemExits 이미 존재하는 item이 잇는지 확인 끝
 
                 if itemExists:
-                    item_candidate = filter(lambda x: x.category ==
-                                            item.category and len(x.tags) == len(item.tags), item_candidate)
+                    item_candidates = filter(lambda x: x.category == item.category and len(x.tags) == len(item.tags),
+                                             item_candidates)
                     assert len(
-                        item_candidate) <= 1, "...it is literally disaster"
-                    if len(item_candidate) == 1:
-                        items_for_new_outfit.append(item_candidate[0])
+                        item_candidates) <= 1, "...it is literally disaster"
+                    if len(item_candidates) == 1:
+                        items_for_new_outfit.append(item_candidates[0])
 
                 else:
                     new_item = Item(category=item.category,
-                                    tags=tags, user=user1)  # check user
+                                    tags=tags_per_item, user=user1)  # check user
                     new_item.save()
                     items_for_new_outfit.append(new_item)
                     # ture -> itmeCanditae 안에 list item id.
