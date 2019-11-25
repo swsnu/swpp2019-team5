@@ -1,4 +1,5 @@
 import React from "react";
+import "./Calendar.scss";
 
 const CALENDAR_HEADER = (
     <thead id="calendar-header">
@@ -9,7 +10,7 @@ const CALENDAR_HEADER = (
             <th>Wed</th>
             <th>Thur</th>
             <th>Fri</th>
-            <th>Sat</th>
+            <th className="last-column">Sat</th>
         </tr>
     </thead>
 );
@@ -26,7 +27,10 @@ const renderCalendarBody = dates => {
             const date = dates[i];
             if (date !== undefined && day === date.getDay()) {
                 row.push(
-                    <td key={7 * week + day}>
+                    <td
+                        key={7 * week + day}
+                        className={day === 6 && "last-column"}
+                    >
                         <div className="date">{date.getDate()}</div>
                     </td>,
                 );

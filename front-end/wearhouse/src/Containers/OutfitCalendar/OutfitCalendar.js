@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Header from "../Header/Header";
 import "./OutfitCalendar.scss";
+import {
+    faChevronLeft,
+    faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Calendar from "../../Components/Calendar/Calendar";
 
@@ -40,22 +45,34 @@ class OutfitCalendar extends Component {
                         Go back to main page
                     </NavLink>
                 </div>
-                <div className="calendar-header">
-                    <button
-                        id="prev-month-button"
-                        onClick={this.onClickPrevMonth}
-                    >
-                        prev month
-                    </button>
-                    {this.state.year}.{this.state.month}
-                    <button
-                        id="next-month-button"
-                        onClick={this.onClickNextMonth}
-                    >
-                        next month
-                    </button>
+                <div id="calendar-wrapper">
+                    <div className="calendar-header">
+                        <button
+                            id="prev-month-button"
+                            className="calendar-button"
+                            onClick={this.onClickPrevMonth}
+                        >
+                            <FontAwesomeIcon
+                                className="calendar-button-icon"
+                                icon={faChevronLeft}
+                            ></FontAwesomeIcon>
+                        </button>
+                        <div id="calendar-year-month">
+                            {this.state.year}.{this.state.month}
+                        </div>
+                        <button
+                            id="next-month-button"
+                            className="calendar-button"
+                            onClick={this.onClickNextMonth}
+                        >
+                            <FontAwesomeIcon
+                                className="calendar-button-icon"
+                                icon={faChevronRight}
+                            ></FontAwesomeIcon>
+                        </button>
+                    </div>
+                    <Calendar year={this.state.year} month={this.state.month} />
                 </div>
-                <Calendar year={this.state.year} month={this.state.month} />
             </div>
         );
     }
