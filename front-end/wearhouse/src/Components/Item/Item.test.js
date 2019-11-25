@@ -1,14 +1,47 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import { ConnectedRouter } from "connected-react-router";
 
 import Item from "./Item";
 
-let stubInitialState = {};
-let mockStore = getMockStore(stubInitialState);
+let stubInitialState_item = {
+    items: [],
+    selectedOutfitItems: [],
+    selectedItem: null,
+    option_list: [
+        {
+            id: 1,
+            category: "UpperBody",
+            tags: ["T-shirt", "2019"],
+        },
+        {
+            id: 2,
+            category: "UpperBody",
+            tags: ["fall", "stripe", "blue"],
+        },
+        {
+            id: 3,
+            category: "UpperBody",
+            tags: ["coat", "wool", "pink"],
+        },
+        {
+            id: 4,
+            category: "UpperBody",
+            tags: ["mom", "hand-made", "check-shirt"],
+        },
+    ],
+};
+let mockStore = getMockStore(
+    stubInitialState_item,
+    stubInitialState_item,
+    stubInitialState_item,
+    stubInitialState_item,
+    stubInitialState_item,
+    stubInitialState_item,
+);
 
 describe("<Item/>", () => {
     let item, deleteHandler, editHandler;

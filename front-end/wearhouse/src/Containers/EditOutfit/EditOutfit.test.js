@@ -8,6 +8,33 @@ import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 import EditOutfit from "./EditOutfit";
 
+let stubInitialState_item = {
+    items: [],
+    selectedOutfitItems: [],
+    selectedItem: null,
+    option_list: [
+        {
+            id: 1,
+            category: "UpperBody",
+            tags: ["T-shirt", "2019"],
+        },
+        {
+            id: 2,
+            category: "UpperBody",
+            tags: ["fall", "stripe", "blue"],
+        },
+        {
+            id: 3,
+            category: "UpperBody",
+            tags: ["coat", "wool", "pink"],
+        },
+        {
+            id: 4,
+            category: "UpperBody",
+            tags: ["mom", "hand-made", "check-shirt"],
+        },
+    ],
+};
 let stubInitialState_outfit = {
     outfits: [],
 
@@ -56,7 +83,7 @@ let stubInitialState_weather = {
 
 let mockStore = getMockStore(
     stubInitialState_login,
-    stubInitialState_outfit,
+    stubInitialState_item,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,

@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import Tag from "../Tag/Tag";
 import Option from "../Option/Option";
@@ -28,7 +29,7 @@ class Item extends Component {
         category: this.props.item.category,
         tags: this.props.item.tags,
         item_list: this.props.item_list,
-        option_list: [],
+        option_list: this.props.option_list,
     };
 
     componentDidMount() {
@@ -204,4 +205,13 @@ class Item extends Component {
         );
     }
 }
-export default Item;
+
+const mapStateToProps = state => {
+    return {
+        option_list: state.item.option_list,
+    };
+};
+export default connect(
+    mapStateToProps,
+    null,
+)(Item);
