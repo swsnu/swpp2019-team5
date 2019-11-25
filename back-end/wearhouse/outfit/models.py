@@ -15,4 +15,5 @@ class Outfit(models.Model):
     date = models.DateField()
     tempAvg = models.IntegerField(default=100)
     tempIcon = models.CharField(max_length=15, default='')
-    satisfaction = models.IntegerField(range(0, 5))
+    satisfaction = models.IntegerField(null=True, blank=True)
+

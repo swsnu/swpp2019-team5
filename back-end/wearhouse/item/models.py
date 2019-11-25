@@ -8,5 +8,3 @@ class Item(models.Model):
     category = models.CharField(max_length=15, default='')
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='items_owned_by_user')
-
-
