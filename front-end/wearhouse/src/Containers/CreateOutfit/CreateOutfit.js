@@ -15,14 +15,16 @@ import DatePicker from "react-datepicker";
 
 class CreateOutfit extends Component {
     state = {
-        image: this.props.image,
+        image: this.props.outfit.image,
         satisfactionValue: null,
-        date: new Date(), //in sprint 4 make it changable. user can select date
-        items: this.props.items ? this.props.items : [], //Made items section be props - everything should be props actually
+        date: new Date(),
+        items: this.props.outfit.items ? this.props.items : [], //Made items section be props - everything should be props actually
         isValid: true,
+        weather: this.props.weather,
     };
     componentDidMount() {
         this.props.setWeather();
+        this.setState({ weather: this.props.weather });
     }
     shouldComponentUpdate() {
         return true;
@@ -52,8 +54,11 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     };
     handleDateChange = date => {
+        if (date !== null)
+            this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         this.setState({
             date: date,
+            weather: this.props.selected_day_weather,
         });
     };
     checkValidation = () => {
@@ -78,13 +83,16 @@ class CreateOutfit extends Component {
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
-            weather: {
-                tempAvg:
-                    (this.props.weather.temperatureHigh +
-                        this.props.weather.temperatureLow) /
-                    2,
-                icon: this.props.weather.icon,
-            },
+            weather:
+                this.state.date !== null
+                    ? {
+                          tempAvg:
+                              (this.state.weather.temperatureHigh +
+                                  this.state.weather.temperatureLow) /
+                              2,
+                          icon: this.props.weather.icon,
+                      }
+                    : null,
         };
         this.props.createOutfit(newOutfit);
         this.props.history.push("/outfitDetail/" + this.props.newOutfit.id);
@@ -105,6 +113,8 @@ class CreateOutfit extends Component {
             );
         });
 
+        console.log(this.props.weather, this.props.selected_day_weather);
+        console.log(this.state.date, Date.parse(this.state.date) / 1000);
         return (
             <div id="create-outfit">
                 <div id="create-outfit-window">
@@ -173,16 +183,15 @@ const mapDispatchToProps = dispatch => {
     return {
         setWeather: () => dispatch(actionCreators.getWeather()),
         createOutfit: outfit => dispatch(actionCreators.createOutfit(outfit)),
+        getSpecificDayWeather: date =>
+            dispatch(actionCreators.getSpecificDayWeather(date)),
     };
 };
 const mapStateToProps = state => {
-    // let outfit = outfit
-    // return {
-    //     image: outfit.image,
-    //     items: outfit.items,
-    // };
     return {
+        outfit: state.image.outfitData,
         weather: state.weather.todayWeather,
+        selected_day_weather: state.weather.selectedDayWeather,
         newOutfit: state.outfit.selectedOutfit,
     };
 };

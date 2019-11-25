@@ -17,9 +17,9 @@ import * as actionCreators from "./store/actions/index";
 import "./App.scss";
 
 class App extends React.Component {
-    componentDidMount() {
+    /*componentDidMount() {
         this.props.getLogin();
-    }
+    }*/ //should restore before push
 
     render() {
         return (
