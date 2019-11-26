@@ -7,6 +7,7 @@ import loginReducer from "./reducers/login";
 import itemReducer from "./reducers/item";
 import outfitReducer from "./reducers/outfit";
 import tagReducer from "./reducers/tag";
+import imageReducer from "./reducers/image";
 
 import weatherReducer from "./reducers/weather";
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     login: loginReducer,
     item: itemReducer,
     outfit: outfitReducer,
+    image: imageReducer,
     tag: tagReducer,
     weather: weatherReducer,
     router: connectRouter(history),

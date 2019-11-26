@@ -3,11 +3,17 @@ import {
     faTimes /*, faCameraRetro */,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as actionCreators from "../../../store/actions/index";
 
 import "./UploadImage.scss";
+import { connect } from "react-redux";
 
 class UploadImage extends React.Component {
-    state = { selectedImageURL: null, isPreviewMode: false };
+    state = {
+        selectedImageURL: null,
+        isPreviewMode: false,
+        showWarning: false,
+    };
 
     onClickClosePopUpButton = () => {
         this.props.onClosePopUp();
@@ -19,23 +25,18 @@ class UploadImage extends React.Component {
 
     onFileChanged = event => {
         if (event.target.files && event.target.files[0]) {
+            event.persist();
+            //console.log(event);
             if (this.isImageFile(event.target.files[0])) {
-                this.setState(
-                    {
-                        ...this.state,
-                        selectedImageURL: URL.createObjectURL(
-                            event.target.files[0],
-                        ),
-                        isPreviewMode: true,
-                    },
-                    () => {
-                        console.log(this.state.selectedImageURL);
-                    },
-                );
+                this.setState({
+                    ...this.state,
+                    selectedImageURL: URL.createObjectURL(
+                        event.target.files[0],
+                    ),
+                    isPreviewMode: true,
+                });
             } else {
-                alert("you need to input image file");
-                console.log(event.target.files[0]);
-                console.log(this.state.selectedImageURL);
+                this.setState({ ...this.state, showWarning: true });
             }
         }
     };
@@ -49,7 +50,17 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
-        // send request to backend
+        let form_data = new FormData();
+
+        form_data.append("image", this.state.image);
+
+        //  send image to backend
+        this.props.onPostImage(form_data);
+
+        //this.props.outfitData
+        // redirect to create outfit page should be proceeded
+        // after having received response from backend
+        // so redirection logic exists at actionCreator
     };
 
     render() {
@@ -57,6 +68,7 @@ class UploadImage extends React.Component {
         let confirmImageButton = null;
         let chooseFileButton = null;
         let previewImage = null;
+        let alertMessage = null;
 
         if (this.state.isPreviewMode) {
             chooseOtherImageButton = (
@@ -79,6 +91,8 @@ class UploadImage extends React.Component {
                     alt="selected file"
                 />
             );
+            // console.log(this.state.isPreviewMode);
+            // console.log(previewImage);
         } else {
             chooseFileButton = (
                 <input
@@ -89,36 +103,61 @@ class UploadImage extends React.Component {
             );
         }
 
+        if (this.state.showWarning) {
+            alertMessage = (
+                <div id="alert-message">
+                    Uploaded file is not a valid image. Only JPG, JPEG, and PNG
+                    are allowed
+                </div>
+            );
+        }
+
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
-                <div id="popup-container">
-                    <div id="upload-image-header">
-                        <div className="header-column">
-                            <div id="upload-image-title">
-                                <p>Upload your outfit!</p>
+                <div id="popup-wrapper">
+                    <div id="popup-container">
+                        <div id="upload-image-header">
+                            <div className="header-column">
+                                <div id="upload-image-title">
+                                    <p>Upload your outfit!</p>
+                                </div>
+                            </div>
+                            <div className="header-column">
+                                <button
+                                    id="cancel-upload-image"
+                                    onClick={this.onClickClosePopUpButton}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faTimes}
+                                        id="cancel-upload-image-icon"
+                                    />
+                                </button>
                             </div>
                         </div>
-                        <div className="header-column">
-                            <button
-                                id="cancel-upload-image"
-                                onClick={this.onClickClosePopUpButton}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faTimes}
-                                    id="cancel-upload-image-icon"
-                                />
-                            </button>
+                        {chooseFileButton}
+                        {previewImage}
+                        {alertMessage}
+                        <div className="buttons">
+                            {chooseOtherImageButton}
+                            {confirmImageButton}
                         </div>
                     </div>
-                    {chooseFileButton}
-                    {previewImage}
-                    {chooseOtherImageButton}
-                    {confirmImageButton}
                 </div>
             </div>
         );
     }
 }
 
-export default UploadImage;
+const mapDispatchToProps = dispatch => {
+    return {
+        onPostImage: image => {
+            dispatch(actionCreators.postImage(image));
+        },
+    };
+};
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(UploadImage);

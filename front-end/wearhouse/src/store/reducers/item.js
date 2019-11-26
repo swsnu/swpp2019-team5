@@ -3,6 +3,7 @@ const initialState = {
     items: [],
     selectedOutfitItems: [],
     selectedItem: null,
+    option_list: [],
 };
 
 const reducer = (state = initialState, action) => {

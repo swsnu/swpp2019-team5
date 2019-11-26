@@ -92,7 +92,7 @@ describe("<Recommendation />", () => {
     it("should render", () => {
         const component = mount(recommendation);
         expect(component.find("#recommendation").length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should filter Only the items for recommendation", () => {
@@ -104,7 +104,7 @@ describe("<Recommendation />", () => {
         const component = mount(recommendation);
         let wrapper = component.find("#recommendation .outfit-preview"); //Wait for props loading time
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(3);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 

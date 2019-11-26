@@ -65,3 +65,19 @@ export const deleteOutfit = id => {
         });
     };
 };
+
+export const editOutfit_ = outfit => {
+    return {
+        type: actionTypes.EDIT_OUTFIT,
+        targetID: outfit.id,
+        new_outfit: outfit,
+    };
+};
+
+export const editOutfit = outfit => {
+    return dispatch => {
+        return axios.put("/api/outfit/" + outfit.id, outfit).then(() => {
+            dispatch(editOutfit_(outfit));
+        });
+    };
+};
