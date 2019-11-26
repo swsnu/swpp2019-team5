@@ -7,6 +7,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
+import { setTimeout } from "timers";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -72,13 +73,21 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (
-            (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&
-            e.target.value !== ""
-        ) {
+        if ((e.keyCode === 13 || e.keyCode == 32) && e.target.value !== "") {
+            if (tags.includes(e.target.value)) {
+                e.target.value = "Tag should be unique!";
+                e.target.disabled = true;
+                e.persist();
+                setTimeout(() => {
+                    e.target.value = null;
+                    e.target.disabled = false;
+                    e.target.focus();
+                }, 700);
+                return;
+            }
             tags.push(e.target.value);
             this.setState({ tags: tags });
-            e.target.value = "";
+            e.target.value = null;
 
             if (tags.length >= 3) {
                 this.setState({ todo: "editDisabled" });
