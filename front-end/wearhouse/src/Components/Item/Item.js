@@ -28,6 +28,7 @@ class Item extends Component {
         preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
+        todo: "editEnabled",
         item_list: this.props.item_list,
         option_list: this.props.option_list,
     };
@@ -52,24 +53,15 @@ class Item extends Component {
         let tags = this.state.tags;
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
+        if (tags.length < 3) {
+            this.setState({ todo: "editEnabled" });
+        }
         this.props.applyEdit({
             category: this.state.category,
             tags: tags,
         });
     }
 
-    //Edit Tag
-    onEditTag(tag, edit_tag) {
-        let tags = this.state.tags;
-        tags = tags.map(tg => {
-            return tg === tag ? edit_tag : tg;
-        });
-        this.setState({ tags: tags });
-        this.props.applyEdit({
-            category: this.state.category,
-            tags: tags,
-        });
-    }
     handleItemDelete() {
         this.props.delete();
         this.setState({
@@ -80,10 +72,23 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (e.keyCode === 13) {
-            tags = tags.concat(e.target.value);
+        if (
+            (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&
+            e.target.value !== ""
+        ) {
+            tags.push(e.target.value);
             this.setState({ tags: tags });
             e.target.value = "";
+
+            if (tags.length >= 3) {
+                this.setState({ todo: "editDisabled" });
+            }
+        } else if (e.target.value === "" && e.keyCode === 8) {
+            tags.pop();
+            this.setState({ tags: tags });
+            if (tags.length < 3) {
+                this.setState({ todo: "editEnabled" });
+            }
         }
         this.props.applyEdit({
             category: this.state.category,
@@ -111,6 +116,7 @@ class Item extends Component {
     }
 
     show = false;
+
     render() {
         let auto_complete = this.state.option_list.map((op, index) => {
             return (
@@ -135,14 +141,13 @@ class Item extends Component {
                     key={index}
                     editMode={this.props.editMode}
                     delete={() => this.onDeleteTag(tag)}
-                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
         let edit_mode_options = null;
         let tag_input = null;
 
-        if (this.props.editMode) {
+        if (this.props.editMode && this.state.todo === "editEnabled") {
             tag_input = (
                 <input
                     ref={input => {
@@ -163,14 +168,12 @@ class Item extends Component {
         }
         if (this.props.editMode) {
             edit_mode_options = (
-                <>
-                    <div
-                        className="item-deleter"
-                        onClick={this.handleItemDelete.bind(this)}
-                    >
-                        <FontAwesomeIcon icon={faTimes} />
-                    </div>
-                </>
+                <div
+                    className="item-deleter"
+                    onClick={this.handleItemDelete.bind(this)}
+                >
+                    <FontAwesomeIcon icon={faTimes} />
+                </div>
             );
         }
         return (

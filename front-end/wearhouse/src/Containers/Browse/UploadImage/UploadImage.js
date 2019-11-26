@@ -115,31 +115,33 @@ class UploadImage extends React.Component {
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
-                <div id="popup-container">
-                    <div id="upload-image-header">
-                        <div className="header-column">
-                            <div id="upload-image-title">
-                                <p>Upload your outfit!</p>
+                <div id="popup-wrapper">
+                    <div id="popup-container">
+                        <div id="upload-image-header">
+                            <div className="header-column">
+                                <div id="upload-image-title">
+                                    <p>Upload your outfit!</p>
+                                </div>
+                            </div>
+                            <div className="header-column">
+                                <button
+                                    id="cancel-upload-image"
+                                    onClick={this.onClickClosePopUpButton}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faTimes}
+                                        id="cancel-upload-image-icon"
+                                    />
+                                </button>
                             </div>
                         </div>
-                        <div className="header-column">
-                            <button
-                                id="cancel-upload-image"
-                                onClick={this.onClickClosePopUpButton}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faTimes}
-                                    id="cancel-upload-image-icon"
-                                />
-                            </button>
+                        {chooseFileButton}
+                        {previewImage}
+                        {alertMessage}
+                        <div className="buttons">
+                            {chooseOtherImageButton}
+                            {confirmImageButton}
                         </div>
-                    </div>
-                    {chooseFileButton}
-                    {previewImage}
-                    {alertMessage}
-                    <div className="buttons">
-                        {chooseOtherImageButton}
-                        {confirmImageButton}
                     </div>
                 </div>
             </div>

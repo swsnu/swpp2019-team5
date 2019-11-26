@@ -154,7 +154,7 @@ describe("<CreateOutfit />", () => {
 
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keypress", {
+        wrapper.simulate("keydown", {
             key: "Enter",
         });
         confirm.simulate("click");
@@ -167,15 +167,5 @@ describe("<CreateOutfit />", () => {
 
         let count = component.find(".Item");
         expect(count.length).toBe(3);
-    });
-
-    it("should call onApplyEditItem", () => {
-        const component = mount(createOutfit);
-        let wrapper = component.find(".Item .tag-input").at(0);
-        wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", { key: "Enter" });
-
-        let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(8); //doesn't actually work but
     });
 });
