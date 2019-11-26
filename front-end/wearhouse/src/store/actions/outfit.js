@@ -53,7 +53,7 @@ export const createOutfit = outfit => {
                 dispatch(createOutfit_(res.data));
                 id = res.data.id;
             })
-            .then(res => dispatch(push("/outfitDetail" + id)));
+            .then(() => dispatch(push("/outfitDetail/" + id)));
     };
 };
 
@@ -82,8 +82,11 @@ export const editOutfit_ = outfit => {
 
 export const editOutfit = outfit => {
     return dispatch => {
-        return axios.put("/api/outfit/" + outfit.id, outfit).then(() => {
-            dispatch(editOutfit_(outfit));
-        });
+        return axios
+            .put("/api/outfit/" + outfit.id, outfit)
+            .then(() => {
+                dispatch(editOutfit_(outfit));
+            })
+            .then(() => dispatch(push("/outfitDetail/" + outfit.id)));
     };
 };
