@@ -6,9 +6,14 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store, { history } from "./store/store";
 import axios from "axios";
+import Cookie from "js-cookie";
 
-axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.withCredentials = true;
+if (Cookie.get().csrftoken === undefined) {
+    axios.get("/api/token/");
+}
 
 ReactDOM.render(
     <Provider store={store}>
