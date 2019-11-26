@@ -108,9 +108,13 @@ describe("<Browse />", () => {
 
     it(`should click 'AddItemButton'`, () => {
         const component = mount(outfitList);
-        const wrapper = component.find("#add-outfit-button").at(0);
+        let wrapper = component.find("#add-outfit-button").at(0);
         wrapper.simulate("click");
-        //fill expect~~ after implementing AddOutfit onclick function
+
+        // re-render component
+        component.update();
+        wrapper = component.find("#upload-image");
+        expect(wrapper.length).toBe(1);
     });
 
     it(`should set state(search_query and mode) properly on search input when writing`, () => {
@@ -120,11 +124,78 @@ describe("<Browse />", () => {
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
+
         expect(CreateInstance.state.search_query).toEqual("black shirt");
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
         expect(CreateInstance.state.mode).toEqual("search");
 
         wrapper.simulate("change", { target: { value: "" } });
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
         expect(CreateInstance.state.search_query).toEqual("");
+        expect(CreateInstance.state.mode).toEqual("browse");
+    });
+
+    it("should change searchOptionsVisible state", () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("#selectButton");
+        wrapper.simulate("click");
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        expect(CreateInstance.state.searchOptionsVisible).toEqual(true);
+
+        wrapper.simulate("click");
+        expect(CreateInstance.state.searchOptionsVisible).toEqual(false);
+    });
+
+    it("should change searchMode value when clicked", () => {
+        const component = mount(outfitList);
+        const wrapper = component.find("#selectButton");
+        wrapper.simulate("click");
+
+        var clicker = component.find(".option").at(0);
+        clicker.simulate("click");
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        expect(CreateInstance.state.searchOptions.searchMode).toEqual("Outfit");
+        clicker = component.find(".option").at(1);
+        clicker.simulate("click");
+        expect(CreateInstance.state.searchOptions.searchMode).toEqual("Item");
+    });
+
+    it("should add and delete tag to and from query", () => {
+        const component = mount(outfitList);
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+        const wrapper = component.find("input");
+        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+
+        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+
+        expect(CreateInstance.state.searchOptions.searchArray.length).toBe(1);
+
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+        expect(CreateInstance.state.searchOptions.searchArray.length).toBe(0);
         expect(CreateInstance.state.mode).toEqual("browse");
     });
 });

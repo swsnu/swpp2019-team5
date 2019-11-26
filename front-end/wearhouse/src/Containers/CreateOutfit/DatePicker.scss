@@ -564,7 +564,7 @@
 .react-datepicker__quarter-text--in-selecting-range,
 .react-datepicker__quarter-text--in-range {
     border-radius: 0.3rem;
-    background-color: rgb(160, 209, 193); //here is the picked date
+    background-color: #f79ead; //here is the picked date
     color: #fff;
 }
 
@@ -577,21 +577,21 @@
 .react-datepicker__quarter-text--selected:hover,
 .react-datepicker__quarter-text--in-selecting-range:hover,
 .react-datepicker__quarter-text--in-range:hover {
-    background-color: mediumaquamarine;
+    background-color: #f18496;
 }
 
 .react-datepicker__day--keyboard-selected,
 .react-datepicker__month-text--keyboard-selected,
 .react-datepicker__quarter-text--keyboard-selected {
     border-radius: 0.3rem;
-    background-color: mediumaquamarine;
+    background-color: lightgray;
     color: #fff;
 }
 
 .react-datepicker__day--keyboard-selected:hover,
 .react-datepicker__month-text--keyboard-selected:hover,
 .react-datepicker__quarter-text--keyboard-selected:hover {
-    background-color: mediumaquamarine;
+    background-color: rgb(177, 172, 172);
 }
 
 .react-datepicker__day--in-selecting-range,
@@ -785,7 +785,7 @@
 
 .react-datepicker__close-icon::after {
     cursor: pointer;
-    background-color: rgb(230, 113, 152);
+    background-color: lightgray;
     color: #fff;
     border-radius: 10%;
     height: 10px;
