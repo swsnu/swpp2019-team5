@@ -49,6 +49,7 @@ var mockStore = getMockStore(
     stubOutfitState,
     {},
     stubWeatherState,
+    {},
 );
 
 describe("<Browse />", () => {

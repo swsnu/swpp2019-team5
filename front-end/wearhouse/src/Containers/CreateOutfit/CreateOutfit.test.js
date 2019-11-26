@@ -67,13 +67,23 @@ let stubInitialState_weather = {
     todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
     selectedWeather: null,
 };
-
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: null,
+        items: null,
+        weather: { tempAvg: "", icon: "" },
+    },
+};
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_item,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
+    stubInitialState_image,
 );
 
 describe("<CreateOutfit />", () => {

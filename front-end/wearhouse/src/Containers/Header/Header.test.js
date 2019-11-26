@@ -9,7 +9,7 @@ import Header from "./Header";
 
 var stubInitialState = { isLoggedIn: false, userID: null };
 
-var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {}, {});
 
 describe("<Header />", () => {
     let spyHistoryPush;

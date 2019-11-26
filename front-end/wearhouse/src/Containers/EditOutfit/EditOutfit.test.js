@@ -87,7 +87,7 @@ let mockStore = getMockStore(
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
-    stubInitialState_outfit,
+    {},
 );
 
 describe("<EditOutfit />", () => {

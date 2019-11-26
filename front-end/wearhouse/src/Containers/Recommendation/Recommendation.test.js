@@ -63,7 +63,7 @@ let stubWeatherState = {
     selectedWeather: null,
 };
 
-var mockStore = getMockStore({}, {}, stubOutfitState, {}, stubWeatherState);
+var mockStore = getMockStore({}, {}, stubOutfitState, {}, stubWeatherState, {});
 
 describe("<Recommendation />", () => {
     let recommendation;
