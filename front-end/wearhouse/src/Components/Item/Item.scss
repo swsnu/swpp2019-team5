@@ -9,8 +9,9 @@
 
     .tag-container {
         display: flex;
+        align-items: flex-start;
         flex-direction: column;
-        width: 550px;
+        width: 400px;
         border: 1px rgb(223, 220, 220) solid;
         margin: 0 10px;
         height: 36px;
@@ -20,6 +21,7 @@
             width: 150px;
             outline: none;
             border: none;
+            font-size: 14px;
             margin-right: 10px;
         }
         .tag-area {
@@ -40,7 +42,7 @@
     }
 
     #option-group {
-        width: 549px;
+        width: 400px;
         max-height: 180px;
         border: rgb(182, 180, 180) solid 1px;
         border-bottom-right-radius: 3%;

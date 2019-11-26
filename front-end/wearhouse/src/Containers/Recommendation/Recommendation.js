@@ -36,7 +36,7 @@ var iconText = {
 class Recommendation extends React.Component {
     componentDidMount = () => {
         this.props.getAllOufits(); // This is a duplicate call
-        this.props.getWeather();
+        this.props.getWeather(); // call only when weather is undefined?
     };
 
     onClickOutfit = outfit => {

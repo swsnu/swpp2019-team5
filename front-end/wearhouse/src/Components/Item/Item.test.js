@@ -44,32 +44,24 @@ let mockStore = getMockStore(
 );
 
 describe("<Item/>", () => {
-    let item, deleteHandler, editHandler;
+    let item;
     beforeEach(() => {
         item = (
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
                     <Item
                         editMode={true}
-                        item={{ tags: ["black", "T-shirt", "2019"] }}
-                        applyEdit={deleteHandler}
-                        delete={editHandler}
+                        item={{ tags: ["black", "T-shirt"] }}
+                        applyEdit={jest.fn()}
+                        delete={jest.fn()}
                     />
                 </ConnectedRouter>
             </Provider>
         );
-
-        deleteHandler = jest.fn();
-        editHandler = jest.fn();
     });
 
-    it("add tag on the first item", () => {
-        const component = mount(item);
-        let wrapper = component.find(".tag-input").at(0);
-        wrapper.simulate("change", { target: { value: "new_tag" } });
-        wrapper.simulate("keypress", {
-            key: "Enter",
-        });
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it("should render properly", () => {
@@ -81,13 +73,24 @@ describe("<Item/>", () => {
     it("should edit item values", () => {
         const component = mount(item);
 
-        let wrapper = component.find(".tag-input").at(0);
+        let wrapper = component.find(".tag-input");
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keypress", {
-            key: "Enter",
+        wrapper.simulate("keydown", {
+            keyCode: 13,
         });
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(3); //doesn't actually work but
+        expect(count.length).toBe(2);
+        expect(wrapper.value).toBe(undefined);
+    });
+
+    it("should add tag", () => {
+        const component = mount(item);
+        let wrapper = component.find(".tag-input");
+        wrapper.instance().value = "new_tag";
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+        expect(component.find(".tag-in-outfit").length).toBe(3);
     });
 
     it("should delete tags", () => {
@@ -96,41 +99,28 @@ describe("<Item/>", () => {
         let wrapper = component.find(".delete-tag").at(0);
         wrapper.simulate("click");
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(2); //doesn't actually work but
+        expect(count.length).toBe(1);
+
+        wrapper = component.find(".tag-input");
+        wrapper.simulate("click");
+        wrapper.simulate("keydown", {
+            keyCode: 8,
+        });
+        count = component.find(".tag-in-outfit");
+        expect(count.length).toBe(0);
     });
 
-    it("should delete item", () => {
-        const component = mount(item);
+    // it("should delete item", () => {
+    //     const component = mount(item);
 
-        let wrapper = component.find(".item-deleter");
-        wrapper.simulate("click");
-    });
-
-    it("should edit tags", () => {
-        const component = mount(item);
-        let wrapper = component.find(".edit-tag").at(0);
-        wrapper.simulate("click");
-
-        component
-            .find(".tag-in-outfit input")
-            .simulate("change", { target: { value: "newvalue" } });
-
-        wrapper = component.find(".edit-tag").at(0);
-        wrapper.simulate("click");
-        let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(3); //doesn't actually work but
-    });
-
-    it("should edit category", () => {
-        const component = mount(item);
-        let wrapper = component.find(".Select").at(0);
-        wrapper.simulate("click");
-        //expect(wrapper.find()).toBe(3);
-    });
+    //     let wrapper = component.find(".item-deleter").at(0);
+    //     wrapper.simulate("click");
+    //     expect(component.find(".Item").length).toBe(3);
+    // });
 
     it("should change state", () => {
         const component = mount(item);
         let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(3); //doesn't actually work but
+        expect(count.length).toBe(2);
     });
 });

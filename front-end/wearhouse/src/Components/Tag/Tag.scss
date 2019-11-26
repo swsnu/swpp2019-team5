@@ -1,19 +1,27 @@
+$fontsize: 14px;
 .tag-in-outfit {
     background-color: #ee7185;
     color: #fff;
     font-weight: 500;
-    padding: 5px;
+    padding: 4px 8px;
     text-align: center;
     text-decoration: none;
     display: flex;
+    align-items: center;
     flex-wrap: nowrap;
-    font-size: 13px;
+    font-size: $fontsize;
     margin: 4px;
-    border-radius: 10%;
+    border-radius: 5px;
     cursor: default;
     width: fit-content;
+    .tag-text {
+        font-size: $fontsize;
+        padding: 0 3px;
+    }
     input {
-        margin-left: 5px;
+        font-size: $fontsize;
+        padding: 0 3px;
+        margin-left: 2px;
         width: 50px;
         max-width: fit-content;
         border: none;
@@ -33,6 +41,8 @@
     cursor: pointer;
 }
 .edit-tag {
-    margin-left: -3px;
+    margin: 0 2px;
+    font-size: 12px;
+    line-height: $fontsize;
     cursor: pointer;
 }
