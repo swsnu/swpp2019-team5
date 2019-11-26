@@ -1,6 +1,5 @@
 [client]
 database = 'wearhouse'
-host = '52.231.167.141'
+host = 'localhost'
 user = 'wearhouse'
 password = 'wearhouse'
-port = '22'
