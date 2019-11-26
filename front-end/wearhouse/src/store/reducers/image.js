@@ -6,7 +6,7 @@ const initialState = {
         image: "",
         satisfactionValue: null,
         date: null,
-        items: [],
+        items: null,
         weather: { tempAvg: "", icon: "" },
     },
 };
