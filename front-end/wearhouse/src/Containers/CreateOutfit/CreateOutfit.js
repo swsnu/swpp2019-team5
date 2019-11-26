@@ -41,7 +41,9 @@ class CreateOutfit extends Component {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: this.props.outfit.items ? this.props.items : [], //Made items section be props - everything should be props actually
+        items: this.props.outfit.items
+            ? this.props.items
+            : [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
     };
