@@ -74,7 +74,8 @@ class Item extends Component {
     addTag(e) {
         let tags = this.state.tags;
         if ((e.keyCode === 13 || e.keyCode == 32) && e.target.value !== "") {
-            if (tags.includes(e.target.value)) {
+            var new_tag = e.target.value.replace(/\s*$/, "");
+            if (tags.includes(new_tag)) {
                 e.target.value = "Tag should be unique!";
                 e.target.disabled = true;
                 e.persist();
@@ -85,7 +86,7 @@ class Item extends Component {
                 }, 700);
                 return;
             }
-            tags.push(e.target.value);
+            tags.push(new_tag);
             this.setState({ tags: tags });
             e.target.value = null;
 
@@ -166,7 +167,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyDown={e => this.addTag(e)}
+                    onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });
