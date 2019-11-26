@@ -170,6 +170,12 @@ class CreateOutfit extends Component {
                             <div id="weather-icon">
                                 {this.state.weather !== null
                                     ? iconText[this.state.weather.icon]
+                                    : null}{" "}
+                                {this.state.weather &&
+                                this.state.weather.temperatureLow
+                                    ? this.state.weather.temperatureHigh +
+                                      "/" +
+                                      this.state.weather.temperatureLow
                                     : null}
                             </div>
                         </div>

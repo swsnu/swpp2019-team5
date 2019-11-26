@@ -186,6 +186,13 @@ class EditOutfit extends Component {
                             <div id="weather-icon">
                                 {this.state.outfit.weather !== null
                                     ? iconText[this.state.outfit.weather.icon]
+                                    : null}{" "}
+                                {this.state.outfit.weather &&
+                                this.state.outfit.weather.temperatureLow
+                                    ? this.state.outfit.weather
+                                          .temperatureHigh +
+                                      "/" +
+                                      this.state.outfit.weather.temperatureLow
                                     : null}
                             </div>
                         </div>
