@@ -12,7 +12,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 if (Cookie.get().csrftoken === undefined) {
-    axios.get("/api/token/");
+    axios.get("/api/user/token/"); //need a top-level token call
 }
 
 ReactDOM.render(
