@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.db.utils import IntegrityError
 
@@ -19,6 +19,8 @@ def token(request):
         return HttpResponseNotAllowed(['GET'])
 
 
+@ensure_csrf_cookie
+@csrf_exempt
 def signin(request):
     if request.method == 'POST':
         try:
@@ -38,7 +40,6 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
-
 def signout(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -51,6 +52,7 @@ def signout(request):
         return HttpResponseNotAllowed(['GET'])
 
 
+@ensure_csrf_cookie
 def user(request):
     if request.method == 'POST':
         try:
@@ -79,4 +81,3 @@ def user(request):
         return JsonResponse(response_user, status=200)
     else:
         return HttpResponseNotAllowed(['POST'])
-
