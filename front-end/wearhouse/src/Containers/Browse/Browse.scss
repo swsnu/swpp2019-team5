@@ -2,8 +2,8 @@ $fontsize: 20px;
 $templatecolor: rgba(127, 255, 212, 0.3);
 
 #browse {
+    min-height: inherit;
     overflow: auto;
-    height: 100vh;
     background-color: rgba(211, 211, 211, 0.3);
     #calendar-button {
         border: none;

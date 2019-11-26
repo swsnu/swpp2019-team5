@@ -82,7 +82,7 @@ describe("<Browse />", () => {
         expect(wrapper.length).toBe(1);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(3);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
@@ -95,7 +95,7 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(4);
+        expect(spyAxios_get).toHaveBeenCalledTimes(3);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 

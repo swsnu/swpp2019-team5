@@ -35,8 +35,7 @@ var iconText = {
 };
 class Recommendation extends React.Component {
     componentDidMount = () => {
-        this.props.getAllOufits(); // This is a duplicate call
-        this.props.getWeather(); // call only when weather is undefined?
+        this.props.getWeather();
     };
 
     onClickOutfit = outfit => {
@@ -143,7 +142,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOufits: () => dispatch(actionCreators.getOutfits()),
         getWeather: () => dispatch(actionCreators.getWeather()),
         selectOutfit: outfit =>
             dispatch(actionCreators.getSpecificOutfit(outfit.id)),
