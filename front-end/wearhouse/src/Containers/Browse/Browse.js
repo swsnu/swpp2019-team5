@@ -33,7 +33,8 @@ class Browse extends React.Component {
     };
 
     componentDidMount() {
-        this.props.getAllOufits();
+        this.props.getAllOutfits();
+        console.log(this.props.getAllOutfits());
     }
     onClickCalendar = () => {
         this.props.history.push("/calendar");
@@ -215,9 +216,13 @@ class Browse extends React.Component {
                                 </RadioGroup>
                             </div>
                         </div>
+                        <div id="search-result">
+                            <Outfit></Outfit>
+                        </div>
                     </div>
                 );
-                /*show the search result : container = ~~~ */
+                /*show the search result : container = ~~~*/
+                ///get outfit list and render them
                 break;
             default:
                 break;
@@ -296,7 +301,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOufits: () => dispatch(actionCreators.getOutfits()),
+        getAllOutfits: () => dispatch(actionCreators.getOutfits()),
         selectOutfit: outfit =>
             dispatch(actionCreators.getSpecificOutfit(outfit.id)),
     };
