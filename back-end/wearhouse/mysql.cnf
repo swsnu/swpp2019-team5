@@ -1,5 +1,6 @@
 [client]
-database = 'testdb'
-host = 'wearhousedb.mysql.database.azure.com'
-user = 'adminteam5@wearhousedb'
-password = 'q1w2e3!@#'
+database = 'wearhouse'
+host = '52.231.167.141'
+user = 'wearhouse'
+password = 'wearhouse'
+port = '22'
