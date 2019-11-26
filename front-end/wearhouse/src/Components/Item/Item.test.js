@@ -75,7 +75,7 @@ describe("<Item/>", () => {
 
         let wrapper = component.find(".tag-input");
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 13,
         });
         let count = component.find(".tag-in-outfit");
@@ -87,7 +87,7 @@ describe("<Item/>", () => {
         const component = mount(item);
         let wrapper = component.find(".tag-input");
         wrapper.instance().value = "new_tag";
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 13,
         });
         expect(component.find(".tag-in-outfit").length).toBe(3);
@@ -103,7 +103,7 @@ describe("<Item/>", () => {
 
         wrapper = component.find(".tag-input");
         wrapper.simulate("click");
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 8,
         });
         count = component.find(".tag-in-outfit");

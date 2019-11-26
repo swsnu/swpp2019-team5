@@ -18,9 +18,9 @@ import * as actionCreators from "./store/actions/index";
 import "./App.scss";
 
 class App extends React.Component {
-    /*componentDidMount() {
+    componentDidMount() {
         this.props.getLogin();
-    }*/ //this should be restored before pull request
+    }
     render() {
         return (
             <ConnectedRouter history={this.props.history}>
