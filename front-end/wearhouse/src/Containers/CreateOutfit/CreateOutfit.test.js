@@ -182,7 +182,7 @@ describe("<CreateOutfit />", () => {
     it("should set null date and selected_day_weather", () => {
         spyAxios_get = jest.spyOn(axios, "get").mockImplementation(() =>
             Promise.resolve({
-                temperatureLow: 20,
+                temperatureHigh: 20,
                 temperatureLow: -10,
                 icon: "rain",
             }),

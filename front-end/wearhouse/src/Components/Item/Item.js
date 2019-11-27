@@ -112,8 +112,7 @@ class Item extends Component {
         });
     }
     handleAutoComplete = e => {
-        let option_list = this.state.tags.concat(e.target.value);
-        option_list = option_list;
+        //let option_list = this.state.tags.concat(e.target.value);
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };
