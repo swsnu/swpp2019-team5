@@ -31,9 +31,6 @@ export const getSpecificOutfit = id => {
 };
 
 export const createOutfit_ = outfit => {
-    for (let i = 0; i < outfit.items.length; i++) {
-        actionCreators.createItem(outfit.id, outfit.items[i]);
-    }
     return {
         type: actionTypes.CREATE_OUTFIT,
         image: outfit.image,

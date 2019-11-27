@@ -89,6 +89,7 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     };
     handleDateChange = date => {
+        console.log("들어온 date......", date);
         this.setState({ date: date });
         if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);

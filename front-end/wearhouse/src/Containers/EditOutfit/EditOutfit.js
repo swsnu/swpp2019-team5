@@ -202,7 +202,7 @@ class EditOutfit extends Component {
                                 satisfactionValue={
                                     this.props.outfit.satisfactionValue
                                 }
-                                chagne={num => this.handleSatisfactionEdit(num)}
+                                change={num => this.handleSatisfactionEdit(num)}
                             />
                             <img src={this.state.image} alt="outfit" />
                         </div>

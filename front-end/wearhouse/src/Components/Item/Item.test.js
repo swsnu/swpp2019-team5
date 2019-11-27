@@ -78,17 +78,27 @@ describe("<Item/>", () => {
         wrapper.simulate("keyup", {
             keyCode: 13,
         });
+        component.update();
         let count = component.find(".tag-in-outfit");
         expect(count.length).toBe(2);
-        expect(wrapper.value).toBe(undefined);
     });
 
     it("should add tag", () => {
+        let spySetTimeout = jest
+            .spyOn(window, "setTimeout")
+            .mockImplementation(() => {});
         const component = mount(item);
         let wrapper = component.find(".tag-input");
         wrapper.instance().value = "new_tag";
         wrapper.simulate("keyup", {
             keyCode: 13,
+        });
+        wrapper.simulate("keyup", {
+            keyCode: 32,
+        });
+        wrapper.instance().value = "new_tag";
+        wrapper.simulate("keyup", {
+            keyCode: 32,
         });
         expect(component.find(".tag-in-outfit").length).toBe(3);
     });

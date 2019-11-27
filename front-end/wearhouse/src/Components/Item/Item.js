@@ -92,7 +92,7 @@ class Item extends Component {
                 }, 700);
                 return;
             }
-            tags.push(new_tag);
+            tags = tags.concat(new_tag);
             this.setState({ tags: tags });
             e.target.value = null;
 

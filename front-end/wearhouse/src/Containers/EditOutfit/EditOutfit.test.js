@@ -122,6 +122,15 @@ describe("<EditOutfit />", () => {
         expect(wrapper.length).toBe(1);
     });
 
+    it("edit satisfaction valaue", () => {
+        const component = mount(editOutfit);
+        const button = component.find(".satisfaction-functions").at(1);
+        button.simulate("click");
+
+        const wrapper = component.find(".satisfaction-option");
+        wrapper.at(0).simulate("click");
+    });
+
     it("set date properly", () => {
         const component = mount(editOutfit);
         let wrapper = component.find("#date-picker").at(1);
@@ -182,6 +191,16 @@ describe("<EditOutfit />", () => {
         });
         confirm.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(0);
+    });
+
+    it("should set null date", () => {
+        let component = mount(editOutfit);
+        component
+            .find(".react-datepicker__close-icon")
+            .at(0)
+            .simulate("click");
+        let instance = component.find(EditOutfit.WrappedComponent).instance();
+        expect(instance.state.date).toBe(undefined);
     });
 
     it("should call onDeleteItem", () => {

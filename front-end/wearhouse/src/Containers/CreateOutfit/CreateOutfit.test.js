@@ -119,8 +119,9 @@ describe("<CreateOutfit />", () => {
 
     it("set date properly", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#date-picker").at(1);
-        wrapper.simulate("change", { target: { value: "2019/11/11" } });
+        let wrapper = component.find("#date-picker");
+        wrapper.at(0).simulate("change", { target: { value: "2019/11/11" } });
+        wrapper.at(1).simulate("change", { target: { value: "2019/11/11" } });
         wrapper = component.find(CreateOutfit.WrappedComponent).instance();
     });
 
@@ -133,8 +134,6 @@ describe("<CreateOutfit />", () => {
 
     it("should add item", () => {
         const component = mount(createOutfit);
-        let instance = component.find(CreateOutfit.WrappedComponent).instance();
-        console.log(instance.state.items);
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
         component.update();
@@ -180,21 +179,12 @@ describe("<CreateOutfit />", () => {
     });
 
     it("should set null date and selected_day_weather", () => {
-        spyAxios_get = jest.spyOn(axios, "get").mockImplementation(() =>
-            Promise.resolve({
-                temperatureHigh: 20,
-                temperatureLow: -10,
-                icon: "rain",
-            }),
-        );
         let component = mount(createOutfit);
         component
-            .find("#date-picker")
+            .find(".react-datepicker__close-icon")
             .at(0)
-            .simulate("change", { target: { value: "null" } });
+            .simulate("click");
 
         component.update();
-        let instance = component.find(CreateOutfit.WrappedComponent).instance();
-        console.log(instance.props, "프롭스지롱");
     });
 });
