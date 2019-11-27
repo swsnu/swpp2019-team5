@@ -174,6 +174,7 @@ class Browse extends React.Component {
                                     Satisfaction:
                                 </div>
                                 <RadioGroup
+                                    className="radio-group"
                                     aria-label="satisfcation"
                                     name="Satisfaction"
                                     defaultValue="0"

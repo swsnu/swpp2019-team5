@@ -13,20 +13,31 @@ const getMockReducer = jest.fn(
     },
 );
 
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: null,
+        items: null,
+        weather: { tempAvg: "", icon: "" },
+    },
+};
+
 export const getMockStore = (
     loginState,
     itemState,
     outfitState,
     tagState,
     weatherState,
-    imageState,
+    stubInitialState_image,
 ) => {
     let mockLoginReducer = getMockReducer(loginState);
     let mockOutfitReducer = getMockReducer(outfitState);
     let mockItemReducer = getMockReducer(itemState);
     let mockTagReducer = getMockReducer(tagState);
     let mockWeatherReducer = getMockReducer(weatherState);
-    let mockImageReducer = getMockReducer(imageState);
+    let mockImageReducer = getMockReducer(stubInitialState_image);
 
     const rootReducer = combineReducers({
         login: mockLoginReducer,
@@ -34,6 +45,7 @@ export const getMockStore = (
         outfit: mockOutfitReducer,
         tag: mockTagReducer,
         weather: mockWeatherReducer,
+        image: mockImageReducer,
         router: connectRouter(history),
     });
     const composeEnhancers =

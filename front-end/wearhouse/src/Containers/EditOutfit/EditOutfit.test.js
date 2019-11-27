@@ -134,7 +134,6 @@ describe("<EditOutfit />", () => {
         let wrapper = component.find("#confirm-edit-outfit");
         wrapper.simulate("click");
         expect(spyAxios_put).toHaveBeenCalledTimes(1);
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
     it("should cancel/confirm cancel edit", () => {
@@ -182,7 +181,7 @@ describe("<EditOutfit />", () => {
             keyCode: 13,
         });
         confirm.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(0);
     });
 
     it("should call onDeleteItem", () => {

@@ -49,6 +49,7 @@ class CreateOutfit extends Component {
     };
     componentDidMount() {
         this.props.setWeather();
+        this.checkValidation();
     }
     shouldComponentUpdate() {
         return true;

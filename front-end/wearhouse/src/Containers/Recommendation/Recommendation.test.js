@@ -63,7 +63,15 @@ let stubWeatherState = {
     selectedWeather: null,
 };
 
-var mockStore = getMockStore({}, {}, stubOutfitState, {}, stubWeatherState, {});
+var mockStore = getMockStore(
+    {},
+    {},
+    stubOutfitState,
+    {},
+    stubWeatherState,
+    {},
+    {},
+);
 
 describe("<Recommendation />", () => {
     let recommendation;
@@ -109,7 +117,7 @@ describe("<Recommendation />", () => {
     });
 
     it("should ", () => {
-        let mockStore_temp = getMockStore({}, {}, stubOutfitState, {}, {});
+        let mockStore_temp = getMockStore({}, {}, stubOutfitState, {}, {}, {});
 
         const component = mount(
             <Provider store={mockStore_temp}>

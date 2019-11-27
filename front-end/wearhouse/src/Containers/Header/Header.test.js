@@ -30,6 +30,7 @@ describe("<Header />", () => {
             {},
             {},
             {},
+            {},
         );
         header_login = (
             <Provider store={mockStore_login}>
