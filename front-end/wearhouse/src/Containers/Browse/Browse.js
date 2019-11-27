@@ -34,7 +34,6 @@ class Browse extends React.Component {
 
     componentDidMount() {
         this.props.getAllOutfits();
-        console.log(this.props.getAllOutfits());
     }
     onClickCalendar = () => {
         this.props.history.push("/calendar");
