@@ -41,6 +41,7 @@ export const createOutfit_ = outfit => {
         weather: outfit.weather,
     };
 };
+
 export const createOutfit = outfit => {
     return dispatch => {
         var id;
