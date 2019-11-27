@@ -204,11 +204,32 @@ def outfit(request):
         return HttpResponseNotAllowed(['GET', 'POST'])
 
 
-def getOutfit(reqeust, outfit_id):
-    if reqeust.method == 'GET':
+def getOutfit(request, outfit_id):
+    if request.method == 'GET':
         outfit = Outfit.objects.get(pk=outfit_id)
 
-    return JsonResponse(model_to_dict(outfit), status=00)
+        response_dict_weather = {
+            "tempAvg": outfit.tempAvg, "icon": outfit.tempIcon
+        }
+        response_dict_items = []
+        for item in outfit.items.all():
+            item_to_add = {
+                "id": item.id,
+                "category": item.category,
+                "tags": [tag.name for tag in item.tags.all()]
+            }
+            response_dict_items.append(item_to_add)
+
+        response_dict = {
+            "id": outfit.id,
+            "image": outfit.image_link,
+            "date": outfit.date,
+            "satisfactionValue": outfit.satisfaction,
+            "weather": response_dict_weather,
+            "items": response_dict_items
+        }
+
+        return JsonResponse(response_dict, status=200)
 
 
 def getItemsOfOutfit(request, outfit_id):
