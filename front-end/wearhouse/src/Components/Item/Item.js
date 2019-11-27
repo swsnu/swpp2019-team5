@@ -75,6 +75,12 @@ class Item extends Component {
         let tags = this.state.tags;
         if ((e.keyCode === 13 || e.keyCode == 32) && e.target.value !== "") {
             var new_tag = e.target.value.replace(/\s*$/, "");
+            if (new_tag.length === 0) {
+                e.target.value = null;
+                e.target.focus();
+                return;
+            }
+            new_tag = new_tag.toLowerCase();
             if (tags.includes(new_tag)) {
                 e.target.value = "Tag should be unique!";
                 e.target.disabled = true;
