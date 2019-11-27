@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-import * as actionCreators from "./item";
 import axios from "axios";
 import { push } from "connected-react-router";
 

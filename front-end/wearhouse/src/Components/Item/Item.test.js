@@ -84,9 +84,6 @@ describe("<Item/>", () => {
     });
 
     it("should add tag", () => {
-        let spySetTimeout = jest
-            .spyOn(window, "setTimeout")
-            .mockImplementation(() => {});
         const component = mount(item);
         let wrapper = component.find(".tag-input");
         wrapper.instance().value = "new_tag";
