@@ -50,7 +50,7 @@ export const createOutfit = outfit => {
                 dispatch(createOutfit_(res.data));
                 id = res.data.id;
             })
-            .then(res => dispatch(push("/outfitDetail" + id)));
+            .then(() => dispatch(push("/outfitDetail/" + id)));
     };
 };
 
