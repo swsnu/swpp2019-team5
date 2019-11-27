@@ -3,48 +3,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import {
-    faSun,
-    faMoon,
-    faUmbrella,
-    faSnowflake,
-    faCloudShowersHeavy,
-    faWind,
-    faSmog,
-    faCloud,
-    faCloudSun,
-    faCloudMoon,
-    faCalendarAlt,
-    faUndo,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
+import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 import PopUp from "../../Components/PopUp/PopUp";
 
-// 1. 대략적인 design 짜기 (o)
-// 2. Action creator 만들기
-// 3. Edit all, edit one 짜기
-// 4. state = {}
-// 5. Detail 에서 누르고 나면 여기로 넘어간다.
-// 6.
-
-var iconText = {
-    "clear-day": <FontAwesomeIcon icon={faSun} />,
-    "clear-night": <FontAwesomeIcon icon={faMoon} />,
-    rain: <FontAwesomeIcon icon={faUmbrella} />,
-    snow: <FontAwesomeIcon icon={faSnowflake} />,
-    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
-    wind: <FontAwesomeIcon icon={faWind} />,
-    fog: <FontAwesomeIcon icon={faSmog} />,
-    cloudy: <FontAwesomeIcon icon={faCloud} />,
-    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
-    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
-};
 class EditOutfit extends Component {
     state = {
         outfit: {

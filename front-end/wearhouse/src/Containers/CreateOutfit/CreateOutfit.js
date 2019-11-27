@@ -2,40 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
-import {
-    faSun,
-    faMoon,
-    faUmbrella,
-    faSnowflake,
-    faCloudShowersHeavy,
-    faWind,
-    faSmog,
-    faCloud,
-    faCloudSun,
-    faCloudMoon,
-    faCalendarAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
 import "./DatePicker.scss";
+import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 //should resolve the case where image is not porperly uploaded
-var iconText = {
-    "clear-day": <FontAwesomeIcon icon={faSun} />,
-    "clear-night": <FontAwesomeIcon icon={faMoon} />,
-    rain: <FontAwesomeIcon icon={faUmbrella} />,
-    snow: <FontAwesomeIcon icon={faSnowflake} />,
-    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
-    wind: <FontAwesomeIcon icon={faWind} />,
-    fog: <FontAwesomeIcon icon={faSmog} />,
-    cloudy: <FontAwesomeIcon icon={faCloud} />,
-    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
-    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
-};
-
 class CreateOutfit extends Component {
     state = {
         image: this.props.outfit.image,
@@ -89,7 +65,6 @@ class CreateOutfit extends Component {
         this.setState({ items: items });
     };
     handleDateChange = date => {
-        console.log("들어온 date......", date);
         this.setState({ date: date });
         if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
