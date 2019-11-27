@@ -39,7 +39,6 @@ class Browse extends React.Component {
         this.props.history.push("/calendar");
     };
     onClickOutfit = outfit => {
-        this.props.selectOutfit(outfit);
         this.props.history.push("/outfitDetail/" + outfit.id);
     };
 
@@ -300,9 +299,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOutfits: () => dispatch(actionCreators.getOutfits()),
-        selectOutfit: outfit =>
-            dispatch(actionCreators.getSpecificOutfit(outfit.id)),
+        getAllOufits: () => dispatch(actionCreators.getOutfits()),
     };
 };
 export default connect(
