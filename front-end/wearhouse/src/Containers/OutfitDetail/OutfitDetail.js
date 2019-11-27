@@ -52,6 +52,13 @@ class OutfitDetail extends Component {
         this.props.getOutfit(this.props.match.params.id);
         this.setState({ outfit: this.props.outfit });
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.outfit !== this.props.outfit) {
+            this.setState({ outfit: this.props.outfit });
+        }
+    }
+
     onEdit = () => {
         this.props.history.push("/editOutfit/" + this.props.match.params.id);
     };
