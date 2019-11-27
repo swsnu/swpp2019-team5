@@ -73,7 +73,7 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if ((e.keyCode === 13 || e.keyCode == 32) && e.target.value !== "") {
+        if ((e.keyCode === 13 || e.keyCode === 32) && e.target.value !== "") {
             var new_tag = e.target.value.replace(/\s*$/, "");
             if (new_tag.length === 0) {
                 e.target.value = null;
@@ -197,6 +197,7 @@ class Item extends Component {
                 <div className="info-container">
                     <div className="position-controller">
                         <Select
+                            menuIsOpen={this.props.menuIsOpen}
                             isDisabled={!this.props.editMode}
                             className="Select"
                             value={option}
