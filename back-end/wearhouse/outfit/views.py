@@ -70,8 +70,8 @@ def outfit(request):
             response_array.append(outfit_dict)
         return JsonResponse(response_array, safe=False, status=200)
 
-    elif request.method == 'POST':
-        try:
+    else:
+       try:
             body = request.body.decode()
             request_dict = json.loads(body)
 
@@ -99,13 +99,15 @@ def outfit(request):
 
                         if itemExists:
                             if i is 0:
-                                item_candidates = [item for item in tag.items_with_this_tag.all()]
+                                item_candidates = [
+                                    item for item in tag.items_with_this_tag.all()]
                                 print("item_candidates first print: ")
                                 print(item_candidates)
                                 i = 1
 
                             else:
-                                item_candidates_read = copy.deepcopy(item_candidates)
+                                item_candidates_read = copy.deepcopy(
+                                    item_candidates)
                                 for item_candidate in item_candidates_read:
                                     print("item_candidate, tag: ")
                                     print(item_candidate, tag.name)
@@ -136,8 +138,9 @@ def outfit(request):
                 # tag 없는 애는 생성, 있는애는 객체로 받아서 받아서 tags안에 다 들어있음
                 # itemExits 이미 존재하는 item이 잇는지 확인 끝
                 item_candidates = filter(lambda x: x.category == item["category"] and x.tags.all().count() == len(item["tags"]),
-                                             item_candidates)
-                item_candidates = list(item_candidates) # convert filter object to list
+                                         item_candidates)
+                # convert filter object to list
+                item_candidates = list(item_candidates)
                 print("item_candidates: ")
                 print(item_candidates)
                 assert len(item_candidates) <= 1, "...it is literally disaster"
@@ -151,7 +154,8 @@ def outfit(request):
                     print(items_for_new_outfit)
 
                 else:
-                    new_item = Item(category=item["category"], user=user1)  # check user
+                    new_item = Item(
+                        category=item["category"], user=user1)  # check user
                     new_item.save()
                     for tag in tags_per_item:
                         new_item.tags.add(tag)
@@ -200,14 +204,16 @@ def outfit(request):
             return HttpResponseBadRequest()
 
         return JsonResponse(model_to_dict(outfit), status=201)
-    else:
-        return HttpResponseNotAllowed(['GET', 'POST'])
 
-
-def getOutfit(request, outfit_id):
-    if request.method == 'GET':
+@csrf_exempt
+@require_http_methods(['GET', 'PUT', 'DELETE'])
+@transaction.atomic
+def specificOutfit(request, outfit_id):
+    try:
         outfit = Outfit.objects.get(pk=outfit_id)
-
+    except Outfit.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
         response_dict_weather = {
             "tempAvg": outfit.tempAvg, "icon": outfit.tempIcon
         }
@@ -230,6 +236,20 @@ def getOutfit(request, outfit_id):
         }
 
         return JsonResponse(response_dict, status=200)
+    elif request.method == 'DELETE':
+        for item in outfit.items.all():
+            for tag in items.tag.all():
+                if tag.items_with_this_tag.all().count() == 1 :
+                    tag.delete()
+            if item.outfits_having_this_item.all().count() == 1:
+                item.delete()
+        # if item.outfits_having_this_item 의 length가 1이면. item도 지워줘
+            # if tag.items_with_this_tag의 length가 1이면 tag도 지워줘
+        outfit.delete()
+        return HttpResponse(status=200) 
+    
+    elif request.method == 'PUT' :
+
 
 
 def getItemsOfOutfit(request, outfit_id):
