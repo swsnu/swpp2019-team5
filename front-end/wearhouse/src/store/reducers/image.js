@@ -2,12 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     outfitData: {
-        id: "",
         image: "",
-        satisfactionValue: null,
-        date: null,
         items: null,
-        weather: { tempAvg: "", icon: "" },
     },
 };
 

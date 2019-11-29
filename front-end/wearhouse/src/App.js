@@ -18,9 +18,9 @@ import * as actionCreators from "./store/actions/index";
 import "./App.scss";
 
 class App extends React.Component {
-    componentDidMount() {
+    /*componentDidMount() {
         this.props.getLogin();
-    }
+    }*/
     render() {
         return (
             <ConnectedRouter history={this.props.history}>
@@ -29,7 +29,6 @@ class App extends React.Component {
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
                     <Route path="/main" exact component={LandingPage} />
-                    {!this.props.isLoggedIn && <Redirect exact to="/main" />}
                     <Route path="/browse" exact component={Browse} />
                     <Route
                         path="/outfitDetail/:id"
