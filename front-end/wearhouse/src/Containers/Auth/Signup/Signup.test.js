@@ -14,7 +14,7 @@ let stubInitialState = {};
 let mockStore = getMockStore(stubInitialState);
 
 describe("<Signup />", () => {
-    let signup, spyAxios_post;
+    let signup, spyAxios_post, spyHistoryPush;
 
     beforeEach(() => {
         signup = (
@@ -25,9 +25,19 @@ describe("<Signup />", () => {
             </Provider>
         );
 
+        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
+            return dispatch => {
+                dispatch();
+            };
+        });
+
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it("should load properly", () => {
@@ -64,5 +74,18 @@ describe("<Signup />", () => {
         let wrapper = component.find("#signup-container #signup-button");
         wrapper.simulate("click");
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
+    });
+
+    it("should redirect to /browse", () => {
+        mockStore = getMockStore({ isLoggedIn: true }, {}, {}, {}, {});
+        signup = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <Signup history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        mount(signup);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 });

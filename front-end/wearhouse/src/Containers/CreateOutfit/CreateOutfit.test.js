@@ -1,13 +1,40 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
 import CreateOutfit from "./CreateOutfit";
 import { ConnectedRouter } from "connected-react-router";
 
+let stubInitialState_item = {
+    items: [],
+    selectedOutfitItems: [],
+    selectedItem: null,
+    option_list: [
+        {
+            id: 1,
+            category: "UpperBody",
+            tags: ["T-shirt", "2019"],
+        },
+        {
+            id: 2,
+            category: "UpperBody",
+            tags: ["fall", "stripe", "blue"],
+        },
+        {
+            id: 3,
+            category: "UpperBody",
+            tags: ["coat", "wool", "pink"],
+        },
+        {
+            id: 4,
+            category: "UpperBody",
+            tags: ["mom", "hand-made", "check-shirt"],
+        },
+    ],
+};
 let stubInitialState_outfit = {
     outfits: {
         id: 1,
@@ -33,18 +60,24 @@ let stubInitialState_outfit = {
 };
 
 let stubInitialState_login = {
-    isLoggedin: true,
+    isLoggedIn: true,
+};
+
+let stubInitialState_weather = {
+    todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
+    selectedWeather: null,
 };
 
 let mockStore = getMockStore(
     stubInitialState_login,
+    stubInitialState_item,
     stubInitialState_outfit,
-    null,
-    null,
+    stubInitialState_outfit,
+    stubInitialState_weather,
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post;
+    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_get;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -53,6 +86,7 @@ describe("<CreateOutfit />", () => {
                         items={stubInitialState_outfit.outfits.items}
                         image=""
                         outfit_id={1}
+                        newOutfit={stubInitialState_outfit.selectedOutfit}
                         history={history}
                     />
                 </ConnectedRouter>
@@ -68,6 +102,10 @@ describe("<CreateOutfit />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -78,6 +116,7 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("set date properly", () => {
@@ -89,10 +128,8 @@ describe("<CreateOutfit />", () => {
 
     it("should put newly created outfit", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#confirm-create-item");
+        let wrapper = component.find("#confirm-create-outfit");
         wrapper.simulate("click");
-        //expect(spyAxios_post).toHaveBeenCalledTimes(12);
-        //4 itmes and 8 tags are newly posted
         expect(spyAxios_post).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
@@ -111,12 +148,13 @@ describe("<CreateOutfit />", () => {
         let instance = component.find(CreateOutfit.WrappedComponent).instance();
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
-        let confirm = component.find("#confirm-create-item");
+        let confirm = component.find("#confirm-create-outfit");
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
+
         wrapper = component.find(".Item .tag-input").at(4);
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keypress", {
+        wrapper.simulate("keydown", {
             key: "Enter",
         });
         confirm.simulate("click");
@@ -129,15 +167,5 @@ describe("<CreateOutfit />", () => {
 
         let count = component.find(".Item");
         expect(count.length).toBe(3);
-    });
-
-    it("should call onApplyEditItem", () => {
-        const component = mount(createOutfit);
-        let wrapper = component.find(".Item .tag-input").at(0);
-        wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", { key: "Enter" });
-
-        let count = component.find(".tag-in-outfit");
-        expect(count.length).toBe(8); //doesn't actually work but
     });
 });

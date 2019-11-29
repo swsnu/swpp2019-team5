@@ -1,12 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
+import moment from "moment";
 
-import Header from "../Header/Header";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Satisfaction from "../../Components/Satisfaction/Satisfaction";
 import "./OutfitDetail.scss";
+import {
+    faSun,
+    faMoon,
+    faUmbrella,
+    faSnowflake,
+    faCloudShowersHeavy,
+    faWind,
+    faSmog,
+    faCloud,
+    faCloudSun,
+    faCloudMoon,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+var iconText = {
+    "clear-day": <FontAwesomeIcon icon={faSun} />,
+    "clear-night": <FontAwesomeIcon icon={faMoon} />,
+    rain: <FontAwesomeIcon icon={faUmbrella} />,
+    snow: <FontAwesomeIcon icon={faSnowflake} />,
+    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
+    wind: <FontAwesomeIcon icon={faWind} />,
+    fog: <FontAwesomeIcon icon={faSmog} />,
+    cloudy: <FontAwesomeIcon icon={faCloud} />,
+    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
+    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
+};
 
 class OutfitDetail extends Component {
     state = {
@@ -15,6 +42,7 @@ class OutfitDetail extends Component {
             satisfactionValue: null,
             date: "", //in sprin
             items: [],
+            weather: {},
         },
     };
     shouldComponentUpdate() {
@@ -38,7 +66,6 @@ class OutfitDetail extends Component {
         });
         return (
             <div id="outfit-detail">
-                <Header />
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <Satisfaction
@@ -46,7 +73,13 @@ class OutfitDetail extends Component {
                         />
                         <img src={this.state.image} alt="outfit" />
 
-                        <label id="date">{this.state.outfit.date}</label>
+                        <label id="date">
+                            {moment(this.state.outfit.date).format("LL")}
+
+                            <div id="weather-icon">
+                                {iconText[this.state.outfit.weather.icon]}
+                            </div>
+                        </label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 

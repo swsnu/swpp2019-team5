@@ -2,25 +2,30 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
-import Header from "../../Header/Header";
 import "./Signup.scss";
 
 class Signup extends Component {
     state = { email: "", password: "", passwordConfirm: "" };
-    onSignUp = () => {
-        this.props.onSignUp();
+
+    componentDidMount() {
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        }
+    }
+
+    onSignUp = userCredentials => {
+        this.props.onSignUp(userCredentials);
     };
 
     render() {
         let pwMatch = this.state.password === this.state.passwordConfirm;
 
-        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}\.[a-z]{2,3}$/;
+        const emailRegex = /^[^@\s]{1,}@[^@\s.]{1,}([-_.]?[^@\s.])*.[a-zA-Z]{2,}$/;
         let validEmail = emailRegex.test(this.state.email);
 
         let active = pwMatch && validEmail && this.state.password !== "";
         return (
             <div id="signup">
-                <Header />
                 <div id="signup-container">
                     <h1>Sign Up</h1>
                     <form id="signup-form">
@@ -74,7 +79,12 @@ class Signup extends Component {
                         <button
                             disabled={!active}
                             id="signup-button"
-                            onClick={() => this.onSignUp()}
+                            onClick={() =>
+                                this.onSignUp({
+                                    email: this.state.email,
+                                    password: this.state.password,
+                                })
+                            }
                         >
                             Sign up
                         </button>
@@ -85,13 +95,20 @@ class Signup extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.login.isLoggedIn,
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
-        onSignUp: () => dispatch(actionCreators.signUp()),
+        onSignUp: userCredentials =>
+            dispatch(actionCreators.signUp(userCredentials)),
     };
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(Signup);

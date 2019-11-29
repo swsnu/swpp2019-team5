@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from user.models import User
 from tag.models import Tag
 # Create your models here.
 
