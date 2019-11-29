@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Calendar from "../../Components/Calendar/Calendar";
+import * as actionCreators from "../../store/actions/index";
 
 var currentTime = new Date();
 
@@ -18,6 +19,10 @@ class OutfitCalendar extends Component {
         year: currentTime.getFullYear(),
         month: currentTime.getMonth() + 1,
     };
+
+    componentDidMount() {
+        this.props.getAllOutfits();
+    }
 
     onClickPrevMonth = () => {
         this.setState({
@@ -42,6 +47,8 @@ class OutfitCalendar extends Component {
     };
 
     render() {
+        const outfits = this.props.outfits;
+        console.log(outfits);
         return (
             <div className="OutfitCalendar">
                 <Header />
@@ -89,11 +96,17 @@ class OutfitCalendar extends Component {
 
 const mapStateToProps = state => {
     return {
-        allOutfits: state.outfit.outfits, // an array of user's all outfit
+        outfits: state.outfit.outfits, // an array of user's all outfit
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllOutfits: () => dispatch(actionCreators.getOutfits()),
     };
 };
 
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(OutfitCalendar);
