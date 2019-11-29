@@ -15,17 +15,42 @@ export const getLogin = () => {
     };
 };
 
-export const logIn_ = user => {
-    return { type: actionTypes.LOGIN, isLoggedIn: true, userID: user };
+export const logIn_ = () => {
+    return { type: actionTypes.LOGIN, isLoggedIn: true, loginErr: null };
+};
+
+export const loginFail = err => {
+    return { type: actionTypes.LOGIN, isLoggedIn: false, loginErr: err };
 };
 
 export const logIn = userCredentials => {
     return dispatch => {
-        return axios.post("/api/user/login/", userCredentials).then(res => {
-            //TODO: divide cases according to login status code
-            dispatch(logIn_(res.data));
-            dispatch(push("/browse"));
-        });
+        return axios
+            .post("/api/user/login/", userCredentials)
+            .then(() => {
+                //TODO: divide cases according to login status code
+                dispatch(logIn_());
+                dispatch(push("/browse"));
+            })
+            .catch(err => {
+                let errMessage = "";
+                switch (err.response.status) {
+                    case 401:
+                        errMessage = "Email or Password incorrect";
+                        break;
+                    case 400:
+                        errMessage =
+                            "Something went wrong with the request. Try again.";
+                        break;
+                    case 404:
+                        errMessage = "Email or Password incorrect";
+                        break;
+                    default:
+                        break;
+                }
+                dispatch(loginFail(errMessage));
+                dispatch(push("/login"));
+            });
     };
 };
 
@@ -43,15 +68,30 @@ export const logOut = () => {
     };
 };
 
-export const signUp_ = user => {
-    return { type: actionTypes.SIGN_UP, user: user };
+export const signUp_ = () => {
+    return { type: actionTypes.SIGN_UP, signupErr: null };
+};
+
+export const signupFail = err => {
+    return { type: actionTypes.SIGN_UP, signupErr: err };
 };
 
 export const signUp = userCredentials => {
     return dispatch => {
-        return axios.post("/api/user/", userCredentials).then(res => {
-            dispatch(signUp_(res.data));
-            dispatch(push("/login"));
-        });
+        return axios
+            .post("/api/user/", userCredentials)
+            .then(() => {
+                dispatch(signUp_());
+                dispatch(push("/browse"));
+            })
+            .catch(err => {
+                let errMessage = "";
+                console.log(err.response);
+                if (err.response.status === 400) {
+                    errMessage = "Email is already registered";
+                }
+                dispatch(signupFail(errMessage));
+                dispatch(push("/signup"));
+            });
     };
 };
