@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import Header from "../Header/Header";
 import "./OutfitCalendar.scss";
 import {
@@ -85,4 +86,14 @@ class OutfitCalendar extends Component {
         );
     }
 }
-export default OutfitCalendar;
+
+const mapStateToProps = state => {
+    return {
+        allOutfits: state.outfit.outfits, // an array of user's all outfit
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null,
+)(OutfitCalendar);
