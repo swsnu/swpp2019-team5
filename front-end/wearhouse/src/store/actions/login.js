@@ -28,7 +28,6 @@ export const logIn = userCredentials => {
         return axios
             .post("/api/user/login/", userCredentials)
             .then(() => {
-                //TODO: divide cases according to login status code
                 dispatch(logIn_());
                 dispatch(push("/browse"));
             })
@@ -60,7 +59,6 @@ export const logOut_ = () => {
 export const logOut = () => {
     return dispatch => {
         return axios.get("/api/user/logout/").then(() => {
-            //TODO: divide cases according to login status code
             dispatch(logOut_());
             dispatch(push("/main"));
         });
