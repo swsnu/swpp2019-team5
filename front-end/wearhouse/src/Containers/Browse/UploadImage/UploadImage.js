@@ -60,7 +60,7 @@ class UploadImage extends React.Component {
         form_data.append("image", this.state.image);
 
         //  send image to backend
-        //this.props.onPostImage(form_data);
+        this.props.onPostImage(form_data);
 
         //this.props.outfitData
         // redirect to create outfit page should be proceeded
