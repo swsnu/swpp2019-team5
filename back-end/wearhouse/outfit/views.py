@@ -71,7 +71,7 @@ def outfit(request):
         return JsonResponse(response_array, safe=False, status=200)
 
     else:
-       try:
+        try:
             body = request.body.decode()
             request_dict = json.loads(body)
 
@@ -205,6 +205,7 @@ def outfit(request):
 
         return JsonResponse(model_to_dict(outfit), status=201)
 
+
 @csrf_exempt
 @require_http_methods(['GET', 'PUT', 'DELETE'])
 @transaction.atomic
@@ -239,22 +240,14 @@ def specificOutfit(request, outfit_id):
     elif request.method == 'DELETE':
         for item in outfit.items.all():
             for tag in items.tag.all():
-                if tag.items_with_this_tag.all().count() == 1 :
+                if tag.items_with_this_tag.all().count() == 1:
                     tag.delete()
             if item.outfits_having_this_item.all().count() == 1:
                 item.delete()
         # if item.outfits_having_this_item 의 length가 1이면. item도 지워줘
             # if tag.items_with_this_tag의 length가 1이면 tag도 지워줘
         outfit.delete()
-        return HttpResponse(status=200) 
-    
-    elif request.method == 'PUT' :
+        return HttpResponse(status=200)
 
-
-
-def getItemsOfOutfit(request, outfit_id):
-    return HttpResponse(status=404)
-
-
-def getSpecificItemOfOutfit(request, outfit_id, item_id):
-    return HttpResponse(status=404)
+    elif request.method == 'PUT':
+        return 
