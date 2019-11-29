@@ -1,9 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     isLoggedIn: false,
-    userID: null,
-    loginErr: null,
-    signupErr: null,
+    loginErr: "",
+    signupErr: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +19,12 @@ const reducer = (state = initialState, action) => {
             return { ...state, isLoggedIn: false };
         case actionTypes.SIGN_UP:
             return { ...state, signupErr: action.signupErr };
+        case actionTypes.RESET_ERR:
+            return {
+                ...state,
+                signupErr: action.signupErr,
+                loginErr: action.loginErr,
+            };
         default:
             break;
     }

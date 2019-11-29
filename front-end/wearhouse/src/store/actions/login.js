@@ -16,7 +16,7 @@ export const getLogin = () => {
 };
 
 export const logIn_ = () => {
-    return { type: actionTypes.LOGIN, isLoggedIn: true, loginErr: null };
+    return { type: actionTypes.LOGIN, isLoggedIn: true, loginErr: "" };
 };
 
 export const loginFail = err => {
@@ -49,27 +49,26 @@ export const logIn = userCredentials => {
                         break;
                 }
                 dispatch(loginFail(errMessage));
-                dispatch(push("/login"));
             });
     };
 };
 
-export const logOut_ = user => {
-    return { type: actionTypes.LOGOUT, user: user };
+export const logOut_ = () => {
+    return { type: actionTypes.LOGOUT };
 };
 
 export const logOut = () => {
     return dispatch => {
-        return axios.get("/api/user/logout/").then(res => {
+        return axios.get("/api/user/logout/").then(() => {
             //TODO: divide cases according to login status code
-            dispatch(logOut_(res.data));
+            dispatch(logOut_());
             dispatch(push("/main"));
         });
     };
 };
 
 export const signUp_ = () => {
-    return { type: actionTypes.SIGN_UP, signupErr: null };
+    return { type: actionTypes.SIGN_UP, signupErr: "" };
 };
 
 export const signupFail = err => {
@@ -91,7 +90,10 @@ export const signUp = userCredentials => {
                     errMessage = "Email is already registered";
                 }
                 dispatch(signupFail(errMessage));
-                dispatch(push("/signup"));
             });
     };
+};
+
+export const resetErr = () => {
+    return { type: actionTypes.RESET_ERR, signupErr: "", loginErr: "" };
 };
