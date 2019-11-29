@@ -7,18 +7,12 @@ import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
+import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 import PopUp from "../../Components/PopUp/PopUp";
-
-// 1. 대략적인 design 짜기 (o)
-// 2. Action creator 만들기
-// 3. Edit all, edit one 짜기
-// 4. state = {}
-// 5. Detail 에서 누르고 나면 여기로 넘어간다.
-// 6.
 
 class EditOutfit extends Component {
     state = {
@@ -62,8 +56,17 @@ class EditOutfit extends Component {
         if (prevState.outfit.items !== this.state.outfit.items) {
             this.checkValidation();
         }
+        if (prevProps.weather !== this.props.weather) {
+            this.setState({
+                outfit: { ...this.state.outfit, weather: this.props.weather },
+            });
+        }
     }
-
+    handleSatisfactionEdit(num) {
+        this.setState({
+            outfit: { ...this.state.outfit, satisfactionValue: num },
+        });
+    }
     onInitializeOutfit = () => {
         this.setState({
             outfit: this.props.outfit,
@@ -83,6 +86,11 @@ class EditOutfit extends Component {
         this.setState({
             outfit: { ...this.state.outfit, date: date },
         });
+        if (date !== null) {
+            this.props.getSpecificDayWeather(Date.parse(date) / 1000);
+        } else {
+            this.setState({ outfit: { ...this.state.outfit, weather: null } });
+        }
     };
     checkValidation = () => {
         const items = this.state.outfit.items;
@@ -106,7 +114,6 @@ class EditOutfit extends Component {
 
     onConfirmEdit = () => {
         this.props.confirmEdit(this.state.outfit);
-        this.props.history.push("/outfitDetail/" + this.state.outfit.id);
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
@@ -145,6 +152,18 @@ class EditOutfit extends Component {
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
                             />
+                            <div id="weather-icon">
+                                {this.state.outfit.weather !== null
+                                    ? iconText[this.state.outfit.weather.icon]
+                                    : null}{" "}
+                                {this.state.outfit.weather &&
+                                this.state.outfit.weather.temperatureLow
+                                    ? this.state.outfit.weather
+                                          .temperatureHigh +
+                                      "/" +
+                                      this.state.outfit.weather.temperatureLow
+                                    : null}
+                            </div>
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
@@ -152,6 +171,7 @@ class EditOutfit extends Component {
                                 satisfactionValue={
                                     this.props.outfit.satisfactionValue
                                 }
+                                change={num => this.handleSatisfactionEdit(num)}
                             />
                             <img src={this.state.image} alt="outfit" />
                         </div>
@@ -213,6 +233,8 @@ class EditOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getSpecificDayWeather: date =>
+            dispatch(actionCreators.getSpecificDayWeather(date)),
         confirmEdit: outfit => {
             dispatch(actionCreators.editOutfit(outfit));
         },
@@ -221,6 +243,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         outfit: state.outfit.selectedOutfit,
+        weather: state.weather.selectedDayWeather,
     };
 };
 

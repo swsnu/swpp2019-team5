@@ -63,7 +63,33 @@ describe("<Item/>", () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
-
+    it("change category", () => {
+        item = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <Item
+                        editMode={true}
+                        item={{ tags: ["black", "T-shirt"] }}
+                        applyEdit={jest.fn()}
+                        delete={jest.fn()}
+                        menuIsOpen={true}
+                    />
+                </ConnectedRouter>
+            </Provider>
+        );
+        const component = mount(item);
+        let select_category = component
+            .find(".css-1hb7zxy-IndicatorsContainer")
+            .at(0);
+        select_category.simulate("click"); //click triangle button
+        component.update();
+        console.log(component.debug(), "com..");
+        select_category = component.find("#react-select-2-option-1").at(0);
+        select_category.simulate("click");
+        expect(
+            component.find(Item.WrappedComponent).instance().state.category,
+        ).toBe("Outer");
+    });
     it("should render properly", () => {
         const component = mount(item);
 
@@ -75,20 +101,31 @@ describe("<Item/>", () => {
 
         let wrapper = component.find(".tag-input");
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 13,
         });
+        component.update();
         let count = component.find(".tag-in-outfit");
         expect(count.length).toBe(2);
-        expect(wrapper.value).toBe(undefined);
     });
 
     it("should add tag", () => {
         const component = mount(item);
         let wrapper = component.find(".tag-input");
+        wrapper.instance().value = " ";
+        wrapper.simulate("keyup", {
+            keyCode: 32,
+        });
         wrapper.instance().value = "new_tag";
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 13,
+        });
+        wrapper.simulate("keyup", {
+            keyCode: 32,
+        });
+        wrapper.instance().value = "new_tag";
+        wrapper.simulate("keyup", {
+            keyCode: 32,
         });
         expect(component.find(".tag-in-outfit").length).toBe(3);
     });
@@ -103,7 +140,7 @@ describe("<Item/>", () => {
 
         wrapper = component.find(".tag-input");
         wrapper.simulate("click");
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             keyCode: 8,
         });
         count = component.find(".tag-in-outfit");

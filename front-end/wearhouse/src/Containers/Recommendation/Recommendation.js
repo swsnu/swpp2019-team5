@@ -21,7 +21,7 @@ import "./Recommendation.scss";
 
 import * as actionCreators from "../../store/actions/index";
 
-var iconText = {
+export var iconText = {
     "clear-day": <FontAwesomeIcon icon={faSun} />,
     "clear-night": <FontAwesomeIcon icon={faMoon} />,
     rain: <FontAwesomeIcon icon={faUmbrella} />,
@@ -85,6 +85,7 @@ class Recommendation extends React.Component {
             );
         });
 
+        console.log(this.props.weather);
         return (
             <div id="recommendation">
                 {recommendationItems.length !== 0 && displayWeather && (

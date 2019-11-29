@@ -11,7 +11,7 @@ import { ConnectedRouter } from "connected-react-router";
 
 var stubInitialState = { isLoggedIn: false, userID: null };
 
-var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {}, {});
 
 describe("<Login />", () => {
     let login, spyHistoryPush, spyAxios_post;

@@ -1,7 +1,14 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    outfitData: "",
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: null,
+        items: null,
+        weather: { tempAvg: "", icon: "" },
+    },
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +18,7 @@ const reducer = (state = initialState, action) => {
                 image: action.image,
                 items: action.items,
             };
+            console.log(outfitData);
             return { ...state, outfitData: outfitData };
         }
         default:

@@ -21,7 +21,6 @@ class App extends React.Component {
     componentDidMount() {
         this.props.getLogin();
     }
-
     render() {
         return (
             <ConnectedRouter history={this.props.history}>

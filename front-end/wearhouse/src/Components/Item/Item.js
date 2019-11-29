@@ -7,6 +7,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
+import { setTimeout } from "timers";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -72,13 +73,28 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (
-            (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&
-            e.target.value !== ""
-        ) {
-            tags.push(e.target.value);
+        if ((e.keyCode === 13 || e.keyCode === 32) && e.target.value !== "") {
+            var new_tag = e.target.value.replace(/\s*$/, "");
+            if (new_tag.length === 0) {
+                e.target.value = null;
+                e.target.focus();
+                return;
+            }
+            new_tag = new_tag.toLowerCase();
+            if (tags.includes(new_tag)) {
+                e.target.value = "Tag should be unique!";
+                e.target.disabled = true;
+                e.persist();
+                setTimeout(() => {
+                    e.target.value = null;
+                    e.target.disabled = false;
+                    e.target.focus();
+                }, 700);
+                return;
+            }
+            tags = tags.concat(new_tag);
             this.setState({ tags: tags });
-            e.target.value = "";
+            e.target.value = null;
 
             if (tags.length >= 3) {
                 this.setState({ todo: "editDisabled" });
@@ -157,7 +173,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyDown={e => this.addTag(e)}
+                    onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });
@@ -181,6 +197,7 @@ class Item extends Component {
                 <div className="info-container">
                     <div className="position-controller">
                         <Select
+                            menuIsOpen={this.props.menuIsOpen}
                             isDisabled={!this.props.editMode}
                             className="Select"
                             value={option}
@@ -199,7 +216,10 @@ class Item extends Component {
                         </div>
 
                         <div id="options">
-                            {this.state.show ? auto_complete : null}
+                            {this.state.show &&
+                            this.state.option_list.length >= 1
+                                ? auto_complete
+                                : null}
                         </div>
                     </div>
                     {edit_mode_options}
