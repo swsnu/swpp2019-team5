@@ -41,8 +41,8 @@ const itemState = {
 const stubNullState = {};
 var mockStore = getMockStore(
     stubNullState,
-    outfitState,
     itemState,
+    outfitState,
     stubNullState,
     stubNullState,
     {},
@@ -76,8 +76,8 @@ describe("App", () => {
     it("should redirect to browse when logged in", () => {
         mockStore = getMockStore(
             { isLoggedIn: true },
-            outfitState,
             itemState,
+            outfitState,
             stubNullState,
             stubNullState,
             {},
