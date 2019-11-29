@@ -3,7 +3,20 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+    faSun,
+    faMoon,
+    faUmbrella,
+    faSnowflake,
+    faCloudShowersHeavy,
+    faWind,
+    faSmog,
+    faCloud,
+    faCloudSun,
+    faCloudMoon,
+    faCalendarAlt,
+    faUndo,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
@@ -20,6 +33,18 @@ import PopUp from "../../Components/PopUp/PopUp";
 // 5. Detail 에서 누르고 나면 여기로 넘어간다.
 // 6.
 
+var iconText = {
+    "clear-day": <FontAwesomeIcon icon={faSun} />,
+    "clear-night": <FontAwesomeIcon icon={faMoon} />,
+    rain: <FontAwesomeIcon icon={faUmbrella} />,
+    snow: <FontAwesomeIcon icon={faSnowflake} />,
+    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
+    wind: <FontAwesomeIcon icon={faWind} />,
+    fog: <FontAwesomeIcon icon={faSmog} />,
+    cloudy: <FontAwesomeIcon icon={faCloud} />,
+    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
+    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
+};
 class EditOutfit extends Component {
     state = {
         outfit: {
@@ -62,8 +87,17 @@ class EditOutfit extends Component {
         if (prevState.outfit.items !== this.state.outfit.items) {
             this.checkValidation();
         }
+        if (prevProps.weather !== this.props.weather) {
+            this.setState({
+                outfit: { ...this.state.outfit, weather: this.props.weather },
+            });
+        }
     }
-
+    handleSatisfactionEdit(num) {
+        this.setState({
+            outfit: { ...this.state.outfit, satisfactionValue: num },
+        });
+    }
     onInitializeOutfit = () => {
         this.setState({
             outfit: this.props.outfit,
@@ -83,6 +117,11 @@ class EditOutfit extends Component {
         this.setState({
             outfit: { ...this.state.outfit, date: date },
         });
+        if (date !== null) {
+            this.props.getSpecificDayWeather(Date.parse(date) / 1000);
+        } else {
+            this.setState({ outfit: { ...this.state.outfit, weather: null } });
+        }
     };
     checkValidation = () => {
         const items = this.state.outfit.items;
@@ -106,7 +145,6 @@ class EditOutfit extends Component {
 
     onConfirmEdit = () => {
         this.props.confirmEdit(this.state.outfit);
-        this.props.history.push("/outfitDetail/" + this.state.outfit.id);
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
@@ -145,6 +183,11 @@ class EditOutfit extends Component {
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
                             />
+                            <div id="weather-icon">
+                                {this.state.outfit.weather !== null
+                                    ? iconText[this.state.outfit.weather.icon]
+                                    : null}
+                            </div>
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
@@ -152,6 +195,7 @@ class EditOutfit extends Component {
                                 satisfactionValue={
                                     this.props.outfit.satisfactionValue
                                 }
+                                chagne={num => this.handleSatisfactionEdit(num)}
                             />
                             <img src={this.state.image} alt="outfit" />
                         </div>
@@ -213,6 +257,8 @@ class EditOutfit extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        getSpecificDayWeather: date =>
+            dispatch(actionCreators.getSpecificDayWeather(date)),
         confirmEdit: outfit => {
             dispatch(actionCreators.editOutfit(outfit));
         },
@@ -221,6 +267,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         outfit: state.outfit.selectedOutfit,
+        weather: state.weather.selectedDayWeather,
     };
 };
 

@@ -27,6 +27,7 @@ const reducer = (state = initialState, action) => {
                 items: action.items,
                 weather: action.weather,
             };
+
             const new_outfits = state.outfits.concat(newOutfit);
             return {
                 ...state,

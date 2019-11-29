@@ -42,6 +42,10 @@
     .date-picker-container {
         display: flex;
         justify-content: center;
+        #weather-icon {
+            margin-left: 10px;
+            color: lightslategray;
+        }
     }
 
     #info-window {
