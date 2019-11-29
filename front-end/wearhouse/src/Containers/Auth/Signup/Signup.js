@@ -1,20 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
+import AuthError from "../../../Components/AuthError/AuthError";
 
 import "./Signup.scss";
 
 class Signup extends Component {
-    state = { email: "", password: "", passwordConfirm: "" };
+    state = {
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        signupErrVisible: true,
+    };
 
     componentDidMount() {
         if (this.props.isLoggedIn) {
             this.props.history.push("/browse");
         }
+        this.props.resetErr();
     }
 
     onSignUp = userCredentials => {
+        this.props.resetErr();
         this.props.onSignUp(userCredentials);
+        this.setState({ loginErrVisible: true });
+    };
+
+    onCloseError = () => {
+        this.setState({ signupErrVisible: false });
     };
 
     render() {
@@ -89,7 +102,13 @@ class Signup extends Component {
                     >
                         Sign up
                     </button>
-                    <div id="err-message">{this.props.signupErr}</div>
+                    {this.state.signupErrVisible &&
+                        (this.props.signupErr && (
+                            <AuthError
+                                error={this.props.signupErr}
+                                onClose={() => this.onCloseError()}
+                            />
+                        ))}
                 </div>
             </div>
         );
@@ -107,6 +126,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onSignUp: userCredentials =>
             dispatch(actionCreators.signUp(userCredentials)),
+        resetErr: () => dispatch(actionCreators.resetErr()),
     };
 };
 
