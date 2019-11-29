@@ -36,6 +36,10 @@ class OutfitCalendar extends Component {
         });
     };
 
+    onClickDateCell = () => {
+        console.log("date cell clicked");
+    };
+
     render() {
         return (
             <div className="OutfitCalendar">
@@ -71,7 +75,11 @@ class OutfitCalendar extends Component {
                             ></FontAwesomeIcon>
                         </button>
                     </div>
-                    <Calendar year={this.state.year} month={this.state.month} />
+                    <Calendar
+                        year={this.state.year}
+                        month={this.state.month}
+                        clicked={this.onClickDateCell}
+                    />
                 </div>
             </div>
         );

@@ -1,10 +1,15 @@
 #calendar {
+    background-color: #fcedcc;
+    box-shadow: 0 0 5px 10px #fcedcc;
+    border-radius: 25px;
+
     border-collapse: collapse;
     #calendar-header {
         th {
             width: 50px;
             border-right: 0.5px solid black;
             padding: 5px 0px;
+            opacity: 100%;
         }
 
         .last-column {
@@ -15,7 +20,7 @@
         td {
             padding: 0px;
             margin: 0px;
-            height: 300px;
+            height: 100px;
             position: relative;
             border-top: 0.5px solid black;
             border-right: 0.5px solid black;
@@ -29,6 +34,10 @@
 
         .last-column {
             border-right: none;
+        }
+
+        .with-date {
+            cursor: pointer;
         }
     }
 }

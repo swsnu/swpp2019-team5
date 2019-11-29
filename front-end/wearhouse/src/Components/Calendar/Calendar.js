@@ -15,7 +15,7 @@ const CALENDAR_HEADER = (
     </thead>
 );
 
-const renderCalendarBody = dates => {
+const renderCalendarBody = (dates, onClickDateCell) => {
     let i = 0;
     const rows = [];
     for (let week = 0; week < 5; week++) {
@@ -29,7 +29,10 @@ const renderCalendarBody = dates => {
                 row.push(
                     <td
                         key={7 * week + day}
-                        className={day === 6 && "last-column"}
+                        className={
+                            day === 6 ? "last-column with-date" : "with-date"
+                        }
+                        onClick={onClickDateCell}
                     >
                         <div className="date">{date.getDate()}</div>
                     </td>,
@@ -50,10 +53,10 @@ const renderCalendarBody = dates => {
     );
 };
 
-const renderCalendar = dates => (
+const renderCalendar = (dates, onClickDateCell) => (
     <table id="calendar">
         {CALENDAR_HEADER}
-        {renderCalendarBody(dates)}
+        {renderCalendarBody(dates, onClickDateCell)}
     </table>
 );
 
@@ -62,13 +65,14 @@ const Calendar = props => {
     const year = props.year;
     const month = props.month - 1; // Date object returns 0 ~ 11
     let maxDate = new Date(year, month + 1, 0).getDate();
+    const onClickDateCell = props.clicked;
 
     // dates: an array of Date objects
     for (let date = 1; date <= maxDate; date++) {
         dates.push(new Date(year, month, date));
     }
 
-    return renderCalendar(dates);
+    return renderCalendar(dates, onClickDateCell);
 };
 
 export default Calendar;
