@@ -76,19 +76,20 @@ class Signup extends Component {
                                 </div>
                             )}
                         </div>
-                        <button
-                            disabled={!active}
-                            id="signup-button"
-                            onClick={() =>
-                                this.onSignUp({
-                                    email: this.state.email,
-                                    password: this.state.password,
-                                })
-                            }
-                        >
-                            Sign up
-                        </button>
                     </form>
+                    <button
+                        disabled={!active}
+                        id="signup-button"
+                        onClick={() =>
+                            this.onSignUp({
+                                email: this.state.email,
+                                password: this.state.password,
+                            })
+                        }
+                    >
+                        Sign up
+                    </button>
+                    <div id="err-message">{this.props.signupErr}</div>
                 </div>
             </div>
         );
@@ -98,6 +99,7 @@ class Signup extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.login.isLoggedIn,
+        signupErr: state.login.signupErr,
     };
 };
 
