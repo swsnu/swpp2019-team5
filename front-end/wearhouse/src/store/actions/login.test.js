@@ -7,7 +7,7 @@ describe("Login Actioncreators", () => {
     afterEach(() => jest.clearAllMocks());
 
     it("should fail to sign up", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
@@ -24,7 +24,7 @@ describe("Login Actioncreators", () => {
     });
 
     it("should fail to sign up with random error", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
@@ -41,7 +41,7 @@ describe("Login Actioncreators", () => {
     });
 
     it("should fail to sign in at 400 error", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
@@ -58,7 +58,7 @@ describe("Login Actioncreators", () => {
     });
 
     it("should fail to sign in at 401 error", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
@@ -75,7 +75,7 @@ describe("Login Actioncreators", () => {
     });
 
     it("should fail to sign in at 404 error", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
@@ -92,7 +92,7 @@ describe("Login Actioncreators", () => {
     });
 
     it("should fail to sign in with random error", done => {
-        const spy = jest.spyOn(axios, "post").mockImplementation(url => {
+        const spy = jest.spyOn(axios, "post").mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 const result = {
                     response: {
