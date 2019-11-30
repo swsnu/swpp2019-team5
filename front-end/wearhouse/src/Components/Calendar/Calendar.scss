@@ -1,6 +1,6 @@
 #calendar {
-    background-color: #fcedcc;
-    box-shadow: 0 0 5px 10px #fcedcc;
+    background-color: white;
+    box-shadow: 0 0 5px 10px white;
     border-radius: 25px;
 
     border-collapse: collapse;
@@ -25,10 +25,28 @@
             border-top: 0.5px solid black;
             border-right: 0.5px solid black;
 
-            .date {
+            .date-shell-header {
+                vertical-align: top;
+
+                .date {
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                }
+
+                .weather-icon {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                }
+            }
+
+            .satisfaction-icon-calendar {
                 position: absolute;
-                top: 5px;
-                left: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 30%;
+                font-size: 45px;
             }
         }
 
@@ -36,7 +54,7 @@
             border-right: none;
         }
 
-        .with-date {
+        .has-outfit {
             cursor: pointer;
         }
     }

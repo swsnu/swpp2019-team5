@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "../Header/Header";
 import "./OutfitCalendar.scss";
@@ -47,16 +46,28 @@ class OutfitCalendar extends Component {
     };
 
     render() {
-        const outfits = this.props.outfits;
-        console.log(outfits);
+        const outfits_of_this_month = this.props.outfits.filter(outfit => {
+            const month_of_outfit = parseInt(outfit.date.split("-")[1]);
+            return month_of_outfit === this.state.month;
+        });
+        // 보내야하는 정보
+        // id, date, image, satisfactionValue, weather.icon
+        const outfits_metadata = outfits_of_this_month.map(outfit => {
+            return {
+                id: outfit.id,
+                month: parseInt(outfit.date.split("-")[1]),
+                date: parseInt(outfit.date.split("-")[2]),
+                image: outfit.image,
+                satisfactionValue: outfit.satisfactionValue,
+                weatherIcon: outfit.weather.icon,
+            };
+        });
+
+        // console.log(outfits_metadata);
+
         return (
             <div className="OutfitCalendar">
                 <Header />
-                <div className="link">
-                    <NavLink to="/browse" exact>
-                        Go back to main page
-                    </NavLink>
-                </div>
                 <div id="calendar-wrapper">
                     <div className="calendar-header">
                         <button
@@ -87,6 +98,7 @@ class OutfitCalendar extends Component {
                         year={this.state.year}
                         month={this.state.month}
                         clicked={this.onClickDateCell}
+                        outfits={outfits_metadata}
                     />
                 </div>
             </div>
