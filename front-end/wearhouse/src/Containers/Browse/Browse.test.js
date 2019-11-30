@@ -196,7 +196,7 @@ describe("<Browse />", () => {
             keyCode: 13,
         });
 
-        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("change", { target: { value: "white" } });
         wrapper.simulate("keydown", {
             keyCode: 13,
         });

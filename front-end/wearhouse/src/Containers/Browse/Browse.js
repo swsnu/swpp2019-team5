@@ -93,13 +93,15 @@ class Browse extends React.Component {
     addTag = e => {
         let tags = this.state.searchOptions.searchArray;
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
-            tags.push(this.state.search_query);
-            this.setState({
-                searchOptions: {
-                    ...this.state.searchOptions,
-                    searchArray: tags,
-                },
-            });
+            if (tags.indexOf(this.state.search_query) === -1) {
+                tags.push(this.state.search_query);
+                this.setState({
+                    searchOptions: {
+                        ...this.state.searchOptions,
+                        searchArray: tags,
+                    },
+                });
+            }
             e.target.value = "";
             this.setState({ search_query: "", mode: "search" });
         } else if (this.state.search_query === "" && e.keyCode === 8) {
