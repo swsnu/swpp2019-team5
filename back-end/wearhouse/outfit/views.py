@@ -336,7 +336,7 @@ def specificOutfit(request, outfit_id):
                 response_dict_items.append(item_to_add)
             response_dict = {
                 "id" : outfit.id,
-                "image" : outfit.image,
+                "image" : outfit.image_link,
                 "date" : outfit.date,
                 "satisfactionValue" : outfit.satisfaction,
                 "weather" : response_dict_weather,
@@ -344,5 +344,6 @@ def specificOutfit(request, outfit_id):
             }
             return JsonResponse(response_dict, status=200)
         except(KeyError, JSONDecodeError) as e:
+            print(e)
             return HttpResponseBadRequest()
         
