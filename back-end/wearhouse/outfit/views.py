@@ -26,15 +26,6 @@ def change_date_format(date):
     return date[0:10]
 
 
-# Create your views here.
-@ensure_csrf_cookie
-def token(request):
-    if request.method == 'GET':
-        return HttpResponse(status=204)
-    else:
-        return HttpResponseNotAllowed(['GET'])
-
-
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
@@ -201,7 +192,6 @@ def outfit(request):
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
-        return JsonResponse(model_to_dict(outfit), status=201)
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
 
@@ -233,10 +223,3 @@ def getOutfit(request, outfit_id):
 
         return JsonResponse(response_dict, status=200)
 
-
-def getItemsOfOutfit(request, outfit_id):
-    return HttpResponse(status=404)
-
-
-def getSpecificItemOfOutfit(request, outfit_id, item_id):
-    return HttpResponse(status=404)
