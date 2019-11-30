@@ -9320,6 +9320,11 @@ react-select@^3.0.8:
     react-input-autosize "^2.2.2"
     react-transition-group "^2.2.1"
 
+react-spinner-material@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-spinner-material/-/react-spinner-material-1.1.3.tgz#bdf375089f038028250762007323f026de5f57d5"
+  integrity sha512-sa9ESbt9/V79jzdxYGfd0i84JG5Nuz6q2wmxqS0Jc8M+J/Rk/aHiA/R2X1ewAwRxysMMDhFG7Altf7FEea1vkg==
+
 react-test-renderer@^16.0.0-0:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.11.0.tgz#72574566496462c808ac449b0287a4c0a1a7d8f8"
