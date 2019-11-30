@@ -281,7 +281,6 @@ class Browse extends React.Component {
                     Calendar
                 </button>
                 {container}
-                {/*To */}
                 <AddOutfit />
             </div>
         );

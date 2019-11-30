@@ -96,7 +96,7 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(3);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 

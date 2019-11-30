@@ -29,6 +29,7 @@ class App extends React.Component {
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
                     <Route path="/main" exact component={LandingPage} />
+                    {!this.props.isLoggedIn && <Redirect exact to="/main" />}
                     <Route path="/browse" exact component={Browse} />
                     <Route
                         path="/outfitDetail/:id"
