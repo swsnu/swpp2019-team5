@@ -33,7 +33,7 @@ class Browse extends React.Component {
     };
 
     componentDidMount() {
-        this.props.getAllOufits();
+        this.props.getAllOutfits();
     }
     onClickCalendar = () => {
         this.props.history.push("/calendar");
@@ -122,6 +122,12 @@ class Browse extends React.Component {
         }
     };
 
+    isMatchSearchArray = (array1, array2) => {
+        return array2.every(function(value) {
+            return array1.indexOf(value) >= 0;
+        });
+    };
+
     render() {
         let container = null;
 
@@ -143,6 +149,53 @@ class Browse extends React.Component {
             },
         );
 
+        const searchedResultbyOutfit = this.props.outfits.map(outfit => {
+            let tagList = [];
+            outfit.items.map(item => {
+                tagList.push(...item.tags);
+            });
+            if (
+                this.isMatchSearchArray(
+                    tagList,
+                    this.state.searchOptions.searchArray,
+                )
+            ) {
+                return (
+                    <Outfit
+                        key={outfit.id}
+                        image={outfit.imageUrl}
+                        satisfactionValue={outfit.satisfactionValue}
+                        date={outfit.date}
+                        clicked={() => this.onClickOutfit(outfit)}
+                    />
+                );
+            }
+        });
+
+        const searchedResultbyItem = this.props.outfits.map(outfit => {
+            let searched = false;
+            outfit.items.map(item => {
+                if (
+                    this.isMatchSearchArray(
+                        item.tags,
+                        this.state.searchOptions.searchArray,
+                    )
+                ) {
+                    searched = true;
+                }
+            });
+            if (searched) {
+                return (
+                    <Outfit
+                        key={outfit.id}
+                        image={outfit.imageUrl}
+                        satisfactionValue={outfit.satisfactionValue}
+                        date={outfit.date}
+                        clicked={() => this.onClickOutfit(outfit)}
+                    />
+                );
+            }
+        });
         switch (this.state.mode) {
             case "browse":
                 container = (
@@ -221,9 +274,15 @@ class Browse extends React.Component {
                                 </RadioGroup>
                             </div>
                         </div>
+                        <div id="search-result">
+                            {this.state.searchOptions.searchMode === "Outfit"
+                                ? searchedResultbyOutfit
+                                : searchedResultbyItem}
+                        </div>
                     </div>
                 );
-                /*show the search result : container = ~~~ */
+                /*show the search result : container = ~~~*/
+                ///get outfit list and render them
                 break;
             default:
                 break;
@@ -301,7 +360,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOufits: () => dispatch(actionCreators.getOutfits()),
+        getAllOutfits: () => dispatch(actionCreators.getOutfits()),
     };
 };
 export default connect(
