@@ -2,6 +2,7 @@ export const GET_LOGIN = "GET_LOGIN";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const SIGN_UP = "SIGN_UP";
+export const RESET_ERR = "RESET_ERR";
 //Login reducer
 
 export const GET_CLASSFICATION_DATA = "GET_CLASSFICATION_DATA";

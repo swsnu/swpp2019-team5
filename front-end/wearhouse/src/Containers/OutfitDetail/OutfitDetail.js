@@ -53,7 +53,7 @@ class OutfitDetail extends Component {
         this.setState({ outfit: this.props.outfit });
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.outfit !== this.props.outfit) {
             this.setState({ outfit: this.props.outfit });
         }

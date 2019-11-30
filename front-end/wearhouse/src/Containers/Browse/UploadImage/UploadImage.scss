@@ -17,9 +17,16 @@
         justify-content: center;
         width: 400px;
         height: auto;
+        min-height: 200px;
         border-radius: 10px;
         background-color: white;
         opacity: 1;
+
+        #loading {
+            position: relative;
+            left: 43%;
+            top: 0%;
+        }
 
         #upload-image-header {
             height: 40px;

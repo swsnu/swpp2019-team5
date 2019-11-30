@@ -93,15 +93,21 @@ class Browse extends React.Component {
     addTag = e => {
         let tags = this.state.searchOptions.searchArray;
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
-            tags.push(this.state.search_query);
-            this.setState({
-                searchOptions: {
-                    ...this.state.searchOptions,
-                    searchArray: tags,
-                },
-            });
+            if (
+                tags.indexOf(this.state.search_query) === -1 &&
+                this.state.search_query !== ""
+            ) {
+                tags.push(this.state.search_query);
+                this.setState({
+                    searchOptions: {
+                        ...this.state.searchOptions,
+                        searchArray: tags,
+                    },
+                });
+                this.setState({ mode: "search" });
+            }
             e.target.value = "";
-            this.setState({ search_query: "", mode: "search" });
+            this.setState({ search_query: "" });
         } else if (this.state.search_query === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({
@@ -340,7 +346,6 @@ class Browse extends React.Component {
                     Calendar
                 </button>
                 {container}
-                {/*To */}
                 <AddOutfit />
             </div>
         );

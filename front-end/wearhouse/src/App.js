@@ -28,7 +28,12 @@ class App extends React.Component {
                 <Switch>
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
-                    <Route path="/main" exact component={LandingPage} />
+                    <Route
+                        path="/main"
+                        exact
+                        component={this.props.isLoggedIn ? Browse : LandingPage}
+                    />
+                    {!this.props.isLoggedIn && <Redirect exact to="/main" />}
                     <Route path="/browse" exact component={Browse} />
                     <Route
                         path="/outfitDetail/:id"
@@ -46,9 +51,7 @@ class App extends React.Component {
                         exact
                         component={EditOutfit}
                     />
-                    <Route path="/main" exact component={LandingPage} />
-                    <Redirect exact to="/main" />
-                    {this.props.isLoggedIn && <Redirect exact to="/browse" />}
+                    <Redirect exact to="/browse" />
                 </Switch>
             </ConnectedRouter>
         );
