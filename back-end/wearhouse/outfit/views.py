@@ -192,7 +192,6 @@ def outfit(request):
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
-        return JsonResponse(model_to_dict(outfit), status=201)
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
 
@@ -224,10 +223,3 @@ def getOutfit(request, outfit_id):
 
         return JsonResponse(response_dict, status=200)
 
-
-def getItemsOfOutfit(request, outfit_id):
-    return HttpResponse(status=404)
-
-
-def getSpecificItemOfOutfit(request, outfit_id, item_id):
-    return HttpResponse(status=404)

@@ -46,11 +46,74 @@ class OutfitTestCase(TestCase):
         outfit1.save()
 
     def test_outfit_id(self):
-        # self.client.login(username='test', password='test')
+        self.client.login(username='test', password='test')
         response = self.client.get('/api/outfit/1/')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Outer', response.content.decode())
 
+    def test_create_outfit1(self):
+        self.client.login(username='test', password='test')
+        input_outfit = {
+            "image": "",
+            "date": "2019-11-12",
+            "satisfactionValue": 4,
+            "weather": {
+                "tempAvg": 3,
+                "icon": "happy"
+            },
+            "items": [{
+                "category": "UpperBody",
+                "tags": ["black", "red"]
+            }]
+        }
+        self.assertEqual(Outfit.objects.all().count(), 1)
+        response = self.client.post('/api/outfit/',
+                                    json.dumps(input_outfit),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Outfit.objects.all().count(), 2)
+
+    def test_create_outfit2(self):
+        self.client.login(username='test', password='test')
+        input_outfit = {
+            "image": "",
+            "date": "2019-11-12",
+            "satisfactionValue": 4,
+            "weather": {
+                "tempAvg": 3,
+                "icon": "happy"
+            },
+            "items": [{
+                "category": "UpperBody",
+                "tags": ["black", "stripe"]
+            }]
+        }
+        self.assertEqual(Outfit.objects.all().count(), 1)
+        response = self.client.post('/api/outfit/',
+                                    json.dumps(input_outfit),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Outfit.objects.all().count(), 2)
+
+    def test_create_outfit_wrong_input(self):
+        self.client.login(username='test', password='test')
+        # wrong key input
+        input_outfit = {
+        }
+        response = self.client.post('/api/outfit/',
+                                    json.dumps(input_outfit),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+        # unallowed request
+        response = self.client.delete('/api/outfit/')
+        self.assertEqual(response.status_code, 405)
+
+    def test_get_outfits(self):
+        self.client.login(username='test', password='test')
+        response = self.client.get('/api/outfit/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(1, len(json.loads(response.content.decode())))
 
 
 
