@@ -15,7 +15,6 @@ from django.db import transaction
 import copy
 
 # user1 = User.objects.get(username="test")
-
 '''
     :param  YYYY-MM-DD-Time
     :return YYYY-MM-DD
@@ -212,6 +211,8 @@ def outfit(request):
 @require_http_methods(['GET', 'PUT', 'DELETE'])
 @transaction.atomic
 def specificOutfit(request, outfit_id):
+    user1 = request.user
+
     try:
         outfit = Outfit.objects.get(pk=outfit_id)
     except Outfit.DoesNotExist:
@@ -335,7 +336,7 @@ def specificOutfit(request, outfit_id):
                 response_dict_items.append(item_to_add)
             response_dict = {
                 "id" : outfit.id,
-                "image" : outfit.image,
+                "image" : outfit.image_link,
                 "date" : outfit.date,
                 "satisfactionValue" : outfit.satisfaction,
                 "weather" : response_dict_weather,
