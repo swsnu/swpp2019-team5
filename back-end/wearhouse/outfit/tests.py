@@ -51,7 +51,14 @@ class OutfitTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('Outer', response.content.decode())
 
-
+    def test_delete_outfit(self):
+        self.client.login(username='test', password='test')
+        self.assertEqual(Outfit.objects.all().count(), 1)
+        response = self.client.delete('/api/outfit/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Outfit.objects.all().count(), 0)
+        self.assertEqual(Item.objects.all().count(), 0)
+        self.assertEqual(Tag.objects.all().count(), 0)
 
 
 
