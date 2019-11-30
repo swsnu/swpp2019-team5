@@ -7,6 +7,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
+import { setTimeout } from "timers";
 //props : item, applyEdit(edit_item), delete
 // further task #1 check whether input tag is existing in database (maybe Sprint4)
 
@@ -28,6 +29,7 @@ class Item extends Component {
         preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
+        todo: "editEnabled",
         item_list: this.props.item_list,
         option_list: this.props.option_list,
     };
@@ -52,24 +54,15 @@ class Item extends Component {
         let tags = this.state.tags;
         tags = tags.filter(tg => tg !== tag);
         this.setState({ tags: tags });
+        if (tags.length < 3) {
+            this.setState({ todo: "editEnabled" });
+        }
         this.props.applyEdit({
             category: this.state.category,
             tags: tags,
         });
     }
 
-    //Edit Tag
-    onEditTag(tag, edit_tag) {
-        let tags = this.state.tags;
-        tags = tags.map(tg => {
-            return tg === tag ? edit_tag : tg;
-        });
-        this.setState({ tags: tags });
-        this.props.applyEdit({
-            category: this.state.category,
-            tags: tags,
-        });
-    }
     handleItemDelete() {
         this.props.delete();
         this.setState({
@@ -80,10 +73,38 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if (e.keyCode === 13) {
-            tags = tags.concat(e.target.value);
+        if ((e.keyCode === 13 || e.keyCode === 32) && e.target.value !== "") {
+            var new_tag = e.target.value.replace(/\s*$/, "");
+            if (new_tag.length === 0) {
+                e.target.value = null;
+                e.target.focus();
+                return;
+            }
+            new_tag = new_tag.toLowerCase();
+            if (tags.includes(new_tag)) {
+                e.target.value = "Tag should be unique!";
+                e.target.disabled = true;
+                e.persist();
+                setTimeout(() => {
+                    e.target.value = null;
+                    e.target.disabled = false;
+                    e.target.focus();
+                }, 700);
+                return;
+            }
+            tags = tags.concat(new_tag);
             this.setState({ tags: tags });
-            e.target.value = "";
+            e.target.value = null;
+
+            if (tags.length >= 3) {
+                this.setState({ todo: "editDisabled" });
+            }
+        } else if (e.target.value === "" && e.keyCode === 8) {
+            tags.pop();
+            this.setState({ tags: tags });
+            if (tags.length < 3) {
+                this.setState({ todo: "editEnabled" });
+            }
         }
         this.props.applyEdit({
             category: this.state.category,
@@ -92,7 +113,7 @@ class Item extends Component {
     }
     handleAutoComplete = e => {
         let option_list = this.state.tags.concat(e.target.value);
-        option_list = option_list;
+        console.log(option_list);
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };
@@ -111,6 +132,7 @@ class Item extends Component {
     }
 
     show = false;
+
     render() {
         let auto_complete = this.state.option_list.map((op, index) => {
             return (
@@ -135,14 +157,13 @@ class Item extends Component {
                     key={index}
                     editMode={this.props.editMode}
                     delete={() => this.onDeleteTag(tag)}
-                    edit={edit_tag => this.onEditTag(tag, edit_tag)}
                 />
             );
         });
         let edit_mode_options = null;
         let tag_input = null;
 
-        if (this.props.editMode) {
+        if (this.props.editMode && this.state.todo === "editEnabled") {
             tag_input = (
                 <input
                     ref={input => {
@@ -152,7 +173,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyDown={e => this.addTag(e)}
+                    onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });
@@ -163,14 +184,12 @@ class Item extends Component {
         }
         if (this.props.editMode) {
             edit_mode_options = (
-                <>
-                    <div
-                        className="item-deleter"
-                        onClick={this.handleItemDelete.bind(this)}
-                    >
-                        <FontAwesomeIcon icon={faTimes} />
-                    </div>
-                </>
+                <div
+                    className="item-deleter"
+                    onClick={this.handleItemDelete.bind(this)}
+                >
+                    <FontAwesomeIcon icon={faTimes} />
+                </div>
             );
         }
         return (
@@ -178,6 +197,7 @@ class Item extends Component {
                 <div className="info-container">
                     <div className="position-controller">
                         <Select
+                            menuIsOpen={this.props.menuIsOpen}
                             isDisabled={!this.props.editMode}
                             className="Select"
                             value={option}

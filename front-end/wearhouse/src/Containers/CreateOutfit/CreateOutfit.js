@@ -2,51 +2,30 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
-import {
-    faSun,
-    faMoon,
-    faUmbrella,
-    faSnowflake,
-    faCloudShowersHeavy,
-    faWind,
-    faSmog,
-    faCloud,
-    faCloudSun,
-    faCloudMoon,
-    faCalendarAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
 import "./DatePicker.scss";
+import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 //should resolve the case where image is not porperly uploaded
-var iconText = {
-    "clear-day": <FontAwesomeIcon icon={faSun} />,
-    "clear-night": <FontAwesomeIcon icon={faMoon} />,
-    rain: <FontAwesomeIcon icon={faUmbrella} />,
-    snow: <FontAwesomeIcon icon={faSnowflake} />,
-    sleet: <FontAwesomeIcon icon={faCloudShowersHeavy} />,
-    wind: <FontAwesomeIcon icon={faWind} />,
-    fog: <FontAwesomeIcon icon={faSmog} />,
-    cloudy: <FontAwesomeIcon icon={faCloud} />,
-    "partly-cloudy-day": <FontAwesomeIcon icon={faCloudSun} />,
-    "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
-};
-
 class CreateOutfit extends Component {
     state = {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: this.props.outfit.items ? this.props.items : [], //Made items section be props - everything should be props actually
+        items: this.props.outfit.items
+            ? this.props.items
+            : [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
     };
     componentDidMount() {
         this.props.setWeather();
+        this.checkValidation();
     }
     shouldComponentUpdate() {
         return true;
@@ -168,6 +147,12 @@ class CreateOutfit extends Component {
                             <div id="weather-icon">
                                 {this.state.weather !== null
                                     ? iconText[this.state.weather.icon]
+                                    : null}{" "}
+                                {this.state.weather &&
+                                this.state.weather.temperatureLow
+                                    ? this.state.weather.temperatureHigh +
+                                      "/" +
+                                      this.state.weather.temperatureLow
                                     : null}
                             </div>
                         </div>

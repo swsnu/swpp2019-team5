@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as actionCreators from "../../../store/actions/index";
+import Spinner from "react-spinner-material";
 
 import "./UploadImage.scss";
 import { connect } from "react-redux";
@@ -13,6 +14,7 @@ class UploadImage extends React.Component {
         selectedImageURL: null,
         isPreviewMode: false,
         showWarning: false,
+        isLoading: false,
     };
 
     onClickClosePopUpButton = () => {
@@ -34,6 +36,7 @@ class UploadImage extends React.Component {
                         event.target.files[0],
                     ),
                     isPreviewMode: true,
+                    showWarning: false,
                 });
             } else {
                 this.setState({ ...this.state, showWarning: true });
@@ -50,6 +53,8 @@ class UploadImage extends React.Component {
     };
 
     onConfirmImage = () => {
+        //
+        this.setState({ isLoading: true });
         let form_data = new FormData();
 
         form_data.append("image", this.state.image);
@@ -69,6 +74,7 @@ class UploadImage extends React.Component {
         let chooseFileButton = null;
         let previewImage = null;
         let alertMessage = null;
+        let loading = null;
 
         if (this.state.isPreviewMode) {
             chooseOtherImageButton = (
@@ -112,34 +118,53 @@ class UploadImage extends React.Component {
             );
         }
 
+        if (this.state.isLoading) {
+            chooseOtherImageButton = null;
+            confirmImageButton = null;
+            chooseFileButton = null;
+            alertMessage = null;
+            previewImage = null;
+            loading = (
+                <Spinner
+                    id="loading"
+                    size={60}
+                    spinnerColor={"#33333"}
+                    spinnerWidth={2}
+                    visible={true}
+                />
+            );
+        }
         return (
             <div id="upload-image">
                 <div className="overlay"></div>
-                <div id="popup-container">
-                    <div id="upload-image-header">
-                        <div className="header-column">
-                            <div id="upload-image-title">
-                                <p>Upload your outfit!</p>
+                <div id="popup-wrapper">
+                    <div id="popup-container">
+                        <div id="upload-image-header">
+                            <div className="header-column">
+                                <div id="upload-image-title">
+                                    <p>Upload your outfit!</p>
+                                </div>
+                            </div>
+                            <div className="header-column">
+                                <button
+                                    id="cancel-upload-image"
+                                    onClick={this.onClickClosePopUpButton}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faTimes}
+                                        id="cancel-upload-image-icon"
+                                    />
+                                </button>
                             </div>
                         </div>
-                        <div className="header-column">
-                            <button
-                                id="cancel-upload-image"
-                                onClick={this.onClickClosePopUpButton}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faTimes}
-                                    id="cancel-upload-image-icon"
-                                />
-                            </button>
+                        {chooseFileButton}
+                        {previewImage}
+                        {alertMessage}
+                        <div className="buttons">
+                            {chooseOtherImageButton}
+                            {confirmImageButton}
                         </div>
-                    </div>
-                    {chooseFileButton}
-                    {previewImage}
-                    {alertMessage}
-                    <div className="buttons">
-                        {chooseOtherImageButton}
-                        {confirmImageButton}
+                        {loading}
                     </div>
                 </div>
             </div>
