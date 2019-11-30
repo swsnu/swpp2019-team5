@@ -80,6 +80,7 @@ describe("App", () => {
             outfitState,
             stubNullState,
             stubNullState,
+            {},
         );
         app = (
             <Provider store={mockStore}>
