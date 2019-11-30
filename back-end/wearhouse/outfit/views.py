@@ -252,4 +252,4 @@ def specificOutfit(request, outfit_id):
         return HttpResponse(status=200)
 
     elif request.method == 'PUT':
-        return 
+        return
