@@ -51,6 +51,74 @@ class OutfitTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('Outer', response.content.decode())
 
+    def test_delete_outfit(self):
+        self.client.login(username='test', password='test')
+        self.assertEqual(Outfit.objects.all().count(), 1)
+        response = self.client.delete('/api/outfit/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Outfit.objects.all().count(), 0)
+        self.assertEqual(Item.objects.all().count(), 0)
+        self.assertEqual(Tag.objects.all().count(), 0)
+
+    def test_edit_outfit1(self):
+        self.client.login(username='test', password='test')
+
+        edited_outfit = {
+            "image": "",
+            "date": "2019-11-11",
+            "satisfactionValue": "4",
+            "weather": {
+                "tempAvg": 3,
+                "icon": "happy"
+            },
+            "items": [
+                {
+                "category": "UpperBody",
+                "tags": ["black", "stripe"]
+                }
+            ]
+        }
+
+        self.assertEqual(Outfit.objects.get(pk=1).items.count(), 4)
+
+        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Outfit.objects.get(pk=1).items.count(), 1)
+
+    def test_edit_outfit2(self):
+        self.client.login(username='test', password='test')
+
+        edited_outfit = {
+            "image": "",
+            "date": "2019-11-11",
+            "satisfactionValue": "4",
+            "weather": {
+                "tempAvg": 3,
+                "icon": "happy"
+            },
+            "items": [
+                {
+                "category": "UpperBody",
+                "tags": ["black", "red"]
+                }
+            ]
+        }
+
+        self.assertEqual(Outfit.objects.get(pk=1).items.count(), 4)
+
+        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Outfit.objects.get(pk=1).items.count(), 1)
+
+    def test_edit_outfit_wrong_input(self):
+        self.client.login(username='test', password='test')
+
+        edited_outfit = {}
+
+        # wrong key input
+        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
 
 
 

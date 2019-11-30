@@ -14,8 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
 
-user1 = User.objects.get(username="test")
-
+# user1 = User.objects.get(username="test")
 '''
     :param  YYYY-MM-DD-Time
     :return YYYY-MM-DD
@@ -39,7 +38,7 @@ def token(request):
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
 def outfit(request):
-    #user1 = request.user
+    user1 = request.user
 
     if request.method == 'GET':
 
@@ -212,6 +211,8 @@ def outfit(request):
 @require_http_methods(['GET', 'PUT', 'DELETE'])
 @transaction.atomic
 def specificOutfit(request, outfit_id):
+    user1 = request.user
+
     try:
         outfit = Outfit.objects.get(pk=outfit_id)
     except Outfit.DoesNotExist:
@@ -240,7 +241,6 @@ def specificOutfit(request, outfit_id):
 
         return JsonResponse(response_dict, status=200)
     elif request.method == 'DELETE':
-        print("delete!"+str(outfit.id))
         for item in outfit.items.all() :
             # print("item list in this outfit : "+list(outfit.items))
             for tag in item.tags.all() :
