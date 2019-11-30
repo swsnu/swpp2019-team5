@@ -8,7 +8,7 @@ import "../../../setupTests";
 import axios from "axios";
 import Logout from "./Logout";
 
-let stubInitialState = {};
+let stubInitialState = { isLoggedin: true };
 
 let mockStore = getMockStore(stubInitialState);
 

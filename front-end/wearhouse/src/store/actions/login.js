@@ -83,7 +83,6 @@ export const signUp = userCredentials => {
             })
             .catch(err => {
                 let errMessage = "";
-                console.log(err.response);
                 if (err.response.status === 400) {
                     errMessage = "Email is already registered";
                 }
