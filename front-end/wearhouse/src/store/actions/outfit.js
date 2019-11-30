@@ -83,7 +83,7 @@ export const editOutfit_ = outfit => {
 export const editOutfit = outfit => {
     return dispatch => {
         return axios
-            .put("/api/outfit/" + "11/", outfit)
+            .put("/api/outfit/" + outfit.id, outfit)
             .then(() => {
                 dispatch(editOutfit_(outfit));
             })
