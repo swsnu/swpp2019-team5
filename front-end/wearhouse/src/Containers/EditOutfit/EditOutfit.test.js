@@ -87,7 +87,7 @@ let mockStore = getMockStore(
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
-    stubInitialState_outfit,
+    {},
 );
 
 describe("<EditOutfit />", () => {
@@ -122,6 +122,15 @@ describe("<EditOutfit />", () => {
         expect(wrapper.length).toBe(1);
     });
 
+    it("edit satisfaction valaue", () => {
+        const component = mount(editOutfit);
+        const button = component.find(".satisfaction-functions").at(1);
+        button.simulate("click");
+
+        const wrapper = component.find(".satisfaction-option");
+        wrapper.at(0).simulate("click");
+    });
+
     it("set date properly", () => {
         const component = mount(editOutfit);
         let wrapper = component.find("#date-picker").at(1);
@@ -134,7 +143,6 @@ describe("<EditOutfit />", () => {
         let wrapper = component.find("#confirm-edit-outfit");
         wrapper.simulate("click");
         expect(spyAxios_put).toHaveBeenCalledTimes(1);
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
     it("should cancel/confirm cancel edit", () => {
@@ -182,7 +190,17 @@ describe("<EditOutfit />", () => {
             keyCode: 13,
         });
         confirm.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(0);
+    });
+
+    it("should set null date", () => {
+        let component = mount(editOutfit);
+        component
+            .find(".react-datepicker__close-icon")
+            .at(0)
+            .simulate("click");
+        let instance = component.find(EditOutfit.WrappedComponent).instance();
+        expect(instance.state.date).toBe(undefined);
     });
 
     it("should call onDeleteItem", () => {

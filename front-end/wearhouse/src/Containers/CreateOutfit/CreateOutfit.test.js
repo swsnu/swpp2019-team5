@@ -65,39 +65,37 @@ let stubInitialState_login = {
 
 let stubInitialState_weather = {
     todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
-    selectedWeather: null,
+    selectedWeather: { temperatureHigh: 10, temperatureLow: 0 },
 };
-
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: null,
+        items: null,
+        weather: { tempAvg: "", icon: "" },
+    },
+};
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_item,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
+    stubInitialState_image,
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyHistoryPush, spyAxios_post, spyAxios_get;
+    let createOutfit, spyAxios_post, spyAxios_get;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
-                    <CreateOutfit
-                        items={stubInitialState_outfit.outfits.items}
-                        image=""
-                        outfit_id={1}
-                        newOutfit={stubInitialState_outfit.selectedOutfit}
-                        history={history}
-                    />
+                    <CreateOutfit image={""} history={history} />
                 </ConnectedRouter>
             </Provider>
         );
-
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
 
         spyAxios_post = jest
             .spyOn(axios, "post")
@@ -121,8 +119,9 @@ describe("<CreateOutfit />", () => {
 
     it("set date properly", () => {
         const component = mount(createOutfit);
-        let wrapper = component.find("#date-picker").at(1);
-        wrapper.simulate("change", { target: { value: "2019/11/11" } });
+        let wrapper = component.find("#date-picker");
+        wrapper.at(0).simulate("change", { target: { value: "2019/11/11" } });
+        wrapper.at(1).simulate("change", { target: { value: "2019/11/11" } });
         wrapper = component.find(CreateOutfit.WrappedComponent).instance();
     });
 
@@ -130,33 +129,32 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#confirm-create-outfit");
         wrapper.simulate("click");
-        expect(spyAxios_post).toHaveBeenCalledTimes(1);
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+        expect(spyAxios_post).toHaveBeenCalledTimes(0);
     });
 
     it("should add item", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#add-item");
         wrapper.simulate("click");
-
+        component.update();
         let count = component.find(".Item");
-        expect(count.length).toBe(5);
+        expect(count.length).toBe(2);
     });
 
     it("confirm create with empty item or not empty item", () => {
         const component = mount(createOutfit);
         let instance = component.find(CreateOutfit.WrappedComponent).instance();
-        let wrapper = component.find("#add-item");
-        wrapper.simulate("click");
         let confirm = component.find("#confirm-create-outfit");
         confirm.simulate("click");
         expect(instance.state.isValid).toBe(false);
 
-        wrapper = component.find(".Item .tag-input").at(4);
+        let wrapper = component.find(".Item .tag-input").at(0);
         wrapper.simulate("change", { target: { value: "Test" } });
-        wrapper.simulate("keydown", {
+        wrapper.simulate("keyup", {
             key: "Enter",
         });
+        component.update();
+        confirm = component.find("#confirm-create-outfit");
         confirm.simulate("click");
     });
 
@@ -164,8 +162,29 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find(".Item .item-deleter").at(0);
         wrapper.simulate("click");
-
         let count = component.find(".Item");
-        expect(count.length).toBe(3);
+        expect(count.length).toBe(0);
+
+        let confirm = component.find("#confirm-create-outfit");
+        confirm.simulate("click");
+    });
+
+    it("edit satisfaction valaue", () => {
+        const component = mount(createOutfit);
+        const button = component.find(".satisfaction-functions").at(1);
+        button.simulate("click");
+
+        const wrapper = component.find(".satisfaction-option");
+        wrapper.at(0).simulate("click");
+    });
+
+    it("should set null date and selected_day_weather", () => {
+        let component = mount(createOutfit);
+        component
+            .find(".react-datepicker__close-icon")
+            .at(0)
+            .simulate("click");
+
+        component.update();
     });
 });

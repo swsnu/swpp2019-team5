@@ -49,6 +49,7 @@ var mockStore = getMockStore(
     stubOutfitState,
     {},
     stubWeatherState,
+    {},
 );
 
 describe("<Browse />", () => {
@@ -152,9 +153,9 @@ describe("<Browse />", () => {
         expect(CreateInstance.state.searchOptionsVisible).toEqual(false);
     });
 
-    it("should change searchMode value when clicked", () => {
+    it("should change searchMode value when clicked and should change filter condition", () => {
         const component = mount(outfitList);
-        const wrapper = component.find("#selectButton");
+        let wrapper = component.find("#selectButton");
         wrapper.simulate("click");
 
         var clicker = component.find(".option").at(0);
@@ -166,6 +167,19 @@ describe("<Browse />", () => {
         clicker = component.find(".option").at(1);
         clicker.simulate("click");
         expect(CreateInstance.state.searchOptions.searchMode).toEqual("Item");
+
+        wrapper = component.find("input");
+        wrapper.simulate("change", { target: { value: "black" } });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+        clicker = component.find(".radio-group").at(0);
+        clicker.simulate("change", { target: { value: 0 } });
+
+        /*component
+            .find("#slider")
+            .at(0)
+            .simulate("change");*/
     });
 
     it("should add and delete tag to and from query", () => {

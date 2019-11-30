@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-import * as actionCreators from "./item";
 import axios from "axios";
 import { push } from "connected-react-router";
 
@@ -80,8 +79,11 @@ export const editOutfit_ = outfit => {
 
 export const editOutfit = outfit => {
     return dispatch => {
-        return axios.put("/api/outfit/" + outfit.id, outfit).then(() => {
-            dispatch(editOutfit_(outfit));
-        });
+        return axios
+            .put("/api/outfit/" + outfit.id, outfit)
+            .then(() => {
+                dispatch(editOutfit_(outfit));
+            })
+            .then(() => dispatch(push("/outfitDetail/" + outfit.id)));
     };
 };

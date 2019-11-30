@@ -74,6 +74,7 @@ let mockStore = getMockStore(
     stubInitialState_outfit,
     {},
     {},
+    {},
 );
 
 describe("<OutfitDetail />", () => {

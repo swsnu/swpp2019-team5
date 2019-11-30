@@ -43,6 +43,10 @@
     .date-picker-container {
         display: flex;
         justify-content: center;
+        #weather-icon {
+            margin-left: 10px;
+            color: lightslategray;
+        }
     }
 
     #info-window {
@@ -106,8 +110,9 @@
         z-index: 9999;
     }
 
-    #add-item-button {
+    #add-item {
         margin-left: 10px;
+        margin-top: 10px;
         border: none;
         color: white;
         padding: 8px 15px;

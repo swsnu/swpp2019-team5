@@ -1,4 +1,4 @@
-import * as actionTypes from "./actionTypes";
+/*import * as actionTypes from "./actionTypes";
 import * as actionCreators from "./tag";
 import axios from "axios";
 
@@ -20,3 +20,4 @@ export const createItem = (outfit_id, item) => {
         });
     };
 };
+*/
