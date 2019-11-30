@@ -45,7 +45,6 @@ var mockStore = getMockStore(
     outfitState,
     stubNullState,
     stubNullState,
-    stubNullState,
 );
 
 describe("App", () => {
