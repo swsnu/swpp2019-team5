@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
 
-# user1 = User.objects.get(username="test")
+user1 = User.objects.get(username="test")
 
 '''
     :param  YYYY-MM-DD-Time
@@ -39,7 +39,7 @@ def token(request):
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
 def outfit(request):
-    user1 = request.user
+    #user1 = request.user
 
     if request.method == 'GET':
 
@@ -240,8 +240,10 @@ def specificOutfit(request, outfit_id):
 
         return JsonResponse(response_dict, status=200)
     elif request.method == 'DELETE':
-        for item in outfit.items.all():
-            for tag in items.tag.all():
+        print("delete!"+str(outfit.id))
+        for item in outfit.items.all() :
+            # print("item list in this outfit : "+list(outfit.items))
+            for tag in item.tags.all() :
                 if tag.items_with_this_tag.all().count() == 1:
                     tag.delete()
             if item.outfits_having_this_item.all().count() == 1:
@@ -251,7 +253,7 @@ def specificOutfit(request, outfit_id):
         outfit.delete()
         return HttpResponse(status=200)
 
-    elif request.method == 'PUT':
+    else :
         try:
             body = request.body.decode()
             # body로 들어온 outfit의 dict형태가 response_dict에 들어있음
@@ -314,8 +316,33 @@ def specificOutfit(request, outfit_id):
             outfit.satisfaction = satisfaction
             outfit.tempIcon = tempIcon
             outfit.tempAvg = tempAvg
-        
+            outfit.items.clear() #기존에 있던 모든 item관게를 끊어준다
 
-        #
-        # 그 outfit의 모든 item을 다 돌아.. 그리고 새로
-        return
+            for item in items_for_edited_outfit :
+                outfit.items.add(item)
+            outfit.save()
+
+            response_dict_weather = {
+                "tempAvg" : outfit.tempAvg, "icon" : outfit.tempIcon
+            }
+
+            response_dict_items = []
+            for item in outfit.items.all():
+                item_to_add = {
+                    "id" : outfit.id,
+                    "category" : item.category,
+                    "tags" : [tag.name for tag in item.tags.all()]
+                }
+                response_dict_items.append(item_to_add)
+            response_dict = {
+                "id" : outfit.id,
+                "image" : outfit.image,
+                "date" : outfit.date,
+                "satisfactionValue" : outfit.satisfaction,
+                "weather" : response_dict_weather,
+                "items" : response_dict_items
+            }
+            return JsonResponse(response_dict, status=200)
+        except(KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
+        

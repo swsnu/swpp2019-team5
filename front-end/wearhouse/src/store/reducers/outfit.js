@@ -36,9 +36,12 @@ const reducer = (state = initialState, action) => {
             };
         }
         case actionTypes.DELETE_OUTFIT: {
+            console.log(action.targetID, "이다~~~!!!");
+            console.log(state.outfits, "를 수정해야하는데..");
             const deletedOutfits = state.outfits.filter(outfit => {
                 return outfit.id !== action.targetID;
             });
+            console.log(deletedOutfits, "이어야 한다");
             return { ...state, outfits: deletedOutfits };
         }
         case actionTypes.EDIT_OUTFIT: {
