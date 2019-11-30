@@ -8,7 +8,7 @@ import Browse from "./Browse";
 import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 
-const stubOutfit = {
+const stubOutfit1 = {
     id: 0,
     imgaeUrl: "image.url",
     satisfactionValue: 4,
@@ -18,10 +18,66 @@ const stubOutfit = {
         icon: "rain",
         tempAvg: 5,
     },
+    items: [
+        { category: "UpperBody", tags: ["a"] },
+        { category: "Shoes", tags: ["b"] },
+        { category: "LowerBody", tags: ["c"] },
+    ],
+};
+
+const stubOutfit2 = {
+    id: 1,
+    imgaeUrl: "image.url",
+    satisfactionValue: 4,
+    date: "2019.10.28",
+    user_id: 1,
+    weather: {
+        icon: "rain",
+        tempAvg: 5,
+    },
+    items: [
+        { category: "UpperBody", tags: ["a"] },
+        { category: "Shoes", tags: ["1"] },
+        { category: "LowerBody", tags: ["2"] },
+    ],
+};
+
+const stubOutfit3 = {
+    id: 2,
+    imgaeUrl: "image.url",
+    satisfactionValue: 4,
+    date: "2019.10.28",
+    user_id: 1,
+    weather: {
+        icon: "rain",
+        tempAvg: 5,
+    },
+    items: [
+        { category: "UpperBody", tags: ["a"] },
+        { category: "Shoes", tags: ["z"] },
+        { category: "LowerBody", tags: ["x"] },
+    ],
+};
+
+const stubOutfit4 = {
+    id: 3,
+    imgaeUrl: "image.url",
+    satisfactionValue: 4,
+    date: "2019.10.28",
+    user_id: 1,
+    weather: {
+        icon: "rain",
+        tempAvg: 5,
+    },
+    items: [
+        { category: "UpperBody", tags: ["a", "b", "c"] },
+        { category: "Shoes", tags: ["1", "2", "3"] },
+        { category: "LowerBody", tags: ["z", "x", "c"] },
+    ],
 };
 
 let stubOutfitState = {
-    outfits: [stubOutfit],
+    outfits: [stubOutfit1, stubOutfit2, stubOutfit3, stubOutfit4],
     selected_Outfit: {
         id: "",
         user_id: 1,
@@ -80,7 +136,7 @@ describe("<Browse />", () => {
     it("should render Outfits, Header, AddOutfit", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit");
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(4);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
         expect(spyAxios_get).toHaveBeenCalledTimes(2);
@@ -89,14 +145,14 @@ describe("<Browse />", () => {
             .instance();
         CreateInstance.setState({ mode: "?" });
         wrapper = component.find("Outfit");
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(4);
     });
 
     it(`should call 'onClickOutfit'`, () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(3);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
@@ -211,5 +267,39 @@ describe("<Browse />", () => {
         });
         expect(CreateInstance.state.searchOptions.searchArray.length).toBe(0);
         expect(CreateInstance.state.mode).toEqual("browse");
+    });
+
+    it("should return correct search result", () => {
+        const component = mount(outfitList);
+        let button = component.find("#selectButton");
+        button.simulate("click");
+        var clicker = component.find(".option").at(0);
+        clicker.simulate("click");
+        const input = component.find("input");
+        input.simulate("change", { target: { value: "a" } });
+        input.simulate("keydown", {
+            keyCode: 13,
+        });
+        input.simulate("change", { target: { value: "b" } });
+        input.simulate("keydown", {
+            keyCode: 13,
+        });
+        let wrapper = component.find("Outfit");
+        expect(wrapper.length).toBe(2);
+        var onClickOutfit = component.find("Outfit .outfit-preview").at(0);
+        onClickOutfit.simulate("click");
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+
+        button.simulate("click");
+        clicker = component.find(".option").at(1);
+        clicker.simulate("click");
+        wrapper = component.find("Outfit");
+        expect(wrapper.length).toBe(1);
+        onClickOutfit = component.find("Outfit .outfit-preview").at(0);
+        onClickOutfit.simulate("click");
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(2);
+        ////check item search
     });
 });

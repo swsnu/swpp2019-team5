@@ -83,7 +83,7 @@ describe("<Item/>", () => {
             .at(0);
         select_category.simulate("click"); //click triangle button
         component.update();
-        console.log(component.debug(), "com..");
+        //console.log(component.debug(), "com..");
         select_category = component.find("#react-select-2-option-1").at(0);
         select_category.simulate("click");
         expect(
