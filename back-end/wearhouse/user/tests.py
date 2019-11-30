@@ -4,6 +4,8 @@ from .models import User
 import json
 
 # Create your tests here.
+
+
 class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(
@@ -27,7 +29,7 @@ class UserTestCase(TestCase):
 
         # Method Not allowed / not authorized response for non-get request to token
         response = client.post('/api/user/token/', HTTP_X_CSRFTOKEN=csrftoken)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 405)
 
     def test_model(self):
         content = User.objects.get(username="test@test.com").__str__()

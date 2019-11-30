@@ -45,7 +45,7 @@ var mockStore = getMockStore(
     outfitState,
     stubNullState,
     stubNullState,
-    {},
+    stubNullState,
 );
 
 describe("App", () => {
@@ -80,7 +80,7 @@ describe("App", () => {
             outfitState,
             stubNullState,
             stubNullState,
-            {},
+            stubNullState,
         );
         app = (
             <Provider store={mockStore}>
