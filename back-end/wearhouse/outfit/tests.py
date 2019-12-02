@@ -51,6 +51,10 @@ class OutfitTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('Outer', response.content.decode())
 
+        # request outfit that does not exist
+        response = self.client.get('/api/outfit/100/')
+        self.assertEqual(response.status_code, 404)
+
     def test_create_outfit1(self):
         self.client.login(username='test', password='test')
         input_outfit = {
