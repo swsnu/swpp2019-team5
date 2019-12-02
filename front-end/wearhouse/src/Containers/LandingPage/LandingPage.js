@@ -10,12 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import image from "./fashion-images.svg";
 import "./LandingPage.scss";
 class LandingPage extends Component {
-    componentDidMount = () => {
-        if (this.props.isLoggedIn) {
-            this.props.history.push("/browse");
-        }
-    };
-
     onLogin = () => {
         this.props.history.push("/login");
     };

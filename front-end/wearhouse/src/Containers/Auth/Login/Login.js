@@ -2,26 +2,36 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
 
+import AuthError from "../../../Components/AuthError/AuthError";
+
 import "./Login.scss";
 
 class Login extends Component {
     state = {
         email: "",
         password: "",
+        loginErrVisible: true,
     };
 
     componentDidMount() {
         if (this.props.isLoggedIn) {
             this.props.history.push("/browse");
         }
+        this.props.resetErr();
     }
 
     onLogin = userCredentials => {
+        this.props.resetErr();
         this.props.onLogIn(userCredentials);
+        this.setState({ loginErrVisible: true });
     };
 
     onClickSignUp = () => {
         this.props.history.push("/signup");
+    };
+
+    onCloseError = () => {
+        this.setState({ loginErrVisible: false });
     };
 
     render() {
@@ -74,6 +84,13 @@ class Login extends Component {
                     >
                         Sign Up
                     </button>
+                    {this.state.loginErrVisible &&
+                        (this.props.loginErr && (
+                            <AuthError
+                                error={this.props.loginErr}
+                                onClose={() => this.onCloseError()}
+                            />
+                        ))}
                 </div>
             </div>
         );
@@ -83,6 +100,7 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.login.isLoggedIn,
+        loginErr: state.login.loginErr,
     };
 };
 
@@ -90,6 +108,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogIn: userCredentials =>
             dispatch(actionCreators.logIn(userCredentials)),
+        resetErr: () => dispatch(actionCreators.resetErr()),
     };
 };
 

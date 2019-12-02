@@ -22,8 +22,8 @@ export const getMockStore = (
     imageState,
 ) => {
     let mockLoginReducer = getMockReducer(loginState);
-    let mockOutfitReducer = getMockReducer(outfitState);
     let mockItemReducer = getMockReducer(itemState);
+    let mockOutfitReducer = getMockReducer(outfitState);
     let mockTagReducer = getMockReducer(tagState);
     let mockWeatherReducer = getMockReducer(weatherState);
     let mockImageReducer = getMockReducer(imageState);

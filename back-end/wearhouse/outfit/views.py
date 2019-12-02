@@ -25,15 +25,6 @@ def change_date_format(date):
     return date[0:10]
 
 
-# Create your views here.
-@ensure_csrf_cookie
-def token(request):
-    if request.method == 'GET':
-        return HttpResponse(status=204)
-    else:
-        return HttpResponseNotAllowed(['GET'])
-
-
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
@@ -71,7 +62,7 @@ def outfit(request):
             response_array.append(outfit_dict)
         return JsonResponse(response_array, safe=False, status=200)
 
-    else:
+    elif request.method == 'POST':
         try:
             body = request.body.decode()
             request_dict = json.loads(body)
@@ -204,7 +195,8 @@ def outfit(request):
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
-        return JsonResponse(model_to_dict(outfit), status=201)
+    else:
+        return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 @csrf_exempt
@@ -253,7 +245,7 @@ def specificOutfit(request, outfit_id):
         outfit.delete()
         return HttpResponse(status=200)
 
-    else :
+    else : # PUT
         try:
             body = request.body.decode()
             # body로 들어온 outfit의 dict형태가 response_dict에 들어있음
@@ -345,4 +337,3 @@ def specificOutfit(request, outfit_id):
             return JsonResponse(response_dict, status=200)
         except(KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
-        

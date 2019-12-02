@@ -3,15 +3,17 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../../test-utils/mocks";
 import { history } from "../../../store/store";
-//import * as actionCreators from "../../../store/actions/login";
+
 import "../../../setupTests";
 import axios from "axios";
 import Signup from "./Signup";
 import { ConnectedRouter } from "connected-react-router";
 
-let stubInitialState = {};
+var stubInitialState = { isLoggedIn: false, loginErr: "Error" };
+var stubErrorState = { isLoggedIn: false, signupErr: "Error" };
 
-let mockStore = getMockStore(stubInitialState);
+var mockStore = getMockStore(stubInitialState);
+var mockStore_error = getMockStore(stubErrorState);
 
 describe("<Signup />", () => {
     let signup, spyAxios_post, spyHistoryPush;
@@ -77,7 +79,7 @@ describe("<Signup />", () => {
     });
 
     it("should redirect to /browse", () => {
-        mockStore = getMockStore({ isLoggedIn: true }, {}, {}, {}, {});
+        mockStore = getMockStore({ isLoggedIn: true });
         signup = (
             <Provider store={mockStore}>
                 <ConnectedRouter history={history}>
@@ -87,5 +89,21 @@ describe("<Signup />", () => {
         );
         mount(signup);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should display <AuthError>", () => {
+        signup = (
+            <Provider store={mockStore_error}>
+                <ConnectedRouter history={history}>
+                    <Signup history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        const container = mount(signup);
+        let wrapper = container.find("#auth-error");
+        expect(wrapper.length).toBe(1);
+
+        let button = wrapper.find("#error-close");
+        button.simulate("click");
     });
 });
