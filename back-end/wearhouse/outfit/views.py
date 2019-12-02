@@ -336,4 +336,5 @@ def specificOutfit(request, outfit_id):
             }
             return JsonResponse(response_dict, status=200)
         except(KeyError, JSONDecodeError) as e:
+            print(e)
             return HttpResponseBadRequest()
