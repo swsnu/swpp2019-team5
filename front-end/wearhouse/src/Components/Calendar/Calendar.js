@@ -61,8 +61,9 @@ const renderCalendarBody = (dates, onClickDateCell) => {
         let row = [];
         for (let day = 0; day < 7; day++) {
             // Sun Mon Tue Wed ...
-            const date = dates[i].date;
-            if (date !== undefined && day === date.getDay()) {
+
+            if (dates[i] !== undefined && day === dates[i].date.getDay()) {
+                const date = dates[i].date;
                 row.push(
                     <td
                         key={7 * week + day}

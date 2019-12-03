@@ -76,7 +76,7 @@ class OutfitCalendar extends Component {
                     weatherIcon: outfit.weather.icon,
                 };
             });
-            // console.log(outfits_metadata);
+            console.log(outfits_metadata);
         }
         return (
             <div className="OutfitCalendar">
