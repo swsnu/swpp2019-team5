@@ -5,8 +5,8 @@ from azure.storage.blob import BlockBlobService, PublicAccess
 from shutil import copyfileobj
 from tempfile import NamedTemporaryFile
 
-ACCOUNT_NAME = 'swppdiag128'
-ACCOUNT_KEY = '+s4gQjcveBLRPQDEtwzsGLvMh+nyKP+odrqDAhonF/67Rl61VTmQINjjMJ/u0EbWGGVkQieZgl/NTMg5lBJFHg=='
+ACCOUNT_NAME = 'swppteam5'
+ACCOUNT_KEY = 'INNEsiLTptw/5kiagJGhIZkv5fmHvEStvN5ALrggYjRvIme68H6YrN6ZEanMkJbYRj5XTcbjvmVLOdgZqXrKZg=='
 CONTAINER_NAME = 'image'
 ML_API_KEY = 'simn+b1WVna/jczp8z4CxaUUq7F1'
 ML_MODEL_NAME = 'algorithmiahq/DeepFashion/1.3.0'
@@ -120,6 +120,8 @@ def getImage(request):
         image_url = storeImageInBlobContainer(block_blob_service, input_file)
 
         result = runML(image_url)["articles"]  # type of result: python dict
+
+        print(result)
 
         categorized_result = map(categorize, result)
 
