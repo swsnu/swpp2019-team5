@@ -82,6 +82,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                         onClick={() => {
                             console.log(props.history);
                             console.log(id);
+                            // props.history.push("/outfitDetail/" + 2);
                             props.history.push("/outfitDetail/" + id);
                         }}
                     >
@@ -97,7 +98,14 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                         <div className="image">{dates[i].image}</div>
                         <div className="satisfaction-icon-calendar">
                             {dates[i].satisfactionValue !== null ? (
-                                satisfactionIconText[dates[i].satisfactionValue]
+                                <img
+                                    className="emoticon_on_calendar_cell"
+                                    src={
+                                        satisfactionIconText[
+                                            dates[i].satisfactionValue
+                                        ]
+                                    }
+                                />
                             ) : (
                                 <FontAwesomeIcon icon={faMehBlank} />
                             )}

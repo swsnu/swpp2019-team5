@@ -47,6 +47,11 @@
                 transform: translateX(-50%);
                 top: 30%;
                 font-size: 45px;
+                display: flex;
+                justify-content: center;
+                .emoticon_on_calendar_cell {
+                    width: 30%;
+                }
             }
         }
 
