@@ -65,8 +65,9 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
 
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
+                const id = dates[i].outfit_id;
                 console.log(dates[i]);
-                row.push(
+                let toPush = (
                     <td
                         key={7 * week + day}
                         className={
@@ -80,11 +81,8 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                         }
                         onClick={() => {
                             console.log(props.history);
-                            console.log(dates[i]);
-                            // props.history.push("/outfitDetail/" + 2);
-                            props.history.push(
-                                "/outfitDetail/" + dates[i].outfit_id,
-                            );
+                            console.log(id);
+                            props.history.push("/outfitDetail/" + id);
                         }}
                     >
                         <div className="date-shell-header">
@@ -104,8 +102,9 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 <FontAwesomeIcon icon={faMehBlank} />
                             )}
                         </div>
-                    </td>,
+                    </td>
                 );
+                row.push(toPush);
                 i++;
             } else {
                 row.push(<td key={7 * week + day}></td>);
@@ -184,7 +183,6 @@ const Calendar = props => {
         dates.push(date_dict);
     }
 
-    console.log(dates);
     // console.log(props.history.push("/"));
 
     return renderCalendar(dates, onClickDateCell, props);
