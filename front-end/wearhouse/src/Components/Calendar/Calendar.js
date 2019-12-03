@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 import "./Calendar.scss";
 import {
     faSun,
@@ -52,7 +53,7 @@ const CALENDAR_HEADER = (
     </thead>
 );
 
-const renderCalendarBody = (dates, onClickDateCell) => {
+const renderCalendarBody = (dates, onClickDateCell, props) => {
     let i = 0;
     const rows = [];
     for (let week = 0; week < 5; week++) {
@@ -64,6 +65,7 @@ const renderCalendarBody = (dates, onClickDateCell) => {
 
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
+                console.log(dates[i]);
                 row.push(
                     <td
                         key={7 * week + day}
@@ -76,7 +78,14 @@ const renderCalendarBody = (dates, onClickDateCell) => {
                                 ? ""
                                 : "has-outfit"
                         }
-                        onClick={onClickDateCell}
+                        onClick={() => {
+                            console.log(props.history);
+                            console.log(dates[i]);
+                            // props.history.push("/outfitDetail/" + 2);
+                            props.history.push(
+                                "/outfitDetail/" + dates[i].outfit_id,
+                            );
+                        }}
                     >
                         <div className="date-shell-header">
                             <div className="date">{date.getDate()}</div>
@@ -113,10 +122,10 @@ const renderCalendarBody = (dates, onClickDateCell) => {
     );
 };
 
-const renderCalendar = (dates, onClickDateCell) => (
+const renderCalendar = (dates, onClickDateCell, props) => (
     <table id="calendar">
         {CALENDAR_HEADER}
-        {renderCalendarBody(dates, onClickDateCell)}
+        {renderCalendarBody(dates, onClickDateCell, props)}
     </table>
 );
 
@@ -176,8 +185,9 @@ const Calendar = props => {
     }
 
     console.log(dates);
+    // console.log(props.history.push("/"));
 
-    return renderCalendar(dates, onClickDateCell);
+    return renderCalendar(dates, onClickDateCell, props);
 };
 
-export default Calendar;
+export default withRouter(Calendar);
