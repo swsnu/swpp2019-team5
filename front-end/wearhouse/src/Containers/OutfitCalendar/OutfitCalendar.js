@@ -17,10 +17,21 @@ class OutfitCalendar extends Component {
     state = {
         year: currentTime.getFullYear(),
         month: currentTime.getMonth() + 1,
+        outfits: null,
     };
 
     componentDidMount() {
         this.props.getAllOutfits();
+    }
+
+    shouldComponentUpdate() {
+        return true;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.outfits !== this.props.outfits) {
+            this.setState({ outfits: this.props.outfits });
+        }
     }
 
     onClickPrevMonth = () => {
@@ -46,25 +57,27 @@ class OutfitCalendar extends Component {
     };
 
     render() {
-        const outfits_of_this_month = this.props.outfits.filter(outfit => {
-            const month_of_outfit = parseInt(outfit.date.split("-")[1]);
-            return month_of_outfit === this.state.month;
-        });
-        // 보내야하는 정보
-        // id, date, image, satisfactionValue, weather.icon
-        const outfits_metadata = outfits_of_this_month.map(outfit => {
-            return {
-                id: outfit.id,
-                month: parseInt(outfit.date.split("-")[1]),
-                date: parseInt(outfit.date.split("-")[2]),
-                image: outfit.image,
-                satisfactionValue: outfit.satisfactionValue,
-                weatherIcon: outfit.weather.icon,
-            };
-        });
-
-        // console.log(outfits_metadata);
-
+        // console.log(this.state.outfits);
+        let outfits_metadata = [];
+        if (this.state.outfits !== null) {
+            const outfits_of_this_month = this.state.outfits.filter(outfit => {
+                const month_of_outfit = parseInt(outfit.date.split("-")[1]);
+                return month_of_outfit === this.state.month;
+            });
+            // 보내야하는 정보
+            // id, date, image, satisfactionValue, weather.icon
+            outfits_metadata = outfits_of_this_month.map(outfit => {
+                return {
+                    id: outfit.id,
+                    month: parseInt(outfit.date.split("-")[1]),
+                    date: parseInt(outfit.date.split("-")[2]),
+                    image: outfit.image,
+                    satisfactionValue: outfit.satisfactionValue,
+                    weatherIcon: outfit.weather.icon,
+                };
+            });
+            // console.log(outfits_metadata);
+        }
         return (
             <div className="OutfitCalendar">
                 <Header />
