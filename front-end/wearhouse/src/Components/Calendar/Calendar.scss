@@ -1,0 +1,61 @@
+#calendar {
+    background-color: white;
+    box-shadow: 0 0 5px 10px white;
+    border-radius: 25px;
+
+    border-collapse: collapse;
+    #calendar-header {
+        th {
+            width: 50px;
+            border-right: 0.5px solid black;
+            padding: 5px 0px;
+            opacity: 100%;
+        }
+
+        .last-column {
+            border-right: none;
+        }
+    }
+    tbody {
+        td {
+            padding: 0px;
+            margin: 0px;
+            height: 100px;
+            position: relative;
+            border-top: 0.5px solid black;
+            border-right: 0.5px solid black;
+
+            .date-shell-header {
+                vertical-align: top;
+
+                .date {
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                }
+
+                .weather-icon {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                }
+            }
+
+            .satisfaction-icon-calendar {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 30%;
+                font-size: 45px;
+            }
+        }
+
+        .last-column {
+            border-right: none;
+        }
+
+        .has-outfit {
+            cursor: pointer;
+        }
+    }
+}
