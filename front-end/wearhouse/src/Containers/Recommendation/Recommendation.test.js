@@ -75,7 +75,7 @@ var mockStore = getMockStore(
 
 describe("<Recommendation />", () => {
     let recommendation;
-    let spyAxios_get, spyHistoryPush;
+    let spyHistoryPush;
     beforeEach(() => {
         recommendation = (
             <Provider store={mockStore}>
@@ -84,9 +84,6 @@ describe("<Recommendation />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
 
         spyHistoryPush = jest
             .spyOn(history, "push")
@@ -104,27 +101,23 @@ describe("<Recommendation />", () => {
 
     it("should filter Only the items for recommendation", () => {
         const component = mount(recommendation);
-        expect(component.find(".outfit-preview").length).toBe(1); //Wait for props loading time
+        expect(component.find(".outfit-preview").length).toBe(1);
     });
 
     it("should call onClickOutfit", () => {
         const component = mount(recommendation);
-        let wrapper = component.find("#recommendation .outfit-preview"); //Wait for props loading time
+        let wrapper = component.find("#recommendation .outfit-preview");
         wrapper.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
-    it("should ", () => {
-        let mockStore_temp = getMockStore({}, {}, stubOutfitState, {}, {}, {});
+    it("should toggle on click", () => {
+        const component = mount(recommendation);
+        let wrapper = component.find("#open-button");
+        wrapper.simulate("click");
+        expect(component.find("#folded").length).toBe(1);
 
-        const component = mount(
-            <Provider store={mockStore_temp}>
-                <ConnectedRouter history={history}>
-                    <Recommendation history={history} />
-                </ConnectedRouter>
-            </Provider>,
-        );
-
-        expect(component.find(".outfit-preview").length).toBe(0);
+        wrapper.simulate("click");
+        expect(component.find("#recommendation-wrapper").length).toBe(1);
     });
 });

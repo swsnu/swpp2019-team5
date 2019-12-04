@@ -19,7 +19,7 @@ $templatecolor: rgba(127, 255, 212, 0.3);
 
     #search-container {
         width: fit-content;
-        margin: 15px auto;
+        margin: 15px auto 5px;
         border: 1px lightgray solid;
         display: flex;
 
@@ -108,7 +108,7 @@ $templatecolor: rgba(127, 255, 212, 0.3);
     #browse-outfit-list {
         display: grid;
         //justify-content: left;
-        padding: 20px 50px;
+        padding: 10px 50px;
         margin-bottom: 100px;
         #outfit-list {
             display: flex;
