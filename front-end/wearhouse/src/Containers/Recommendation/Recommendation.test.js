@@ -5,7 +5,6 @@ import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import Recommendation from "./Recommendation";
 
-import axios from "axios";
 import { ConnectedRouter } from "connected-react-router";
 
 let stubOutfitState = {
