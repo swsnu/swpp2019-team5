@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
 
-# user1 = User.objects.get(username="test")
+#user1 = User.objects.get(username="test")
 
 '''
     :param  YYYY-MM-DD-Time
