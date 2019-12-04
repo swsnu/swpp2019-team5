@@ -19,6 +19,7 @@ def token(request):
         return HttpResponseNotAllowed(['GET'])
 
 
+@ensure_csrf_cookie
 def signin(request):
     if request.method == 'POST':
         try:
@@ -50,6 +51,7 @@ def signout(request):
         return HttpResponseNotAllowed(['GET'])
 
 
+@ensure_csrf_cookie
 def user(request):
     if request.method == 'POST':
         try:
