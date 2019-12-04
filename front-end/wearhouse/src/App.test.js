@@ -12,6 +12,11 @@ const outfitState = {
     outfits: [
         {
             id: 1,
+            satisfactionValue: 3,
+            date: "2019.11.7",
+            weather: {
+                tempAvg: 0,
+            },
             items: [
                 { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
                 { category: "Shoes", tags: ["black", "opentoe"] },
@@ -20,17 +25,6 @@ const outfitState = {
             ],
         },
     ],
-    selectedOutfit: {
-        id: 1,
-        items: [
-            { category: "UpperBody", tags: ["black", "T-shirt", "2019"] },
-            { category: "Shoes", tags: ["black", "opentoe"] },
-            { category: "LowerBody", tags: ["jeans"] },
-            { category: "Accessories", tags: ["black", "golden-buckle"] },
-        ],
-        satisfactionValue: 3,
-        date: "2019.11.7",
-    },
 };
 const itemState = {
     items: [],
