@@ -187,5 +187,8 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                 flex-direction: column;
             }
         }
+        #search-result {
+            display: flex;
+        }
     }
 }

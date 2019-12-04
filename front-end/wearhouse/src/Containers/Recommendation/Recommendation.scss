@@ -13,6 +13,8 @@
         #weather-info {
             color: white;
             text-align: center;
+            background: none;
+            display: block;
             margin: 0 10px;
             #weather-icon {
                 font-size: 80px;
@@ -36,6 +38,7 @@
             }
             #recommendation-items {
                 display: flex;
+                align-content: flex-start;
                 height: 340px;
                 max-width: 100%;
                 width: 100%;
