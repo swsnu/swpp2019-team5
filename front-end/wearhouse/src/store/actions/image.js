@@ -23,6 +23,7 @@ export const postImage = image => {
                 .post("/api/image/", image, axiosConfig)
                 //.post("/api/image/", image)
                 .then(res => {
+                    console.log(res.data);
                     dispatch(postImage_(res.data));
                 })
                 .then(() => dispatch(push("/createOutfit")))

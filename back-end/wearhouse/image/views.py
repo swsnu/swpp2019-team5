@@ -126,6 +126,7 @@ def getImage(request):
         categorized_result = map(categorize, result)
 
         response_dict = {"image": image_url, "items": list(categorized_result)}
+        print(response_dict)
 
         return JsonResponse(response_dict, status=201)
 
