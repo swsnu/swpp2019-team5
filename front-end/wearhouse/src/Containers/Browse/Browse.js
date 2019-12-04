@@ -237,15 +237,15 @@ class Browse extends React.Component {
         switch (this.state.mode) {
             case "browse":
                 container = (
-                    <div id="outfit-list">
+                    <div id="browse-outfit-list">
                         <Recommendation />
-                        {outfits}
+                        <div id="outfit-list">{outfits}</div>
                     </div>
                 );
                 break;
             case "search":
                 container = (
-                    <div id="outfit-list">
+                    <div id="search-outfit-list">
                         <div id="search-filters">
                             <div id="slider-container">
                                 <div className="filter-label">
@@ -312,7 +312,7 @@ class Browse extends React.Component {
                                 </RadioGroup>
                             </div>
                         </div>
-                        <div id="search-result">
+                        <div id="outfit-list">
                             {this.state.searchOptions.searchMode === "Outfit"
                                 ? searchedResultbyOutfit
                                 : searchedResultbyItem}

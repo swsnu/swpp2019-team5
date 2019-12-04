@@ -104,14 +104,17 @@ $templatecolor: rgba(127, 255, 212, 0.3);
             // }
         }
     }
-    #outfit-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: left;
+    #search-outfit-list,
+    #browse-outfit-list {
+        display: grid;
+        //justify-content: left;
         padding: 20px 50px;
         margin-bottom: 100px;
+        #outfit-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
         #search-filters {
-            width: 20%;
             height: 100%;
             //border: gray 1px solid;
             padding: 0 10px;
@@ -188,8 +191,9 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                 flex-direction: column;
             }
         }
-        #search-result {
-            display: flex;
-        }
+    }
+    #search-outfit-list {
+        display: grid;
+        grid-template-columns: 180px auto;
     }
 }

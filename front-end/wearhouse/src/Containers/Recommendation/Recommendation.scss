@@ -1,13 +1,11 @@
 #recommendation {
-    margin: 5px 10px;
-    width: 100%;
+    margin-bottom: 20px;
     #recommendation-container {
         border-radius: 3px;
         background-color: rgba(0, 0, 0, 0.8);
         padding: 10px;
         align-items: center;
         display: grid;
-        width: 100%;
         grid-template-columns: 150px auto;
         overflow: hidden;
         #weather-info {

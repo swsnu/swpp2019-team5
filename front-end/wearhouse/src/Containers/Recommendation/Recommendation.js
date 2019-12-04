@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
     faSun,
     faMoon,
@@ -34,12 +35,17 @@ export var iconText = {
     "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
 };
 class Recommendation extends React.Component {
+    state = {
+        showRecommendation: false,
+        displayWeather: false,
+    };
     componentDidMount = () => {
-        this.props.getWeather();
+        if (!this.props.weather) {
+            this.props.getWeather();
+        }
     };
 
     onClickOutfit = outfit => {
-        this.props.selectOutfit(outfit);
         this.props.history.push("/outfitDetail/" + outfit.id);
     };
 
@@ -136,7 +142,6 @@ class Recommendation extends React.Component {
 const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
-        selectedOutfit: state.outfit.selectedOutfit,
         weather: state.weather.todayWeather,
     };
 };
@@ -144,12 +149,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getWeather: () => dispatch(actionCreators.getWeather()),
-        selectOutfit: outfit =>
-            dispatch(actionCreators.getSpecificOutfit(outfit.id)),
     };
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Recommendation);
+)(withRouter(Recommendation));
