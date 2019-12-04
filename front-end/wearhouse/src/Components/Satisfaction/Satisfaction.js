@@ -18,7 +18,7 @@ const Satisfaction = props => {
     let iconlist = [horrible, bad, neutral, good, great];
 
     if (value >= 1 && value <= 5) {
-        icon = <img src={iconlist[value]} alt={"satisfaction: " + value} />;
+        icon = <img src={iconlist[value - 1]} alt={"satisfaction: " + value} />;
     } else {
         icon = (
             <FontAwesomeIcon
