@@ -17,15 +17,14 @@ class CreateOutfit extends Component {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: this.props.outfit.items
-            ? this.props.items
-            : [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
+        items: [], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
     };
     componentDidMount() {
         this.props.setWeather();
         this.checkValidation();
+        this.setState({ items: this.props.outfit.items });
         console.log("did mount", this.props.outfit);
     }
     shouldComponentUpdate() {
@@ -118,6 +117,8 @@ class CreateOutfit extends Component {
     };
 
     render() {
+        console.log(this.state, this.props);
+
         let items = this.state.items.map((item, index) => {
             return (
                 <Item
