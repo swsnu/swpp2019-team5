@@ -4,3 +4,5 @@ pylint==2.4.3
 mysqlclient==1.4.4
 coveralls==1.8.2
 requests==2.22.0
+Algorithmia
+azure-storage-blob==2.1.0
