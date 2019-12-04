@@ -26,11 +26,21 @@ class CreateOutfit extends Component {
     componentDidMount() {
         this.props.setWeather();
         this.checkValidation();
+        console.log("did mount", this.props.outfit);
     }
     shouldComponentUpdate() {
         return true;
     }
     componentDidUpdate(prevProps, prevState) {
+        if (prevProps.outfit !== this.props.outfit) {
+            this.setState({
+                ...this.state,
+                image: this.props.outfit.image,
+                items: this.props.outfit.items
+                    ? this.props.items
+                    : [{ category: "default", tags: [] }],
+            });
+        }
         if (prevState.items !== this.state.items) {
             this.checkValidation();
         }
