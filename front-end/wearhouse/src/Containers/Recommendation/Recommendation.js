@@ -65,7 +65,8 @@ class Recommendation extends React.Component {
             recommendationList = this.props.outfits.filter(outfit => {
                 return (
                     outfit.weather.icon === this.props.weather.icon &&
-                    Math.abs(outfit.weather.tempAvg - tempAvg) < 3
+                    Math.abs(outfit.weather.tempAvg - tempAvg) < 3 &&
+                    outfit.satisfactionValue >= 4
                 );
             });
             displayWeather = true;

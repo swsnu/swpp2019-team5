@@ -48,7 +48,17 @@ class Browse extends React.Component {
         if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
         } else {
-            this.setState({ mode: "browse" });
+            //init searchOptions when searchmode is turned off
+            this.setState({
+                mode: "browse",
+                searchOptions: {
+                    searchMode: "Outfit",
+                    searchArray: [],
+                    tempMax: 50,
+                    tempMin: -30,
+                    satisfaction: "0",
+                },
+            });
         }
     };
 
@@ -75,8 +85,8 @@ class Browse extends React.Component {
         this.setState({
             searchOptions: {
                 ...this.state.searchOptions,
-                tempMax: value[0],
-                tempMin: value[1],
+                tempMax: value[1],
+                tempMin: value[0],
             },
         });
     };
@@ -128,6 +138,32 @@ class Browse extends React.Component {
         });
     };
 
+    isMatchSearchFilters = outfit => {
+        if (this.state.searchOptions.satisfaction === "0") {
+            if (
+                outfit.weather.tempAvg <= this.state.searchOptions.tempMax &&
+                outfit.weather.tempAvg >= this.state.searchOptions.tempMin
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (
+            this.state.searchOptions.satisfaction ===
+            outfit.satisfactionValue + ""
+        ) {
+            if (
+                outfit.weather.tempAvg <= this.state.searchOptions.tempMax &&
+                outfit.weather.tempAvg >= this.state.searchOptions.tempMin
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //return true;
+    };
+
     render() {
         let container = null;
 
@@ -158,7 +194,8 @@ class Browse extends React.Component {
                 this.isMatchSearchArray(
                     tagList,
                     this.state.searchOptions.searchArray,
-                )
+                ) &&
+                this.isMatchSearchFilters(outfit)
             ) {
                 return (
                     <Outfit
@@ -179,7 +216,8 @@ class Browse extends React.Component {
                     this.isMatchSearchArray(
                         item.tags,
                         this.state.searchOptions.searchArray,
-                    )
+                    ) &&
+                    this.isMatchSearchFilters(outfit)
                 ) {
                     searched = true;
                 }
