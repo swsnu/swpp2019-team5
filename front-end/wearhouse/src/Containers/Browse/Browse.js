@@ -95,7 +95,7 @@ class Browse extends React.Component {
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
             if (
                 tags.indexOf(this.state.search_query) === -1 &&
-                this.state.search_query !== ""
+                this.state.search_query.trim() !== ""
             ) {
                 tags.push(this.state.search_query);
                 this.setState({
