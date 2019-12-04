@@ -33,7 +33,7 @@ class App extends React.Component {
                         exact
                         component={this.props.isLoggedIn ? Browse : LandingPage}
                     />
-                    {!this.props.isLoggedIn && <Redirect exact to="/main" />}
+
                     <Route path="/browse" exact component={Browse} />
                     <Route
                         path="/outfitDetail/:id"
