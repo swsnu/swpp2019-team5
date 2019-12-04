@@ -4,7 +4,7 @@ const initialState = {
     outfitData: {
         id: "",
         image: "",
-        items: null,
+        items: [],
     },
 };
 
