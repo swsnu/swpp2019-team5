@@ -42,6 +42,10 @@
     .date-picker-container {
         display: flex;
         justify-content: center;
+        #weather-icon {
+            margin-left: 10px;
+            color: lightslategray;
+        }
     }
 
     #info-window {
@@ -118,7 +122,7 @@
         }
     }
 
-    #confirm-create-item {
+    #confirm-create-outfit {
         grid-column: 2;
         justify-self: flex-end;
         background-color: rgb(54, 54, 54);
@@ -130,8 +134,13 @@
         width: 200px;
         &:hover {
             cursor: pointer;
-            background-color: rgb(172, 159, 159);
+            background-color: lightgray;
         }
         margin: 5px 80px;
+
+        &:disabled {
+            background-color: lightgray;
+            cursor: not-allowed;
+        }
     }
 }

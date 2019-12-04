@@ -3,17 +3,16 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
-import axios from "axios";
 
 import LandingPage from "./LandingPage";
 import { ConnectedRouter } from "connected-react-router";
 
 var stubInitialState = { isLoggedIn: false, userID: null };
 
-var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
+var mockStore = getMockStore(stubInitialState, {}, {}, {}, {}, {});
 
 describe("<LandingPage />", () => {
-    let spyHistoryPush, spyAxios_get;
+    let spyHistoryPush;
     let landingPage;
     beforeEach(() => {
         landingPage = (
@@ -29,12 +28,6 @@ describe("<LandingPage />", () => {
                 dispatch();
             };
         });
-
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true } }),
-            );
     });
 
     afterEach(() => {
@@ -45,7 +38,6 @@ describe("<LandingPage />", () => {
         const component = mount(landingPage);
         let wrapper = component.find("#Main");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should redirect when login button is clicked", () => {

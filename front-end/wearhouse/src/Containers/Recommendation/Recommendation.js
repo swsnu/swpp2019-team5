@@ -21,7 +21,7 @@ import "./Recommendation.scss";
 
 import * as actionCreators from "../../store/actions/index";
 
-var iconText = {
+export var iconText = {
     "clear-day": <FontAwesomeIcon icon={faSun} />,
     "clear-night": <FontAwesomeIcon icon={faMoon} />,
     rain: <FontAwesomeIcon icon={faUmbrella} />,
@@ -35,7 +35,6 @@ var iconText = {
 };
 class Recommendation extends React.Component {
     componentDidMount = () => {
-        this.props.getAllOufits(); // This is a duplicate call
         this.props.getWeather();
     };
 
@@ -143,7 +142,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllOufits: () => dispatch(actionCreators.getOutfits()),
         getWeather: () => dispatch(actionCreators.getWeather()),
         selectOutfit: outfit =>
             dispatch(actionCreators.getSpecificOutfit(outfit.id)),

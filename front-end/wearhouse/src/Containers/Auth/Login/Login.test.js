@@ -3,18 +3,20 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { getMockStore } from "../../../test-utils/mocks";
 import { history } from "../../../store/store";
-//import * as actionCreators from "../../../store/actions/login";
-import "../../../setupTests";
+
 import axios from "axios";
 import Login from "./Login";
 import { ConnectedRouter } from "connected-react-router";
 
-var stubInitialState = { isLoggedIn: false, userID: null };
+var stubInitialState = { isLoggedIn: false, loginErr: "Error" };
 
-var mockStore = getMockStore(stubInitialState, {}, {}, {}, {});
+var stubErrorState = { isLoggedIn: false, loginErr: "Error" };
+
+var mockStore = getMockStore(stubInitialState);
+var mockStore_error = getMockStore(stubErrorState);
 
 describe("<Login />", () => {
-    let login, spyHistoryPush, spyAxios_post, spyAxios_get;
+    let login, spyHistoryPush, spyAxios_post;
 
     beforeEach(() => {
         login = (
@@ -34,12 +36,6 @@ describe("<Login />", () => {
         spyAxios_post = jest
             .spyOn(axios, "post")
             .mockImplementation(() => Promise.resolve({}));
-
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true } }),
-            );
     });
 
     afterEach(() => {
@@ -49,7 +45,6 @@ describe("<Login />", () => {
     it("should load properly", () => {
         const component = mount(login);
         let wrapper = component.find("#login");
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(wrapper.length).toBe(1);
     });
 
@@ -121,5 +116,34 @@ describe("<Login />", () => {
         let wrapper = component.find("#login-container #signup-button");
         wrapper.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should redirect to /browse", () => {
+        mockStore = getMockStore({ isLoggedIn: true });
+        login = (
+            <Provider store={mockStore}>
+                <ConnectedRouter history={history}>
+                    <Login history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        mount(login);
+        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+    });
+
+    it("should display <AuthError>", () => {
+        login = (
+            <Provider store={mockStore_error}>
+                <ConnectedRouter history={history}>
+                    <Login history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        const container = mount(login);
+        let wrapper = container.find("#auth-error");
+        expect(wrapper.length).toBe(1);
+
+        let button = wrapper.find("#error-close");
+        button.simulate("click");
     });
 });

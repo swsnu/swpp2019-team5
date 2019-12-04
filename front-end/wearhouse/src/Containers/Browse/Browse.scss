@@ -2,8 +2,8 @@ $fontsize: 20px;
 $templatecolor: rgba(127, 255, 212, 0.3);
 
 #browse {
+    min-height: inherit;
     overflow: auto;
-    height: 100vh;
     background-color: rgba(211, 211, 211, 0.3);
     #calendar-button {
         border: none;
@@ -23,17 +23,71 @@ $templatecolor: rgba(127, 255, 212, 0.3);
         border: 1px lightgray solid;
         display: flex;
 
-        #search-input {
-            font-size: $fontsize;
-            margin: 0;
-            width: 450px;
-            border: none;
-            padding: 10px;
-
-            background-color: rgba(211, 211, 211, 0.2);
-            &:focus {
-                outline: none;
+        #select-searchmode {
+            width: 80px;
+            font-size: 17px;
+            #selected-option {
+                height: 43px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                #selected-text {
+                    margin: 0 5px 0 10px;
+                }
+                #selectButton {
+                    height: 43px;
+                    width: 20px;
+                    line-height: 43px;
+                    font-size: 15px;
+                }
+            }
+            #dropdown-selection {
+                position: absolute;
+                width: 80px;
                 background-color: white;
+                overflow: hidden;
+                transition: all ease-out 0.2s;
+                .option {
+                    padding: 5px 10px;
+                    &:hover {
+                        background-color: lightgray;
+                        cursor: pointer;
+                    }
+                }
+                &.true {
+                    max-height: 60px;
+                }
+                &.false {
+                    max-height: 0px;
+                }
+            }
+        }
+        #search-input {
+            padding-left: 5px;
+            height: 43px;
+            width: 450px;
+            outline: none;
+            border: none;
+            font-size: 14px;
+            display: flex;
+            background-color: white;
+            overflow: hidden;
+            #search-input-queries {
+                display: flex;
+                align-items: center;
+                height: 43px;
+                width: fit-content;
+                flex-shrink: 0;
+            }
+            #search-input-text {
+                font-size: $fontsize;
+                width: 400px;
+                border: none;
+                padding: 10px;
+                padding-left: 5px;
+                &:focus {
+                    outline: none;
+                }
             }
         }
 
@@ -45,9 +99,9 @@ $templatecolor: rgba(127, 255, 212, 0.3);
             &:focus {
                 outline: none;
             }
-            &:hover {
-                background-color: $templatecolor;
-            }
+            // &:hover {
+            //     background-color: $templatecolor;
+            // }
         }
     }
     #outfit-list {
@@ -55,5 +109,83 @@ $templatecolor: rgba(127, 255, 212, 0.3);
         flex-wrap: wrap;
         justify-content: left;
         padding: 20px 50px;
+        #search-filters {
+            width: 20%;
+            height: 100%;
+            //border: gray 1px solid;
+            padding: 0 10px;
+            .filter-label {
+                font-size: 15px;
+            }
+            #slider-container {
+                $slider-size: 20px;
+                height: 200px;
+                margin: 20px 0;
+                #slider-temp {
+                    background-color: darkslategray;
+                    width: 50px;
+                    color: white;
+                    border-radius: 3px;
+                    text-align: center;
+                }
+                #slider {
+                    height: 150px;
+                    width: 5px;
+                    margin: 20px 0;
+                    .MuiSlider-root,
+                    .MuiSlider-rail,
+                    .MuiSlider-track {
+                        width: 8px;
+                    }
+
+                    .MuiSlider-track {
+                        width: 7px;
+                        margin-left: 1px;
+                        background-color: lightcoral;
+                    }
+                    .MuiSlider-rail {
+                        width: 8px;
+                        background-color: white;
+                        border: 0.5px gray solid;
+                    }
+                    .MuiSlider-mark {
+                        display: none;
+                    }
+
+                    .MuiSlider-thumb {
+                        margin-left: -3px;
+                    }
+                }
+            }
+            .MuiFormGroup-root {
+                margin: 15px 0;
+                $buttonsize: 18px;
+                .MuiFormControlLabel-root {
+                    margin: 3px 0;
+                }
+                .MuiFormControlLabel-label {
+                    font-size: 15px;
+                }
+                .MuiRadio-root {
+                    padding: 3px;
+                    width: $buttonsize;
+                    height: $buttonsize;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+
+                .MuiSvgIcon-root {
+                    width: $buttonsize;
+                    height: $buttonsize;
+                }
+                .MuiRadio-colorSecondary.Mui-checked,
+                .MuiIconButton-colorSecondary {
+                    fill: rgb(248, 81, 81);
+                }
+            }
+            #satisfaction-container {
+                display: flex;
+                flex-direction: column;
+            }
+        }
     }
 }

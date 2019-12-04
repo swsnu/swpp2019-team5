@@ -38,7 +38,6 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
-
 def signout(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -77,4 +76,3 @@ def user(request):
         return JsonResponse(response_user, status=200)
     else:
         return HttpResponseNotAllowed(['POST'])
-

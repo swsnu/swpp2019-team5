@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
-import * as actionCreators from "./item";
 import axios from "axios";
+import { push } from "connected-react-router";
 
 export const getOutfits_ = outfits => {
     return { type: actionTypes.GET_OUTFITS, outfits: outfits };
@@ -30,9 +30,6 @@ export const getSpecificOutfit = id => {
 };
 
 export const createOutfit_ = outfit => {
-    for (let i = 0; i < outfit.items.length; i++) {
-        actionCreators.createItem(outfit.id, outfit.items[i]);
-    }
     return {
         type: actionTypes.CREATE_OUTFIT,
         image: outfit.image,
@@ -43,11 +40,17 @@ export const createOutfit_ = outfit => {
         weather: outfit.weather,
     };
 };
+
 export const createOutfit = outfit => {
     return dispatch => {
-        return axios.post("/api/outfit/", outfit).then(res => {
-            dispatch(createOutfit_(res.data));
-        });
+        var id;
+        return axios
+            .post("/api/outfit/", outfit)
+            .then(res => {
+                dispatch(createOutfit_(res.data));
+                id = res.data.id;
+            })
+            .then(() => dispatch(push("/outfitDetail/" + id)));
     };
 };
 
@@ -63,5 +66,24 @@ export const deleteOutfit = id => {
         return axios.delete("/api/outfit/" + id).then(() => {
             dispatch(deleteOutfit_(id));
         });
+    };
+};
+
+export const editOutfit_ = outfit => {
+    return {
+        type: actionTypes.EDIT_OUTFIT,
+        targetID: outfit.id,
+        new_outfit: outfit,
+    };
+};
+
+export const editOutfit = outfit => {
+    return dispatch => {
+        return axios
+            .put("/api/outfit/" + outfit.id, outfit)
+            .then(() => {
+                dispatch(editOutfit_(outfit));
+            })
+            .then(() => dispatch(push("/outfitDetail/" + outfit.id)));
     };
 };

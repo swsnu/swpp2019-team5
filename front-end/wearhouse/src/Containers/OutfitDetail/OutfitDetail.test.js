@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../test-utils/mocks";
+import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import "../../setupTests";
 import axios from "axios";
@@ -15,8 +15,34 @@ import { ConnectedRouter } from "connected-react-router";
 //         return;
 //     });
 // });
-
-let stubInitialState = {
+let stubInitialState_item = {
+    items: [],
+    selectedOutfitItems: [],
+    selectedItem: null,
+    option_list: [
+        {
+            id: 1,
+            category: "UpperBody",
+            tags: ["T-shirt", "2019"],
+        },
+        {
+            id: 2,
+            category: "UpperBody",
+            tags: ["fall", "stripe", "blue"],
+        },
+        {
+            id: 3,
+            category: "UpperBody",
+            tags: ["coat", "wool", "pink"],
+        },
+        {
+            id: 4,
+            category: "UpperBody",
+            tags: ["mom", "hand-made", "check-shirt"],
+        },
+    ],
+};
+let stubInitialState_outfit = {
     outfits: [
         {
             id: 1,
@@ -38,10 +64,18 @@ let stubInitialState = {
         ],
         satisfactionValue: 3,
         date: "2019.11.7",
+        weather: { icon: "rain" },
     },
 };
 
-let mockStore = getMockStore(stubInitialState);
+let mockStore = getMockStore(
+    {},
+    stubInitialState_item,
+    stubInitialState_outfit,
+    {},
+    {},
+    {},
+);
 
 describe("<OutfitDetail />", () => {
     let outfitDetail, spyHistoryPush, spyAxios_delete;
@@ -69,9 +103,7 @@ describe("<OutfitDetail />", () => {
 
         spyAxios_get = jest
             .spyOn(axios, "get")
-            .mockImplementation(() =>
-                Promise.resolve({ data: { isLoggedIn: true } }),
-            );
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -82,7 +114,7 @@ describe("<OutfitDetail />", () => {
         const component = mount(outfitDetail);
         let wrapper = component.find("#outfit-detail");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should call onEdit", () => {

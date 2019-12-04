@@ -4,6 +4,8 @@ from .models import User
 import json
 
 # Create your tests here.
+
+
 class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(
@@ -25,7 +27,7 @@ class UserTestCase(TestCase):
                                content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
-        # Method Not allowed response for non-get request to token
+        # Method Not allowed / not authorized response for non-get request to token
         response = client.post('/api/user/token/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
 
@@ -101,11 +103,6 @@ class UserTestCase(TestCase):
                                content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
-        # Nonallowed method
-        response = client.put('/api/user/', json.dumps({'email': 'swpp@snu.com', 'password': 'iluvswpp'}),
-                              content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
-        self.assertEqual(response.status_code, 405)
-
         # Get value of isLoggedIn
         response = client.get('/api/user/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 200)
@@ -115,3 +112,8 @@ class UserTestCase(TestCase):
         sessionid = credentials[2]
         response = client.get('/api/user/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 200)
+
+        # Nonallowed method
+        response = client.put('/api/user/', json.dumps({'email': 'swpp@snu.com', 'password': 'iluvswpp'}),
+                              content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)

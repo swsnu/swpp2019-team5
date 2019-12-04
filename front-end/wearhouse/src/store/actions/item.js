@@ -1,4 +1,4 @@
-import * as actionTypes from "./actionTypes";
+/*import * as actionTypes from "./actionTypes";
 import * as actionCreators from "./tag";
 import axios from "axios";
 
@@ -15,8 +15,9 @@ export const createItem_ = item => {
 };
 export const createItem = (outfit_id, item) => {
     return dispatch => {
-        return axios.post("outfit/" + outfit_id + "/item", item).then(res => {
+        return axios.post("/outfit/" + outfit_id + "/item", item).then(res => {
             dispatch(createItem_(res.data));
         });
     };
 };
+*/

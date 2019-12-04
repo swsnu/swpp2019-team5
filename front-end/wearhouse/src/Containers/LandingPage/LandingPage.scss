@@ -3,8 +3,8 @@
         display: grid;
         grid-template-rows: 30% 10% 60%;
 
-        height: 85vh;
-        padding: 10px 5%;
+        height: 90vh;
+        padding: 0 5%;
 
         #intro-text {
             text-align: center;
@@ -41,19 +41,80 @@
 
         #intro-image {
             width: 70%;
-            margin: 10px auto;
+            margin: 20px auto 40px;
             position: relative;
             align-self: end;
         }
     }
 
     #content-2 {
-        margin-top: 40px;
         background-color: rgba(218, 165, 32, 0.3);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        h1 {
+            width: 60%;
+            margin: 70px auto 0;
+            text-align: center;
+        }
+        #information-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            .features-info {
+                .features-icon {
+                    font-size: 80px;
+                    text-align: center;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 100%;
+                    margin: 0 auto 20px;
+                    padding: 30px;
+                    background-color: white;
+                    //color: rgb(116, 63, 27);
+                    color: black;
+                }
+                h4 {
+                    margin: 15px auto;
+                    text-align: center;
+                    font-size: 20px;
+                }
+                text-align: center;
+                width: 230px;
+                height: 350px;
+                padding: 25px;
+                border-radius: 10px;
+                font-size: 17px;
+                font-weight: 400;
+
+                color: white;
+                background-color: #495159;
+            }
+        }
     }
 
     footer {
         height: 15vh;
-        background-color: rgb(25, 66, 106);
+        background-color: rgb(36, 97, 158);
+        display: flex;
+        align-items: center;
+        #footericon {
+            width: 150px;
+            height: 70px;
+            margin-left: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url(./Logo_point.png);
+        }
+        #footertext {
+            text-align: left;
+            color: white;
+            margin-left: 20px;
+            line-height: 20px;
+            a {
+                color: lightyellow;
+            }
+        }
     }
 }

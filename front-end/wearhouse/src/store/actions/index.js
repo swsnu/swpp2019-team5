@@ -3,9 +3,10 @@ export {
     getSpecificOutfit,
     createOutfit,
     deleteOutfit,
+    editOutfit,
 } from "./outfit";
 
-export { logIn, logOut, signUp, getLogin } from "./login";
+export { logIn, logOut, signUp, getLogin, resetErr } from "./login";
 
 export { createItem } from "./item";
 

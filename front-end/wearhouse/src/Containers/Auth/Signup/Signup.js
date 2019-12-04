@@ -1,14 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../store/actions/index";
+import AuthError from "../../../Components/AuthError/AuthError";
 
-import Header from "../../Header/Header";
 import "./Signup.scss";
 
 class Signup extends Component {
-    state = { email: "", password: "", passwordConfirm: "" };
+    state = {
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        signupErrVisible: true,
+    };
+
+    componentDidMount() {
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/browse");
+        }
+        this.props.resetErr();
+    }
+
     onSignUp = userCredentials => {
+        this.props.resetErr();
         this.props.onSignUp(userCredentials);
+        this.setState({ loginErrVisible: true });
+    };
+
+    onCloseError = () => {
+        this.setState({ signupErrVisible: false });
     };
 
     render() {
@@ -20,7 +39,6 @@ class Signup extends Component {
         let active = pwMatch && validEmail && this.state.password !== "";
         return (
             <div id="signup">
-                <Header />
                 <div id="signup-container">
                     <h1>Sign Up</h1>
                     <form id="signup-form">
@@ -71,33 +89,48 @@ class Signup extends Component {
                                 </div>
                             )}
                         </div>
-                        <button
-                            disabled={!active}
-                            id="signup-button"
-                            onClick={() =>
-                                this.onSignUp({
-                                    email: this.state.email,
-                                    password: this.state.password,
-                                })
-                            }
-                        >
-                            Sign up
-                        </button>
                     </form>
+                    <button
+                        disabled={!active}
+                        id="signup-button"
+                        onClick={() =>
+                            this.onSignUp({
+                                email: this.state.email,
+                                password: this.state.password,
+                            })
+                        }
+                    >
+                        Sign up
+                    </button>
+                    {this.state.signupErrVisible &&
+                        (this.props.signupErr && (
+                            <AuthError
+                                error={this.props.signupErr}
+                                onClose={() => this.onCloseError()}
+                            />
+                        ))}
                 </div>
             </div>
         );
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.login.isLoggedIn,
+        signupErr: state.login.signupErr,
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         onSignUp: userCredentials =>
             dispatch(actionCreators.signUp(userCredentials)),
+        resetErr: () => dispatch(actionCreators.resetErr()),
     };
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(Signup);

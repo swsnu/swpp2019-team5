@@ -22,6 +22,7 @@ class EditSatisfaction extends React.Component {
 
     changeSelectedTo = number => {
         this.setState({ currSatisfaction: number });
+        this.props.change(number);
     };
 
     render() {
