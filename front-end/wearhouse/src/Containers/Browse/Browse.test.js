@@ -139,7 +139,7 @@ describe("<Browse />", () => {
         expect(wrapper.length).toBe(4);
         wrapper = component.find("AddOutfit");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         const CreateInstance = component
             .find(Browse.WrappedComponent)
             .instance();
@@ -152,7 +152,7 @@ describe("<Browse />", () => {
         const component = mount(outfitList);
         let wrapper = component.find("Outfit .outfit-preview").at(0);
         wrapper.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 
@@ -231,11 +231,6 @@ describe("<Browse />", () => {
         });
         clicker = component.find(".radio-group").at(0);
         clicker.simulate("change", { target: { value: 0 } });
-
-        /*component
-            .find("#slider")
-            .at(0)
-            .simulate("change");*/
     });
 
     it("should add and delete tag to and from query", () => {
@@ -288,7 +283,7 @@ describe("<Browse />", () => {
         expect(wrapper.length).toBe(2);
         var onClickOutfit = component.find("Outfit .outfit-preview").at(0);
         onClickOutfit.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
 
         button.simulate("click");
@@ -298,8 +293,70 @@ describe("<Browse />", () => {
         expect(wrapper.length).toBe(1);
         onClickOutfit = component.find("Outfit .outfit-preview").at(0);
         onClickOutfit.simulate("click");
-        expect(spyAxios_get).toHaveBeenCalledTimes(2);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
         expect(spyHistoryPush).toHaveBeenCalledTimes(2);
-        ////check item search
+    });
+
+    it("should return correct search result according to filters", () => {
+        let stubOutfit = (temp, satisfaction, key) => {
+            return {
+                id: key,
+                satisfactionValue: satisfaction,
+                weather: {
+                    tempAvg: temp,
+                },
+                items: [{ tags: ["a"] }],
+            };
+        };
+
+        let mockSearchOutfitState = getMockStore(
+            stubLoginState,
+            {},
+            {
+                outfits: [
+                    stubOutfit(0, 1, 1),
+                    stubOutfit(60, 1, 4),
+                    stubOutfit(0, 3, 2),
+                    stubOutfit(60, 3, 3),
+                ],
+            },
+            {},
+            stubWeatherState,
+            {},
+        );
+
+        const component = mount(
+            <Provider store={mockSearchOutfitState}>
+                <ConnectedRouter history={history}>
+                    <Browse history={history} />
+                </ConnectedRouter>
+            </Provider>,
+        );
+
+        const wrapper = component.find("input");
+        wrapper.simulate("change", { target: { value: "a" } });
+        wrapper.simulate("keydown", {
+            keyCode: 13,
+        });
+
+        let satisfaction = component.find(".MuiFormControlLabel-root").at(1);
+        satisfaction.simulate("click");
+
+        const CreateInstance = component
+            .find(Browse.WrappedComponent)
+            .instance();
+
+        CreateInstance.setState({
+            searchOptions: {
+                searchMode: "Outfit",
+                searchArray: [],
+                tempMax: 50,
+                tempMin: -30,
+                satisfaction: "1",
+            },
+        });
+
+        let searchResults = component.find(".outfit-preview");
+        expect(searchResults.length).toBe(2);
     });
 });

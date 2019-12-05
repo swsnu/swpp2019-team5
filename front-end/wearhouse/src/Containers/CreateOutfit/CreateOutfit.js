@@ -17,20 +17,30 @@ class CreateOutfit extends Component {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: this.props.outfit.items
-            ? this.props.items
-            : [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
+        items: [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
     };
     componentDidMount() {
         this.props.setWeather();
         this.checkValidation();
+        this.setState({ items: this.props.outfit.items });
+        console.log("did mount", this.props.outfit);
     }
     shouldComponentUpdate() {
         return true;
     }
     componentDidUpdate(prevProps, prevState) {
+        if (prevProps.outfit !== this.props.outfit) {
+            this.setState({
+                ...this.state,
+                image: this.props.outfit.image,
+                items:
+                    this.props.outfit.items.length >= 1
+                        ? this.props.items
+                        : [{ category: "default", tags: [] }],
+            });
+        }
         if (prevState.items !== this.state.items) {
             this.checkValidation();
         }
@@ -108,6 +118,8 @@ class CreateOutfit extends Component {
     };
 
     render() {
+        console.log(this.state, this.props);
+
         let items = this.state.items.map((item, index) => {
             return (
                 <Item
@@ -165,35 +177,37 @@ class CreateOutfit extends Component {
                         </div>
                     </div>
 
-                    <div id="info-window">
-                        <div id="items-info-window">{items}</div>
-                        <div className="not-info">
-                            <div id="add-confirm-buttons-container">
-                                <button
-                                    onClick={this.addItemHandler}
-                                    id="add-item"
-                                >
-                                    Add Item
-                                </button>
-                            </div>
-                            <div id="error-container">
-                                {!this.state.isValid && (
-                                    <div className="item-error">
-                                        Please select category and add at least
-                                        one tag for each Item!
-                                    </div>
-                                )}
+                    <div id="info-window-wrapper">
+                        <div id="info-window">
+                            <div id="items-info-window">{items}</div>
+                            <div className="not-info">
+                                <div id="add-confirm-buttons-container">
+                                    <button
+                                        onClick={this.addItemHandler}
+                                        id="add-item"
+                                    >
+                                        Add Item
+                                    </button>
+                                </div>
+                                <div id="error-container">
+                                    {!this.state.isValid && (
+                                        <div className="item-error">
+                                            Please select category and add at
+                                            least one tag for each Item!
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <button
-                        onClick={this.onConfirmCreate}
-                        id="confirm-create-outfit"
-                        disabled={!this.state.isValid}
-                    >
-                        Confirm Create
-                    </button>
+                        <button
+                            onClick={this.onConfirmCreate}
+                            id="confirm-create-outfit"
+                            disabled={!this.state.isValid}
+                        >
+                            Confirm Create
+                        </button>
+                    </div>
                 </div>
             </div>
         );

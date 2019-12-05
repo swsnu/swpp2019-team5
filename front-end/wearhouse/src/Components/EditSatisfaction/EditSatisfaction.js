@@ -29,7 +29,7 @@ class EditSatisfaction extends React.Component {
         let iconlist = [horrible, bad, neutral, good, great];
         let iconOptions = [];
         for (var i = 0; i < 5; i++) {
-            let j = i;
+            let j = i + 1;
             iconOptions.push(
                 <img
                     key={i}
@@ -39,7 +39,7 @@ class EditSatisfaction extends React.Component {
                             : "satisfaction-option"
                     }
                     src={iconlist[i]}
-                    alt={"Satisfaction level: " + i}
+                    alt={"Satisfaction level: " + j}
                     onClick={() => this.changeSelectedTo(j)}
                 />,
             );
@@ -48,7 +48,7 @@ class EditSatisfaction extends React.Component {
         if (typeof this.state.currSatisfaction === "number") {
             selectedIcon = (
                 <img
-                    src={iconlist[this.state.currSatisfaction]}
+                    src={iconlist[this.state.currSatisfaction - 1]}
                     alt={"selected satisfaction"}
                     id="selected-satisfaction"
                 />

@@ -48,7 +48,17 @@ class Browse extends React.Component {
         if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
         } else {
-            this.setState({ mode: "browse" });
+            //init searchOptions when searchmode is turned off
+            this.setState({
+                mode: "browse",
+                searchOptions: {
+                    searchMode: "Outfit",
+                    searchArray: [],
+                    tempMax: 50,
+                    tempMin: -30,
+                    satisfaction: "0",
+                },
+            });
         }
     };
 
@@ -75,8 +85,8 @@ class Browse extends React.Component {
         this.setState({
             searchOptions: {
                 ...this.state.searchOptions,
-                tempMax: value[0],
-                tempMin: value[1],
+                tempMax: value[1],
+                tempMin: value[0],
             },
         });
     };
@@ -95,7 +105,7 @@ class Browse extends React.Component {
         if (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) {
             if (
                 tags.indexOf(this.state.search_query) === -1 &&
-                this.state.search_query !== ""
+                this.state.search_query.trim() !== ""
             ) {
                 tags.push(this.state.search_query);
                 this.setState({
@@ -128,6 +138,32 @@ class Browse extends React.Component {
         });
     };
 
+    isMatchSearchFilters = outfit => {
+        if (this.state.searchOptions.satisfaction === "0") {
+            if (
+                outfit.weather.tempAvg <= this.state.searchOptions.tempMax &&
+                outfit.weather.tempAvg >= this.state.searchOptions.tempMin
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (
+            this.state.searchOptions.satisfaction ===
+            outfit.satisfactionValue + ""
+        ) {
+            if (
+                outfit.weather.tempAvg <= this.state.searchOptions.tempMax &&
+                outfit.weather.tempAvg >= this.state.searchOptions.tempMin
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //return true;
+    };
+
     render() {
         let container = null;
 
@@ -135,7 +171,7 @@ class Browse extends React.Component {
             return (
                 <Outfit
                     key={outfit.id}
-                    image={outfit.imageUrl}
+                    image={outfit.image}
                     satisfactionValue={outfit.satisfactionValue}
                     date={outfit.date}
                     clicked={() => this.onClickOutfit(outfit)}
@@ -151,14 +187,15 @@ class Browse extends React.Component {
 
         const searchedResultbyOutfit = this.props.outfits.map(outfit => {
             let tagList = [];
-            outfit.items.map(item => {
+            outfit.items.forEach(item => {
                 tagList.push(...item.tags);
             });
             if (
                 this.isMatchSearchArray(
                     tagList,
                     this.state.searchOptions.searchArray,
-                )
+                ) &&
+                this.isMatchSearchFilters(outfit)
             ) {
                 return (
                     <Outfit
@@ -169,17 +206,20 @@ class Browse extends React.Component {
                         clicked={() => this.onClickOutfit(outfit)}
                     />
                 );
+            } else {
+                return null;
             }
         });
 
         const searchedResultbyItem = this.props.outfits.map(outfit => {
             let searched = false;
-            outfit.items.map(item => {
+            outfit.items.forEach(item => {
                 if (
                     this.isMatchSearchArray(
                         item.tags,
                         this.state.searchOptions.searchArray,
-                    )
+                    ) &&
+                    this.isMatchSearchFilters(outfit)
                 ) {
                     searched = true;
                 }
@@ -194,20 +234,22 @@ class Browse extends React.Component {
                         clicked={() => this.onClickOutfit(outfit)}
                     />
                 );
+            } else {
+                return null;
             }
         });
         switch (this.state.mode) {
             case "browse":
                 container = (
-                    <div id="outfit-list">
+                    <div id="browse-outfit-list">
                         <Recommendation />
-                        {outfits}
+                        <div id="outfit-list">{outfits}</div>
                     </div>
                 );
                 break;
             case "search":
                 container = (
-                    <div id="outfit-list">
+                    <div id="search-outfit-list">
                         <div id="search-filters">
                             <div id="slider-container">
                                 <div className="filter-label">
@@ -274,7 +316,7 @@ class Browse extends React.Component {
                                 </RadioGroup>
                             </div>
                         </div>
-                        <div id="search-result">
+                        <div id="outfit-list">
                             {this.state.searchOptions.searchMode === "Outfit"
                                 ? searchedResultbyOutfit
                                 : searchedResultbyItem}
