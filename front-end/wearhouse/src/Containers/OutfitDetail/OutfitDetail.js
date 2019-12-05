@@ -38,7 +38,7 @@ var iconText = {
 class OutfitDetail extends Component {
     state = {
         outfit: {
-            image: null,
+            image: this.props.outfit.image,
             satisfactionValue: null,
             date: "", //in sprin
             items: [],
@@ -57,6 +57,10 @@ class OutfitDetail extends Component {
         if (prevProps.outfit !== this.props.outfit) {
             this.setState({ outfit: this.props.outfit });
         }
+
+        if (prevProps.outfit.image !== this.props.outfit.image) {
+            this.setState({ image: this.props.outfit.image });
+        }
     }
 
     onEdit = () => {
@@ -71,6 +75,7 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
+        console.log(this.props.outfit.image);
         return (
             <div id="outfit-detail">
                 <div id="detail-outfit-window">
@@ -78,7 +83,7 @@ class OutfitDetail extends Component {
                         <Satisfaction
                             value={this.state.outfit.satisfactionValue}
                         />
-                        <img src={this.state.image} alt="outfit" />
+                        <img src={this.props.outfit.image} alt="outfit" />
 
                         <label id="date">
                             {moment(this.state.outfit.date).format("LL")}
