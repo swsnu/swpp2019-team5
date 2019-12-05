@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCalendarAlt,
+    faUndo,
+    faTemperatureHigh,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
@@ -119,7 +123,7 @@ class EditOutfit extends Component {
             id: this.state.outfit.id,
             image: this.state.outfit.image,
             satisfactionValue: this.state.outfit.satisfactionValue,
-            date: this.state.outfit.date,
+            date: this.props.outfit.date,
             items: this.state.outfit.items,
             weather: this.props.outfit.weather,
             /*
@@ -131,8 +135,7 @@ class EditOutfit extends Component {
                               2,
                           icon: this.state.outfit.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" }
-                    */
+                    : { tempAvg: "", icon: "" }*/
         };
 
         console.log(edittedOutfit);
@@ -159,12 +162,12 @@ class EditOutfit extends Component {
                     <div className="left-window">
                         <div className="date-picker-container">
                             <span data-tooltip-text="Date select is optional">
-                                <div>
+                                {/*}<div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
                                         icon={faCalendarAlt}
                                     />
-                                </div>
+                                </div>{*/}
                             </span>
                             {/*}
                             <DatePicker
@@ -181,12 +184,17 @@ class EditOutfit extends Component {
                                     ? iconText[this.state.outfit.weather.icon]
                                     : null}{" "}
                                 {this.state.outfit.weather &&
-                                this.state.outfit.weather.temperatureLow
-                                    ? this.state.outfit.weather
-                                          .temperatureHigh +
-                                      "/" +
-                                      this.state.outfit.weather.temperatureLow
+                                this.state.outfit.weather.tempAvg
+                                    ? this.state.outfit.weather.icon + "     "
                                     : null}
+                                <FontAwesomeIcon
+                                    id="tempAvg"
+                                    icon={faTemperatureHigh}
+                                />
+                                {this.state.outfit.weather.tempAvg
+                                    ? this.state.outfit.weather.tempAvg + "'C"
+                                    : null}
+                                {}
                             </div>
                         </div>
                         <div id="image-window">

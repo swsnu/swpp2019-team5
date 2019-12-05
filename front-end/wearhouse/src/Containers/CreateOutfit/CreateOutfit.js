@@ -99,7 +99,7 @@ class CreateOutfit extends Component {
     }
     onConfirmCreate = () => {
         const newOutfit = {
-            image: this.state.image,
+            image: this.state.image ? this.state.image : "",
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
@@ -153,7 +153,7 @@ class CreateOutfit extends Component {
                                 placeholderText="Date isn't selected  :)"
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
-                                dateFormat="yyyy/MM/dd"
+                                dateFormat="yyyy-MM-dd"
                                 maxDate={new Date()}
                             />
                             <div id="weather-icon">
