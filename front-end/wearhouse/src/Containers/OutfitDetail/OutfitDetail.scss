@@ -12,18 +12,17 @@
         background-color: rgb(66, 66, 66);
         border: 2px solid rgb(124, 112, 117);
         border-radius: 5px;
+        min-height: 60%; // Temp value
         img {
             max-width: inherit;
         }
         #date {
             position: absolute;
             top: 135px;
-            color: rgb(245, 241, 241);
-            background-color: rgb(160, 209, 193);
-            border: solid rgb(210, 221, 223) 1px;
-            padding: 3px;
-            padding-left: 5px;
-            padding-right: 5px;
+            color: white;
+            background-color: rgb(0, 150, 100);
+            //border: solid rgb(210, 221, 223) 1px;
+            padding: 10px;
             font-size: 14px;
             #weather-icon {
                 display: inline-block;

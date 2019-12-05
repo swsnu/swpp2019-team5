@@ -102,7 +102,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                     className="emoticon_on_calendar_cell"
                                     src={
                                         satisfactionIconText[
-                                            dates[i].satisfactionValue
+                                            dates[i].satisfactionValue - 1
                                         ]
                                     }
                                 />

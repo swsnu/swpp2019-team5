@@ -63,9 +63,12 @@ export const deleteOutfit_ = id => {
 
 export const deleteOutfit = id => {
     return dispatch => {
-        return axios.delete("/api/outfit/" + id).then(() => {
-            dispatch(deleteOutfit_(id));
-        });
+        return axios
+            .delete("/api/outfit/" + id)
+            .then(() => {
+                dispatch(deleteOutfit_(id));
+            })
+            .then(() => dispatch(push("/browse/")));
     };
 };
 
