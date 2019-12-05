@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
     faSun,
     faMoon,
@@ -12,6 +13,8 @@ import {
     faCloudSun,
     faCloudMoon,
     faMapMarkerAlt,
+    faChevronDown,
+    faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -34,13 +37,22 @@ export var iconText = {
     "partly-cloudy-night": <FontAwesomeIcon icon={faCloudMoon} />,
 };
 class Recommendation extends React.Component {
+    state = {
+        showRecommendation: true,
+        displayWeather: false,
+    };
     componentDidMount = () => {
-        this.props.getWeather();
+        if (!this.props.weather) {
+            this.props.getWeather();
+        }
     };
 
     onClickOutfit = outfit => {
-        this.props.selectOutfit(outfit);
         this.props.history.push("/outfitDetail/" + outfit.id);
+    };
+
+    showModeToggle = value => {
+        this.setState({ showRecommendation: value });
     };
 
     render() {
@@ -65,7 +77,8 @@ class Recommendation extends React.Component {
             recommendationList = this.props.outfits.filter(outfit => {
                 return (
                     outfit.weather.icon === this.props.weather.icon &&
-                    Math.abs(outfit.weather.tempAvg - tempAvg) < 3
+                    Math.abs(outfit.weather.tempAvg - tempAvg) < 3 &&
+                    outfit.satisfactionValue >= 4
                 );
             });
             displayWeather = true;
@@ -87,46 +100,81 @@ class Recommendation extends React.Component {
 
         return (
             <div id="recommendation">
-                {recommendationItems.length !== 0 && displayWeather && (
-                    <div id="recommendation-container">
-                        <div id="weather-info">
-                            <div id="weather-icon">
-                                {iconText[this.props.weather.icon]}
+                {displayWeather ? (
+                    this.state.showRecommendation ? (
+                        <div id="recommendation-wrapper">
+                            <div
+                                id="open-button"
+                                onClick={() => {
+                                    this.showModeToggle(false);
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faChevronUp} />
                             </div>
-                            <div id="weather-text">
-                                <div id="weather-temp">{tempInfo}</div>
-                                <div id="weather-summary">{weatherSummary}</div>
-                                <div id="weather-loc">
-                                    <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
-                                    Seoul
-                                </div>
-                            </div>
-                        </div>
+                            {recommendationItems.length !== 0 ? (
+                                <div id="recommendation-container">
+                                    <div id="weather-info">
+                                        <div id="weather-icon">
+                                            {iconText[this.props.weather.icon]}
+                                        </div>
+                                        <div id="weather-text">
+                                            <div id="weather-temp">
+                                                {tempInfo}
+                                            </div>
+                                            <div id="weather-summary">
+                                                {weatherSummary}
+                                            </div>
+                                            <div id="weather-loc">
+                                                <FontAwesomeIcon
+                                                    icon={faMapMarkerAlt}
+                                                />{" "}
+                                                Seoul
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        <div id="recommendation-info">
-                            <div id="recommendation-text">
-                                Recommended for days like this:
-                            </div>
-                            <div id="recommendation-items">
-                                {recommendationItems}
+                                    <div id="recommendation-info">
+                                        <div id="recommendation-text">
+                                            Recommended for days like this:
+                                        </div>
+                                        <div id="recommendation-items">
+                                            {recommendationItems}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div id="weather-info">
+                                    <div id="weather-icon">
+                                        {iconText[this.props.weather.icon]}
+                                    </div>
+                                    <div id="weather-text">
+                                        <div id="weather-temp">{tempInfo}</div>
+                                        <div id="weather-summary">
+                                            {weatherSummary}
+                                        </div>
+                                        <div id="weather-loc">
+                                            <FontAwesomeIcon
+                                                icon={faMapMarkerAlt}
+                                            />{" "}
+                                            Seoul
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div id="folded">
+                            <div
+                                id="open-button"
+                                onClick={() => {
+                                    this.showModeToggle(true);
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faChevronDown} />
                             </div>
                         </div>
-                    </div>
-                )}
-                {recommendationItems.length === 0 && displayWeather && (
-                    <div id="weather-info">
-                        <div id="weather-icon">
-                            {iconText[this.props.weather.icon]}
-                        </div>
-                        <div id="weather-text">
-                            <div id="weather-temp">{tempInfo}</div>
-                            <div id="weather-summary">{weatherSummary}</div>
-                            <div id="weather-loc">
-                                <FontAwesomeIcon icon={faMapMarkerAlt} /> Seoul
-                            </div>
-                        </div>
-                    </div>
-                )}
+                    )
+                ) : null}
             </div>
         );
     }
@@ -135,7 +183,6 @@ class Recommendation extends React.Component {
 const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
-        selectedOutfit: state.outfit.selectedOutfit,
         weather: state.weather.todayWeather,
     };
 };
@@ -143,12 +190,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getWeather: () => dispatch(actionCreators.getWeather()),
-        selectOutfit: outfit =>
-            dispatch(actionCreators.getSpecificOutfit(outfit.id)),
     };
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Recommendation);
+)(withRouter(Recommendation));

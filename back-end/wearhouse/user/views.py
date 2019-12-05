@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.db.utils import IntegrityError
 
@@ -20,6 +20,7 @@ def token(request):
 
 
 @ensure_csrf_cookie
+@csrf_exempt
 def signin(request):
     if request.method == 'POST':
         try:
@@ -52,6 +53,7 @@ def signout(request):
 
 
 @ensure_csrf_cookie
+@csrf_exempt
 def user(request):
     if request.method == 'POST':
         try:
