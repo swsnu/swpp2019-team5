@@ -107,7 +107,7 @@ class Browse extends React.Component {
                 tags.indexOf(this.state.search_query) === -1 &&
                 this.state.search_query.trim() !== ""
             ) {
-                tags.push(this.state.search_query);
+                tags.push(this.state.search_query.toLowerCase());
                 this.setState({
                     searchOptions: {
                         ...this.state.searchOptions,
