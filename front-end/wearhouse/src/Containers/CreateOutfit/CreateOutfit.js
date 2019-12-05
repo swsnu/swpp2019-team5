@@ -17,7 +17,7 @@ class CreateOutfit extends Component {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: [], //Made items section be props - everything should be props actually
+        items: [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
     };
@@ -35,9 +35,10 @@ class CreateOutfit extends Component {
             this.setState({
                 ...this.state,
                 image: this.props.outfit.image,
-                items: this.props.outfit.items
-                    ? this.props.items
-                    : [{ category: "default", tags: [] }],
+                items:
+                    this.props.outfit.items.length >= 1
+                        ? this.props.items
+                        : [{ category: "default", tags: [] }],
             });
         }
         if (prevState.items !== this.state.items) {

@@ -4,7 +4,7 @@ const initialState = {
     outfitData: {
         id: "",
         image: "",
-        items: [{ category: "Outer", tags: ["hi"] }],
+        items: [{ category: "default", tags: [] }],
     },
 };
 
