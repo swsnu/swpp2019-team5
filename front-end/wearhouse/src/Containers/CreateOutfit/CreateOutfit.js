@@ -110,7 +110,7 @@ class CreateOutfit extends Component {
                               (this.state.weather.temperatureHigh +
                                   this.state.weather.temperatureLow) /
                               2,
-                          icon: this.props.weather.icon,
+                          icon: this.state.weather.icon,
                       }
                     : { tempAvg: "", icon: "" },
         };

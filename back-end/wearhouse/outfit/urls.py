@@ -3,5 +3,5 @@ from outfit import views
 
 urlpatterns = [
     path('', views.outfit, name=''),
-    path('<int:outfit_id>/', views.getOutfit, name=''),
+    path('<int:outfit_id>/', views.specificOutfit, name=''),
 ]
