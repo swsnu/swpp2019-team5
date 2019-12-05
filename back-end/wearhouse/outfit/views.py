@@ -185,7 +185,7 @@ def outfit(request):
             response_dict = {
                 "id": new_outfit.id,
                 "image": new_outfit.image_link,
-                "date": new_outfit.dateWithTime,
+                "date": new_outfit.date,
                 "satisfactionValue": new_outfit.satisfaction,
                 "weather": response_dict_weather,
                 "items": response_dict_items}
