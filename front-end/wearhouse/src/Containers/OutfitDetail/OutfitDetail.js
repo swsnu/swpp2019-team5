@@ -92,18 +92,22 @@ class OutfitDetail extends Component {
 
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
+                        <div id="button-group">
+                            <button
+                                onClick={this.onDelete}
+                                id="delete-outfit-button"
+                            >
+                                Delete
+                            </button>
+                            <button
+                                onClick={this.onEdit}
+                                id="edit-outfit-button"
+                            >
+                                Edit
+                            </button>
+                        </div>
                     </div>
-                    <div id="button-group">
-                        <button
-                            onClick={this.onDelete}
-                            id="delete-outfit-button"
-                        >
-                            Delete
-                        </button>
-                        <button onClick={this.onEdit} id="edit-outfit-button">
-                            Edit
-                        </button>
-                    </div>
+
                     <AddOutfit />
                 </div>
             </div>
