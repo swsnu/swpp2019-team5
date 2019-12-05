@@ -11,7 +11,8 @@ import { connect } from "react-redux";
 
 class UploadImage extends React.Component {
     state = {
-        selectedImageURL: null,
+        selectedImageFile: null, // binary file to send to backend
+        selectedImageURL: null, // url for image file in local filesystem
         isPreviewMode: false,
         showWarning: false,
         isLoading: false,
@@ -32,6 +33,7 @@ class UploadImage extends React.Component {
             if (this.isImageFile(event.target.files[0])) {
                 this.setState({
                     ...this.state,
+                    selectedImageFile: event.target.files[0],
                     selectedImageURL: URL.createObjectURL(
                         event.target.files[0],
                     ),
@@ -47,6 +49,7 @@ class UploadImage extends React.Component {
     onChooseOtherImage = () => {
         this.setState({
             ...this.state,
+            selectedImageFile: null,
             selectedImageURL: null,
             isPreviewMode: false,
         });
@@ -57,8 +60,8 @@ class UploadImage extends React.Component {
         this.setState({ isLoading: true });
         let form_data = new FormData();
 
-        form_data.append("image", this.state.image);
-
+        form_data.append("image", this.state.selectedImageFile);
+        console.log(this.state.selectedImageFile);
         //  send image to backend
         this.props.onPostImage(form_data);
 

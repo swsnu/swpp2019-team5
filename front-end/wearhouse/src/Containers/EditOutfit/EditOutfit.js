@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCalendarAlt,
+    faUndo,
+    faTemperatureHigh,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
@@ -47,6 +51,8 @@ class EditOutfit extends Component {
         this.setState({ popUp: null });
     };
     componentDidMount() {
+        this.props.getOutfit(this.props.match.params.id);
+
         this.setState({ outfit: this.props.outfit });
     }
     shouldComponentUpdate() {
@@ -114,11 +120,13 @@ class EditOutfit extends Component {
 
     onConfirmEdit = () => {
         const edittedOutfit = {
+            id: this.state.outfit.id,
             image: this.state.outfit.image,
             satisfactionValue: this.state.outfit.satisfactionValue,
-            date: this.state.outfit.date,
+            date: this.props.outfit.date,
             items: this.state.outfit.items,
-            weather:
+            weather: this.props.outfit.weather,
+            /*
                 this.state.outfit.date !== null
                     ? {
                           tempAvg:
@@ -127,8 +135,9 @@ class EditOutfit extends Component {
                               2,
                           icon: this.state.outfit.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" },
+                    : { tempAvg: "", icon: "" }*/
         };
+
         console.log(edittedOutfit);
         this.props.confirmEdit(edittedOutfit);
     };
@@ -153,13 +162,14 @@ class EditOutfit extends Component {
                     <div className="left-window">
                         <div className="date-picker-container">
                             <span data-tooltip-text="Date select is optional">
-                                <div>
+                                {/*}<div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
                                         icon={faCalendarAlt}
                                     />
-                                </div>
+                                </div>{*/}
                             </span>
+                            {/*}
                             <DatePicker
                                 id="date-picker"
                                 isClearable
@@ -168,18 +178,23 @@ class EditOutfit extends Component {
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
-                            />
+        />{*/}
                             <div id="weather-icon">
                                 {this.state.outfit.weather !== null
                                     ? iconText[this.state.outfit.weather.icon]
                                     : null}{" "}
                                 {this.state.outfit.weather &&
-                                this.state.outfit.weather.temperatureLow
-                                    ? this.state.outfit.weather
-                                          .temperatureHigh +
-                                      "/" +
-                                      this.state.outfit.weather.temperatureLow
+                                this.state.outfit.weather.tempAvg
+                                    ? this.state.outfit.weather.icon + "     "
                                     : null}
+                                <FontAwesomeIcon
+                                    id="tempAvg"
+                                    icon={faTemperatureHigh}
+                                />
+                                {this.state.outfit.weather.tempAvg
+                                    ? this.state.outfit.weather.tempAvg + "'C"
+                                    : null}
+                                {}
                             </div>
                         </div>
                         <div id="image-window">
@@ -190,7 +205,7 @@ class EditOutfit extends Component {
                                 }
                                 change={num => this.handleSatisfactionEdit(num)}
                             />
-                            <img src={this.state.image} alt="outfit" />
+                            <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
 
@@ -255,6 +270,7 @@ const mapDispatchToProps = dispatch => {
         confirmEdit: outfit => {
             dispatch(actionCreators.editOutfit(outfit));
         },
+        getOutfit: id => dispatch(actionCreators.getSpecificOutfit(id)),
     };
 };
 const mapStateToProps = state => {

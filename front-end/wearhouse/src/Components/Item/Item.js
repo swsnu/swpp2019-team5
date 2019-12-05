@@ -100,6 +100,7 @@ class Item extends Component {
                 this.setState({ todo: "editDisabled" });
             }
         } else if (e.target.value === "" && e.keyCode === 8) {
+            console.log(e.target.value);
             tags.pop();
             this.setState({ tags: tags });
             if (tags.length < 3) {
@@ -113,7 +114,6 @@ class Item extends Component {
     }
     handleAutoComplete = e => {
         let option_list = this.state.tags.concat(e.target.value);
-        console.log(option_list);
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };

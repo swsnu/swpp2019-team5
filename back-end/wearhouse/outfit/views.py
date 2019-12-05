@@ -13,8 +13,9 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
-
 # user1 = User.objects.get(username="test")
+
+
 '''
     :param  YYYY-MM-DD-Time
     :return YYYY-MM-DD
@@ -53,7 +54,7 @@ def outfit(request):
             outfit_dict = {
                 "id": _outfit.id,
                 "image": _outfit.image_link,
-                "date": _outfit.date,
+                "date": _outfit.dateWithTime,
                 "satisfactionValue": _outfit.satisfaction,
                 "weather": weather_dict,
                 "items": items_array
@@ -161,7 +162,7 @@ def outfit(request):
                 print(itemExists)
 
             new_outfit = Outfit(
-                image_link=image, date=change_date_format(date), satisfaction=satisfaction, tempIcon=tempIcon, tempAvg=tempAvg, user=user1)
+                image_link=image, dateWithTime=date, date=change_date_format(date), satisfaction=satisfaction, tempIcon=tempIcon, tempAvg=tempAvg, user=user1)
             new_outfit.save()
 
             print("items_for_new_outfit: right before saving outfit: ")
@@ -184,7 +185,7 @@ def outfit(request):
             response_dict = {
                 "id": new_outfit.id,
                 "image": new_outfit.image_link,
-                "date": new_outfit.date,
+                "date": new_outfit.dateWithTime,
                 "satisfactionValue": new_outfit.satisfaction,
                 "weather": response_dict_weather,
                 "items": response_dict_items}
@@ -225,7 +226,7 @@ def specificOutfit(request, outfit_id):
         response_dict = {
             "id": outfit.id,
             "image": outfit.image_link,
-            "date": outfit.date,
+            "date": outfit.dateWithTime,
             "satisfactionValue": outfit.satisfaction,
             "weather": response_dict_weather,
             "items": response_dict_items
@@ -304,6 +305,7 @@ def specificOutfit(request, outfit_id):
                     new_item.save()
                     items_for_edited_outfit.append(new_item)
 
+            outfit.dateWithTime = date
             outfit.date = change_date_format(date)
             outfit.satisfaction = satisfaction
             outfit.tempIcon = tempIcon
@@ -329,7 +331,7 @@ def specificOutfit(request, outfit_id):
             response_dict = {
                 "id" : outfit.id,
                 "image" : outfit.image_link,
-                "date" : outfit.date,
+                "date" : outfit.dateWithTime,
                 "satisfactionValue" : outfit.satisfaction,
                 "weather" : response_dict_weather,
                 "items" : response_dict_items

@@ -1,0 +1,47 @@
+.OutfitCalendar {
+    width: 100%;
+    height: 100%;
+
+    #calendar-wrapper {
+        padding-top: 20px;
+        padding-bottom: 50px;
+        width: 100%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(211, 211, 211, 0.3);
+
+        .calendar-header {
+            width: 90%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 30px;
+
+            #calendar-year-month {
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            .calendar-button {
+                background: none;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+
+                .calendar-button-icon {
+                    width: 20px;
+                    height: 20px;
+                    color: pink;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        #calendar {
+            width: 90%;
+            height: 100%;
+        }
+    }
+}
