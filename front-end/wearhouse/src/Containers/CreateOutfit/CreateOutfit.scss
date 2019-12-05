@@ -47,31 +47,57 @@
             color: lightslategray;
         }
     }
-
-    #info-window {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        #items-info-window {
+    #info-window-wrapper {
+        display: grid;
+        height: 100%;
+        grid-template-rows: auto 110px;
+        #info-window {
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-        .not-info {
-            display: flex;
-            justify-content: flex-start;
-            #add-confirm-buttons-container {
+            #items-info-window {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .not-info {
                 display: flex;
                 justify-content: flex-start;
-                margin-top: 10px;
-            }
-
-            #error-container {
-                margin-top: 15px;
-                margin-left: 65px;
-                .item-error {
-                    color: rgb(255, 2, 2);
+                #add-confirm-buttons-container {
+                    display: flex;
+                    justify-content: flex-start;
+                    margin-top: 10px;
                 }
+
+                #error-container {
+                    margin-top: 15px;
+                    margin-left: 65px;
+                    .item-error {
+                        color: rgb(255, 2, 2);
+                    }
+                }
+            }
+        }
+        #confirm-create-outfit {
+            justify-self: flex-end;
+            background-color: rgb(54, 54, 54);
+            color: white;
+            font-size: 17px;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            &:hover {
+                cursor: pointer;
+                background-color: lightgray;
+            }
+            margin: 5px;
+            margin-right: 20px;
+
+            &:disabled {
+                background-color: lightgray;
+                cursor: not-allowed;
             }
         }
     }
@@ -119,28 +145,6 @@
         border-radius: 20px;
         &:hover {
             cursor: pointer;
-        }
-    }
-
-    #confirm-create-outfit {
-        grid-column: 2;
-        justify-self: flex-end;
-        background-color: rgb(54, 54, 54);
-        color: white;
-        font-size: 20px;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        width: 200px;
-        &:hover {
-            cursor: pointer;
-            background-color: lightgray;
-        }
-        margin: 5px 80px;
-
-        &:disabled {
-            background-color: lightgray;
-            cursor: not-allowed;
         }
     }
 }

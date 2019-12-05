@@ -165,35 +165,37 @@ class CreateOutfit extends Component {
                         </div>
                     </div>
 
-                    <div id="info-window">
-                        <div id="items-info-window">{items}</div>
-                        <div className="not-info">
-                            <div id="add-confirm-buttons-container">
-                                <button
-                                    onClick={this.addItemHandler}
-                                    id="add-item"
-                                >
-                                    Add Item
-                                </button>
-                            </div>
-                            <div id="error-container">
-                                {!this.state.isValid && (
-                                    <div className="item-error">
-                                        Please select category and add at least
-                                        one tag for each Item!
-                                    </div>
-                                )}
+                    <div id="info-window-wrapper">
+                        <div id="info-window">
+                            <div id="items-info-window">{items}</div>
+                            <div className="not-info">
+                                <div id="add-confirm-buttons-container">
+                                    <button
+                                        onClick={this.addItemHandler}
+                                        id="add-item"
+                                    >
+                                        Add Item
+                                    </button>
+                                </div>
+                                <div id="error-container">
+                                    {!this.state.isValid && (
+                                        <div className="item-error">
+                                            Please select category and add at
+                                            least one tag for each Item!
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <button
-                        onClick={this.onConfirmCreate}
-                        id="confirm-create-outfit"
-                        disabled={!this.state.isValid}
-                    >
-                        Confirm Create
-                    </button>
+                        <button
+                            onClick={this.onConfirmCreate}
+                            id="confirm-create-outfit"
+                            disabled={!this.state.isValid}
+                        >
+                            Confirm Create
+                        </button>
+                    </div>
                 </div>
             </div>
         );
