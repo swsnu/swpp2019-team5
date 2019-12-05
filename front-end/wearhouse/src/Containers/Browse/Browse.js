@@ -200,7 +200,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -228,7 +228,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
