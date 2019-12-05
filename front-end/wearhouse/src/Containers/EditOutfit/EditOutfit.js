@@ -47,6 +47,8 @@ class EditOutfit extends Component {
         this.setState({ popUp: null });
     };
     componentDidMount() {
+        this.props.getOutfit(this.props.match.params.id);
+
         this.setState({ outfit: this.props.outfit });
     }
     shouldComponentUpdate() {
@@ -255,6 +257,7 @@ const mapDispatchToProps = dispatch => {
         confirmEdit: outfit => {
             dispatch(actionCreators.editOutfit(outfit));
         },
+        getOutfit: id => dispatch(actionCreators.getSpecificOutfit(id)),
     };
 };
 const mapStateToProps = state => {
