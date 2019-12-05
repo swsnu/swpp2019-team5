@@ -73,10 +73,14 @@ class Item extends Component {
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
-        if ((e.keyCode === 13 || e.keyCode === 32) && e.target.value !== "") {
+        if (
+            (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&
+            e.target.value !== ""
+        ) {
             var new_tag = e.target.value.replace(/\s*$/, "");
             if (new_tag.length === 0) {
                 e.target.value = null;
+                this.setState({ tag_input_text: "" });
                 e.target.focus();
                 return;
             }
@@ -87,6 +91,7 @@ class Item extends Component {
                 e.persist();
                 setTimeout(() => {
                     e.target.value = null;
+                    this.setState({ tag_input_text: "" });
                     e.target.disabled = false;
                     e.target.focus();
                 }, 700);
@@ -95,11 +100,12 @@ class Item extends Component {
             tags = tags.concat(new_tag);
             this.setState({ tags: tags });
             e.target.value = null;
+            this.setState({ tag_input_text: "" });
 
             if (tags.length >= 3) {
                 this.setState({ todo: "editDisabled" });
             }
-        } else if (e.target.value === "" && e.keyCode === 8) {
+        } else if (this.state.tag_input_text === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({ tags: tags });
             if (tags.length < 3) {
@@ -112,7 +118,7 @@ class Item extends Component {
         });
     }
     handleAutoComplete = e => {
-        let option_list = this.state.tags.concat(e.target.value);
+        //let option_list = this.state.tags.concat(e.target.value);
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
     };
@@ -172,7 +178,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyUp={e => this.addTag(e)}
+                    onKeyDown={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });
