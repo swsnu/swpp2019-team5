@@ -4,6 +4,7 @@ import Algorithmia
 from azure.storage.blob import BlockBlobService, PublicAccess
 from shutil import copyfileobj
 from tempfile import NamedTemporaryFile
+import uuid
 
 ACCOUNT_NAME = 'swppteam5'
 ACCOUNT_KEY = 'INNEsiLTptw/5kiagJGhIZkv5fmHvEStvN5ALrggYjRvIme68H6YrN6ZEanMkJbYRj5XTcbjvmVLOdgZqXrKZg=='
@@ -34,7 +35,7 @@ def storeImageInBlobContainer(block_blob_service, input_file):
             target.flush()
             print(target.name)
 
-            blob_name = "test"
+            blob_name = str(uuid.uuid4())
             block_blob_service.create_blob_from_path(CONTAINER_NAME, blob_name, target.name)
 
             image_url = block_blob_service.make_blob_url(CONTAINER_NAME, blob_name)
