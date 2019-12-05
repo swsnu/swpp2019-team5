@@ -13,7 +13,10 @@ export const postImage_ = outfit_metadata => {
     return {
         type: actionTypes.POST_IMAGE,
         image: outfit_metadata.image,
-        items: outfit_metadata.items,
+        items:
+            outfit_metadata.items.length >= 1
+                ? outfit_metadata.items
+                : [{ category: "default", tags: [] }],
     };
 };
 
