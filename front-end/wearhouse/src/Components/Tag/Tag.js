@@ -27,7 +27,7 @@ class Tag extends Component {
             label = (
                 <div className="tag-in-outfit">
                     <div className="tag-text">
-                        #{this.state.tag_name}
+                        {this.state.tag_name}
                         <span className="vertical-line">ㅣ</span>
                     </div>
                     <div className="delete-tag" onClick={this.props.delete}>

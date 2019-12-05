@@ -91,7 +91,6 @@ class Item extends Component {
                 e.persist();
                 setTimeout(() => {
                     e.target.value = null;
-                    this.setState({ tag_input_text: "" });
                     e.target.disabled = false;
                     e.target.focus();
                 }, 700);
@@ -100,12 +99,11 @@ class Item extends Component {
             tags = tags.concat(new_tag);
             this.setState({ tags: tags });
             e.target.value = null;
-            this.setState({ tag_input_text: "" });
 
             if (tags.length >= 3) {
                 this.setState({ todo: "editDisabled" });
             }
-        } else if (this.state.tag_input_text === "" && e.keyCode === 8) {
+        } else if (e.target.value === "" && e.keyCode === 8) {
             tags.pop();
             this.setState({ tags: tags });
             if (tags.length < 3) {
