@@ -95,7 +95,7 @@ def categorize(article):
 
     # print(len(outer) + len(upper) + len(lower) + len(full) + len(shoes) + len(accessories))
 
-    mapping = {'outer': outer, 'upper': upper, 'lower': lower, 'full': full, 'shoes': shoes, 'accessories': accessories}
+    mapping = {'Outer': outer, 'UpperBody': upper, 'LowerBody': lower, 'FullBody': full, 'Shoes': shoes, 'Accessories': accessories}
 
     item_dict = {}
 
