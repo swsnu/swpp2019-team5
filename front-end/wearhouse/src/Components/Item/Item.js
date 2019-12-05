@@ -100,6 +100,7 @@ class Item extends Component {
                 this.setState({ todo: "editDisabled" });
             }
         } else if (e.target.value === "" && e.keyCode === 8) {
+            console.log(e.target.value);
             tags.pop();
             this.setState({ tags: tags });
             if (tags.length < 3) {
