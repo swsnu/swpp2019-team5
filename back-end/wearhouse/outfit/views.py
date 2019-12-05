@@ -54,7 +54,7 @@ def outfit(request):
             outfit_dict = {
                 "id": _outfit.id,
                 "image": _outfit.image_link,
-                "date": _outfit.dateWithTime,
+                "date": _outfit.date,
                 "satisfactionValue": _outfit.satisfaction,
                 "weather": weather_dict,
                 "items": items_array
@@ -226,7 +226,7 @@ def specificOutfit(request, outfit_id):
         response_dict = {
             "id": outfit.id,
             "image": outfit.image_link,
-            "date": outfit.dateWithTime,
+            "date": outfit.date,
             "satisfactionValue": outfit.satisfaction,
             "weather": response_dict_weather,
             "items": response_dict_items
@@ -305,7 +305,7 @@ def specificOutfit(request, outfit_id):
                     new_item.save()
                     items_for_edited_outfit.append(new_item)
 
-            outfit.dateWithTime = date
+            #outfit.dateWithTime = date
             outfit.date = change_date_format(date)
             outfit.satisfaction = satisfaction
             outfit.tempIcon = tempIcon
@@ -331,7 +331,7 @@ def specificOutfit(request, outfit_id):
             response_dict = {
                 "id" : outfit.id,
                 "image" : outfit.image_link,
-                "date" : outfit.dateWithTime,
+                "date" : outfit.date,
                 "satisfactionValue" : outfit.satisfaction,
                 "weather" : response_dict_weather,
                 "items" : response_dict_items
