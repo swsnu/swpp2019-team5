@@ -170,7 +170,7 @@ def outfit(request):
             for item in items_for_new_outfit:
                 new_outfit.items.add(item)
             new_outfit.save()
-
+            print("here1")
             response_dict_weather = {
                 "tempAvg": new_outfit.tempAvg, "icon": new_outfit.tempIcon}
             response_dict_items = []
@@ -181,7 +181,7 @@ def outfit(request):
                     "tags": [tag.name for tag in item.tags.all()]
                 }
                 response_dict_items.append(item_to_add)
-
+            print("here2")
             response_dict = {
                 "id": new_outfit.id,
                 "image": new_outfit.image_link,
