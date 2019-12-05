@@ -1,19 +1,75 @@
 #recommendation {
-    margin: 5px 10px;
-    width: 100%;
-    #recommendation-container {
+    #folded,
+    #recommendation-wrapper {
+        margin-bottom: 20px;
         border-radius: 3px;
         background-color: rgba(0, 0, 0, 0.8);
         padding: 10px;
-        align-items: center;
+    }
+    #folded {
+        display: flex;
+        justify-content: flex-end;
+        #open-button {
+            color: white;
+            margin-right: 15px;
+        }
+    }
+    #recommendation-wrapper {
         display: grid;
-        width: 100%;
-        grid-template-columns: 150px auto;
-        overflow: hidden;
+        #open-button {
+            text-align: right;
+            color: white;
+            margin-right: 15px;
+        }
+        #recommendation-container {
+            align-items: center;
+            display: grid;
+            grid-template-columns: 150px auto;
+            overflow: hidden;
+            #weather-info {
+                color: white;
+                text-align: center;
+                background: none;
+                display: block;
+                margin: 0 10px;
+                #weather-icon {
+                    font-size: 80px;
+                    height: 100px;
+                    margin: 0px 5px;
+                }
+                #weather-text {
+                    text-align: center;
+                    #weather-temp {
+                        font-size: 20px;
+                    }
+                    #weather-summary {
+                        margin: 10px 0;
+                    }
+                }
+            }
+            #recommendation-info {
+                margin-right: 10px;
+                #recommendation-text {
+                    color: white;
+                }
+                #recommendation-items {
+                    display: flex;
+                    align-content: flex-start;
+                    height: 340px;
+                    max-width: 100%;
+                    width: 100%;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    overflow: scroll;
+                }
+            }
+        }
         #weather-info {
             color: white;
             text-align: center;
-            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             #weather-icon {
                 font-size: 80px;
                 height: 100px;
@@ -27,45 +83,6 @@
                 #weather-summary {
                     margin: 10px 0;
                 }
-            }
-        }
-        #recommendation-info {
-            margin-right: 10px;
-            #recommendation-text {
-                color: white;
-            }
-            #recommendation-items {
-                display: flex;
-                height: 340px;
-                max-width: 100%;
-                width: 100%;
-                flex-wrap: wrap;
-                flex-direction: column;
-                overflow: scroll;
-            }
-        }
-    }
-    #weather-info {
-        border-radius: 3px;
-        background-color: rgba(0, 0, 0, 0.8);
-        padding: 10px;
-        color: white;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        #weather-icon {
-            font-size: 80px;
-            height: 100px;
-            margin: 0px 5px;
-        }
-        #weather-text {
-            text-align: center;
-            #weather-temp {
-                font-size: 20px;
-            }
-            #weather-summary {
-                margin: 10px 0;
             }
         }
     }

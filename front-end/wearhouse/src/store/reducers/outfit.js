@@ -37,13 +37,15 @@ const reducer = (state = initialState, action) => {
         }
         case actionTypes.DELETE_OUTFIT: {
             const deletedOutfits = state.outfits.filter(outfit => {
-                return outfit.id !== action.targetID;
+                return outfit.id !== parseInt(action.targetID);
             });
             return { ...state, outfits: deletedOutfits };
         }
         case actionTypes.EDIT_OUTFIT: {
             const edittedOutfits = state.outfits.map(oft => {
-                return oft.id === action.targetID ? action.new_outfit : oft;
+                return oft.id === parseInt(action.targetID)
+                    ? action.new_outfit
+                    : oft;
             });
             return {
                 ...state,
