@@ -4,7 +4,7 @@ const initialState = {
     outfitData: {
         id: "",
         image: "",
-        items: null,
+        items: [{ category: "default", tags: [] }],
     },
 };
 
@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.POST_IMAGE: {
             const outfitData = {
                 image: action.image,
-                items: action.items,
+                items: action.items ? action.items : [],
             };
             console.log(outfitData);
             return { ...state, outfitData: outfitData };
