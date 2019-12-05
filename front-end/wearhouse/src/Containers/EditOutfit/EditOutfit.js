@@ -116,11 +116,13 @@ class EditOutfit extends Component {
 
     onConfirmEdit = () => {
         const edittedOutfit = {
+            id: this.state.outfit.id,
             image: this.state.outfit.image,
             satisfactionValue: this.state.outfit.satisfactionValue,
             date: this.state.outfit.date,
             items: this.state.outfit.items,
-            weather:
+            weather: this.props.outfit.weather,
+            /*
                 this.state.outfit.date !== null
                     ? {
                           tempAvg:
@@ -129,8 +131,10 @@ class EditOutfit extends Component {
                               2,
                           icon: this.state.outfit.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" },
+                    : { tempAvg: "", icon: "" }
+                    */
         };
+
         console.log(edittedOutfit);
         this.props.confirmEdit(edittedOutfit);
     };
@@ -162,6 +166,7 @@ class EditOutfit extends Component {
                                     />
                                 </div>
                             </span>
+                            {/*}
                             <DatePicker
                                 id="date-picker"
                                 isClearable
@@ -170,7 +175,7 @@ class EditOutfit extends Component {
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
-                            />
+        />{*/}
                             <div id="weather-icon">
                                 {this.state.outfit.weather !== null
                                     ? iconText[this.state.outfit.weather.icon]
