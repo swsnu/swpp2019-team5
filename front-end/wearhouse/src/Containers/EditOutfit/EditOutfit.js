@@ -113,7 +113,24 @@ class EditOutfit extends Component {
     }
 
     onConfirmEdit = () => {
-        this.props.confirmEdit(this.state.outfit);
+        const edittedOutfit = {
+            image: this.state.outfit.image,
+            satisfactionValue: this.state.outfit.satisfactionValue,
+            date: this.state.outfit.date,
+            items: this.state.outfit.items,
+            weather:
+                this.state.outfit.date !== null
+                    ? {
+                          tempAvg:
+                              (this.state.outfit.weather.temperatureHigh +
+                                  this.state.outfit.weather.temperatureLow) /
+                              2,
+                          icon: this.state.outfit.weather.icon,
+                      }
+                    : { tempAvg: "", icon: "" },
+        };
+        console.log(edittedOutfit);
+        this.props.confirmEdit(edittedOutfit);
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
