@@ -13,6 +13,7 @@ class Outfit(models.Model):
     items = models.ManyToManyField(Item, related_name='item_list')
     image_link = models.CharField(max_length=100)
     date = models.DateField()
+    dateWithTime = models.CharField(max_length=20, default='')
     tempAvg = models.IntegerField(default=100)
     tempIcon = models.CharField(max_length=15, default='')
     satisfaction = models.IntegerField(null=True, blank=True)
