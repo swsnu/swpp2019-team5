@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import Recommendation from "./Recommendation";
+import axios from "axios";
 
 import { ConnectedRouter } from "connected-react-router";
 
@@ -74,7 +75,7 @@ var mockStore = getMockStore(
 
 describe("<Recommendation />", () => {
     let recommendation;
-    let spyHistoryPush;
+    let spyHistoryPush, spyAxios_get;
     beforeEach(() => {
         recommendation = (
             <Provider store={mockStore}>
@@ -87,6 +88,9 @@ describe("<Recommendation />", () => {
         spyHistoryPush = jest
             .spyOn(history, "push")
             .mockImplementation(() => Promise.resolve({}));
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -96,6 +100,19 @@ describe("<Recommendation />", () => {
     it("should render", () => {
         const component = mount(recommendation);
         expect(component.find("#recommendation").length).toBe(1);
+    });
+
+    it("should recieve weather", () => {
+        let mockStore_no = getMockStore({}, {}, {}, {}, {}, {}, {});
+        recommendation = (
+            <Provider store={mockStore_no}>
+                <ConnectedRouter history={history}>
+                    <Recommendation history={history} />
+                </ConnectedRouter>
+            </Provider>
+        );
+        const component = mount(recommendation);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should filter Only the items for recommendation", () => {
