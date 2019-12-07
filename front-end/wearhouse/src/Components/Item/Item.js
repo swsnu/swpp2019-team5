@@ -176,7 +176,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyDown={e => this.addTag(e)}
+                    onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });

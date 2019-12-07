@@ -11,6 +11,7 @@ import { iconText } from "../Recommendation/Recommendation";
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 //should resolve the case where image is not porperly uploaded
 class CreateOutfit extends Component {
     state = {
@@ -139,6 +140,7 @@ class CreateOutfit extends Component {
 
         return (
             <div id="create-outfit">
+                <NavigationButton buttonName="Go Back" />
                 <div id="create-outfit-window">
                     <div className="left-window">
                         <div className="date-picker-container">

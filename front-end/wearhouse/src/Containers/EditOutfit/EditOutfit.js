@@ -13,6 +13,7 @@ import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 import PopUp from "../../Components/PopUp/PopUp";
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 
 class EditOutfit extends Component {
     state = {
@@ -172,6 +173,7 @@ class EditOutfit extends Component {
         });
         return (
             <div className="EditOutfit">
+                <NavigationButton buttonName="Go Back" />
                 {this.state.popUp}
                 <div id="edit-outfit-window">
                     <div className="left-window">

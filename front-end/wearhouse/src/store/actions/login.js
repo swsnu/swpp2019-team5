@@ -53,7 +53,7 @@ export const logIn = userCredentials => {
 };
 
 export const logOut_ = () => {
-    return { type: actionTypes.LOGOUT };
+    return { type: actionTypes.LOGOUT, isLoggedIn: false };
 };
 
 export const logOut = () => {
@@ -79,7 +79,7 @@ export const signUp = userCredentials => {
             .post("/api/user/", userCredentials)
             .then(() => {
                 dispatch(signUp_());
-                dispatch(push("/browse"));
+                dispatch(logIn(userCredentials));
             })
             .catch(err => {
                 let errMessage = "";

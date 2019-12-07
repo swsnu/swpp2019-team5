@@ -22,7 +22,11 @@ class Header extends React.Component {
 
     onClickHomeButton() {
         if (this.props.isLoggedIn) {
-            this.props.history.push("/browse");
+            if (window.location.pathname === "/browse") {
+                window.location.reload();
+            } else {
+                this.props.history.push("/browse");
+            }
         } else {
             this.props.history.push("/main");
         }

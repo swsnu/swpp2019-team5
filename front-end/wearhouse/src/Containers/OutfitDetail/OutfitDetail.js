@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
 
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Satisfaction from "../../Components/Satisfaction/Satisfaction";
@@ -78,6 +79,7 @@ class OutfitDetail extends Component {
         console.log(this.props.outfit.date, "detail date");
         return (
             <div id="outfit-detail">
+                <NavigationButton buttonName="Go Back" />
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <Satisfaction
