@@ -108,13 +108,14 @@ class CreateOutfit extends Component {
                 this.state.date !== null
                     ? {
                           tempAvg:
-                              (this.state.weather.temperatureHigh +
-                                  this.state.weather.temperatureLow) /
+                              (this.props.weather.temperatureHigh +
+                                  this.props.weather.temperatureLow) /
                               2,
-                          icon: this.state.weather.icon,
+                          icon: this.props.weather.icon,
                       }
                     : { tempAvg: "", icon: "" },
         };
+        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
     };
 
