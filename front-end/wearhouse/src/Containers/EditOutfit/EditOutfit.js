@@ -16,6 +16,7 @@ import PopUp from "../../Components/PopUp/PopUp";
 
 class EditOutfit extends Component {
     state = {
+        completeUpdateWeather: true,
         outfit: {
             image: null,
             satisfactionValue: null,
@@ -67,6 +68,7 @@ class EditOutfit extends Component {
             this.checkValidation();
         }
         if (prevProps.weather !== this.props.weather) {
+            this.setState({ completeUpdateWeather: true });
             this.setState({
                 outfit: { ...this.state.outfit, weather: this.props.weather },
             });
@@ -96,8 +98,10 @@ class EditOutfit extends Component {
         this.setState({
             outfit: { ...this.state.outfit, date: date },
         });
-        if (date !== null)
+        if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
+            this.setState({ completeUpdateWeather: false });
+        }
         /*if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         } else {
@@ -252,6 +256,10 @@ class EditOutfit extends Component {
                         <button
                             onClick={this.onConfirmEdit}
                             id="confirm-edit-outfit"
+                            disabled={
+                                !this.state.completeUpdateWeather ||
+                                !this.state.isValid
+                            }
                         >
                             Confirm Edit
                         </button>

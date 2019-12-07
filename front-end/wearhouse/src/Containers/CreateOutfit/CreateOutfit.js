@@ -19,8 +19,8 @@ class CreateOutfit extends Component {
         date: new Date(),
         items: [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
-        weather: { tempAvg: "", icon: "" },
         onConfirmCreate: false,
+        completeUpdateWeather: true,
     };
     componentDidMount() {
         this.props.setWeather();
@@ -50,6 +50,7 @@ class CreateOutfit extends Component {
         if (
             prevProps.selected_day_weather !== this.props.selected_day_weather
         ) {
+            this.setState({ completeUpdateWeather: true });
             this.setState({
                 weather: this.props.selected_day_weather,
             });
@@ -77,6 +78,7 @@ class CreateOutfit extends Component {
     handleDateChange = date => {
         this.setState({ date: date });
         if (date !== null) {
+            this.setState({ completeUpdateWeather: false });
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         } else {
             this.setState({ weather: null });
@@ -205,7 +207,9 @@ class CreateOutfit extends Component {
                             id="confirm-create-outfit"
                             disabled={
                                 !this.state.isValid ||
+                                !this.state.completeUpdateWeather ||
                                 this.state.onConfirmCreate
+                                //!this.state.completeUpdateWeather
                             }
                         >
                             Confirm Create
