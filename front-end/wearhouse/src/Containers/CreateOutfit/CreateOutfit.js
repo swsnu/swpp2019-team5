@@ -20,6 +20,7 @@ class CreateOutfit extends Component {
         items: [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
         weather: { tempAvg: "", icon: "" },
+        onConfirmCreate: false,
     };
     componentDidMount() {
         this.props.setWeather();
@@ -97,6 +98,7 @@ class CreateOutfit extends Component {
         this.setState({ satisfactionValue: num });
     }
     onConfirmCreate = () => {
+        this.setState({ onConfirmCreate: true });
         const newOutfit = {
             image: this.state.image ? this.state.image : "",
             satisfactionValue: this.state.satisfactionValue,
@@ -200,7 +202,10 @@ class CreateOutfit extends Component {
                         <button
                             onClick={this.onConfirmCreate}
                             id="confirm-create-outfit"
-                            disabled={!this.state.isValid}
+                            disabled={
+                                !this.state.isValid ||
+                                this.state.onConfirmCreate
+                            }
                         >
                             Confirm Create
                         </button>
