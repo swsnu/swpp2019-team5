@@ -14,13 +14,16 @@ class LandingPage extends Component {
             <div id="Main">
                 <div className="intro-content">
                     <div id="intro-text">
-                        Get your wardrobe organized with <span>WearHouse</span>
+                        Get your wardrobe organized with <br />
+                        <span>WearHouse</span>
                     </div>
-                    <img
-                        id="intro-image"
-                        src={image}
-                        alt="Fashionable People in a list"
-                    />
+                    <div id="image-container">
+                        <img
+                            id="intro-image"
+                            src={image}
+                            alt="Fashionable People in a list"
+                        />
+                    </div>
                 </div>
                 <div className="intro-content" id="content-2">
                     <h1>
