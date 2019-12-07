@@ -4,6 +4,8 @@ import {
     faSearch,
     faChevronDown,
     faChevronUp,
+    faCalendar,
+    faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
@@ -319,14 +321,15 @@ class Browse extends React.Component {
                         </div>
                     </div>
                 );
-                /*show the search result : container = ~~~*/
-                ///get outfit list and render them
                 break;
             default:
                 break;
         }
         return (
             <div id="browse">
+                <button id="calendar-button" onClick={this.onClickCalendar}>
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                </button>
                 <div id="search-container">
                     <div id="select-searchmode">
                         <div id="selected-option">
@@ -380,9 +383,6 @@ class Browse extends React.Component {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </div>
-                <button id="calendar-button" onClick={this.onClickCalendar}>
-                    Calendar
-                </button>
                 {container}
                 <AddOutfit />
             </div>

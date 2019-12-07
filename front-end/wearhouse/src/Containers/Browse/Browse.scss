@@ -6,19 +6,23 @@ $templatecolor: rgba(127, 255, 212, 0.3);
     overflow: auto;
     background-color: rgba(211, 211, 211, 0.3);
     #calendar-button {
+        position: absolute;
         border: none;
-        background-color: rgb(248, 223, 227);
-        color: gray;
+        left: 15%;
+        background-color: rgb(216, 133, 147);
+        color: white;
         border-radius: 2px;
         padding: 5px 10px;
-        font-size: $fontsize;
-        box-shadow: rgba(0, 0, 0, 0.6) 0 0 2px;
+        font-size: 18px;
         cursor: pointer;
-        margin-left: 60px;
+        @media (max-width: 768px) {
+            left: 10%;
+        }
     }
 
     #search-container {
-        width: fit-content;
+        width: 70%;
+        max-width: 575px;
         margin: 15px auto 5px;
         border: 1px lightgray solid;
         display: flex;
@@ -93,30 +97,74 @@ $templatecolor: rgba(127, 255, 212, 0.3);
 
         #search-button {
             font-size: $fontsize;
+            background-color: white;
             border: none;
             padding: 10px;
-            cursor: pointer;
             &:focus {
                 outline: none;
             }
-            // &:hover {
-            //     background-color: $templatecolor;
-            // }
+        }
+        @media (max-width: 768px) {
+            width: 80%;
+            font-size: 15px;
+            #select-searchmode {
+                font-size: 15px;
+                #selected-option {
+                    height: 35px;
+                }
+            }
+            #search-input {
+                height: 35px;
+                width: 80%;
+                display: flex;
+                #search-input-text {
+                    font-size: 15px;
+                    width: 90%;
+                }
+                #search-input-queries {
+                    height: 35px;
+                }
+            }
+            #search-button {
+                font-size: 20px;
+                padding: 5px 10px;
+            }
         }
     }
-    #search-outfit-list,
+
     #browse-outfit-list {
         display: grid;
-        //justify-content: left;
-        padding: 10px 50px;
+        margin: 10px auto;
+        width: 70%;
         margin-bottom: 100px;
-        #outfit-list {
-            display: flex;
-            flex-wrap: wrap;
+        @media (max-width: 768px) {
+            width: 80%;
         }
+    }
+
+    #outfit-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        @media (max-width: 1200px) {
+            width: 720px;
+        }
+        @media (max-width: 1020px) {
+            width: 480px;
+        }
+        @media (max-width: 600px) {
+            width: fit-content;
+        }
+    }
+
+    #search-outfit-list {
+        display: grid;
+        grid-template-columns: 180px auto;
+        margin: 10px auto;
+        width: 90%;
+        margin-bottom: 100px;
         #search-filters {
             height: 100%;
-            //border: gray 1px solid;
             padding: 0 10px;
             .filter-label {
                 font-size: 15px;
@@ -136,7 +184,7 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     height: 150px;
                     width: 5px;
                     margin: 20px 0;
-                    .MuiSlider-root,
+                    padding: 0 13px !important;
                     .MuiSlider-rail,
                     .MuiSlider-track {
                         width: 8px;
@@ -161,39 +209,49 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                     }
                 }
             }
-            .MuiFormGroup-root {
-                margin: 15px 0;
-                $buttonsize: 18px;
-                .MuiFormControlLabel-root {
-                    margin: 3px 0;
-                }
-                .MuiFormControlLabel-label {
-                    font-size: 15px;
-                }
-                .MuiRadio-root {
-                    padding: 3px;
-                    width: $buttonsize;
-                    height: $buttonsize;
-                    color: rgba(0, 0, 0, 0.54);
-                }
-
-                .MuiSvgIcon-root {
-                    width: $buttonsize;
-                    height: $buttonsize;
-                }
-                .MuiRadio-colorSecondary.Mui-checked,
-                .MuiIconButton-colorSecondary {
-                    fill: rgb(248, 81, 81);
-                }
-            }
             #satisfaction-container {
                 display: flex;
                 flex-direction: column;
+                .MuiFormGroup-root {
+                    margin: 5px 0;
+                    $buttonsize: 18px;
+                    .MuiFormControlLabel-root {
+                        margin: 3px 0;
+                    }
+                    .MuiFormControlLabel-label {
+                        font-size: 15px;
+                    }
+                    .MuiRadio-root {
+                        padding: 3px;
+                        width: $buttonsize;
+                        height: $buttonsize;
+                        color: rgba(0, 0, 0, 0.54);
+                    }
+
+                    .MuiSvgIcon-root {
+                        width: $buttonsize;
+                        height: $buttonsize;
+                    }
+                    .MuiRadio-colorSecondary.Mui-checked,
+                    .MuiIconButton-colorSecondary {
+                        fill: rgb(248, 81, 81);
+                    }
+                }
             }
         }
-    }
-    #search-outfit-list {
-        display: grid;
-        grid-template-columns: 180px auto;
+        @media (max-width: 768px) {
+            width: 80%;
+        }
+        @media (max-width: 550px) {
+            grid-template-columns: 1fr;
+            #search-filters {
+                padding: 0;
+                display: flex;
+                justify-content: space-around;
+                #slider-container {
+                    margin: 0;
+                }
+            }
+        }
     }
 }

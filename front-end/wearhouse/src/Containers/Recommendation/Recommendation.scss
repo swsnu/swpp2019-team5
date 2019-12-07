@@ -9,9 +9,11 @@
     #folded {
         display: flex;
         justify-content: flex-end;
+        margin-bottom: 10px;
         #open-button {
             color: white;
             margin-right: 15px;
+            cursor: pointer;
         }
     }
     #recommendation-wrapper {
@@ -20,6 +22,7 @@
             text-align: right;
             color: white;
             margin-right: 15px;
+            cursor: pointer;
         }
         #recommendation-container {
             align-items: center;
