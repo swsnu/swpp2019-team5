@@ -12,7 +12,6 @@ var stubInitialState = { isLoggedIn: false, userID: null };
 var mockStore = getMockStore(stubInitialState, {}, {}, {}, {}, {});
 
 describe("<LandingPage />", () => {
-    let spyHistoryPush;
     let landingPage;
     beforeEach(() => {
         landingPage = (
@@ -22,12 +21,6 @@ describe("<LandingPage />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
     });
 
     afterEach(() => {
