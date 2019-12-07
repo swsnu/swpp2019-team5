@@ -111,7 +111,7 @@ describe("<Recommendation />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-        const component = mount(recommendation);
+        mount(recommendation);
         expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
