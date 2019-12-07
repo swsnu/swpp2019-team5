@@ -191,7 +191,9 @@ class Item extends Component {
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    <FontAwesomeIcon icon={faTimes} />
+                    <span id="item-delete" data-tooltip-text="Delete Item">
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
                 </div>
             );
         }
