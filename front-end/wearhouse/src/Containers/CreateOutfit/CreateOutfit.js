@@ -113,7 +113,7 @@ class CreateOutfit extends Component {
                               2,
                           icon: this.props.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" },
+                    : { tempAvg: null, icon: "" },
         };
         console.log(newOutfit);
         this.props.createOutfit(newOutfit);
