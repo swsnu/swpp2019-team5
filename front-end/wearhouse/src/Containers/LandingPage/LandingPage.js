@@ -25,20 +25,6 @@ class LandingPage extends Component {
                     <div id="intro-text">
                         Get your wardrobe organized with <span>WearHouse</span>
                     </div>
-                    <div id="button-container">
-                        <button
-                            id="login-button"
-                            onClick={() => this.onLogin()}
-                        >
-                            Log In
-                        </button>
-                        <button
-                            id="signup-button"
-                            onClick={() => this.onClickSignUp()}
-                        >
-                            Sign Up
-                        </button>
-                    </div>
                     <img
                         id="intro-image"
                         src={image}
