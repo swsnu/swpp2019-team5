@@ -111,12 +111,11 @@ class Item extends Component {
             tags: tags,
         });
     }
-    handleAutoComplete = e => {
-        let option_list = this.state.tags.concat(e.target.value);
-        console.log(option_list);
-        //should implement autocomplete feature (from TaeWon's work)
-        //autocomplete candidates should be set in option list
-    };
+    // handleAutoComplete = e => {
+    //     //let option_list = this.state.tags.concat(e.target.value);
+    //     //should implement autocomplete feature (from TaeWon's work)
+    //     //autocomplete candidates should be set in option list
+    // };
 
     handleBlur = () => {
         if (!this.state.preventBlur) this.setState({ show: false });
@@ -172,7 +171,7 @@ class Item extends Component {
                     className="tag-input"
                     type="text"
                     placeholder="Enter tag.."
-                    onChange={e => this.handleAutoComplete(e)}
+                    // onChange={e => this.handleAutoComplete(e)}
                     onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {

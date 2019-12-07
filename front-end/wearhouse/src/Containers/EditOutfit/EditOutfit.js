@@ -129,7 +129,6 @@ class EditOutfit extends Component {
                       }
                     : { tempAvg: "", icon: "" },
         };
-        console.log(edittedOutfit);
         this.props.confirmEdit(edittedOutfit);
     };
     render() {
