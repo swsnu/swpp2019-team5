@@ -48,8 +48,16 @@ class EditOutfit extends Component {
     };
     componentDidMount() {
         this.props.getOutfit(this.props.match.params.id);
-
-        this.setState({ outfit: this.props.outfit });
+        let date = this.props.outfit.date;
+        if (date !== null) {
+            let date_arr = date.split("-");
+            date_arr[2] = date_arr[2].substring(0, 2);
+            date_arr[1] = (parseInt(date_arr[1]) - 1).toString();
+            date = new Date(date_arr[0], date_arr[1], date_arr[2], 12);
+        }
+        let outfit = { ...this.props.outfit, date: date };
+        this.setState({ outfit: outfit });
+        console.log(outfit);
     }
     shouldComponentUpdate() {
         return true;
