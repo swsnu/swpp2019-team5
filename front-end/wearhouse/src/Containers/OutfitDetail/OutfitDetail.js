@@ -75,7 +75,7 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
-        console.log(this.props.outfit.image);
+        console.log(this.props.outfit.date, "detail date");
         return (
             <div id="outfit-detail">
                 <div id="detail-outfit-window">
@@ -86,11 +86,15 @@ class OutfitDetail extends Component {
                         <img src={this.props.outfit.image} alt="outfit" />
 
                         <label id="date">
-                            {moment(this.state.outfit.date).format("LL")}
+                            {this.state.outfit.date
+                                ? moment(this.state.outfit.date).format("LL")
+                                : "Date is not selected"}
 
-                            <div id="weather-icon">
-                                {iconText[this.state.outfit.weather.icon]}
-                            </div>
+                            {this.state.outfit.date && (
+                                <div id="weather-icon">
+                                    {iconText[this.state.outfit.weather.icon]}
+                                </div>
+                            )}
                         </label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}

@@ -96,11 +96,13 @@ class EditOutfit extends Component {
         this.setState({
             outfit: { ...this.state.outfit, date: date },
         });
-        if (date !== null) {
+        if (date !== null)
+            this.props.getSpecificDayWeather(Date.parse(date) / 1000);
+        /*if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         } else {
             this.setState({ outfit: { ...this.state.outfit, weather: null } });
-        }
+        }*/
     };
     checkValidation = () => {
         const items = this.state.outfit.items;
@@ -123,23 +125,28 @@ class EditOutfit extends Component {
     }
 
     onConfirmEdit = () => {
+        console.log(this.props.weather);
         const edittedOutfit = {
             id: this.state.outfit.id,
             image: this.state.outfit.image,
             satisfactionValue: this.state.outfit.satisfactionValue,
-            date: this.props.outfit.date,
+            date: this.state.outfit.date,
             items: this.state.outfit.items,
-            weather: this.props.outfit.weather,
-            /*
-                this.state.outfit.date !== null
+            weather:
+                this.state.outfit.date === null
+                    ? { tempAvg: null, icon: "" }
+                    : this.props.weather
                     ? {
                           tempAvg:
-                              (this.state.outfit.weather.temperatureHigh +
-                                  this.state.outfit.weather.temperatureLow) /
+                              (this.props.weather.temperatureHigh +
+                                  this.props.weather.temperatureLow) /
                               2,
-                          icon: this.state.outfit.weather.icon,
+                          icon: this.props.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" }*/
+                    : {
+                          tempAvg: this.state.outfit.weather.tempAvg,
+                          icon: this.state.outfit.weather.icon,
+                      },
         };
 
         console.log(edittedOutfit);
@@ -166,14 +173,14 @@ class EditOutfit extends Component {
                     <div className="left-window">
                         <div className="date-picker-container">
                             <span data-tooltip-text="Date select is optional">
-                                {/*}<div>
+                                <div>
                                     <FontAwesomeIcon
                                         id="calendar-icon"
                                         icon={faCalendarAlt}
                                     />
-                                </div>{*/}
+                                </div>
                             </span>
-                            {/*}
+
                             <DatePicker
                                 id="date-picker"
                                 isClearable
