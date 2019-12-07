@@ -58,7 +58,7 @@ class EditOutfit extends Component {
         }
         let outfit = { ...this.props.outfit, date: date };
         this.setState({ outfit: outfit });
-        console.log(outfit);
+        //console.log(outfit);
     }
     shouldComponentUpdate() {
         return true;

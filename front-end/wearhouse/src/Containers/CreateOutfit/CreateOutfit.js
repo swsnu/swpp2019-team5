@@ -89,10 +89,12 @@ class CreateOutfit extends Component {
         for (var i = 0; i < items.length; i++) {
             if (items[i].category === "default" || items[i].tags.length === 0) {
                 this.setState({ isValid: false });
+
                 return false;
             }
         }
         this.setState({ isValid: true });
+
         return true;
     };
 
@@ -117,7 +119,6 @@ class CreateOutfit extends Component {
                       }
                     : { tempAvg: null, icon: "" },
         };
-        console.log(newOutfit);
         this.props.createOutfit(newOutfit);
     };
 
