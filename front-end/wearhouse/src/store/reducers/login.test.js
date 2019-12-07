@@ -5,7 +5,7 @@ describe("Login Reducer", () => {
     it("should return default state", () => {
         const newState = reducer(undefined, {}); // initialize
         expect(newState).toEqual({
-            isLoggedIn: false,
+            isLoggedIn: null,
             loginErr: "",
             signupErr: "",
         });
@@ -55,7 +55,7 @@ describe("Login Reducer", () => {
             signupErr: "",
         });
         expect(newState).toEqual({
-            isLoggedIn: false,
+            isLoggedIn: null,
             loginErr: "",
             signupErr: "",
         });
@@ -69,7 +69,7 @@ describe("Login Reducer", () => {
             signupErr: "",
         });
         expect(newState).toEqual({
-            isLoggedIn: false,
+            isLoggedIn: null,
             loginErr: "",
             signupErr: "",
         });
