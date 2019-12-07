@@ -57,4 +57,16 @@
             bottom: 40px;
         }
     }
+    @media (max-width: 599px) {
+        width: 100%;
+        padding: 15px;
+        .outfit-image {
+            background-color: gray;
+            width: 100%;
+        }
+        .outfit-info {
+            padding: 0px 10px;
+            bottom: 40px;
+        }
+    }
 }
