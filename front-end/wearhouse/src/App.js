@@ -25,7 +25,36 @@ class App extends React.Component {
         return (
             <ConnectedRouter history={this.props.history}>
                 <Header />
-                <Switch>
+                {this.props.isLoggedIn ? (
+                    <Switch>
+                        <Route path="/browse" exact component={Browse} />
+                        <Route
+                            path="/outfitDetail/:id"
+                            exact
+                            component={OutfitDetail}
+                        />
+                        <Route path="/calendar" exact component={Calendar} />
+                        <Route
+                            path="/createOutfit"
+                            exact
+                            component={CreateOutfit}
+                        />
+                        <Route
+                            path="/editOutfit/:id"
+                            exact
+                            component={EditOutfit}
+                        />
+                        <Redirect exact to="/browse" />
+                    </Switch>
+                ) : (
+                    <Switch>
+                        <Route path="/login" exact component={Login} />
+                        <Route path="/signup" exact component={Signup} />
+                        <Route path="/main" exact component={LandingPage} />
+                        <Redirect exact to="/main" />
+                    </Switch>
+                )}
+                {/* <Switch>
                     <Route path="/login" exact component={Login} />
                     <Route path="/signup" exact component={Signup} />
                     <Route
@@ -52,7 +81,7 @@ class App extends React.Component {
                         component={EditOutfit}
                     />
                     <Redirect exact to="/browse" />
-                </Switch>
+                </Switch> */}
             </ConnectedRouter>
         );
     }
