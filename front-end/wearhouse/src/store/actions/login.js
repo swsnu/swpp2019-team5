@@ -79,7 +79,7 @@ export const signUp = userCredentials => {
             .post("/api/user/", userCredentials)
             .then(() => {
                 dispatch(signUp_());
-                dispatch(push("/browse"));
+                dispatch(logIn(userCredentials));
             })
             .catch(err => {
                 let errMessage = "";
