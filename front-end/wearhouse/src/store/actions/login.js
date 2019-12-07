@@ -53,7 +53,7 @@ export const logIn = userCredentials => {
 };
 
 export const logOut_ = () => {
-    return { type: actionTypes.LOGOUT };
+    return { type: actionTypes.LOGOUT, isLoggedIn: false };
 };
 
 export const logOut = () => {
