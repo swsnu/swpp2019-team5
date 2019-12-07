@@ -3,11 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actionCreators from "../../store/actions/index";
 
-import {
-    faCalendarAlt,
-    faUndo,
-    faTemperatureHigh,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
@@ -178,24 +174,18 @@ class EditOutfit extends Component {
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
-        />{*/}
-                            <div id="weather-icon">
-                                {this.state.outfit.weather !== null
+                            />
+                            {/*}<div id="weather-icon">
+                                {this.state.outfit.date !== null
                                     ? iconText[this.state.outfit.weather.icon]
                                     : null}{" "}
-                                {this.state.outfit.weather &&
-                                this.state.outfit.weather.tempAvg
-                                    ? this.state.outfit.weather.icon + "     "
+                                {this.state.outfit.date !== null &&
+                                this.props.weather
+                                    ? this.props.weather.temperatureHigh +
+                                      "/" +
+                                      this.props.weather.temperatureLow
                                     : null}
-                                <FontAwesomeIcon
-                                    id="tempAvg"
-                                    icon={faTemperatureHigh}
-                                />
-                                {this.state.outfit.weather.tempAvg
-                                    ? this.state.outfit.weather.tempAvg + "'C"
-                                    : null}
-                                {}
-                            </div>
+                            </div>{*/}
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
