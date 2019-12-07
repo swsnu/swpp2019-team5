@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import {
     faTags,
     faCloudSun,
@@ -10,14 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import image from "./fashion-images.svg";
 import "./LandingPage.scss";
 class LandingPage extends Component {
-    onLogin = () => {
-        this.props.history.push("/login");
-    };
-
-    onClickSignUp = () => {
-        this.props.history.push("/signup");
-    };
-
     render() {
         return (
             <div id="Main">
@@ -99,13 +90,4 @@ class LandingPage extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.login.isLoggedIn,
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    null,
-)(LandingPage);
+export default LandingPage;

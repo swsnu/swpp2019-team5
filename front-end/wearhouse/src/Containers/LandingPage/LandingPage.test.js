@@ -39,18 +39,4 @@ describe("<LandingPage />", () => {
         let wrapper = component.find("#Main");
         expect(wrapper.length).toBe(1);
     });
-
-    it("should redirect when login button is clicked", () => {
-        const component = mount(landingPage);
-        let wrapper = component.find("#button-container #login-button");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-    });
-
-    it("should redirect when signup button is clicked", () => {
-        const component = mount(landingPage);
-        let wrapper = component.find("#button-container #signup-button");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-    });
 });
