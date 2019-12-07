@@ -25,7 +25,6 @@ class CreateOutfit extends Component {
         this.props.setWeather();
         this.checkValidation();
         this.setState({ items: this.props.outfit.items });
-        console.log("did mount", this.props.outfit);
     }
     shouldComponentUpdate() {
         return true;
@@ -118,8 +117,6 @@ class CreateOutfit extends Component {
     };
 
     render() {
-        console.log(this.state, this.props);
-
         let items = this.state.items.map((item, index) => {
             return (
                 <Item
