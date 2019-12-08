@@ -1,8 +1,9 @@
 #login-container {
     width: 40%;
+    max-width: 400px;
     margin: 100px auto;
     #login-form {
-        margin: 30px 0 40px;
+        margin: 30px 0 10px;
         label {
             position: relative;
             color: gray;
@@ -35,6 +36,7 @@
         border-radius: 3px;
         font-size: 15px;
         margin-right: 40px;
+        margin-bottom: 20px;
         &#login-button {
             color: white;
             background-color: black;
@@ -46,7 +48,15 @@
         }
         &#signup-button {
             color: darkslategray;
+            background-color: white;
             border: 1px darkslategray solid;
         }
+    }
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+    @media (max-width: 500px) {
+        width: 80%;
+        margin: 50px auto;
     }
 }
