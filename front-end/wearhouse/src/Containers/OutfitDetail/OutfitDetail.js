@@ -77,11 +77,6 @@ class OutfitDetail extends Component {
                 <NavigationButton buttonName="Go Back" />
                 <div id="detail-outfit-window">
                     <div id="image-window">
-                        <Satisfaction
-                            value={this.state.outfit.satisfactionValue}
-                        />
-                        <img src={this.state.image} alt="outfit" />
-
                         <label id="date">
                             {moment(this.state.outfit.date).format("LL")}
 
@@ -89,6 +84,12 @@ class OutfitDetail extends Component {
                                 {iconText[this.state.outfit.weather.icon]}
                             </div>
                         </label>
+                        <div id="image-section">
+                            <Satisfaction
+                                value={this.state.outfit.satisfactionValue}
+                            />
+                            <img src={this.state.image} alt="outfit" />
+                        </div>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 

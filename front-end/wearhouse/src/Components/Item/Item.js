@@ -193,36 +193,31 @@ class Item extends Component {
         }
         return (
             <div className="Item">
-                <div className="info-container">
-                    <div className="position-controller">
-                        <Select
-                            menuIsOpen={this.props.menuIsOpen}
-                            isDisabled={!this.props.editMode}
-                            className="Select"
-                            value={option}
-                            selected={option}
-                            label="Category"
-                            options={itemOptions}
-                            styles={itemStyles}
-                            onChange={e => this.handleCategoryChange(e)}
-                        />
+                <Select
+                    menuIsOpen={this.props.menuIsOpen}
+                    isDisabled={!this.props.editMode}
+                    className="Select"
+                    value={option}
+                    selected={option}
+                    label="Category"
+                    options={itemOptions}
+                    styles={itemStyles}
+                    onChange={e => this.handleCategoryChange(e)}
+                />
+
+                <div className="tag-container">
+                    <div className="tag-area">
+                        {tags}
+                        {tag_input}
                     </div>
 
-                    <div className="tag-container">
-                        <div className="tag-area">
-                            {tags}
-                            {tag_input}
-                        </div>
-
-                        <div id="options">
-                            {this.state.show &&
-                            this.state.option_list.length >= 1
-                                ? auto_complete
-                                : null}
-                        </div>
+                    <div id="options">
+                        {this.state.show && this.state.option_list.length >= 1
+                            ? auto_complete
+                            : null}
                     </div>
-                    {edit_mode_options}
                 </div>
+                {edit_mode_options}
             </div>
         );
     }
