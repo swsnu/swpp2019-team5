@@ -59,6 +59,7 @@ class EditOutfit extends Component {
         }
         let outfit = { ...this.props.outfit, date: date };
         this.setState({ outfit: outfit });
+        this.setState({ original_outfit: outfit });
         //console.log(outfit);
     }
     shouldComponentUpdate() {
@@ -82,7 +83,7 @@ class EditOutfit extends Component {
     }
     onInitializeOutfit = () => {
         this.setState({
-            outfit: this.props.outfit,
+            outfit: this.state.original_outfit,
         });
     };
     onDeleteItem(item) {
