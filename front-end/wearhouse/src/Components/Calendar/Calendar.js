@@ -66,7 +66,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
                 const id = dates[i].outfit_id;
-                console.log(dates[i]);
+                // console.log(dates[i]);
                 let toPush = (
                     <td
                         key={7 * week + day}
@@ -80,10 +80,11 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 : "has-outfit"
                         }
                         onClick={() => {
-                            console.log(props.history);
+                            // console.log(props.history);
                             console.log(id);
                             // props.history.push("/outfitDetail/" + 2);
-                            props.history.push("/outfitDetail/" + id);
+                            typeof id !== "undefined" &&
+                                props.history.push("/outfitDetail/" + id);
                         }}
                     >
                         <div className="date-shell-header">
