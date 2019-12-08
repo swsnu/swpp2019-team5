@@ -115,11 +115,11 @@ class Item extends Component {
             tags: tags,
         });
     }
-    handleAutoComplete = e => {
+    /*handleAutoComplete = e => {
         //let option_list = this.state.tags.concat(e.target.value);
         //should implement autocomplete feature (from TaeWon's work)
         //autocomplete candidates should be set in option list
-    };
+    };*/
 
     handleBlur = () => {
         if (!this.state.preventBlur) this.setState({ show: false });

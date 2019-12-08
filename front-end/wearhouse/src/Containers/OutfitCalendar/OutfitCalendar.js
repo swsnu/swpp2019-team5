@@ -28,7 +28,7 @@ class OutfitCalendar extends Component {
         return true;
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.outfits !== this.props.outfits) {
             this.setState({ outfits: this.props.outfits });
         }
