@@ -6,7 +6,6 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
 import "./DatePicker.scss";
-import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
