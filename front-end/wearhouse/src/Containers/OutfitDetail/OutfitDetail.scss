@@ -1,6 +1,6 @@
 #detail-outfit-window {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 90%;
     align-items: center;
     height: 85vh;
@@ -70,5 +70,8 @@
             }
             margin: 5px auto;
         }
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
     }
 }

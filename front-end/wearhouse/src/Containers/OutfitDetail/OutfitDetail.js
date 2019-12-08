@@ -109,7 +109,6 @@ class OutfitDetail extends Component {
                             </button>
                         </div>
                     </div>
-
                     <AddOutfit />
                 </div>
             </div>
