@@ -168,7 +168,7 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        const outfits = this.props.outfits.map(outfit => {
+        const outfits = this.props.outfits.reverse().map(outfit => {
             return (
                 <Outfit
                     key={outfit.id}
