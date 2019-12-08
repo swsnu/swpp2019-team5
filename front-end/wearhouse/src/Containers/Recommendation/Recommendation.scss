@@ -29,25 +29,9 @@
             grid-template-columns: 150px auto;
             overflow: hidden;
             #weather-info {
-                color: white;
-                text-align: center;
                 background: none;
                 display: block;
                 margin: 0 10px;
-                #weather-icon {
-                    font-size: 80px;
-                    height: 100px;
-                    margin: 0px 5px;
-                }
-                #weather-text {
-                    text-align: center;
-                    #weather-temp {
-                        font-size: 20px;
-                    }
-                    #weather-summary {
-                        margin: 10px 0;
-                    }
-                }
             }
             #recommendation-info {
                 margin-right: 10px;
@@ -67,15 +51,16 @@
             }
         }
         #weather-info {
+            margin-top: -5px;
             color: white;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
             #weather-icon {
-                font-size: 80px;
-                height: 100px;
-                margin: 0px 5px;
+                font-size: 70px;
+                height: 90px;
+                margin: 0 5px;
             }
             #weather-text {
                 text-align: center;
@@ -84,6 +69,34 @@
                 }
                 #weather-summary {
                     margin: 10px 0;
+                }
+            }
+        }
+    }
+    @media (max-width: 500px) {
+        #folded,
+        #recommendation-wrapper {
+            padding: 5px;
+        }
+        #recommendation-wrapper {
+            padding-bottom: 10px;
+            #weather-info {
+                margin-top: -5px;
+                #weather-icon {
+                    font-size: 60px;
+                    height: 70px;
+                    margin: 0;
+                    margin-left: 15px;
+                }
+                #weather-text {
+                    text-align: center;
+                    #weather-temp {
+                        font-size: 17px;
+                    }
+                    #weather-summary {
+                        font-size: 15px;
+                        margin: 5px 0;
+                    }
                 }
             }
         }
