@@ -4,21 +4,33 @@
     grid-template-rows: 90%;
     align-items: center;
     height: 85vh;
+    padding-top: 70px;
+    @media (max-width: 500px) {
+        padding-top: 40px;
+    }
 
-    #image-window {
-        margin: 20px 40px;
-        display: flex;
-        justify-content: center;
-        background-color: rgb(66, 66, 66);
-        border: 2px solid rgb(124, 112, 117);
-        border-radius: 5px;
-        img {
-            max-width: inherit;
+    .left-window {
+        height: 100%;
+        #image-window {
+            margin: 20px auto;
+            width: 85%;
+            display: flex;
+            height: 80%;
+            justify-content: center;
+            background-color: rgb(66, 66, 66);
+            border: 2px solid rgb(124, 112, 117);
+            border-radius: 5px;
+            img {
+                max-width: inherit;
+            }
+            #edit-satisfaction {
+                left: 5%;
+            }
+            overflow: hidden;
+            @media (max-width: 900px) {
+                width: 90%;
+            }
         }
-        #edit-satisfaction {
-            left: 50px;
-        }
-        overflow: hidden;
     }
 
     #date-picker {
@@ -63,17 +75,27 @@
             .not-info {
                 display: flex;
                 justify-content: flex-start;
-                #add-confirm-buttons-container {
-                    display: flex;
-                    justify-content: flex-start;
-                    margin-top: 10px;
+                align-items: center;
+                @media (max-width: 1000px) {
+                    margin-left: 5%;
                 }
 
-                #error-container {
-                    margin-top: 15px;
-                    margin-left: 65px;
-                    .item-error {
-                        color: rgb(255, 2, 2);
+                .item-error {
+                    color: rgb(255, 2, 2);
+                    margin-left: 30px;
+                }
+                #add-item {
+                    flex-shrink: 0;
+                    margin-left: 10px;
+                    border: none;
+                    color: white;
+                    padding: 0 15px;
+                    height: 30px;
+                    font-size: 15px;
+                    background-color: black;
+                    border-radius: 20px;
+                    &:hover {
+                        cursor: pointer;
                     }
                 }
             }
@@ -135,16 +157,17 @@
         z-index: 9999;
     }
 
-    #add-item {
-        margin-left: 10px;
-        border: none;
-        color: white;
-        padding: 8px 15px;
-        font-size: 15px;
-        background-color: black;
-        border-radius: 20px;
-        &:hover {
-            cursor: pointer;
+    @media (max-width: 1000px) {
+        min-height: 85vh;
+        grid-template-columns: 50% 50%;
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60% auto;
+        min-height: 85vh;
+        #image-window {
+            margin: 0 auto;
+            width: 90%;
         }
     }
 }

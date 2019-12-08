@@ -2,34 +2,57 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
         flex-wrap: wrap;
+        margin-left: 5%;
     }
     .selector {
         display: inline-block;
     }
 
-    .tag-container {
+    .option-wrapper {
         display: flex;
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
+        width: 80%;
         max-width: 400px;
-        width: 90%;
-        border: 1px rgb(223, 220, 220) solid;
-        margin: 10px;
-        height: 36px;
-        .tag-input {
-            padding-left: 5px;
-            height: 30px;
-            width: 150px;
-            outline: none;
-            border: none;
-            font-size: 14px;
-            margin-right: 10px;
-        }
-        .tag-area {
+        .tag-container {
             display: flex;
-            width: fit-content;
+            align-items: flex-start;
+            flex-direction: column;
+            max-width: 400px;
+            width: 85%;
+            border: 1px rgb(223, 220, 220) solid;
+            margin: 10px;
+            margin-right: 5px;
+            height: 36px;
+            .tag-input {
+                padding-left: 5px;
+                height: 30px;
+                width: 150px;
+                outline: none;
+                border: none;
+                font-size: 14px;
+                margin-right: 10px;
+            }
+            .tag-area {
+                display: flex;
+                width: fit-content;
+            }
+        }
+        .item-deleter {
+            background-color: lightgray;
+
+            color: #fff;
+            padding: 5px;
+            font-size: 25px;
+            line-height: 25px;
+            text-align: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+
+            cursor: pointer;
+            margin: 0;
         }
     }
 
@@ -51,22 +74,6 @@
         border-bottom-right-radius: 3%;
         border-bottom-left-radius: 3%;
         overflow-y: scroll;
-    }
-
-    .item-deleter {
-        background-color: lightgray;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        padding: 5px;
-        font-size: 15px;
-        width: 15px;
-        height: 15px;
-        border-radius: 10px;
-
-        cursor: pointer;
-        margin: 0 2px;
     }
 
     .mode-controller {

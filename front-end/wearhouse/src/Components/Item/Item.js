@@ -204,20 +204,22 @@ class Item extends Component {
                     styles={itemStyles}
                     onChange={e => this.handleCategoryChange(e)}
                 />
+                <div className="option-wrapper">
+                    <div className="tag-container">
+                        <div className="tag-area">
+                            {tags}
+                            {tag_input}
+                        </div>
 
-                <div className="tag-container">
-                    <div className="tag-area">
-                        {tags}
-                        {tag_input}
+                        <div id="options">
+                            {this.state.show &&
+                            this.state.option_list.length >= 1
+                                ? auto_complete
+                                : null}
+                        </div>
                     </div>
-
-                    <div id="options">
-                        {this.state.show && this.state.option_list.length >= 1
-                            ? auto_complete
-                            : null}
-                    </div>
+                    {edit_mode_options}
                 </div>
-                {edit_mode_options}
             </div>
         );
     }

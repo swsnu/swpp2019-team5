@@ -1,5 +1,9 @@
 .navigation-button {
     position: absolute;
     font-size: 20px;
-    margin: 20px;
+    margin: 30px 20px;
+    @media (max-width: 500px) {
+        margin: 10px;
+        font-size: 15px;
+    }
 }
