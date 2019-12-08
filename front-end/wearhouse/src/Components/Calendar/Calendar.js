@@ -66,7 +66,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
                 const id = dates[i].outfit_id;
-                // console.log(dates[i]);
+
                 let toPush = (
                     <td
                         key={7 * week + day}
@@ -87,7 +87,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 props.history.push("/outfitDetail/" + id);
                         }}
                     >
-                        <div className="date-shell-header">
+                        <div className="date-cell-header">
                             <div className="date">{date.getDate()}</div>
                             <div className="weather-icon">
                                 {dates[i].weather !== null
@@ -96,20 +96,29 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                             </div>
                         </div>
 
-                        <div className="image">{dates[i].image}</div>
-                        <div className="satisfaction-icon-calendar">
-                            {dates[i].satisfactionValue !== null ? (
-                                <img
-                                    className="emoticon_on_calendar_cell"
-                                    src={
-                                        satisfactionIconText[
-                                            dates[i].satisfactionValue - 1
-                                        ]
-                                    }
-                                />
-                            ) : (
-                                <FontAwesomeIcon icon={faMehBlank} />
-                            )}
+                        <div className="date-cell-body">
+                            <div className="outfit-image">
+                                {typeof dates[i].imageURL !== "undefined" && (
+                                    <React.Fragment>
+                                        <img src={dates[i].imageURL}></img>
+                                        <div className="overlay-calendar"></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                            <div className="satisfaction-icon-calendar">
+                                {dates[i].satisfactionValue !== null ? (
+                                    <img
+                                        className="emoticon_on_calendar_cell"
+                                        src={
+                                            satisfactionIconText[
+                                                dates[i].satisfactionValue - 1
+                                            ]
+                                        }
+                                    />
+                                ) : (
+                                    <FontAwesomeIcon icon={faMehBlank} />
+                                )}
+                            </div>
                         </div>
                     </td>
                 );

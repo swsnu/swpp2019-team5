@@ -70,7 +70,7 @@ class OutfitCalendar extends Component {
 
                 return (
                     year_of_outfit === this.state.year &&
-                    month_of_outfit == this.state.month
+                    month_of_outfit === this.state.month
                 );
             });
             // 보내야하는 정보
