@@ -61,10 +61,17 @@ class OutfitCalendar extends Component {
         let outfits_metadata = [];
         if (this.state.outfits !== null) {
             const outfits_of_this_month = this.state.outfits.filter(outfit => {
+                const year_of_outfit = outfit.date
+                    ? parseInt(outfit.date.split("-")[0])
+                    : -1;
                 const month_of_outfit = outfit.date
                     ? parseInt(outfit.date.split("-")[1])
                     : 100;
-                return month_of_outfit === this.state.month;
+
+                return (
+                    year_of_outfit === this.state.year &&
+                    month_of_outfit == this.state.month
+                );
             });
             // 보내야하는 정보
             // id, date, image, satisfactionValue, weather.icon
