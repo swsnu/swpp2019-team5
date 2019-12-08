@@ -5,6 +5,10 @@ $templatecolor: rgba(127, 255, 212, 0.3);
     min-height: inherit;
     overflow: auto;
     background-color: rgba(211, 211, 211, 0.3);
+    padding-top: 50px;
+    @media (max-width: 500px) {
+        padding-top: 15px;
+    }
     #calendar-button {
         position: absolute;
         border: none;

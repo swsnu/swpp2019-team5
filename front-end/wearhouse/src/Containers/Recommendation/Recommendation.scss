@@ -1,15 +1,14 @@
 #recommendation {
     #folded,
     #recommendation-wrapper {
-        margin-bottom: 20px;
         border-radius: 3px;
+        margin-bottom: 5px;
         background-color: rgba(0, 0, 0, 0.8);
         padding: 10px;
     }
     #folded {
         display: flex;
         justify-content: flex-end;
-        margin-bottom: 10px;
         #open-button {
             color: white;
             margin-right: 15px;
