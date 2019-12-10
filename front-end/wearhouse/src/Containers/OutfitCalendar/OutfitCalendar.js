@@ -22,6 +22,7 @@ class OutfitCalendar extends Component {
 
     componentDidMount() {
         this.props.getAllOutfits();
+        this.setState({ outfits: this.props.outfits });
     }
 
     shouldComponentUpdate() {
