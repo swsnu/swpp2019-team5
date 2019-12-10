@@ -14,6 +14,7 @@ class Option extends Component {
                 />
             );
         });
+
         return (
             <div className="Option">
                 <div
