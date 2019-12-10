@@ -7,7 +7,6 @@ import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
-import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
@@ -59,6 +58,7 @@ class EditOutfit extends Component {
         }
         let outfit = { ...this.props.outfit, date: date };
         this.setState({ outfit: outfit });
+        this.setState({ original_outfit: outfit });
         //console.log(outfit);
     }
     shouldComponentUpdate() {
@@ -82,7 +82,7 @@ class EditOutfit extends Component {
     }
     onInitializeOutfit = () => {
         this.setState({
-            outfit: this.props.outfit,
+            outfit: this.state.original_outfit,
         });
     };
     onDeleteItem(item) {

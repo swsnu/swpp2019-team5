@@ -42,7 +42,7 @@ let stubInitialState_outfit = {
         id: 1,
         image: null,
         satisfactionValue: 3,
-        date: new Date(),
+        date: "2019-11-07T04",
         items: [
             {
                 id: 1,
