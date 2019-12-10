@@ -51,7 +51,7 @@ const CALENDAR_HEADER = (
     </thead>
 );
 
-const renderCalendarBody = (dates, onClickDateCell, props) => {
+const renderCalendarBody = (dates, props) => {
     let i = 0;
     const rows = [];
     for (let week = 0; week < 5; week++) {
@@ -137,10 +137,10 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
     );
 };
 
-const renderCalendar = (dates, onClickDateCell, props) => (
+const renderCalendar = (dates, props) => (
     <table id="calendar">
         {CALENDAR_HEADER}
-        {renderCalendarBody(dates, onClickDateCell, props)}
+        {renderCalendarBody(dates, props)}
     </table>
 );
 
@@ -149,7 +149,6 @@ const Calendar = props => {
     const year = props.year;
     const month = props.month - 1; // Date object returns 0 ~ 11
     let maxDate = new Date(year, month + 1, 0).getDate();
-    const onClickDateCell = props.clicked;
     const outfits = props.outfits;
     console.log(outfits);
 
@@ -203,7 +202,7 @@ const Calendar = props => {
 
     // console.log(props.history.push("/"));
 
-    return renderCalendar(dates, onClickDateCell, props);
+    return renderCalendar(dates, props);
 };
 
 export default withRouter(Calendar);
