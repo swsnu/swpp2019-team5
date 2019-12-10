@@ -185,6 +185,7 @@ describe("<EditOutfit />", () => {
         expect(instance.state.isValid).toBe(false);
 
         wrapper = component.find(".Item .tag-input").at(4);
+        wrapper = component.find(".Item .tag-input").at(0);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keyDown", {
             keyCode: 13,
