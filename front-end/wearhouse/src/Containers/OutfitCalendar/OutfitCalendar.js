@@ -57,7 +57,7 @@ class OutfitCalendar extends Component {
     };
 
     render() {
-        // console.log(this.state.outfits);
+        console.log(this.state.outfits);
         let outfits_metadata = [];
         if (this.state.outfits !== null) {
             const outfits_of_this_month = this.state.outfits.filter(outfit => {
@@ -85,7 +85,6 @@ class OutfitCalendar extends Component {
                     weatherIcon: outfit.weather.icon,
                 };
             });
-            console.log(outfits_metadata);
         }
         return (
             <div className="OutfitCalendar">
