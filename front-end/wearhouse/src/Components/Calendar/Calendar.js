@@ -78,9 +78,6 @@ const renderCalendarBody = (dates, props) => {
                                 : "has-outfit"
                         }
                         onClick={() => {
-                            // console.log(props.history);
-                            console.log(id);
-                            // props.history.push("/outfitDetail/" + 2);
                             typeof id !== "undefined" &&
                                 props.history.push("/outfitDetail/" + id);
                         }}

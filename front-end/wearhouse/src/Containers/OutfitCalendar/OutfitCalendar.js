@@ -24,17 +24,18 @@ class OutfitCalendar extends Component {
         this.props.getAllOutfits();
         this.setState({ outfits: this.props.outfits });
     }
-
+    /*
     shouldComponentUpdate() {
         return true;
     }
-
+    */
+    /*
     componentDidUpdate(prevProps) {
         if (prevProps.outfits !== this.props.outfits) {
             this.setState({ outfits: this.props.outfits });
         }
     }
-
+    */
     onClickPrevMonth = () => {
         this.setState({
             ...this.state,
@@ -53,12 +54,8 @@ class OutfitCalendar extends Component {
         });
     };
 
-    onClickDateCell = () => {
-        console.log("date cell clicked");
-    };
-
     render() {
-        console.log(this.state.outfits);
+        // console.log(this.state.outfits);
         let outfits_metadata = [];
         if (this.state.outfits !== null) {
             const outfits_of_this_month = this.state.outfits.filter(outfit => {
@@ -119,7 +116,6 @@ class OutfitCalendar extends Component {
                     <Calendar
                         year={this.state.year}
                         month={this.state.month}
-                        clicked={this.onClickDateCell}
                         outfits={outfits_metadata}
                     />
                 </div>
