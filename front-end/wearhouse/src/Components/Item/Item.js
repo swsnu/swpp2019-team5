@@ -35,6 +35,9 @@ class Item extends Component {
     };
 
     componentDidMount() {
+        if (this.state.tags.length >= 3) {
+            this.setState({ todo: "editDisabled" });
+        }
         this.setState({
             category: this.props.item.category,
             tags: this.props.item.tags,
