@@ -61,7 +61,7 @@ class UploadImage extends React.Component {
         let form_data = new FormData();
 
         form_data.append("image", this.state.selectedImageFile);
-        console.log(this.state.selectedImageFile);
+        //console.log(this.state.selectedImageFile);
         //  send image to backend
         this.props.onPostImage(form_data);
 

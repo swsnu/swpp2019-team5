@@ -98,9 +98,6 @@ describe("<OutfitCalendar />", () => {
 
     it("should render year, month, date, outfits properly initially", () => {
         const component = mount(outfitCalendar);
-
-        //console.log(component.debug());
-
         let wrapper = component.find("#calendar-year-month");
         expect(wrapper.length).toBe(1);
         expect(wrapper.text()).toBe("2019.12");
