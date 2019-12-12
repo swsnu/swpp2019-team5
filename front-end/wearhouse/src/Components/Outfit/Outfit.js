@@ -12,7 +12,9 @@ const Outfit = props => {
                 <img src={props.image} alt="outfit" />
             </div>
             <div className="outfit-info">
-                <div className="outfit-date">{props.date}</div>
+                <div className="outfit-date">
+                    {props.date && props.date.substring(0, 10)}
+                </div>
                 <Satisfaction
                     className="emoji"
                     value={props.satisfactionValue}

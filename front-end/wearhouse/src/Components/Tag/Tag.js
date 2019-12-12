@@ -26,10 +26,7 @@ class Tag extends Component {
             //tag_name is not editable
             label = (
                 <div className="tag-in-outfit">
-                    <div className="tag-text">
-                        #{this.state.tag_name}
-                        <span className="vertical-line">ㅣ</span>
-                    </div>
+                    <div className="tag-text">{this.state.tag_name}</div>
                     <div className="delete-tag" onClick={this.props.delete}>
                         <FontAwesomeIcon icon={faTimes} />
                     </div>

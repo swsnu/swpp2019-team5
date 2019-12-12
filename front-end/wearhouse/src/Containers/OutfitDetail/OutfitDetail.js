@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-
 import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -39,9 +38,9 @@ var iconText = {
 class OutfitDetail extends Component {
     state = {
         outfit: {
-            image: null,
+            image: this.props.outfit.image,
             satisfactionValue: null,
-            date: "", //in sprin
+            date: this.props.outfit.date, //in sprin
             items: [],
             weather: {},
         },
@@ -57,6 +56,10 @@ class OutfitDetail extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.outfit !== this.props.outfit) {
             this.setState({ outfit: this.props.outfit });
+        }
+
+        if (prevProps.outfit.image !== this.props.outfit.image) {
+            this.setState({ image: this.props.outfit.image });
         }
     }
 
@@ -77,12 +80,21 @@ class OutfitDetail extends Component {
                 <NavigationButton buttonName="Go Back" />
                 <div id="detail-outfit-window">
                     <div id="image-window">
-                        <label id="date">
-                            {moment(this.state.outfit.date).format("LL")}
+                        <Satisfaction
+                            value={this.state.outfit.satisfactionValue}
+                        />
+                        <img src={this.props.outfit.image} alt="outfit" />
 
-                            <div id="weather-icon">
-                                {iconText[this.state.outfit.weather.icon]}
-                            </div>
+                        <label id="date">
+                            {this.state.outfit.date
+                                ? moment(this.state.outfit.date).format("LL")
+                                : "Date is not selected"}
+
+                            {this.state.outfit.date && (
+                                <div id="weather-icon">
+                                    {iconText[this.state.outfit.weather.icon]}
+                                </div>
+                            )}
                         </label>
                         <div id="image-section">
                             <Satisfaction

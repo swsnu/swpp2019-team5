@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/outfit/', include('outfit.urls')),
     path('api/tag/', include('tag.urls')),
     path('api/user/', include('user.urls')),
-    path('api/weather/', include('weather.urls'))
+    path('api/weather/', include('weather.urls')),
+    path('api/image/', include('image.urls')),
 ]

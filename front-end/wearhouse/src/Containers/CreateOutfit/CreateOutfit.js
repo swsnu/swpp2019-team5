@@ -6,7 +6,6 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CreateOutfit.scss";
 import "./DatePicker.scss";
-import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
@@ -18,20 +17,30 @@ class CreateOutfit extends Component {
         image: this.props.outfit.image,
         satisfactionValue: null,
         date: new Date(),
-        items: this.props.outfit.items
-            ? this.props.items
-            : [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
+        items: [{ category: "default", tags: [] }], //Made items section be props - everything should be props actually
         isValid: true,
-        weather: { tempAvg: "", icon: "" },
+        onConfirmCreate: false,
+        completeUpdateWeather: true,
     };
     componentDidMount() {
         this.props.setWeather();
         this.checkValidation();
+        this.setState({ items: this.props.outfit.items });
     }
     shouldComponentUpdate() {
         return true;
     }
     componentDidUpdate(prevProps, prevState) {
+        if (prevProps.outfit !== this.props.outfit) {
+            this.setState({
+                ...this.state,
+                image: this.props.outfit.image,
+                items:
+                    this.props.outfit.items.length >= 1
+                        ? this.props.items
+                        : [{ category: "default", tags: [] }],
+            });
+        }
         if (prevState.items !== this.state.items) {
             this.checkValidation();
         }
@@ -41,6 +50,7 @@ class CreateOutfit extends Component {
         if (
             prevProps.selected_day_weather !== this.props.selected_day_weather
         ) {
+            this.setState({ completeUpdateWeather: true });
             this.setState({
                 weather: this.props.selected_day_weather,
             });
@@ -68,6 +78,7 @@ class CreateOutfit extends Component {
     handleDateChange = date => {
         this.setState({ date: date });
         if (date !== null) {
+            this.setState({ completeUpdateWeather: false });
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         } else {
             this.setState({ weather: null });
@@ -78,10 +89,12 @@ class CreateOutfit extends Component {
         for (var i = 0; i < items.length; i++) {
             if (items[i].category === "default" || items[i].tags.length === 0) {
                 this.setState({ isValid: false });
+
                 return false;
             }
         }
         this.setState({ isValid: true });
+
         return true;
     };
 
@@ -89,8 +102,9 @@ class CreateOutfit extends Component {
         this.setState({ satisfactionValue: num });
     }
     onConfirmCreate = () => {
+        this.setState({ onConfirmCreate: true });
         const newOutfit = {
-            image: this.state.image,
+            image: this.state.image ? this.state.image : "",
             satisfactionValue: this.state.satisfactionValue,
             date: this.state.date,
             items: this.state.items,
@@ -98,12 +112,12 @@ class CreateOutfit extends Component {
                 this.state.date !== null
                     ? {
                           tempAvg:
-                              (this.state.weather.temperatureHigh +
-                                  this.state.weather.temperatureLow) /
+                              (this.props.weather.temperatureHigh +
+                                  this.props.weather.temperatureLow) /
                               2,
-                          icon: this.state.weather.icon,
+                          icon: this.props.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" },
+                    : { tempAvg: null, icon: "" },
         };
         this.props.createOutfit(newOutfit);
     };
@@ -143,10 +157,10 @@ class CreateOutfit extends Component {
                                 placeholderText="Date isn't selected  :)"
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
-                                dateFormat="yyyy/MM/dd"
+                                dateFormat="yyyy-MM-dd"
                                 maxDate={new Date()}
                             />
-                            <div id="weather-icon">
+                            {/*}<div id="weather-icon">
                                 {this.state.weather !== null
                                     ? iconText[this.state.weather.icon]
                                     : null}{" "}
@@ -156,7 +170,7 @@ class CreateOutfit extends Component {
                                       "/" +
                                       this.state.weather.temperatureLow
                                     : null}
-                            </div>
+                                </div>{*/}
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
@@ -171,25 +185,34 @@ class CreateOutfit extends Component {
                         <div id="info-window">
                             <div id="items-info-window">{items}</div>
                             <div className="not-info">
-                                <button
-                                    onClick={this.addItemHandler}
-                                    id="add-item"
-                                >
-                                    Add Item
-                                </button>
-                                {!this.state.isValid && (
-                                    <div className="item-error">
-                                        Please select category and add at least
-                                        one tag for each Item!
-                                    </div>
-                                )}
+                                <div id="add-confirm-buttons-container">
+                                    <button
+                                        onClick={this.addItemHandler}
+                                        id="add-item"
+                                    >
+                                        Add Item
+                                    </button>
+                                </div>
+                                <div id="error-container">
+                                    {!this.state.isValid && (
+                                        <div className="item-error">
+                                            Please select category and add at
+                                            least one tag for each Item!
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         <button
                             onClick={this.onConfirmCreate}
                             id="confirm-create-outfit"
-                            disabled={!this.state.isValid}
+                            disabled={
+                                !this.state.isValid ||
+                                !this.state.completeUpdateWeather ||
+                                this.state.onConfirmCreate
+                                //!this.state.completeUpdateWeather
+                            }
                         >
                             Confirm Create
                         </button>

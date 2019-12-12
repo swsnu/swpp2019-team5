@@ -75,6 +75,7 @@
             .not-info {
                 display: flex;
                 justify-content: flex-start;
+<<<<<<< HEAD
                 align-items: center;
                 @media (max-width: 1000px) {
                     margin-left: 5%;
@@ -96,6 +97,19 @@
                     border-radius: 20px;
                     &:hover {
                         cursor: pointer;
+=======
+                #add-confirm-buttons-container {
+                    display: flex;
+                    justify-content: flex-start;
+                    margin-top: 10px;
+                }
+
+                #error-container {
+                    margin-top: 15px;
+                    margin-left: 65px;
+                    .item-error {
+                        color: rgb(255, 2, 2);
+>>>>>>> master
                     }
                 }
             }
@@ -161,6 +175,7 @@
         min-height: 85vh;
         grid-template-columns: 50% 50%;
     }
+<<<<<<< HEAD
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
         grid-template-rows: 60% auto;
@@ -170,4 +185,6 @@
             width: 90%;
         }
     }
+=======
+>>>>>>> master
 }
