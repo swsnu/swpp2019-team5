@@ -5,12 +5,20 @@
     border-collapse: collapse;
     table-layout: fixed;
 
+    width: 100%;
+    height: 100%;
+    margin-left: 15vw;
+    margin-right: 15vw;
+
+    @media (max-width: 500px) {
+        border-radius: 0px;
+    }
+
     #calendar-header {
         th {
-            width: 50px;
+            width: 5vw;
+            padding-bottom: 1vh;
             border-right: 0.5px solid black;
-            padding: 5px 0px;
-            opacity: 100%;
         }
 
         .last-column {
@@ -19,13 +27,15 @@
     }
     tbody {
         font-family: "Indie Flower", cursive;
+
         td {
             text-align: center;
             padding: 0px;
             margin: 0px;
-            table-layout: fixed;
-            height: 100px;
-            width: 100px;
+
+            width: 1vw;
+            height: 20vh;
+
             max-height: 100%;
             position: relative;
             border-top: 0.5px solid black;
@@ -63,20 +73,6 @@
             }
 
             .date-cell-body {
-                max-height: 100%;
-                max-width: 100%;
-
-                .overlay-calendar {
-                    background-color: black;
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0px;
-                    left: 0px;
-                    opacity: 0.3;
-                    z-index: 3;
-                }
-
                 .satisfaction-icon-calendar {
                     position: absolute;
                     left: 50%;
