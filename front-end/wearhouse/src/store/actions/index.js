@@ -8,7 +8,7 @@ export {
 
 export { logIn, logOut, signUp, getLogin, resetErr } from "./login";
 
-export { createItem } from "./item";
+export { getItems } from "./item";
 
 export { createTag } from "./tag";
 
