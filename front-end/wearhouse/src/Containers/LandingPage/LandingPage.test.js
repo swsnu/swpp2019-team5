@@ -12,7 +12,6 @@ var stubInitialState = { isLoggedIn: false, userID: null };
 var mockStore = getMockStore(stubInitialState, {}, {}, {}, {}, {});
 
 describe("<LandingPage />", () => {
-    let spyHistoryPush;
     let landingPage;
     beforeEach(() => {
         landingPage = (
@@ -22,12 +21,6 @@ describe("<LandingPage />", () => {
                 </ConnectedRouter>
             </Provider>
         );
-
-        spyHistoryPush = jest.spyOn(history, "push").mockImplementation(() => {
-            return dispatch => {
-                dispatch();
-            };
-        });
     });
 
     afterEach(() => {
@@ -38,19 +31,5 @@ describe("<LandingPage />", () => {
         const component = mount(landingPage);
         let wrapper = component.find("#Main");
         expect(wrapper.length).toBe(1);
-    });
-
-    it("should redirect when login button is clicked", () => {
-        const component = mount(landingPage);
-        let wrapper = component.find("#button-container #login-button");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-    });
-
-    it("should redirect when signup button is clicked", () => {
-        const component = mount(landingPage);
-        let wrapper = component.find("#button-container #signup-button");
-        wrapper.simulate("click");
-        expect(spyHistoryPush).toHaveBeenCalledTimes(1);
     });
 });

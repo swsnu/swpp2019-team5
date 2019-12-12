@@ -23,7 +23,10 @@ import copy
 
 
 def change_date_format(date):
-    return date[0:10]
+    if date != None :
+        return date[0:10]
+    else:
+        return None
 
 
 @csrf_exempt

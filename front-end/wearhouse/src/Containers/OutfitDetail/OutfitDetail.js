@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import Satisfaction from "../../Components/Satisfaction/Satisfaction";
@@ -40,7 +40,7 @@ class OutfitDetail extends Component {
         outfit: {
             image: this.props.outfit.image,
             satisfactionValue: null,
-            date: "", //in sprin
+            date: this.props.outfit.date, //in sprin
             items: [],
             weather: {},
         },
@@ -75,9 +75,9 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
-        console.log(this.props.outfit.image);
         return (
             <div id="outfit-detail">
+                <NavigationButton buttonName="Go Back" />
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <Satisfaction
@@ -86,11 +86,15 @@ class OutfitDetail extends Component {
                         <img src={this.props.outfit.image} alt="outfit" />
 
                         <label id="date">
-                            {moment(this.state.outfit.date).format("LL")}
+                            {this.state.outfit.date
+                                ? moment(this.state.outfit.date).format("LL")
+                                : "Date is not selected"}
 
-                            <div id="weather-icon">
-                                {iconText[this.state.outfit.weather.icon]}
-                            </div>
+                            {this.state.outfit.date && (
+                                <div id="weather-icon">
+                                    {iconText[this.state.outfit.weather.icon]}
+                                </div>
+                            )}
                         </label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}

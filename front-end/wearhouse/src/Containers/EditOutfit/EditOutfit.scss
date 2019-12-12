@@ -157,5 +157,11 @@
             }
             margin: 5px 80px;
         }
+        #confirm-edit-outfit {
+            &:disabled {
+                background-color: ligthgray;
+                cursor: not-allowed;
+            }
+        }
     }
 }

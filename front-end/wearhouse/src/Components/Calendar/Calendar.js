@@ -12,8 +12,6 @@ import {
     faCloud,
     faCloudSun,
     faCloudMoon,
-    faCalendarAlt,
-    faUndo,
     faMehBlank,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -53,11 +51,11 @@ const CALENDAR_HEADER = (
     </thead>
 );
 
-const renderCalendarBody = (dates, onClickDateCell, props) => {
+const renderCalendarBody = (dates, props) => {
     let i = 0;
     const rows = [];
     for (let week = 0; week < 5; week++) {
-        let day = 0; // Sunday
+        //let day = 0; // Sunday
 
         let row = [];
         for (let day = 0; day < 7; day++) {
@@ -66,7 +64,15 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
                 const id = dates[i].outfit_id;
-                console.log(dates[i]);
+
+                const imgUrl =
+                    typeof dates[i].imageURL === "undefined"
+                        ? ""
+                        : dates[i].imageURL;
+                const outfitImage = {
+                    backgroundImage: "url(" + imgUrl + ")",
+                };
+
                 let toPush = (
                     <td
                         key={7 * week + day}
@@ -80,42 +86,55 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 : "has-outfit"
                         }
                         onClick={() => {
-                            console.log(props.history);
-                            console.log(id);
-                            // props.history.push("/outfitDetail/" + 2);
-                            props.history.push("/outfitDetail/" + id);
+                            typeof id !== "undefined" &&
+                                props.history.push("/outfitDetail/" + id);
                         }}
+                        style={outfitImage}
                     >
-                        <div className="date-shell-header">
+                        <div
+                            className={
+                                typeof dates[i].outfit_id !== "undefined"
+                                    ? "calendar-overlay active"
+                                    : "calendar-overlay inactive"
+                            }
+                        ></div>
+                        <div className="date-cell-header">
                             <div className="date">{date.getDate()}</div>
-                            <div className="weather-icon">
-                                {dates[i].weather !== null
-                                    ? weatherIconText[dates[i].weather]
-                                    : null}
-                            </div>
                         </div>
 
-                        <div className="image">{dates[i].image}</div>
-                        <div className="satisfaction-icon-calendar">
-                            {dates[i].satisfactionValue !== null ? (
-                                <img
-                                    className="emoticon_on_calendar_cell"
-                                    src={
-                                        satisfactionIconText[
-                                            dates[i].satisfactionValue - 1
-                                        ]
-                                    }
-                                />
-                            ) : (
-                                <FontAwesomeIcon icon={faMehBlank} />
-                            )}
+                        <div className="date-cell-body">
+                            <div className="satisfaction-icon-calendar">
+                                {dates[i].satisfactionValue !== null ? (
+                                    <img
+                                        className="emoticon_on_calendar_cell"
+                                        src={
+                                            satisfactionIconText[
+                                                dates[i].satisfactionValue - 1
+                                            ]
+                                        }
+                                    />
+                                ) : (
+                                    <FontAwesomeIcon icon={faMehBlank} />
+                                )}
+
+                                <div className="weather-icon">
+                                    {dates[i].weather !== null
+                                        ? weatherIconText[dates[i].weather]
+                                        : null}
+                                </div>
+                            </div>
                         </div>
                     </td>
                 );
                 row.push(toPush);
                 i++;
             } else {
-                row.push(<td key={7 * week + day}></td>);
+                row.push(
+                    <td
+                        key={7 * week + day}
+                        className={day === 6 ? "last-column" : ""}
+                    ></td>,
+                );
             }
         }
         rows.push(row);
@@ -129,10 +148,10 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
     );
 };
 
-const renderCalendar = (dates, onClickDateCell, props) => (
+const renderCalendar = (dates, props) => (
     <table id="calendar">
         {CALENDAR_HEADER}
-        {renderCalendarBody(dates, onClickDateCell, props)}
+        {renderCalendarBody(dates, props)}
     </table>
 );
 
@@ -141,9 +160,7 @@ const Calendar = props => {
     const year = props.year;
     const month = props.month - 1; // Date object returns 0 ~ 11
     let maxDate = new Date(year, month + 1, 0).getDate();
-    const onClickDateCell = props.clicked;
     const outfits = props.outfits;
-    console.log(outfits);
 
     // dates: an array of Date objects
     for (let date = 1; date <= maxDate; date++) {
@@ -160,6 +177,7 @@ const Calendar = props => {
                 };
                 break;
             case 1:
+                // eslint-disable-next-line no-case-declarations
                 const outfit = outfit_per_date[0];
                 date_dict = {
                     date: new Date(year, month, date),
@@ -170,6 +188,7 @@ const Calendar = props => {
                 };
                 break;
             default:
+                // eslint-disable-next-line no-case-declarations
                 let outfit_with_max_satisfaction = outfit_per_date[0];
                 for (var i = 1; i < outfit_per_date.length; i++) {
                     if (
@@ -193,7 +212,7 @@ const Calendar = props => {
 
     // console.log(props.history.push("/"));
 
-    return renderCalendar(dates, onClickDateCell, props);
+    return renderCalendar(dates, props);
 };
 
 export default withRouter(Calendar);

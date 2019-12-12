@@ -2,14 +2,29 @@
     background-color: white;
     box-shadow: 0 0 5px 10px white;
     border-radius: 25px;
-
     border-collapse: collapse;
+    table-layout: fixed;
+
+    width: 90vw;
+    height: 70vh;
+    max-width: 800px;
+
+    @media (max-width: 800px) {
+        border-radius: 0px;
+    }
+
+    @media (max-width: 500px) {
+        border-radius: 0px;
+        max-width: 100%;
+        width: 100vw;
+        height: 60vh;
+    }
+
     #calendar-header {
         th {
-            width: 50px;
+            width: 5vw;
+            padding-bottom: 1vh;
             border-right: 0.5px solid black;
-            padding: 5px 0px;
-            opacity: 100%;
         }
 
         .last-column {
@@ -17,15 +32,43 @@
         }
     }
     tbody {
+        font-family: "Indie Flower", cursive;
+
         td {
+            text-align: center;
             padding: 0px;
             margin: 0px;
-            height: 100px;
+            height: 15vh;
+
+            max-height: 100%;
             position: relative;
             border-top: 0.5px solid black;
             border-right: 0.5px solid black;
 
-            .date-shell-header {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center 15%;
+
+            @media (max-width: 800px) {
+                height: 10vh;
+            }
+
+            @media (max-width: 500px) {
+                height: 10vh;
+            }
+
+            .calendar-overlay {
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                opacity: 0.2;
+            }
+
+            .inactive {
+                display: none;
+            }
+
+            .date-cell-header {
                 vertical-align: top;
 
                 .date {
@@ -33,24 +76,34 @@
                     top: 5px;
                     left: 5px;
                 }
-
-                .weather-icon {
-                    position: absolute;
-                    top: 5px;
-                    right: 5px;
-                }
             }
 
-            .satisfaction-icon-calendar {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 30%;
-                font-size: 45px;
-                display: flex;
-                justify-content: center;
-                .emoticon_on_calendar_cell {
-                    width: 30%;
+            .date-cell-body {
+                .satisfaction-icon-calendar {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    top: 30%;
+                    font-size: 45px;
+                    display: flex;
+                    justify-content: center;
+                    z-index: 10;
+
+                    .emoticon_on_calendar_cell {
+                        width: 100%;
+                        max-width: 40px;
+                    }
+
+                    .weather-icon {
+                        position: absolute;
+                        top: -14px;
+                        right: -14px;
+                        font-size: 20px;
+
+                        .fa-sun {
+                            color: #f2c629 !important;
+                        }
+                    }
                 }
             }
         }
@@ -61,6 +114,12 @@
 
         .has-outfit {
             cursor: pointer;
+            .date-cell-header {
+                .date {
+                    color: white;
+                    font-weight: bold;
+                }
+            }
         }
     }
 }
