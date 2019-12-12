@@ -130,7 +130,6 @@ class EditOutfit extends Component {
     }
 
     onConfirmEdit = () => {
-        console.log(this.props.weather);
         const edittedOutfit = {
             id: this.state.outfit.id,
             image: this.state.outfit.image,
@@ -154,7 +153,7 @@ class EditOutfit extends Component {
                       },
         };
 
-        console.log(edittedOutfit);
+        //console.log(edittedOutfit);
         this.props.confirmEdit(edittedOutfit);
     };
     render() {

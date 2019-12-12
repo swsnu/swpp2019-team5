@@ -79,7 +79,7 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                         }
                         onClick={() => {
                             // console.log(props.history);
-                            console.log(id);
+                            //console.log(id);
                             // props.history.push("/outfitDetail/" + 2);
                             typeof id !== "undefined" &&
                                 props.history.push("/outfitDetail/" + id);
@@ -151,7 +151,7 @@ const Calendar = props => {
     let maxDate = new Date(year, month + 1, 0).getDate();
     const onClickDateCell = props.clicked;
     const outfits = props.outfits;
-    console.log(outfits);
+    //console.log(outfits);
 
     // dates: an array of Date objects
     for (let date = 1; date <= maxDate; date++) {

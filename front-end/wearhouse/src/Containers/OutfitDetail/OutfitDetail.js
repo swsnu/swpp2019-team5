@@ -76,7 +76,6 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
-        console.log(this.props.outfit.date, "detail date");
         return (
             <div id="outfit-detail">
                 <NavigationButton buttonName="Go Back" />

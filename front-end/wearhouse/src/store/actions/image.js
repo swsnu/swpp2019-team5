@@ -9,7 +9,7 @@ var axiosConfig = {
 };
 
 export const postImage_ = outfit_metadata => {
-    console.log("outfit_metadata", outfit_metadata);
+    //console.log("outfit_metadata", outfit_metadata);
     return {
         type: actionTypes.POST_IMAGE,
         image: outfit_metadata.image,

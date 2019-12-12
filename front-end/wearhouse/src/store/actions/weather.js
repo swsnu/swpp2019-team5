@@ -16,7 +16,6 @@ export const getWeather = () => {
 };
 
 export const getSpecificDayWeather_ = weather => {
-    console.log(weather, "here is weather");
     return { type: actionTypes.GET_SPEC_WEATHER, selectedDayWeather: weather };
 };
 export const getSpecificDayWeather = time => {
