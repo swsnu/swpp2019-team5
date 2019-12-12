@@ -27,12 +27,15 @@ export const postImage = image => {
                 .post("/api/image/", image, axiosConfig)
                 //.post("/api/image/", image)
                 .then(res => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     dispatch(postImage_(res.data));
                 })
+                .catch(error => {
+                    Promise.reject(error.response.data.message);
+                })
                 .then(() => dispatch(push("/createOutfit")))
-                .catch(err => {
-                    console.log(err);
+                .catch(error => {
+                    Promise.reject(error.response.data.message);
                     dispatch(push("/createOutfit"));
                 })
         );
