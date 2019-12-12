@@ -172,7 +172,7 @@ describe("<CreateOutfit />", () => {
         confirm.simulate("click");
     });
 
-    fit("should call onDeleteItem", () => {
+    it("should call onDeleteItem", () => {
         const component = mount(createOutfit);
         let wrapper = component.find(".Item .item-deleter").at(0);
         wrapper.simulate("click");
