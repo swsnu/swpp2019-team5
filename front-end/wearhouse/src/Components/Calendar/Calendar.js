@@ -100,11 +100,6 @@ const renderCalendarBody = (dates, props) => {
                         ></div>
                         <div className="date-cell-header">
                             <div className="date">{date.getDate()}</div>
-                            <div className="weather-icon">
-                                {dates[i].weather !== null
-                                    ? weatherIconText[dates[i].weather]
-                                    : null}
-                            </div>
                         </div>
 
                         <div className="date-cell-body">
@@ -121,6 +116,12 @@ const renderCalendarBody = (dates, props) => {
                                 ) : (
                                     <FontAwesomeIcon icon={faMehBlank} />
                                 )}
+
+                                <div className="weather-icon">
+                                    {dates[i].weather !== null
+                                        ? weatherIconText[dates[i].weather]
+                                        : null}
+                                </div>
                             </div>
                         </div>
                     </td>

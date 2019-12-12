@@ -76,16 +76,6 @@
                     top: 5px;
                     left: 5px;
                 }
-
-                .weather-icon {
-                    position: absolute;
-                    top: 5px;
-                    right: 5px;
-
-                    .fa-sun {
-                        color: #f2c629 !important;
-                    }
-                }
             }
 
             .date-cell-body {
@@ -102,6 +92,17 @@
                     .emoticon_on_calendar_cell {
                         width: 100%;
                         max-width: 40px;
+                    }
+
+                    .weather-icon {
+                        position: absolute;
+                        top: -14px;
+                        right: -14px;
+                        font-size: 20px;
+
+                        .fa-sun {
+                            color: #f2c629 !important;
+                        }
                     }
                 }
             }
