@@ -75,41 +75,33 @@
             .not-info {
                 display: flex;
                 justify-content: flex-start;
-<<<<<<< HEAD
                 align-items: center;
                 @media (max-width: 1000px) {
                     margin-left: 5%;
                 }
-
-                .item-error {
-                    color: rgb(255, 2, 2);
-                    margin-left: 30px;
-                }
-                #add-item {
-                    flex-shrink: 0;
-                    margin-left: 10px;
-                    border: none;
-                    color: white;
-                    padding: 0 15px;
-                    height: 30px;
-                    font-size: 15px;
-                    background-color: black;
-                    border-radius: 20px;
-                    &:hover {
-                        cursor: pointer;
-=======
                 #add-confirm-buttons-container {
                     display: flex;
-                    justify-content: flex-start;
-                    margin-top: 10px;
+                    #add-item {
+                        flex-shrink: 0;
+                        margin-left: 10px;
+                        border: none;
+                        color: white;
+                        padding: 0 15px;
+                        height: 30px;
+                        font-size: 15px;
+                        background-color: black;
+                        border-radius: 20px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
                 }
 
                 #error-container {
                     margin-top: 15px;
-                    margin-left: 65px;
+                    margin-left: 30px;
                     .item-error {
                         color: rgb(255, 2, 2);
->>>>>>> master
                     }
                 }
             }
@@ -175,7 +167,6 @@
         min-height: 85vh;
         grid-template-columns: 50% 50%;
     }
-<<<<<<< HEAD
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
         grid-template-rows: 60% auto;
@@ -185,6 +176,4 @@
             width: 90%;
         }
     }
-=======
->>>>>>> master
 }
