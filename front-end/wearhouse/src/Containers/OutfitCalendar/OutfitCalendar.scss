@@ -58,15 +58,5 @@
                 }
             }
         }
-
-        #calendar {
-            width: 90vw;
-            height: 80vh;
-
-            @media (max-width: 500px) {
-                width: 100vw;
-                height: 60vh;
-            }
-        }
     }
 }
