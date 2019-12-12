@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-
 import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -41,7 +40,7 @@ class OutfitDetail extends Component {
         outfit: {
             image: this.props.outfit.image,
             satisfactionValue: null,
-            date: "", //in sprin
+            date: this.props.outfit.date, //in sprin
             items: [],
             weather: {},
         },
