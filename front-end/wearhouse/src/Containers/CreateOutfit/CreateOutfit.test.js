@@ -172,7 +172,7 @@ describe("<CreateOutfit />", () => {
         confirm.simulate("click");
     });
 
-    it("should call onDeleteItem", () => {
+    fit("should call onDeleteItem", () => {
         const component = mount(createOutfit);
         let wrapper = component.find(".Item .item-deleter").at(0);
         wrapper.simulate("click");
@@ -180,6 +180,7 @@ describe("<CreateOutfit />", () => {
         expect(count.length).toBe(0);
         let confirm = component.find("#confirm-create-outfit");
         confirm.simulate("click");
+        expect(spyPostOutfit).toHaveBeenCalledTimes(1);
     });
 
     it("edit satisfaction valaue", () => {
