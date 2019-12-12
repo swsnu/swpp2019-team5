@@ -65,6 +65,14 @@ const renderCalendarBody = (dates, props) => {
                 const date = dates[i].date;
                 const id = dates[i].outfit_id;
 
+                const imgUrl =
+                    typeof dates[i].imageURL === "undefined"
+                        ? ""
+                        : dates[i].imageURL;
+                const outfitImage = {
+                    backgroundImage: "url(" + imgUrl + ")",
+                };
+
                 let toPush = (
                     <td
                         key={7 * week + day}
@@ -81,7 +89,15 @@ const renderCalendarBody = (dates, props) => {
                             typeof id !== "undefined" &&
                                 props.history.push("/outfitDetail/" + id);
                         }}
+                        style={outfitImage}
                     >
+                        <div
+                            className={
+                                typeof dates[i].outfit_id !== "undefined"
+                                    ? "calendar-overlay active"
+                                    : "calendar-overlay inactive"
+                            }
+                        ></div>
                         <div className="date-cell-header">
                             <div className="date">{date.getDate()}</div>
                             <div className="weather-icon">
@@ -92,14 +108,6 @@ const renderCalendarBody = (dates, props) => {
                         </div>
 
                         <div className="date-cell-body">
-                            <div className="outfit-image">
-                                {typeof dates[i].imageURL !== "undefined" && (
-                                    <React.Fragment>
-                                        <img src={dates[i].imageURL}></img>
-                                        <div className="overlay-calendar"></div>
-                                    </React.Fragment>
-                                )}
-                            </div>
                             <div className="satisfaction-icon-calendar">
                                 {dates[i].satisfactionValue !== null ? (
                                     <img

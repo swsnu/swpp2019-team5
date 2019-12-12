@@ -31,6 +31,21 @@
             border-top: 0.5px solid black;
             border-right: 0.5px solid black;
 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center 15%;
+
+            .calendar-overlay {
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                opacity: 0.2;
+            }
+
+            .inactive {
+                display: none;
+            }
+
             .date-cell-header {
                 vertical-align: top;
 
@@ -51,29 +66,17 @@
                 max-height: 100%;
                 max-width: 100%;
 
-                .outfit-image {
-                    padding: 0px 5px;
-                    margin: 0px auto;
-
-                    img {
-                        width: 90%;
-                        height: 90%;
-                        max-height: 100%;
-                        background-repeat: no-repeat;
-                        background-size: contain;
-                        background-position: center;
-                    }
-                    .overlay-calendar {
-                        background-color: black;
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        opacity: 0.3;
-                        z-index: 3;
-                    }
+                .overlay-calendar {
+                    background-color: black;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    opacity: 0.3;
+                    z-index: 3;
                 }
+
                 .satisfaction-icon-calendar {
                     position: absolute;
                     left: 50%;
