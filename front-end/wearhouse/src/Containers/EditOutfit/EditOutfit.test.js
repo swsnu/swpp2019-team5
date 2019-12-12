@@ -42,7 +42,7 @@ let stubInitialState_outfit = {
         id: 1,
         image: null,
         satisfactionValue: 3,
-        date: new Date(),
+        date: "2019-11-07T04",
         items: [
             {
                 id: 1,
@@ -80,18 +80,27 @@ let stubInitialState_weather = {
     todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
     selectedWeather: null,
 };
-
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: "2019-11-07T04",
+        items: [{ category: "Outer", tags: [] }],
+        weather: { tempAvg: "", icon: "" },
+    },
+};
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_item,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
-    {},
+    stubInitialState_image,
 );
 
 describe("<EditOutfit />", () => {
-    let editOutfit, spyHistoryPush, spyAxios_put;
+    let editOutfit, spyHistoryPush, spyAxios_put, spyAxios_get;
     beforeEach(() => {
         editOutfit = (
             <Provider store={mockStore}>
@@ -110,6 +119,9 @@ describe("<EditOutfit />", () => {
         spyAxios_put = jest
             .spyOn(axios, "put")
             .mockImplementation(() => Promise.resolve({}));
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -120,6 +132,7 @@ describe("<EditOutfit />", () => {
         const component = mount(editOutfit);
         let wrapper = component.find(".EditOutfit");
         expect(wrapper.length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("edit satisfaction valaue", () => {
@@ -185,6 +198,7 @@ describe("<EditOutfit />", () => {
         expect(instance.state.isValid).toBe(false);
 
         wrapper = component.find(".Item .tag-input").at(4);
+        wrapper = component.find(".Item .tag-input").at(0);
         wrapper.simulate("change", { target: { value: "Test" } });
         wrapper.simulate("keyDown", {
             keyCode: 13,

@@ -14,6 +14,7 @@
         border-radius: 5px;
         img {
             max-width: inherit;
+            max-height: 400px;
         }
         #edit-satisfaction {
             height: 50px;
@@ -155,6 +156,12 @@
                 background-color: rgb(172, 159, 159);
             }
             margin: 5px 80px;
+        }
+        #confirm-edit-outfit {
+            &:disabled {
+                background-color: ligthgray;
+                cursor: not-allowed;
+            }
         }
     }
 }

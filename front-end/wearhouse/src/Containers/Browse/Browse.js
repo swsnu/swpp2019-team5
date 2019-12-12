@@ -171,7 +171,7 @@ class Browse extends React.Component {
             return (
                 <Outfit
                     key={outfit.id}
-                    image={outfit.imageUrl}
+                    image={outfit.image}
                     satisfactionValue={outfit.satisfactionValue}
                     date={outfit.date}
                     clicked={() => this.onClickOutfit(outfit)}
@@ -187,7 +187,7 @@ class Browse extends React.Component {
 
         const searchedResultbyOutfit = this.props.outfits.map(outfit => {
             let tagList = [];
-            outfit.items.map(item => {
+            outfit.items.forEach(item => {
                 tagList.push(...item.tags);
             });
             if (
@@ -206,12 +206,14 @@ class Browse extends React.Component {
                         clicked={() => this.onClickOutfit(outfit)}
                     />
                 );
+            } else {
+                return null;
             }
         });
 
         const searchedResultbyItem = this.props.outfits.map(outfit => {
             let searched = false;
-            outfit.items.map(item => {
+            outfit.items.forEach(item => {
                 if (
                     this.isMatchSearchArray(
                         item.tags,
@@ -232,6 +234,8 @@ class Browse extends React.Component {
                         clicked={() => this.onClickOutfit(outfit)}
                     />
                 );
+            } else {
+                return null;
             }
         });
         switch (this.state.mode) {

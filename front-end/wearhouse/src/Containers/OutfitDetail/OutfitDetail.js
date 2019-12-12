@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-
 import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -39,9 +38,9 @@ var iconText = {
 class OutfitDetail extends Component {
     state = {
         outfit: {
-            image: null,
+            image: this.props.outfit.image,
             satisfactionValue: null,
-            date: "", //in sprin
+            date: this.props.outfit.date, //in sprin
             items: [],
             weather: {},
         },
@@ -57,6 +56,10 @@ class OutfitDetail extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.outfit !== this.props.outfit) {
             this.setState({ outfit: this.props.outfit });
+        }
+
+        if (prevProps.outfit.image !== this.props.outfit.image) {
+            this.setState({ image: this.props.outfit.image });
         }
     }
 
@@ -80,32 +83,40 @@ class OutfitDetail extends Component {
                         <Satisfaction
                             value={this.state.outfit.satisfactionValue}
                         />
-                        <img src={this.state.image} alt="outfit" />
+                        <img src={this.props.outfit.image} alt="outfit" />
 
                         <label id="date">
-                            {moment(this.state.outfit.date).format("LL")}
+                            {this.state.outfit.date
+                                ? moment(this.state.outfit.date).format("LL")
+                                : "Date is not selected"}
 
-                            <div id="weather-icon">
-                                {iconText[this.state.outfit.weather.icon]}
-                            </div>
+                            {this.state.outfit.date && (
+                                <div id="weather-icon">
+                                    {iconText[this.state.outfit.weather.icon]}
+                                </div>
+                            )}
                         </label>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 
                     <div id="info-window">
                         <div id="items-info-window">{items}</div>
+                        <div id="button-group">
+                            <button
+                                onClick={this.onDelete}
+                                id="delete-outfit-button"
+                            >
+                                Delete
+                            </button>
+                            <button
+                                onClick={this.onEdit}
+                                id="edit-outfit-button"
+                            >
+                                Edit
+                            </button>
+                        </div>
                     </div>
-                    <div id="button-group">
-                        <button
-                            onClick={this.onDelete}
-                            id="delete-outfit-button"
-                        >
-                            Delete
-                        </button>
-                        <button onClick={this.onEdit} id="edit-outfit-button">
-                            Edit
-                        </button>
-                    </div>
+
                     <AddOutfit />
                 </div>
             </div>

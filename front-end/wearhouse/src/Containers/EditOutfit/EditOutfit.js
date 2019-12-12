@@ -7,7 +7,6 @@ import { faCalendarAlt, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
-import { iconText } from "../Recommendation/Recommendation";
 
 import Item from "../../Components/Item/Item";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
@@ -17,6 +16,7 @@ import NavigationButton from "../../Components/NavigationButton/NavigationButton
 
 class EditOutfit extends Component {
     state = {
+        completeUpdateWeather: true,
         outfit: {
             image: null,
             satisfactionValue: null,
@@ -48,7 +48,18 @@ class EditOutfit extends Component {
         this.setState({ popUp: null });
     };
     componentDidMount() {
-        this.setState({ outfit: this.props.outfit });
+        this.props.getOutfit(this.props.match.params.id);
+        let date = this.props.outfit.date;
+        if (date !== null) {
+            let date_arr = date.split("-");
+            date_arr[2] = date_arr[2].substring(0, 2);
+            date_arr[1] = (parseInt(date_arr[1]) - 1).toString();
+            date = new Date(date_arr[0], date_arr[1], date_arr[2], 12);
+        }
+        let outfit = { ...this.props.outfit, date: date };
+        this.setState({ outfit: outfit });
+        this.setState({ original_outfit: outfit });
+        //console.log(outfit);
     }
     shouldComponentUpdate() {
         return true;
@@ -58,6 +69,7 @@ class EditOutfit extends Component {
             this.checkValidation();
         }
         if (prevProps.weather !== this.props.weather) {
+            this.setState({ completeUpdateWeather: true });
             this.setState({
                 outfit: { ...this.state.outfit, weather: this.props.weather },
             });
@@ -70,7 +82,7 @@ class EditOutfit extends Component {
     }
     onInitializeOutfit = () => {
         this.setState({
-            outfit: this.props.outfit,
+            outfit: this.state.original_outfit,
         });
     };
     onDeleteItem(item) {
@@ -89,9 +101,13 @@ class EditOutfit extends Component {
         });
         if (date !== null) {
             this.props.getSpecificDayWeather(Date.parse(date) / 1000);
+            this.setState({ completeUpdateWeather: false });
+        }
+        /*if (date !== null) {
+            this.props.getSpecificDayWeather(Date.parse(date) / 1000);
         } else {
             this.setState({ outfit: { ...this.state.outfit, weather: null } });
-        }
+        }*/
     };
     checkValidation = () => {
         const items = this.state.outfit.items;
@@ -115,21 +131,29 @@ class EditOutfit extends Component {
 
     onConfirmEdit = () => {
         const edittedOutfit = {
+            id: this.state.outfit.id,
             image: this.state.outfit.image,
             satisfactionValue: this.state.outfit.satisfactionValue,
             date: this.state.outfit.date,
             items: this.state.outfit.items,
             weather:
-                this.state.outfit.date !== null
+                this.state.outfit.date === null
+                    ? { tempAvg: null, icon: "" }
+                    : this.props.weather
                     ? {
                           tempAvg:
-                              (this.state.outfit.weather.temperatureHigh +
-                                  this.state.outfit.weather.temperatureLow) /
+                              (this.props.weather.temperatureHigh +
+                                  this.props.weather.temperatureLow) /
                               2,
-                          icon: this.state.outfit.weather.icon,
+                          icon: this.props.weather.icon,
                       }
-                    : { tempAvg: "", icon: "" },
+                    : {
+                          tempAvg: this.state.outfit.weather.tempAvg,
+                          icon: this.state.outfit.weather.icon,
+                      },
         };
+
+        //console.log(edittedOutfit);
         this.props.confirmEdit(edittedOutfit);
     };
     render() {
@@ -161,6 +185,7 @@ class EditOutfit extends Component {
                                     />
                                 </div>
                             </span>
+
                             <DatePicker
                                 id="date-picker"
                                 isClearable
@@ -170,18 +195,17 @@ class EditOutfit extends Component {
                                 dateFormat="yyyy/MM/dd"
                                 maxDate={new Date()}
                             />
-                            <div id="weather-icon">
-                                {this.state.outfit.weather !== null
+                            {/*}<div id="weather-icon">
+                                {this.state.outfit.date !== null
                                     ? iconText[this.state.outfit.weather.icon]
                                     : null}{" "}
-                                {this.state.outfit.weather &&
-                                this.state.outfit.weather.temperatureLow
-                                    ? this.state.outfit.weather
-                                          .temperatureHigh +
+                                {this.state.outfit.date !== null &&
+                                this.props.weather
+                                    ? this.props.weather.temperatureHigh +
                                       "/" +
-                                      this.state.outfit.weather.temperatureLow
+                                      this.props.weather.temperatureLow
                                     : null}
-                            </div>
+                            </div>{*/}
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
@@ -191,7 +215,7 @@ class EditOutfit extends Component {
                                 }
                                 change={num => this.handleSatisfactionEdit(num)}
                             />
-                            <img src={this.state.image} alt="outfit" />
+                            <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
 
@@ -233,6 +257,10 @@ class EditOutfit extends Component {
                         <button
                             onClick={this.onConfirmEdit}
                             id="confirm-edit-outfit"
+                            disabled={
+                                !this.state.completeUpdateWeather ||
+                                !this.state.isValid
+                            }
                         >
                             Confirm Edit
                         </button>
@@ -256,6 +284,7 @@ const mapDispatchToProps = dispatch => {
         confirmEdit: outfit => {
             dispatch(actionCreators.editOutfit(outfit));
         },
+        getOutfit: id => dispatch(actionCreators.getSpecificOutfit(id)),
     };
 };
 const mapStateToProps = state => {

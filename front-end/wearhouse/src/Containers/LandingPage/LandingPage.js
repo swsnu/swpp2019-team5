@@ -62,9 +62,9 @@ class LandingPage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="intro-content" id="content-3">
+                {/* <div className="intro-content" id="content-3">
                     <h1>How WearHouse works</h1>
-                </div>
+                </div> */}
                 <footer>
                     <div id="footericon"></div>
                     <div id="footertext">

@@ -13,6 +13,9 @@
     opacity: 1;
 
     #header {
+        position: absolute;
+        top: 0px;
+        left: 0px;
         height: 50px;
         justify-content: space-between;
         align-items: center;

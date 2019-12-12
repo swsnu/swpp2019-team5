@@ -63,7 +63,7 @@ let stubInitialState_outfit = {
             { category: "Accessories", tags: ["black", "golden-buckle"] },
         ],
         satisfactionValue: 3,
-        date: "2019.11.7",
+        date: "2019-11-19T15",
         weather: { icon: "rain" },
     },
 };
