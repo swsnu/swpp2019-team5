@@ -1,15 +1,24 @@
 import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
-import { getMockStore } from "../../../test-utils/mocks";
+import { getMockStore } from "../../../test-utils/mocks_specific";
 import { history } from "../../../store/store";
 import UploadImage from "./UploadImage";
 import { ConnectedRouter } from "connected-react-router";
 import axios from "axios";
 
-let stubInitialState = {};
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: "2019-11-07T04",
+        items: [{ category: "Outer", tags: [] }],
+        weather: { tempAvg: "", icon: "" },
+    },
+};
 
-var mockStore = getMockStore(stubInitialState);
+var mockStore = getMockStore({}, {}, {}, {}, {}, stubInitialState_image);
 var mockOnClosePopup = jest.fn();
 
 describe("<UploadImage/>", () => {
@@ -109,9 +118,17 @@ describe("<UploadImage/>", () => {
 
         CreateInstance.setState({ isPreviewMode: true });
         // re-render component
+        let wrapper = component.find("#choose-file");
+
+        // input valid file
+        wrapper.simulate("change", {
+            target: {
+                files: [{ name: "test_image.jpg", type: "image/jpeg" }],
+            },
+        });
         component.update();
 
-        let wrapper = component.find("#confirm-image");
+        wrapper = component.find("#confirm-image");
         expect(wrapper.length).toBe(1);
         wrapper.simulate("click");
         expect(spyAxiosPost).toBeCalledTimes(1);
