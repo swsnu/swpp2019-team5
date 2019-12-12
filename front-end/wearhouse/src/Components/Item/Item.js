@@ -206,7 +206,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
-                    onKeyDown={e => this.addTag(e)}
+                    onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {
                         this.setState({ show: true });
@@ -221,7 +221,9 @@ class Item extends Component {
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    <FontAwesomeIcon icon={faTimes} />
+                    <span id="item-delete" data-tooltip-text="Delete Item">
+                        <FontAwesomeIcon icon={faTimes} />
+                    </span>
                 </div>
             );
         }

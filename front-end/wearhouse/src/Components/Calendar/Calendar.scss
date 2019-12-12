@@ -2,8 +2,9 @@
     background-color: white;
     box-shadow: 0 0 5px 10px white;
     border-radius: 25px;
-
     border-collapse: collapse;
+    table-layout: fixed;
+
     #calendar-header {
         th {
             width: 50px;
@@ -17,15 +18,20 @@
         }
     }
     tbody {
+        font-family: "Indie Flower", cursive;
         td {
+            text-align: center;
             padding: 0px;
             margin: 0px;
+            table-layout: fixed;
             height: 100px;
+            width: 100px;
+            max-height: 100%;
             position: relative;
             border-top: 0.5px solid black;
             border-right: 0.5px solid black;
 
-            .date-shell-header {
+            .date-cell-header {
                 vertical-align: top;
 
                 .date {
@@ -41,16 +47,47 @@
                 }
             }
 
-            .satisfaction-icon-calendar {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 30%;
-                font-size: 45px;
-                display: flex;
-                justify-content: center;
-                .emoticon_on_calendar_cell {
-                    width: 30%;
+            .date-cell-body {
+                max-height: 100%;
+                max-width: 100%;
+
+                .outfit-image {
+                    padding: 0px 5px;
+                    margin: 0px auto;
+
+                    img {
+                        width: 90%;
+                        height: 90%;
+                        max-height: 100%;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        background-position: center;
+                    }
+                    .overlay-calendar {
+                        background-color: black;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        opacity: 0.3;
+                        z-index: 3;
+                    }
+                }
+                .satisfaction-icon-calendar {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    top: 30%;
+                    font-size: 45px;
+                    display: flex;
+                    justify-content: center;
+                    z-index: 10;
+
+                    .emoticon_on_calendar_cell {
+                        width: 100%;
+                        max-width: 60px;
+                    }
                 }
             }
         }

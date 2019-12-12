@@ -1,7 +1,7 @@
 #Main {
     .intro-content {
         display: grid;
-        grid-template-rows: 30% 10% 60%;
+        grid-template-rows: 40% 60%;
 
         height: 90vh;
         padding: 0 5%;
@@ -15,27 +15,6 @@
                 font-size: 60px;
                 font-weight: 900;
                 line-height: 100px;
-            }
-        }
-
-        #button-container {
-            margin: 20px auto;
-            button {
-                border: none;
-                width: 120px;
-                height: 40px;
-                border-radius: 3px;
-                font-size: 15px;
-                margin: 0 20px;
-                cursor: pointer;
-                &#signup-button {
-                    color: white;
-                    background-color: black;
-                }
-                &#login-button {
-                    color: darkslategray;
-                    border: 1px darkslategray solid;
-                }
             }
         }
 

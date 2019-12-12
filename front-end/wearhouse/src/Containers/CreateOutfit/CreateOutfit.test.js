@@ -55,7 +55,7 @@ let stubInitialState_outfit = {
             { category: "Accessories", tags: ["black", "golden-buckle"] },
         ],
         satisfactionValue: 3,
-        date: "2019.11.7",
+        date: "2019-11-07T04",
     },
 };
 
@@ -72,8 +72,8 @@ let stubInitialState_image = {
         id: "",
         image: "",
         satisfactionValue: null,
-        date: null,
-        items: null,
+        date: "2019-11-07T04",
+        items: [{ category: "Outer", tags: [] }],
         weather: { tempAvg: "", icon: "" },
     },
 };

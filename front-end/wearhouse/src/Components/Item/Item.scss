@@ -7,6 +7,38 @@
         display: inline-block;
     }
 
+    [data-tooltip-text]:hover {
+        position: relative;
+    }
+
+    [data-tooltip-text]:hover:after {
+        background-color: #000000;
+        background-color: rgba(0, 0, 0, 0.7);
+
+        -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+        -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+        box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+        color: #ffffff;
+        font-size: 12px;
+        content: attr(data-tooltip-text);
+
+        margin-bottom: 10px;
+        top: 130%;
+        left: -15px;
+        padding: 7px 12px;
+        position: absolute;
+        width: auto;
+        min-width: 300px;
+        max-width: 500px;
+        word-wrap: break-word;
+
+        z-index: 9999;
+    }
     .tag-container {
         display: flex;
         align-items: flex-start;

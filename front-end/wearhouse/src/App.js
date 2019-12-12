@@ -19,40 +19,47 @@ import "./App.scss";
 
 class App extends React.Component {
     componentDidMount() {
-        this.props.getLogin();
+        if (!this.props.isLoggedIn) {
+            this.props.getLogin();
+        }
     }
     render() {
         return (
             <ConnectedRouter history={this.props.history}>
                 <Header />
-                <Switch>
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/signup" exact component={Signup} />
-                    <Route
-                        path="/main"
-                        exact
-                        component={this.props.isLoggedIn ? Browse : LandingPage}
-                    />
-                    {!this.props.isLoggedIn && <Redirect exact to="/main" />}
-                    <Route path="/browse" exact component={Browse} />
-                    <Route
-                        path="/outfitDetail/:id"
-                        exact
-                        component={OutfitDetail}
-                    />
-                    <Route path="/calendar" exact component={OutfitCalendar} />
-                    <Route
-                        path="/createOutfit"
-                        exact
-                        component={CreateOutfit}
-                    />
-                    <Route
-                        path="/editOutfit/:id"
-                        exact
-                        component={EditOutfit}
-                    />
-                    <Redirect exact to="/browse" />
-                </Switch>
+                {this.props.isLoggedIn ? (
+                    <Switch>
+                        <Route
+                            path="/outfitDetail/:id"
+                            exact
+                            component={OutfitDetail}
+                        />
+                        <Route
+                            path="/calendar"
+                            exact
+                            component={OutfitCalendar}
+                        />
+                        <Route
+                            path="/createOutfit"
+                            exact
+                            component={CreateOutfit}
+                        />
+                        <Route
+                            path="/editOutfit/:id"
+                            exact
+                            component={EditOutfit}
+                        />
+                        <Route path="/browse" exact component={Browse} />
+                        <Redirect exact to="/browse" />
+                    </Switch>
+                ) : (
+                    <Switch>
+                        <Route path="/login" exact component={Login} />
+                        <Route path="/signup" exact component={Signup} />
+                        <Route path="/main" exact component={LandingPage} />
+                        <Redirect exact to="/main" />
+                    </Switch>
+                )}
             </ConnectedRouter>
         );
     }

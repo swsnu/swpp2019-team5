@@ -22,13 +22,14 @@ class OutfitCalendar extends Component {
 
     componentDidMount() {
         this.props.getAllOutfits();
+        this.setState({ outfits: this.props.outfits });
     }
 
     shouldComponentUpdate() {
         return true;
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.outfits !== this.props.outfits) {
             this.setState({ outfits: this.props.outfits });
         }
@@ -57,12 +58,21 @@ class OutfitCalendar extends Component {
     };
 
     render() {
-        // console.log(this.state.outfits);
+        console.log(this.state.outfits);
         let outfits_metadata = [];
         if (this.state.outfits !== null) {
             const outfits_of_this_month = this.state.outfits.filter(outfit => {
-                const month_of_outfit = parseInt(outfit.date.split("-")[1]);
-                return month_of_outfit === this.state.month;
+                const year_of_outfit = outfit.date
+                    ? parseInt(outfit.date.split("-")[0])
+                    : -1;
+                const month_of_outfit = outfit.date
+                    ? parseInt(outfit.date.split("-")[1])
+                    : 100;
+
+                return (
+                    year_of_outfit === this.state.year &&
+                    month_of_outfit === this.state.month
+                );
             });
             // 보내야하는 정보
             // id, date, image, satisfactionValue, weather.icon
@@ -76,7 +86,6 @@ class OutfitCalendar extends Component {
                     weatherIcon: outfit.weather.icon,
                 };
             });
-            console.log(outfits_metadata);
         }
         return (
             <div className="OutfitCalendar">
