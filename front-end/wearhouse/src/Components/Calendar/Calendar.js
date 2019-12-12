@@ -128,7 +128,12 @@ const renderCalendarBody = (dates, props) => {
                 row.push(toPush);
                 i++;
             } else {
-                row.push(<td key={7 * week + day}></td>);
+                row.push(
+                    <td
+                        key={7 * week + day}
+                        className={day === 6 ? "last-column" : ""}
+                    ></td>,
+                );
             }
         }
         rows.push(row);
@@ -155,7 +160,6 @@ const Calendar = props => {
     const month = props.month - 1; // Date object returns 0 ~ 11
     let maxDate = new Date(year, month + 1, 0).getDate();
     const outfits = props.outfits;
-    console.log(outfits);
 
     // dates: an array of Date objects
     for (let date = 1; date <= maxDate; date++) {
