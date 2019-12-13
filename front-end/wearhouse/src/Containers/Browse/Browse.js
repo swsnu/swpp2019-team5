@@ -330,60 +330,63 @@ class Browse extends React.Component {
         }
         return (
             <div id="browse">
-                <button id="calendar-button" onClick={this.onClickCalendar}>
-                    <FontAwesomeIcon icon={faCalendarAlt} />
-                </button>
-                <div id="search-container">
-                    <div id="select-searchmode">
-                        <div id="selected-option">
-                            <div id="selected-text">
-                                {this.state.searchOptions.searchMode}
+                <div id="top-container">
+                    <div id="search-container">
+                        <div id="select-searchmode">
+                            <div id="selected-option">
+                                <div id="selected-text">
+                                    {this.state.searchOptions.searchMode}
+                                </div>
+                                <div
+                                    id="selectButton"
+                                    onClick={() => this.showSearchOptions()}
+                                >
+                                    {!this.state.searchOptionsVisible ? (
+                                        <FontAwesomeIcon icon={faChevronDown} />
+                                    ) : (
+                                        <FontAwesomeIcon icon={faChevronUp} />
+                                    )}
+                                </div>
                             </div>
                             <div
-                                id="selectButton"
-                                onClick={() => this.showSearchOptions()}
+                                id="dropdown-selection"
+                                className={this.state.searchOptionsVisible.toString()}
                             >
-                                {!this.state.searchOptionsVisible ? (
-                                    <FontAwesomeIcon icon={faChevronDown} />
-                                ) : (
-                                    <FontAwesomeIcon icon={faChevronUp} />
-                                )}
+                                <div
+                                    className="option"
+                                    onClick={() =>
+                                        this.onSelectSearchOption("Outfit")
+                                    }
+                                >
+                                    Outfit
+                                </div>
+                                <div
+                                    className="option"
+                                    onClick={() =>
+                                        this.onSelectSearchOption("Item")
+                                    }
+                                >
+                                    Item
+                                </div>
                             </div>
                         </div>
-                        <div
-                            id="dropdown-selection"
-                            className={this.state.searchOptionsVisible.toString()}
-                        >
-                            <div
-                                className="option"
-                                onClick={() =>
-                                    this.onSelectSearchOption("Outfit")
-                                }
-                            >
-                                Outfit
-                            </div>
-                            <div
-                                className="option"
-                                onClick={() =>
-                                    this.onSelectSearchOption("Item")
-                                }
-                            >
-                                Item
-                            </div>
+                        <div id="search-input">
+                            <div id="search-input-queries">{searchQuery}</div>
+                            <input
+                                id="search-input-text"
+                                value={this.state.search_query}
+                                onKeyDown={e => this.addTag(e)}
+                                onChange={e => this.onSearchInput(e)}
+                                placeholder="Search by tag..."
+                            />
                         </div>
+                        <button id="search-button">
+                            <FontAwesomeIcon icon={faSearch} />
+                        </button>
                     </div>
-                    <div id="search-input">
-                        <div id="search-input-queries">{searchQuery}</div>
-                        <input
-                            id="search-input-text"
-                            value={this.state.search_query}
-                            onKeyDown={e => this.addTag(e)}
-                            onChange={e => this.onSearchInput(e)}
-                            placeholder="Search by tag..."
-                        />
-                    </div>
-                    <button id="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
+
+                    <button id="calendar-button" onClick={this.onClickCalendar}>
+                        <FontAwesomeIcon icon={faCalendarAlt} />
                     </button>
                 </div>
                 {container}

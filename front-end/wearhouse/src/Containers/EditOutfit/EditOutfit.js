@@ -9,10 +9,10 @@ import "../CreateOutfit/DatePicker.scss";
 import "./EditOutfit.scss";
 
 import Item from "../../Components/Item/Item";
+import AddOutfit from "../../Components/AddOutfit/AddOutfit";
 import EditSatisfaction from "../../Components/EditSatisfaction/EditSatisfaction";
 import DatePicker from "react-datepicker";
 import PopUp from "../../Components/PopUp/PopUp";
-import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 
 class EditOutfit extends Component {
     state = {
@@ -172,7 +172,6 @@ class EditOutfit extends Component {
         });
         return (
             <div className="EditOutfit">
-                <NavigationButton buttonName="Go Back" />
                 {this.state.popUp}
                 <div id="edit-outfit-window">
                     <div className="left-window">
@@ -209,7 +208,6 @@ class EditOutfit extends Component {
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
-                                id="edit-satisfaction"
                                 satisfactionValue={
                                     this.props.outfit.satisfactionValue
                                 }
@@ -218,60 +216,60 @@ class EditOutfit extends Component {
                             <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
-
-                    <div id="info-window">
-                        <div id="initialize-outfit-button-container">
-                            <button
-                                data-tooltip-text="initialize outfit to original state"
-                                onClick={this.onInitializeOutfit}
-                                className="small-button"
-                                id="initialize-button"
-                            >
-                                <FontAwesomeIcon
-                                    id="initialize-icon"
-                                    icon={faUndo}
-                                />
-                            </button>
-                        </div>
-                        <div id="items-info-window">{items}</div>
-                        <div className="not-info">
-                            <div id="add-confirm-button-container">
+                    <div id="info-window-wrapper">
+                        <div id="info-window">
+                            <div id="initialize-outfit-button-container">
+                                <button
+                                    data-tooltip-text="initialize outfit to original state"
+                                    onClick={this.onInitializeOutfit}
+                                    className="small-button"
+                                    id="initialize-button"
+                                >
+                                    <FontAwesomeIcon
+                                        id="initialize-icon"
+                                        icon={faUndo}
+                                    />
+                                </button>
+                            </div>
+                            <div id="items-info-window">{items}</div>
+                            <div className="not-info">
                                 <button
                                     onClick={this.addItemHandler}
                                     id="add-item"
                                 >
                                     Add Item
                                 </button>
-                            </div>
-                            <div id="error-container">
-                                {!this.state.isValid && (
-                                    <div className="item-error">
-                                        Please select category and add at least
-                                        one tag for each Item!
-                                    </div>
-                                )}
+                                <div id="error-container">
+                                    {!this.state.isValid && (
+                                        <div className="item-error">
+                                            Please select category and add at
+                                            least one tag for each Item!
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="button-container">
-                        <button
-                            onClick={this.onConfirmEdit}
-                            id="confirm-edit-outfit"
-                            disabled={
-                                !this.state.completeUpdateWeather ||
-                                !this.state.isValid
-                            }
-                        >
-                            Confirm Edit
-                        </button>
-                        <button
-                            onClick={this.onCancelEdit}
-                            id="cancel-edit-outfit"
-                        >
-                            Cancel Edit
-                        </button>
+                        <div id="button-container">
+                            <button
+                                onClick={this.onConfirmEdit}
+                                id="confirm-edit-outfit"
+                                disabled={
+                                    !this.state.completeUpdateWeather ||
+                                    !this.state.isValid
+                                }
+                            >
+                                Confirm Edit
+                            </button>
+                            <button
+                                onClick={this.onCancelEdit}
+                                id="cancel-edit-outfit"
+                            >
+                                Cancel Edit
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <AddOutfit />
             </div>
         );
     }

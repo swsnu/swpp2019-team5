@@ -2,7 +2,10 @@
     max-height: 20px;
     max-width: 20px;
     position: absolute;
-    left: 50px;
+    left: 5%;
+    @media (max-width: 500px) {
+        left: 30px;
+    }
     padding: 5px 10px;
 
     margin: 5px 0;

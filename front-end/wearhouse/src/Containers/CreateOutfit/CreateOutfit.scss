@@ -21,7 +21,10 @@
             border: 2px solid rgb(124, 112, 117);
             border-radius: 5px;
             img {
-                max-width: inherit;
+                max-width: 100%;
+                max-height: 100%;
+
+                margin: 0 auto;
             }
             #edit-satisfaction {
                 left: 5%;
@@ -31,32 +34,32 @@
                 width: 90%;
             }
         }
-    }
 
-    #date-picker {
-        width: 140px;
-        text-align: left;
-        font-size: 14px;
-        border: solid rgb(210, 221, 223) 1px;
-        padding-bottom: 3px;
-        padding-top: 3px;
-        padding-left: 3px;
-        font-style: italic;
-        &:hover {
-            cursor: pointer;
-            background-color: rgb(204, 190, 190);
+        #date-picker {
+            width: 140px;
+            text-align: left;
+            font-size: 14px;
+            border: solid rgb(210, 221, 223) 1px;
+            padding-bottom: 3px;
+            padding-top: 3px;
+            padding-left: 3px;
+            font-style: italic;
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(204, 190, 190);
+            }
         }
-    }
-    #calendar-icon {
-        color: lightgray;
-        padding-right: 10px;
-    }
-    .date-picker-container {
-        display: flex;
-        justify-content: center;
-        #weather-icon {
-            margin-left: 10px;
-            color: lightslategray;
+        #calendar-icon {
+            color: lightgray;
+            padding-right: 10px;
+        }
+        .date-picker-container {
+            display: flex;
+            justify-content: center;
+            #weather-icon {
+                margin-left: 10px;
+                color: lightslategray;
+            }
         }
     }
     #info-window-wrapper {
@@ -79,8 +82,17 @@
                 @media (max-width: 1000px) {
                     margin-left: 5%;
                 }
+                #error-container {
+                    margin-top: 15px;
+                    margin-left: 30px;
+                    .item-error {
+                        color: rgb(255, 2, 2);
+                    }
+                }
                 #add-confirm-buttons-container {
                     display: flex;
+                    justify-content: flex-start;
+                    margin-top: 10px;
                     #add-item {
                         flex-shrink: 0;
                         margin-left: 10px;
@@ -94,14 +106,6 @@
                         &:hover {
                             cursor: pointer;
                         }
-                    }
-                }
-
-                #error-container {
-                    margin-top: 15px;
-                    margin-left: 30px;
-                    .item-error {
-                        color: rgb(255, 2, 2);
                     }
                 }
             }
