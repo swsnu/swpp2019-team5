@@ -203,21 +203,18 @@ class Item extends Component {
         }
         return (
             <div className="Item">
-                <div className="info-container">
-                    <div className="position-controller">
-                        <Select
-                            menuIsOpen={this.props.menuIsOpen}
-                            isDisabled={!this.props.editMode}
-                            className="Select"
-                            value={option}
-                            selected={option}
-                            label="Category"
-                            options={itemOptions}
-                            styles={itemStyles}
-                            onChange={e => this.handleCategoryChange(e)}
-                        />
-                    </div>
-
+                <Select
+                    menuIsOpen={this.props.menuIsOpen}
+                    isDisabled={!this.props.editMode}
+                    className="Select"
+                    value={option}
+                    selected={option}
+                    label="Category"
+                    options={itemOptions}
+                    styles={itemStyles}
+                    onChange={e => this.handleCategoryChange(e)}
+                />
+                <div className="option-wrapper">
                     <div className="tag-container">
                         <div className="tag-area">
                             {tags}

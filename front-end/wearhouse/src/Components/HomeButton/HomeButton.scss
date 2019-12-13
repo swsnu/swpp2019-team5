@@ -1,10 +1,11 @@
 #homebutton {
-    // margin: 15px;
-    // margin-left: 5%;
-    // display: flex;
-    // align-items: flex-end;
     img {
         max-width: 100px;
     }
     cursor: pointer;
+    @media (max-width: 500px) {
+        img {
+            width: 50px;
+        }
+    }
 }

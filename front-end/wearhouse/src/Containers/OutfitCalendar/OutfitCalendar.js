@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Header from "../Header/Header";
 import "./OutfitCalendar.scss";
 import {
     faChevronLeft,
@@ -9,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Calendar from "../../Components/Calendar/Calendar";
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import * as actionCreators from "../../store/actions/index";
 
 var currentTime = new Date();
@@ -85,7 +85,7 @@ class OutfitCalendar extends Component {
         }
         return (
             <div className="OutfitCalendar">
-                <Header />
+                <NavigationButton buttonName="Go Back" />
                 <div id="calendar-wrapper">
                     <div className="calendar-header">
                         <button

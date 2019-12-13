@@ -48,4 +48,30 @@
 
         font-size: 30px;
     }
+    @media (max-width: 550px) {
+        width: fit-content;
+        position: fixed;
+        right: 30px;
+        height: 100px;
+        #add-outfit-button {
+            width: 70px;
+            height: 70px;
+            margin: 0;
+            #add-outfit-icon {
+                color: white;
+                position: static;
+            }
+            &:hover {
+                margin: 0;
+                width: 70px;
+                height: 70px;
+                #add-outfit-text {
+                    display: none;
+                }
+                #add-outfit-icon {
+                    display: block;
+                }
+            }
+        }
+    }
 }

@@ -23,13 +23,13 @@ class PopUp extends React.Component {
                             className="option-button"
                             onClick={this.props.onProceedCancel}
                         >
-                            Yes I am sure
+                            Yes, I am sure
                         </button>
                         <button
                             className="option-button"
                             onClick={this.onClickClosePopUpButton}
                         >
-                            No keep editing
+                            No, keep editing
                         </button>
                     </div>
                 </div>

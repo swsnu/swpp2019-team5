@@ -1,14 +1,13 @@
 #popup-wrapper {
     height: 100vh;
-    width: 100vh;
-    background-color: none;
+    width: 100%;
+    background: none;
     position: fixed;
-    top: -30%;
-    left: 50%;
-    transform: translateX(-85%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    //
+    right: 0;
+    top: 0;
+    //transform: translateX(-85%);
+
     z-index: 4;
 
     #popup-container {
@@ -16,8 +15,11 @@
         position: relative;
         flex-direction: column;
         justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
 
-        width: 400px;
+        max-width: 400px;
+        width: 80%;
         height: auto;
         min-height: 200px;
         border-radius: 10px;
@@ -50,6 +52,9 @@
 
             #cancel-upload-image {
                 margin-right: 10px;
+                border: none;
+                background: none;
+                font-size: 17px;
             }
         }
 
@@ -57,6 +62,7 @@
             margin-top: 60px;
             padding: 0px 10px;
             height: 20px;
+            //font-size: 15px;
         }
 
         #upload-image-button {

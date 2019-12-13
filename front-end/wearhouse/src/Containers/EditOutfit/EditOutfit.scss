@@ -4,164 +4,210 @@
     grid-template-rows: 90%;
     align-items: center;
     height: 85vh;
+    padding-top: 40px;
+    @media (max-width: 500px) {
+        padding-top: 20px;
+    }
+    .left-window {
+        height: 100%;
+        display: grid;
+        grid-template-rows: 10% 90%;
+        #image-window {
+            width: 80%;
+            margin: 0 auto;
+            height: 100%;
+            justify-content: center;
+            background-color: rgb(66, 66, 66);
+            border: 2px solid rgb(124, 112, 117);
+            border-radius: 5px;
+            display: flex;
+            img {
+                max-width: 100%;
+                max-height: 100%;
 
-    #image-window {
-        margin: 20px 40px;
-        display: flex;
-        justify-content: center;
-        background-color: rgb(66, 66, 66);
-        border: 2px solid rgb(124, 112, 117);
-        border-radius: 5px;
-        img {
-            max-width: inherit;
-            max-height: 400px;
+                margin: 0 auto;
+            }
+            #edit-satisfaction {
+                left: 50px;
+                @media (max-width: 900px) {
+                    left: 30px;
+                }
+            }
+            overflow: hidden;
         }
-        #edit-satisfaction {
-            height: 50px;
-            left: 50px;
+
+        #date-picker {
+            width: 140px;
+            text-align: left;
+            font-size: 14px;
+            border: solid rgb(210, 221, 223) 1px;
+            padding-bottom: 3px;
+            padding-top: 3px;
+            padding-left: 3px;
+            font-style: italic;
+            &:hover {
+                cursor: pointer;
+                background-color: rgb(204, 190, 190);
+            }
         }
-        overflow: hidden;
+        #calendar-icon {
+            color: lightgray;
+            padding-right: 10px;
+        }
+        .date-picker-container {
+            display: flex;
+            height: fit-content;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+            #weather-icon {
+                margin-left: 10px;
+                color: lightslategray;
+            }
+            .react-datepicker__close-icon::after {
+                color: black;
+            }
+        }
     }
 
-    #date-picker {
-        width: 140px;
-        text-align: left;
-        font-size: 14px;
-        border: solid rgb(210, 221, 223) 1px;
-        padding-bottom: 3px;
-        padding-top: 3px;
-        padding-left: 3px;
-        font-style: italic;
-        &:hover {
-            cursor: pointer;
-            background-color: rgb(204, 190, 190);
+    #info-window-wrapper {
+        display: grid;
+        height: 100%;
+        grid-template-rows: auto 110px;
+        @media (max-width: 768px) {
+            margin-top: 15px;
         }
-    }
-    #calendar-icon {
-        color: lightgray;
-        padding-right: 10px;
-    }
-    .date-picker-container {
-        display: flex;
-        justify-content: center;
-        #weather-icon {
-            margin-left: 10px;
-            color: lightslategray;
-        }
-    }
-
-    #info-window {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        #items-info-window {
+        #info-window {
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-        .not-info {
-            display: flex;
-            justify-content: flex-start;
-            #add-confirm-buttons-container {
+            #items-info-window {
                 display: flex;
-                justify-content: flex-start;
-                margin-top: 10px;
+                flex-direction: column;
+                justify-content: center;
             }
+            .not-info {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
 
-            #error-container {
-                margin-top: 15px;
-                margin-left: 65px;
-                .item-error {
-                    color: rgb(255, 2, 2);
+                #add-item {
+                    margin-top: 10px;
+                    flex-shrink: 0;
+                    margin-left: 10px;
+                    border: none;
+                    color: white;
+                    padding: 0 15px;
+                    height: 30px;
+                    font-size: 15px;
+                    background-color: black;
+                    border-radius: 20px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                #error-container {
+                    margin-top: 15px;
+                    margin-left: 30px;
+                    .item-error {
+                        color: rgb(255, 2, 2);
+                    }
                 }
             }
         }
-    }
 
-    [data-tooltip-text]:hover {
-        position: relative;
-    }
-
-    [data-tooltip-text]:hover:after {
-        background-color: #000000;
-        background-color: rgba(0, 0, 0, 0.7);
-
-        -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
-        -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
-        box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-
-        color: #ffffff;
-        font-size: 12px;
-        content: attr(data-tooltip-text);
-
-        margin-bottom: 10px;
-        top: 130%;
-        left: -15px;
-        padding: 7px 12px;
-        position: absolute;
-        width: auto;
-        min-width: 120px;
-        max-width: 500px;
-        word-wrap: break-word;
-
-        z-index: 9999;
-    }
-
-    #add-item {
-        margin-left: 10px;
-        margin-top: 10px;
-        border: none;
-        color: white;
-        padding: 8px 15px;
-        font-size: 15px;
-        background-color: black;
-        border-radius: 20px;
-        &:hover {
-            cursor: pointer;
+        [data-tooltip-text]:hover {
+            position: relative;
         }
-    }
 
-    #initialize-button {
-        margin-left: 10px;
-        border: none;
-        color: white;
-        padding: 8px 15px;
-        font-size: 15px;
-        background-color: lightgray;
-        border-radius: 20px;
-        &:hover {
-            cursor: pointer;
+        [data-tooltip-text]:hover:after {
+            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0.7);
+
+            -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+            -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.9);
+            box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+
+            color: #ffffff;
+            font-size: 12px;
+            content: attr(data-tooltip-text);
+
+            margin-bottom: 10px;
+            top: 130%;
+            left: -15px;
+            padding: 7px 12px;
+            position: absolute;
+            width: auto;
+            min-width: 120px;
+            max-width: 500px;
+            word-wrap: break-word;
+
+            z-index: 9999;
         }
-    }
-    #button-container {
-        display: contents;
-        justify-content: center;
-        justify-items: center;
-        button {
-            grid-column: 2;
-            justify-self: flex-end;
-            background-color: rgb(54, 54, 54);
-            color: white;
-            font-size: 20px;
-            padding: 10px;
+
+        #initialize-button {
+            margin-left: 10px;
+            margin-bottom: 5px;
             border: none;
-            border-radius: 20px;
-            width: 200px;
+            color: white;
+            padding: 8px 10px;
+            font-size: 15px;
+            background-color: lightgray;
+            border-radius: 10px;
             &:hover {
                 cursor: pointer;
-                background-color: rgb(172, 159, 159);
             }
-            margin: 5px 80px;
         }
-        #confirm-edit-outfit {
-            &:disabled {
-                background-color: ligthgray;
-                cursor: not-allowed;
+        #button-container {
+            justify-self: end;
+            margin-right: 20px;
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            button {
+                justify-self: flex-end;
+                background-color: rgb(54, 54, 54);
+                color: white;
+                font-size: 17px;
+                height: 40px;
+                padding: 10px;
+                border: none;
+                border-radius: 20px;
+                width: 200px;
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgb(172, 159, 159);
+                }
+                margin: 5px;
             }
+            #confirm-edit-outfit {
+                &:disabled {
+                    background-color: ligthgray;
+                    cursor: not-allowed;
+                }
+            }
+            @media (max-width: 768px) {
+                margin: 10px;
+                justify-self: start;
+            }
+        }
+    }
+    @media (max-width: 1000px) {
+        min-height: 85vh;
+        grid-template-columns: 50% 50%;
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60% auto;
+        min-height: 85vh;
+        #image-window {
+            margin: 0 auto;
+            width: 90%;
         }
     }
 }
