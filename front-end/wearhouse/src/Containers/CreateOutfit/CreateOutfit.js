@@ -161,14 +161,14 @@ class CreateOutfit extends Component {
                                 dateFormat="yyyy-MM-dd"
                                 maxDate={new Date()}
                             />
-                            <div id="weather-icon">
+                            {/*}<div id="weather-icon">
                                 {this.state.weather &&
                                 this.state.weather.temperatureLow
                                     ? this.state.weather.temperatureHigh +
                                       "/" +
                                       this.state.weather.temperatureLow
                                     : null}
-                            </div>
+                            </div>{*/}
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
