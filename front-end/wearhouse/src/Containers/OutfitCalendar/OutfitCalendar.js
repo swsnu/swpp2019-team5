@@ -24,18 +24,17 @@ class OutfitCalendar extends Component {
         this.props.getAllOutfits();
         this.setState({ outfits: this.props.outfits });
     }
-    /*
+
     shouldComponentUpdate() {
         return true;
     }
-    */
-    /*
+
     componentDidUpdate(prevProps) {
         if (prevProps.outfits !== this.props.outfits) {
             this.setState({ outfits: this.props.outfits });
         }
     }
-    */
+
     onClickPrevMonth = () => {
         this.setState({
             ...this.state,
