@@ -166,6 +166,7 @@ def outfit(request):
 
             new_outfit = Outfit(
                 image_link=image, dateWithTime=date, date=change_date_format(date), satisfaction=satisfaction, tempIcon=tempIcon, tempAvg=tempAvg, user=user1)
+            print(new_outfit.__dict__)
             new_outfit.save()
 
             print("items_for_new_outfit: right before saving outfit: ")
