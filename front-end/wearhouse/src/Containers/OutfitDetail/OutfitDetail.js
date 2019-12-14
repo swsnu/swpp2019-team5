@@ -72,8 +72,7 @@ class OutfitDetail extends Component {
         this.props.history.push("/browse");
     };
     render() {
-		console.log(this.props.outfit);
-	    let items = this.state.outfit.items.map((item, index) => {
+        let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
         return (
