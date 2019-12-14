@@ -76,7 +76,6 @@ class Item extends Component {
     deleteTag(e) {
         let tags = this.state.tags;
         if (e.target.value === "" && e.keyCode === 8) {
-            console.log("여기로", e.target.value.length);
             tags.pop();
             this.setState({ tags: tags });
             if (tags.length < 3) {
@@ -90,7 +89,6 @@ class Item extends Component {
     }
     //add Tag
     addTag(e) {
-        console.log(e.target.value, "일단 들어옴");
         let tags = this.state.tags;
         if (
             (e.keyCode === 13 || e.keyCode === 32 || e.keyCode === 9) &&

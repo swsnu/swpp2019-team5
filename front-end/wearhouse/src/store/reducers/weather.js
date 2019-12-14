@@ -8,7 +8,11 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_WEATHER:
-            return { ...state, todayWeather: action.weather };
+            return {
+                ...state,
+                todayWeather: action.weather,
+                selectedDayWeather: action.weather,
+            };
         case actionTypes.GET_SPEC_WEATHER:
             return { ...state, selectedDayWeather: action.selectedDayWeather };
         default:
