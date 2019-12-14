@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Header from "../Header/Header";
 import "./OutfitCalendar.scss";
 import {
     faChevronLeft,
@@ -9,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Calendar from "../../Components/Calendar/Calendar";
+import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import * as actionCreators from "../../store/actions/index";
 
 var currentTime = new Date();
@@ -24,17 +24,18 @@ class OutfitCalendar extends Component {
         this.props.getAllOutfits();
         this.setState({ outfits: this.props.outfits });
     }
-
+    /*
     shouldComponentUpdate() {
         return true;
     }
-
+    */
+    /*
     componentDidUpdate(prevProps) {
         if (prevProps.outfits !== this.props.outfits) {
             this.setState({ outfits: this.props.outfits });
         }
     }
-
+    */
     onClickPrevMonth = () => {
         this.setState({
             ...this.state,
@@ -53,12 +54,7 @@ class OutfitCalendar extends Component {
         });
     };
 
-    onClickDateCell = () => {
-        console.log("date cell clicked");
-    };
-
     render() {
-        console.log(this.state.outfits);
         let outfits_metadata = [];
         if (this.state.outfits !== null) {
             const outfits_of_this_month = this.state.outfits.filter(outfit => {
@@ -89,7 +85,7 @@ class OutfitCalendar extends Component {
         }
         return (
             <div className="OutfitCalendar">
-                <Header />
+                <NavigationButton buttonName="Go Back" />
                 <div id="calendar-wrapper">
                     <div className="calendar-header">
                         <button
@@ -119,7 +115,6 @@ class OutfitCalendar extends Component {
                     <Calendar
                         year={this.state.year}
                         month={this.state.month}
-                        clicked={this.onClickDateCell}
                         outfits={outfits_metadata}
                     />
                 </div>

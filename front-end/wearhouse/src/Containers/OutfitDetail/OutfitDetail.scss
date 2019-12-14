@@ -6,29 +6,40 @@
     height: 85vh;
 
     #image-window {
-        margin: 20px 40px;
-        display: flex;
+        width: 80%;
+        margin: 20px auto;
+        height: 90%;
+        padding-top: 10%;
+        display: grid;
+        grid-template-rows: 15% 85%;
+        grid-template-columns: 1fr;
         justify-content: center;
-        background-color: rgb(66, 66, 66);
-        border: 2px solid rgb(124, 112, 117);
-        border-radius: 5px;
-        min-height: 60%; // Temp value
-        img {
-            max-width: inherit;
-            max-height: 400px;
+        #image-section {
+            background-color: rgb(66, 66, 66);
+            border: 2px solid rgb(124, 112, 117);
+            border-radius: 5px;
+            display: flex;
+            img {
+                max-width: 100%;
+                max-height: 100%;
+
+                margin: 0 auto;
+            }
         }
         #date {
-            position: absolute;
-            top: 135px;
             color: white;
             background-color: rgb(0, 150, 100);
             border-radius: 3px;
-            //border: solid rgb(210, 221, 223) 1px;
+            height: 15px;
             padding: 10px;
             font-size: 14px;
+            width: 140px;
+            display: flex;
+            text-align: center;
+            justify-self: center;
+            align-self: center;
             #weather-icon {
-                display: inline-block;
-                margin-left: 10px;
+                margin-left: 5px;
             }
         }
         overflow: hidden;
@@ -37,13 +48,19 @@
     #info-window {
         display: grid;
         height: 100%;
+        width: 90%;
+        margin: 0 auto;
         grid-template-rows: auto 110px;
+        grid-template-columns: 1fr;
         flex-direction: column;
         justify-content: center;
         #items-info-window {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            .Item {
+                margin-left: 0;
+            }
         }
     }
 
@@ -52,8 +69,6 @@
         display: flex;
         flex-wrap: wrap;
         width: 200px;
-        margin-right: 20px;
-        // flex-direction: column;
         align-content: flex-end;
         button {
             justify-self: flex-end;
@@ -70,6 +85,23 @@
                 background-color: rgb(172, 159, 159);
             }
             margin: 5px auto;
+            @media (max-width: 768px) {
+                margin: 10px;
+                justify-self: start;
+            }
+        }
+    }
+    @media (max-width: 1000px) {
+        min-height: 85vh;
+        grid-template-columns: 50% 50%;
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60% auto;
+        min-height: 85vh;
+        #image-window {
+            margin: 0 auto;
+            width: 90%;
         }
     }
 }

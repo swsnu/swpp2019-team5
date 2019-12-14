@@ -51,7 +51,7 @@ const CALENDAR_HEADER = (
     </thead>
 );
 
-const renderCalendarBody = (dates, onClickDateCell, props) => {
+const renderCalendarBody = (dates, props) => {
     let i = 0;
     const rows = [];
     for (let week = 0; week < 5; week++) {
@@ -64,6 +64,14 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
             if (dates[i] !== undefined && day === dates[i].date.getDay()) {
                 const date = dates[i].date;
                 const id = dates[i].outfit_id;
+
+                const imgUrl =
+                    typeof dates[i].imageURL === "undefined"
+                        ? ""
+                        : dates[i].imageURL;
+                const outfitImage = {
+                    backgroundImage: "url(" + imgUrl + ")",
+                };
 
                 let toPush = (
                     <td
@@ -78,35 +86,27 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 : "has-outfit"
                         }
                         onClick={() => {
-                            // console.log(props.history);
-                            console.log(id);
-                            // props.history.push("/outfitDetail/" + 2);
                             typeof id !== "undefined" &&
                                 props.history.push("/outfitDetail/" + id);
                         }}
+                        style={outfitImage}
                     >
+                        <div
+                            className={
+                                typeof dates[i].outfit_id !== "undefined"
+                                    ? "calendar-overlay active"
+                                    : "calendar-overlay inactive"
+                            }
+                        ></div>
                         <div className="date-cell-header">
                             <div className="date">{date.getDate()}</div>
-                            <div className="weather-icon">
-                                {dates[i].weather !== null
-                                    ? weatherIconText[dates[i].weather]
-                                    : null}
-                            </div>
                         </div>
 
                         <div className="date-cell-body">
-                            <div className="outfit-image">
-                                {typeof dates[i].imageURL !== "undefined" && (
-                                    <React.Fragment>
-                                        <img src={dates[i].imageURL}></img>
-                                        <div className="overlay-calendar"></div>
-                                    </React.Fragment>
-                                )}
-                            </div>
                             <div className="satisfaction-icon-calendar">
                                 {dates[i].satisfactionValue !== null ? (
                                     <img
-                                        className="emoticon_on_calendar_cell"
+                                        className="emoticon-on-calendar-cell"
                                         src={
                                             satisfactionIconText[
                                                 dates[i].satisfactionValue - 1
@@ -116,6 +116,12 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                                 ) : (
                                     <FontAwesomeIcon icon={faMehBlank} />
                                 )}
+
+                                <div className="weather-icon">
+                                    {dates[i].weather !== null
+                                        ? weatherIconText[dates[i].weather]
+                                        : null}
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -123,7 +129,12 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
                 row.push(toPush);
                 i++;
             } else {
-                row.push(<td key={7 * week + day}></td>);
+                row.push(
+                    <td
+                        key={7 * week + day}
+                        className={day === 6 ? "last-column" : ""}
+                    ></td>,
+                );
             }
         }
         rows.push(row);
@@ -137,10 +148,10 @@ const renderCalendarBody = (dates, onClickDateCell, props) => {
     );
 };
 
-const renderCalendar = (dates, onClickDateCell, props) => (
+const renderCalendar = (dates, props) => (
     <table id="calendar">
         {CALENDAR_HEADER}
-        {renderCalendarBody(dates, onClickDateCell, props)}
+        {renderCalendarBody(dates, props)}
     </table>
 );
 
@@ -149,9 +160,7 @@ const Calendar = props => {
     const year = props.year;
     const month = props.month - 1; // Date object returns 0 ~ 11
     let maxDate = new Date(year, month + 1, 0).getDate();
-    const onClickDateCell = props.clicked;
     const outfits = props.outfits;
-    console.log(outfits);
 
     // dates: an array of Date objects
     for (let date = 1; date <= maxDate; date++) {
@@ -203,7 +212,7 @@ const Calendar = props => {
 
     // console.log(props.history.push("/"));
 
-    return renderCalendar(dates, onClickDateCell, props);
+    return renderCalendar(dates, props);
 };
 
 export default withRouter(Calendar);

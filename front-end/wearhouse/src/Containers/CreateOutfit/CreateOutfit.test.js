@@ -7,6 +7,7 @@ import "../../setupTests";
 import axios from "axios";
 import CreateOutfit from "./CreateOutfit";
 import { ConnectedRouter } from "connected-react-router";
+import * as actionCreators from "../../store/actions/outfit";
 
 let stubInitialState_item = {
     items: [],
@@ -87,7 +88,7 @@ let mockStore = getMockStore(
 );
 
 describe("<CreateOutfit />", () => {
-    let createOutfit, spyAxios_post, spyAxios_get;
+    let createOutfit, spyAxios_post, spyAxios_get, spyPostOutfit;
     beforeEach(() => {
         createOutfit = (
             <Provider store={mockStore}>
@@ -104,6 +105,19 @@ describe("<CreateOutfit />", () => {
         spyAxios_get = jest
             .spyOn(axios, "get")
             .mockImplementation(() => Promise.resolve({}));
+        spyPostOutfit = jest
+            .spyOn(actionCreators, "createOutfit")
+            .mockImplementation(() => {
+                return {
+                    id: 0,
+                    type: "CREATE_OUTFIT",
+                    image: "",
+                    satisfactionValue: null,
+                    date: "2019-12-12T06:36:23.998Z",
+                    items: [],
+                    weather: { tempAvg: 5, icon: undefined },
+                };
+            });
     });
 
     afterEach(() => {
@@ -164,9 +178,9 @@ describe("<CreateOutfit />", () => {
         wrapper.simulate("click");
         let count = component.find(".Item");
         expect(count.length).toBe(0);
-
         let confirm = component.find("#confirm-create-outfit");
         confirm.simulate("click");
+        expect(spyPostOutfit).toHaveBeenCalledTimes(1);
     });
 
     it("edit satisfaction valaue", () => {

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../store/actions/index";
 import moment from "moment";
-
 import NavigationButton from "../../Components/NavigationButton/NavigationButton";
 import Item from "../../Components/Item/Item";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -41,7 +40,7 @@ class OutfitDetail extends Component {
         outfit: {
             image: this.props.outfit.image,
             satisfactionValue: null,
-            date: "", //in sprin
+            date: this.props.outfit.date, //in sprin
             items: [],
             weather: {},
         },
@@ -76,17 +75,11 @@ class OutfitDetail extends Component {
         let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
-        console.log(this.props.outfit.date, "detail date");
         return (
             <div id="outfit-detail">
                 <NavigationButton buttonName="Go Back" />
                 <div id="detail-outfit-window">
                     <div id="image-window">
-                        <Satisfaction
-                            value={this.state.outfit.satisfactionValue}
-                        />
-                        <img src={this.props.outfit.image} alt="outfit" />
-
                         <label id="date">
                             {this.state.outfit.date
                                 ? moment(this.state.outfit.date).format("LL")
@@ -98,6 +91,12 @@ class OutfitDetail extends Component {
                                 </div>
                             )}
                         </label>
+                        <div id="image-section">
+                            <Satisfaction
+                                value={this.state.outfit.satisfactionValue}
+                            />
+                            <img src={this.state.image} alt="outfit" />
+                        </div>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
 
@@ -118,7 +117,6 @@ class OutfitDetail extends Component {
                             </button>
                         </div>
                     </div>
-
                     <AddOutfit />
                 </div>
             </div>

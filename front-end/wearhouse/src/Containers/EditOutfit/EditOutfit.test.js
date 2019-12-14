@@ -80,14 +80,23 @@ let stubInitialState_weather = {
     todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
     selectedWeather: null,
 };
-
+let stubInitialState_image = {
+    outfitData: {
+        id: "",
+        image: "",
+        satisfactionValue: null,
+        date: "2019-11-07T04",
+        items: [{ category: "Outer", tags: [] }],
+        weather: { tempAvg: "", icon: "" },
+    },
+};
 let mockStore = getMockStore(
     stubInitialState_login,
     stubInitialState_item,
     stubInitialState_outfit,
     stubInitialState_outfit,
     stubInitialState_weather,
-    {},
+    stubInitialState_image,
 );
 
 describe("<EditOutfit />", () => {

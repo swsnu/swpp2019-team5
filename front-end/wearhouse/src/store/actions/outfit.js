@@ -30,6 +30,7 @@ export const getSpecificOutfit = id => {
 };
 
 export const createOutfit_ = outfit => {
+    //console.log(outfit, "here1");
     return {
         type: actionTypes.CREATE_OUTFIT,
         image: outfit.image,
@@ -50,7 +51,10 @@ export const createOutfit = outfit => {
                 dispatch(createOutfit_(res.data));
                 id = res.data.id;
             })
-            .then(() => dispatch(push("/outfitDetail/" + id)));
+            .then(() => dispatch(push("/outfitDetail/" + id)))
+            .catch(error => {
+                Promise.reject(error.response.data.message);
+            });
     };
 };
 
