@@ -31,11 +31,11 @@ export const postImage = image => {
                     dispatch(postImage_(res.data));
                 })
                 .catch(error => {
-                    Promise.reject(error.response.data.message);
+                    console.log(error);
                 })
                 .then(() => dispatch(push("/createOutfit")))
                 .catch(error => {
-                    Promise.reject(error.response.data.message);
+                    console.log(error);
                     dispatch(push("/createOutfit"));
                 })
         );

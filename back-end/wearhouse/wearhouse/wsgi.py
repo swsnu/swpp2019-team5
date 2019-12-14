@@ -11,6 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+<<<<<<< HEAD
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wearhouse.settings.development')
+=======
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wearhouse.settings.production')
+>>>>>>> a9cde5b8b338a05bb1a2cb228e27c991977eee29
 
 application = get_wsgi_application()

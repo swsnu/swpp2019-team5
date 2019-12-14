@@ -53,7 +53,7 @@ export const createOutfit = outfit => {
             })
             .then(() => dispatch(push("/outfitDetail/" + id)))
             .catch(error => {
-                Promise.reject(error.response.data.message);
+                console.log(error);
             });
     };
 };

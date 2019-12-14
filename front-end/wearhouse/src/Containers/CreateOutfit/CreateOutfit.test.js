@@ -66,7 +66,7 @@ let stubInitialState_login = {
 
 let stubInitialState_weather = {
     todayWeather: { temperatureHigh: 10, temperatureLow: 0 },
-    selectedWeather: { temperatureHigh: 10, temperatureLow: 0 },
+    selectedDayWeather: { temperatureHigh: 10, temperatureLow: 0 },
 };
 let stubInitialState_image = {
     outfitData: {
