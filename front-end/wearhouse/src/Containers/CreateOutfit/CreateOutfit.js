@@ -112,10 +112,11 @@ class CreateOutfit extends Component {
                 this.state.date !== null
                     ? {
                           tempAvg:
-                              (this.props.weather.temperatureHigh +
-                                  this.props.weather.temperatureLow) /
+                              (this.props.selected_day_weather.temperatureHigh +
+                                  this.props.selected_day_weather
+                                      .temperatureLow) /
                               2,
-                          icon: this.props.weather.icon,
+                          icon: this.props.selected_day_weather.icon,
                       }
                     : { tempAvg: null, icon: "" },
         };
@@ -161,16 +162,13 @@ class CreateOutfit extends Component {
                                 maxDate={new Date()}
                             />
                             {/*}<div id="weather-icon">
-                                {this.state.weather !== null
-                                    ? iconText[this.state.weather.icon]
-                                    : null}{" "}
                                 {this.state.weather &&
                                 this.state.weather.temperatureLow
                                     ? this.state.weather.temperatureHigh +
                                       "/" +
                                       this.state.weather.temperatureLow
                                     : null}
-                                </div>{*/}
+                            </div>{*/}
                         </div>
                         <div id="image-window">
                             <EditSatisfaction
