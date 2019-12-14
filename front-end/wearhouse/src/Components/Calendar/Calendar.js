@@ -106,7 +106,7 @@ const renderCalendarBody = (dates, props) => {
                             <div className="satisfaction-icon-calendar">
                                 {dates[i].satisfactionValue !== null ? (
                                     <img
-                                        className="emoticon_on_calendar_cell"
+                                        className="emoticon-on-calendar-cell"
                                         src={
                                             satisfactionIconText[
                                                 dates[i].satisfactionValue - 1

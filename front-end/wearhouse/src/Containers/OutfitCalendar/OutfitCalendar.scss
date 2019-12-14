@@ -1,22 +1,17 @@
 .OutfitCalendar {
-    width: 100vw;
-    height: 100vh;
     background-color: rgba(211, 211, 211, 0.3);
 
+    height: 92vh;
     #calendar-wrapper {
-        margin-left: 15vw;
-        margin-right: 15vw;
+        margin: 0 auto;
         padding-top: 5vh;
-        width: 70vw;
-        height: 100vh;
+        width: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
 
         @media (max-width: 500px) {
-            margin-left: 0px;
-            margin-right: 0px;
-            width: 100vw;
+            width: 90%;
         }
 
         .calendar-header {
@@ -27,7 +22,7 @@
             margin-bottom: 5vh;
 
             @media (max-width: 500px) {
-                margin-bottom: 3vh;
+                margin-bottom: 20px;
             }
 
             #calendar-year-month {

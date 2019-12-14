@@ -3,12 +3,12 @@
         display: grid;
         grid-template-rows: 40% 60%;
 
-        height: 90vh;
+        min-height: 90vh;
         padding: 0 5%;
 
         #intro-text {
             text-align: center;
-            width: 60%;
+            width: fit-content;
             margin: 70px auto;
             font-size: 30px;
             span {
@@ -16,13 +16,24 @@
                 font-weight: 900;
                 line-height: 100px;
             }
+            @media (max-width: 768px) {
+                span {
+                    font-size: 40px;
+                }
+            }
         }
 
-        #intro-image {
-            width: 70%;
-            margin: 20px auto 40px;
-            position: relative;
-            align-self: end;
+        #image-container {
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            #intro-image {
+                flex-shrink: 0;
+                height: 80%;
+                margin: 20px auto 40px;
+                position: relative;
+                align-self: end;
+            }
         }
     }
 
@@ -35,6 +46,11 @@
             width: 60%;
             margin: 70px auto 0;
             text-align: center;
+            @media (max-width: 768px) {
+                width: 100%;
+                margin-top: 30px;
+                font-size: 25px;
+            }
         }
         #information-wrapper {
             width: 100%;
@@ -45,8 +61,8 @@
                 .features-icon {
                     font-size: 80px;
                     text-align: center;
-                    width: 100px;
-                    height: 100px;
+                    width: 90px;
+                    height: 90px;
                     border-radius: 100%;
                     margin: 0 auto 20px;
                     padding: 30px;
@@ -60,9 +76,10 @@
                     font-size: 20px;
                 }
                 text-align: center;
-                width: 230px;
+                width: 220px;
                 height: 350px;
                 padding: 25px;
+                margin: 20px;
                 border-radius: 10px;
                 font-size: 17px;
                 font-weight: 400;
@@ -93,6 +110,22 @@
             line-height: 20px;
             a {
                 color: lightyellow;
+            }
+        }
+        @media (max-width: 768px) {
+            height: fit-content;
+            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            #footericon {
+                width: 100px;
+                height: 50px;
+                margin: 0 auto;
+            }
+            #footertext {
+                width: 100%;
+                margin: 0;
+                text-align: center;
             }
         }
     }

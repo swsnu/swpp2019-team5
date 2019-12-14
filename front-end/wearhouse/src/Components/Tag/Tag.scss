@@ -3,7 +3,7 @@ $fontsize: 14px;
     background-color: #ee7185;
     color: #fff;
     font-weight: 500;
-    padding: 4px 8px;
+    padding: 4px 6px;
     text-align: center;
     text-decoration: none;
     display: flex;
@@ -16,7 +16,8 @@ $fontsize: 14px;
     width: fit-content;
     .tag-text {
         font-size: $fontsize;
-        padding: 0 3px;
+        padding: 0;
+        padding-right: 5px;
     }
     input {
         font-size: $fontsize;

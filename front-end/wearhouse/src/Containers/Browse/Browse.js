@@ -4,6 +4,7 @@ import {
     faSearch,
     faChevronDown,
     faChevronUp,
+    faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
@@ -196,7 +197,7 @@ class Browse extends React.Component {
         });
         auto_complete = <div id="option-group">{auto_complete}</div>;
 
-        const outfits = this.props.outfits.map(outfit => {
+        const outfits = this.props.outfits.reverse().map(outfit => {
             return (
                 <Outfit
                     key={outfit.id}
@@ -353,53 +354,67 @@ class Browse extends React.Component {
                         </div>
                     </div>
                 );
-                /*show the search result : container = ~~~*/
-                ///get outfit list and render them
                 break;
             default:
                 break;
         }
         return (
             <div id="browse">
-                <div id="search-container">
-                    <div id="select-searchmode">
-                        <div id="selected-option">
-                            <div id="selected-text">
-                                {this.state.searchOptions.searchMode}
+                <div id="top-container">
+                    <div id="search-container">
+                        <div id="select-searchmode">
+                            <div id="selected-option">
+                                <div id="selected-text">
+                                    {this.state.searchOptions.searchMode}
+                                </div>
+                                <div
+                                    id="selectButton"
+                                    onClick={() => this.showSearchOptions()}
+                                >
+                                    {!this.state.searchOptionsVisible ? (
+                                        <FontAwesomeIcon icon={faChevronDown} />
+                                    ) : (
+                                        <FontAwesomeIcon icon={faChevronUp} />
+                                    )}
+                                </div>
                             </div>
                             <div
-                                id="selectButton"
-                                onClick={() => this.showSearchOptions()}
+                                id="dropdown-selection"
+                                className={this.state.searchOptionsVisible.toString()}
                             >
-                                {!this.state.searchOptionsVisible ? (
-                                    <FontAwesomeIcon icon={faChevronDown} />
-                                ) : (
-                                    <FontAwesomeIcon icon={faChevronUp} />
-                                )}
+                                <div
+                                    className="option"
+                                    onClick={() =>
+                                        this.onSelectSearchOption("Outfit")
+                                    }
+                                >
+                                    Outfit
+                                </div>
+                                <div
+                                    className="option"
+                                    onClick={() =>
+                                        this.onSelectSearchOption("Item")
+                                    }
+                                >
+                                    Item
+                                </div>
                             </div>
                         </div>
-                        <div
-                            id="dropdown-selection"
-                            className={this.state.searchOptionsVisible.toString()}
-                        >
-                            <div
-                                className="option"
-                                onClick={() =>
-                                    this.onSelectSearchOption("Outfit")
-                                }
-                            >
-                                Outfit
-                            </div>
-                            <div
-                                className="option"
-                                onClick={() =>
-                                    this.onSelectSearchOption("Item")
-                                }
-                            >
-                                Item
-                            </div>
+                        <div id="search-input">
+                            <div id="search-input-queries">{searchQuery}</div>
+                            <input
+                                id="search-input-text"
+                                value={this.state.search_query}
+                                onKeyDown={e => this.addTag(e)}
+                                onChange={e => this.onSearchInput(e)}
+                                placeholder="Search by tag..."
+                            />
                         </div>
+                        <button id="search-button">
+                            <FontAwesomeIcon icon={faSearch} />
+                        </button>
                     </div>
+<<<<<<< HEAD
                     <div id="search-input">
                         <div id="search-input-queries">{searchQuery}</div>
                         <input
@@ -417,11 +432,13 @@ class Browse extends React.Component {
                     </div>
                     <button id="search-button">
                         <FontAwesomeIcon icon={faSearch} />
+=======
+
+                    <button id="calendar-button" onClick={this.onClickCalendar}>
+                        <FontAwesomeIcon icon={faCalendarAlt} />
+>>>>>>> da5f4f7f2b12d78ee6e4212efa41cd14ad98afe5
                     </button>
                 </div>
-                <button id="calendar-button" onClick={this.onClickCalendar}>
-                    Calendar
-                </button>
                 {container}
                 <AddOutfit />
             </div>
