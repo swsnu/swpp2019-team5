@@ -59,7 +59,7 @@ class Browse extends React.Component {
             this.setState({
                 mode: "browse",
                 searchOptions: {
-                    searchMode: "Outfit",
+                    searchMode: this.state.searchOptions.searchMode,
                     searchArray: [],
                     tempMax: 50,
                     tempMin: -30,
