@@ -76,6 +76,7 @@ class UploadImage extends React.Component {
         let confirmImageButton = null;
         let chooseFileButton = null;
         let previewImage = null;
+        let chooseMLButton = null;
         let alertMessage = null;
         let loading = null;
 
@@ -99,6 +100,12 @@ class UploadImage extends React.Component {
                     src={this.state.selectedImageURL}
                     alt="selected file"
                 />
+            );
+            chooseMLButton = (
+                <div id="choose-ml">
+                    <input type="checkbox" name="ml" value="active" />
+                    <label>Automatically detect items!</label>
+                </div>
             );
             // console.log(this.state.isPreviewMode);
             // console.log(previewImage);
@@ -162,6 +169,7 @@ class UploadImage extends React.Component {
                         </div>
                         {chooseFileButton}
                         {previewImage}
+                        {chooseMLButton}
                         {alertMessage}
                         <div className="buttons">
                             {chooseOtherImageButton}
