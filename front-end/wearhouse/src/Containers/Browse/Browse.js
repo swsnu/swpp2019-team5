@@ -414,29 +414,9 @@ class Browse extends React.Component {
                             <FontAwesomeIcon icon={faSearch} />
                         </button>
                     </div>
-<<<<<<< HEAD
-                    <div id="search-input">
-                        <div id="search-input-queries">{searchQuery}</div>
-                        <input
-                            id="search-input-text"
-                            value={this.state.search_query}
-                            onKeyDown={e => this.addTag(e)}
-                            onChange={e => this.onSearchInput(e)}
-                            placeholder="Search by tag..."
-                        />
-                        <div id="options">
-                            {this.state.option_list.length >= 1
-                                ? auto_complete
-                                : null}
-                        </div>
-                    </div>
-                    <button id="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
-=======
 
                     <button id="calendar-button" onClick={this.onClickCalendar}>
                         <FontAwesomeIcon icon={faCalendarAlt} />
->>>>>>> da5f4f7f2b12d78ee6e4212efa41cd14ad98afe5
                     </button>
                 </div>
                 {container}
