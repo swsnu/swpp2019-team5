@@ -1,5 +1,5 @@
 [client]
-database = 'wearhouse'
+database = 'test'
 host = 'localhost'
 user = 'wearhouse'
 password = 'q1w2e3!@#'

@@ -72,7 +72,8 @@ class OutfitDetail extends Component {
         this.props.history.push("/browse");
     };
     render() {
-        let items = this.state.outfit.items.map((item, index) => {
+		console.log(this.props.outfit);
+	    let items = this.state.outfit.items.map((item, index) => {
             return <Item item={item} key={index} editMode={false} />;
         });
         return (
@@ -95,7 +96,7 @@ class OutfitDetail extends Component {
                             <Satisfaction
                                 value={this.state.outfit.satisfactionValue}
                             />
-                            <img src={this.state.image} alt="outfit" />
+                            <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}
