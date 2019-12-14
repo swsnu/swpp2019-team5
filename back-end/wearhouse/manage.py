@@ -5,11 +5,7 @@ import sys
 
 
 def main():
-<<<<<<< HEAD
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wearhouse.settings.development')
-=======
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wearhouse.settings.production')
->>>>>>> a9cde5b8b338a05bb1a2cb228e27c991977eee29
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

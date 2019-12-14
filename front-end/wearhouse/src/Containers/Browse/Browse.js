@@ -4,7 +4,6 @@ import {
     faSearch,
     faChevronDown,
     faChevronUp,
-    faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";

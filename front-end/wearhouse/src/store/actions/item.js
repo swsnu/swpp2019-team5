@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import { push } from "connected-react-router";
 
 export const getItems_ = items => {
     return { type: actionTypes.GET_ITEMS, items: items };
