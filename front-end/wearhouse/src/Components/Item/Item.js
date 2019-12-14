@@ -73,6 +73,20 @@ class Item extends Component {
             tags: this.props.item.tags,
         });
     }
+    deleteTag(e) {
+        let tags = this.state.tags;
+        if (e.target.value === "" && e.keyCode === 8) {
+            tags.pop();
+            this.setState({ tags: tags });
+            if (tags.length < 3) {
+                this.setState({ todo: "editEnabled" });
+            }
+        }
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: tags,
+        });
+    }
     //add Tag
     addTag(e) {
         let tags = this.state.tags;
@@ -105,12 +119,6 @@ class Item extends Component {
 
             if (tags.length >= 3) {
                 this.setState({ todo: "editDisabled" });
-            }
-        } else if (e.target.value === "" && e.keyCode === 8) {
-            tags.pop();
-            this.setState({ tags: tags });
-            if (tags.length < 3) {
-                this.setState({ todo: "editEnabled" });
             }
         }
         this.props.applyEdit({
@@ -180,6 +188,7 @@ class Item extends Component {
                     type="text"
                     placeholder="Enter tag.."
                     onChange={e => this.handleAutoComplete(e)}
+                    onKeyDown={e => this.deleteTag(e)}
                     onKeyUp={e => this.addTag(e)}
                     autoComplete="on"
                     onFocus={() => {

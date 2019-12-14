@@ -139,7 +139,7 @@ describe("<Item/>", () => {
 
         wrapper = component.find(".tag-input");
         wrapper.simulate("click");
-        wrapper.simulate("keyup", {
+        wrapper.simulate("keydown", {
             keyCode: 8,
         });
         count = component.find(".tag-in-outfit");
