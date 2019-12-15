@@ -139,7 +139,10 @@ def outfit(request):
                 item_candidates = list(item_candidates)
                 print("item_candidates: ")
                 print(item_candidates)
-                assert len(item_candidates) <= 1, "...it is literally disaster"
+                if len(item_candidates) > 1 :
+                    print("...it is literally disaster")
+                    print(item_candidates)
+                
 
                 itemExists = len(item_candidates) == 1
 
