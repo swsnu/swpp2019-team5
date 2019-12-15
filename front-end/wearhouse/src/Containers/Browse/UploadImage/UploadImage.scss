@@ -87,13 +87,20 @@
             margin: auto;
             margin-top: 0px;
             margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 20px auto;
 
             input {
                 margin-right: 10px;
             }
 
             label {
-                font-size: 15px;
+                font-size: 14px;
+
+                #warning-message {
+                    font-size: 10px;
+                    color: red;
+                }
             }
         }
 
