@@ -4,6 +4,7 @@ import {
     faSearch,
     faChevronDown,
     faChevronUp,
+    faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
@@ -22,7 +23,6 @@ class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
-
         item_list: this.props.item_list,
         option_list: this.props.option_list,
 
@@ -52,7 +52,20 @@ class Browse extends React.Component {
         if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
 
-            //auto_complete
+            let e_value = e.target.value;
+
+            let response_list = [];
+            this.props.items.forEach(item => {
+                item.tags.forEach(tag => {
+                    if (tag.includes(e_value)) {
+                        response_list.push(item);
+                    }
+                });
+            });
+            this.setState({ option_list: response_list });
+
+            console.log(this.state.option_list);
+            response_list = [];
         } else {
             //init searchOptions when searchmode is turned off
             this.setState({
@@ -229,7 +242,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.image}
+                        image={outfit.imageUrl}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -257,7 +270,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.image}
+                        image={outfit.imageUrl}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -267,7 +280,6 @@ class Browse extends React.Component {
                 return null;
             }
         });
-
         switch (this.state.mode) {
             case "browse":
                 container = (
@@ -408,28 +420,19 @@ class Browse extends React.Component {
                                 onChange={e => this.onSearchInput(e)}
                                 placeholder="Search by tag..."
                             />
+                            <div id="options">
+                                {this.state.option_list.length >= 1
+                                    ? auto_complete
+                                    : null}
+                            </div>
                         </div>
                         <button id="search-button">
                             <FontAwesomeIcon icon={faSearch} />
                         </button>
                     </div>
-                    <div id="search-input">
-                        <div id="search-input-queries">{searchQuery}</div>
-                        <input
-                            id="search-input-text"
-                            value={this.state.search_query}
-                            onKeyDown={e => this.addTag(e)}
-                            onChange={e => this.onSearchInput(e)}
-                            placeholder="Search by tag..."
-                        />
-                        <div id="options">
-                            {this.state.option_list.length >= 1
-                                ? auto_complete
-                                : null}
-                        </div>
-                    </div>
-                    <button id="search-button">
-                        <FontAwesomeIcon icon={faSearch} />
+
+                    <button id="calendar-button" onClick={this.onClickCalendar}>
+                        <FontAwesomeIcon icon={faCalendarAlt} />
                     </button>
                 </div>
                 {container}

@@ -50,8 +50,10 @@ class EditOutfit extends Component {
     componentDidMount() {
         this.props.getOutfit(this.props.match.params.id);
         let date = this.props.outfit.date;
-        if (date !== null) {
+        console.log(date);
+        if (date !== "") {
             let date_arr = date.split("-");
+            console.log(date_arr);
             date_arr[2] = date_arr[2].substring(0, 2);
             date_arr[1] = (parseInt(date_arr[1]) - 1).toString();
             date = new Date(date_arr[0], date_arr[1], date_arr[2], 12);
