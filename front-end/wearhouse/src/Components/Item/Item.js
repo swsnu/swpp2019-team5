@@ -137,16 +137,17 @@ class Item extends Component {
         let tag_list = this.state.tags;
         let e_value = e.target.value;
 
-        console.log("tag_list =" + tag_list);
         let temp_list = [];
         let response_list = [];
         this.props.items.forEach(item => {
             if (this.isSubSet(item.tags, tag_list)) {
-                temp_list.push(item);
+                let sug = item.tags.filter(x => !tag_list.includes(x));
+                if (sug.length !== 0) {
+                    temp_list.push(item);
+                }
             }
         });
         console.log(temp_list);
-
         temp_list.forEach(item => {
             item.tags.forEach(tag => {
                 if (tag.includes(e_value)) {
@@ -154,13 +155,13 @@ class Item extends Component {
                 }
             });
         });
+
         response_list.reduce(function(a, b) {
             if (a.indexOf(b) < 0) a.push(b);
             return a;
         }, []);
         this.setState({ option_list: response_list });
 
-        console.log(this.state.option_list);
         temp_list = [];
         response_list = [];
     };
@@ -270,8 +271,11 @@ class Item extends Component {
                         <div id="options">
                             {this.state.show &&
                             this.state.option_list.length >= 1 &&
-                            (this.input_bar.value.length >= 1 ||
-                                this.state.tags.length >= 1)
+                            ((this.state.todo === "editEnabled" &&
+                                this.input_bar &&
+                                this.input_bar.value.length >= 1) ||
+                                (this.state.tags.length >= 1 &&
+                                    this.state.tags <= 2))
                                 ? auto_complete
                                 : null}
                         </div>

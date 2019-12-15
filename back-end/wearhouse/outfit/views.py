@@ -13,7 +13,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
-user1 = User.objects.get(username="user1")
+#user1 = User.objects.get(username="user1")
 
 
 '''
@@ -33,7 +33,7 @@ def change_date_format(date):
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
 def outfit(request):
-    # user1 = request.user
+    user1 = request.user
 
     if request.method == 'GET':
 
