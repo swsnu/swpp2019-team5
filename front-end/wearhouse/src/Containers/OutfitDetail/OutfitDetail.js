@@ -69,7 +69,7 @@ class OutfitDetail extends Component {
 
     onDelete = () => {
         this.props.deleteOutfit(this.props.match.params.id);
-        this.props.history.push("/browse");
+        this.props.history.push("/main");
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
