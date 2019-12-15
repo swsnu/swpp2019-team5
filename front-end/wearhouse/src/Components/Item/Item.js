@@ -156,11 +156,7 @@ class Item extends Component {
             });
         });
 
-        response_list.reduce(function(a, b) {
-            if (a.indexOf(b) < 0) a.push(b);
-            return a;
-        }, []);
-        this.setState({ option_list: response_list });
+        this.setState({ option_list: Array.from(new Set(response_list)) });
 
         temp_list = [];
         response_list = [];
