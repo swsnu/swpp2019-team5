@@ -9,7 +9,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
 import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
-import Option from "../../Components/Option/Option";
 
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -23,8 +22,6 @@ class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
-        item_list: this.props.item_list,
-        option_list: this.props.option_list,
 
         searchOptionsVisible: false,
         searchOptions: {
@@ -51,21 +48,6 @@ class Browse extends React.Component {
         this.setState({ search_query: e.target.value });
         if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
-
-            let e_value = e.target.value;
-
-            let response_list = [];
-            this.props.items.forEach(item => {
-                item.tags.forEach(tag => {
-                    if (tag.includes(e_value)) {
-                        response_list.push(item);
-                    }
-                });
-            });
-            this.setState({ option_list: response_list });
-
-            console.log(this.state.option_list);
-            response_list = [];
         } else {
             //init searchOptions when searchmode is turned off
             this.setState({
@@ -408,11 +390,6 @@ class Browse extends React.Component {
                                 placeholder="Search by tag..."
                             />
                         </div>
-                        <div id="options">
-                            {this.state.option_list.length >= 1
-                                ? auto_complete
-                                : null}
-                        </div>
                         <button id="search-button">
                             <FontAwesomeIcon icon={faSearch} />
                         </button>
@@ -433,7 +410,6 @@ const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
         selectedOutfit: state.outfit.selectedOutfit,
-        option_list: state.item.option_list,
         items: state.item.items,
     };
 };
