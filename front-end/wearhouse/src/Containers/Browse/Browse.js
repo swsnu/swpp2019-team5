@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TempSlider, marks } from "./sliderStyles";
 import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
+import Option from "../../Components/Option/Option";
 
 import Outfit from "../../Components/Outfit/Outfit";
 import AddOutfit from "../../Components/AddOutfit/AddOutfit";
@@ -22,6 +23,8 @@ class Browse extends React.Component {
     state = {
         mode: "browse",
         search_query: "",
+        item_list: this.props.item_list,
+        option_list: this.props.option_list,
 
         searchOptionsVisible: false,
         searchOptions: {
@@ -48,6 +51,21 @@ class Browse extends React.Component {
         this.setState({ search_query: e.target.value });
         if (this.state.searchOptions.searchArray.length >= 1) {
             this.setState({ mode: "search" }); //check whether search query exists
+
+            let e_value = e.target.value;
+
+            let response_list = [];
+            this.props.items.forEach(item => {
+                item.tags.forEach(tag => {
+                    if (tag.includes(e_value)) {
+                        response_list.push(item);
+                    }
+                });
+            });
+            this.setState({ option_list: response_list });
+
+            console.log(this.state.option_list);
+            response_list = [];
         } else {
             //init searchOptions when searchmode is turned off
             this.setState({
@@ -165,8 +183,31 @@ class Browse extends React.Component {
         //return true;
     };
 
+    //auto-complete
+    setItem(op) {
+        this.setState({ show: false });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: op.tags,
+        });
+        this.setState({ preventBlur: false });
+    }
+
     render() {
         let container = null;
+
+        let auto_complete = this.state.option_list.map((op, index) => {
+            return (
+                <Option
+                    key={index}
+                    click={() => this.setItem(op)}
+                    option={op}
+                    activateBlur={() => this.setState({ preventBlur: false })}
+                    preventBlur={() => this.setState({ preventBlur: true })}
+                />
+            );
+        });
+        auto_complete = <div id="option-group">{auto_complete}</div>;
 
         const outfits = this.props.outfits.reverse().map(outfit => {
             return (
@@ -201,7 +242,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.image}
+                        image={outfit.imageUrl}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -229,7 +270,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.image}
+                        image={outfit.imageUrl}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -379,6 +420,11 @@ class Browse extends React.Component {
                                 onChange={e => this.onSearchInput(e)}
                                 placeholder="Search by tag..."
                             />
+                            <div id="options">
+                                {this.state.option_list.length >= 1
+                                    ? auto_complete
+                                    : null}
+                            </div>
                         </div>
                         <button id="search-button">
                             <FontAwesomeIcon icon={faSearch} />
@@ -400,11 +446,14 @@ const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
         selectedOutfit: state.outfit.selectedOutfit,
+        option_list: state.item.option_list,
+        items: state.item.items,
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
         getAllOutfits: () => dispatch(actionCreators.getOutfits()),
+        getAllItems: () => dispatch(actionCreators.getItems()),
     };
 };
 export default connect(

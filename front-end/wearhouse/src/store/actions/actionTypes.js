@@ -15,6 +15,7 @@ export const SET_OUTFIT_SATISFACTION = "SET_OUTFIT_SATISFACTION";
 export const GET_OUTFIT_BY_ITEM = "GET_OUTFIT_BY_ITEM";
 //Outfit reducer
 
+export const GET_ITEMS = "GET_ITEMS";
 export const GET_ITEM_BY_TAGS = "GET_ITEM_BY_TAGS";
 export const EDIT_ITEM = "EDIT_ITEM";
 export const CREATE_ITEM = "CREATE_ITEM";
