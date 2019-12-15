@@ -111,7 +111,7 @@ def categorize(article):
 @csrf_exempt
 def getImage(request):
     if request.method == 'POST':
-
+        print(request.POST.get('ml'))
         block_blob_service = initBlobStorageService()
         # createBlobStorageContainer(block_blob_service, CONTAINER_NAME)
 
@@ -120,15 +120,19 @@ def getImage(request):
 
         image_url = storeImageInBlobContainer(block_blob_service, input_file)
 
-        result = runML(image_url)["articles"]  # type of result: python dict
+        if request.POST.get('ml') == "true":
+            result = runML(image_url)["articles"]  # type of result: python dict
 
-        print(result)
+            print(result)
 
-        categorized_result = map(categorize, result)
+            categorized_result = map(categorize, result)
 
-        response_dict = {"image": image_url, "items": list(categorized_result)}
+            response_dict = {"image": image_url, "items": list(categorized_result)}
+
+        else:
+            response_dict = {"image": image_url, "items": []}
+
         print(response_dict)
-
         return JsonResponse(response_dict, status=201)
 
     else:
