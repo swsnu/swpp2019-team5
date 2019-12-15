@@ -196,20 +196,7 @@ class Browse extends React.Component {
     render() {
         let container = null;
 
-        let auto_complete = this.state.option_list.map((op, index) => {
-            return (
-                <Option
-                    key={index}
-                    click={() => this.setItem(op)}
-                    option={op}
-                    activateBlur={() => this.setState({ preventBlur: false })}
-                    preventBlur={() => this.setState({ preventBlur: true })}
-                />
-            );
-        });
-        auto_complete = <div id="option-group">{auto_complete}</div>;
-
-        const outfits = this.props.outfits.reverse().map(outfit => {
+        const outfits = this.props.outfits.map(outfit => {
             return (
                 <Outfit
                     key={outfit.id}

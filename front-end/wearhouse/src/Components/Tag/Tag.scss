@@ -17,6 +17,7 @@ $fontsize: 14px;
     .tag-text {
         font-size: $fontsize;
         padding: 0;
+        flex-shrink: 0;
         padding-right: 5px;
     }
     input {
