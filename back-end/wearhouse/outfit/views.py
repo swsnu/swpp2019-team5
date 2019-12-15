@@ -13,7 +13,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 import copy
-# user1 = User.objects.get(username="test")
+user1 = User.objects.get(username="user1")
 
 
 '''
@@ -33,7 +33,7 @@ def change_date_format(date):
 @require_http_methods(['GET', 'POST'])
 @transaction.atomic
 def outfit(request):
-    user1 = request.user
+    # user1 = request.user
 
     if request.method == 'GET':
 
@@ -207,7 +207,7 @@ def outfit(request):
 @require_http_methods(['GET', 'PUT', 'DELETE'])
 @transaction.atomic
 def specificOutfit(request, outfit_id):
-    user1 = request.user
+    # user1 = request.user
 
     try:
         outfit = Outfit.objects.get(pk=outfit_id)
@@ -300,6 +300,9 @@ def specificOutfit(request, outfit_id):
                 if itemExists :
                     assert len(item_candidates) ==1, "...inside itemExists"
                     items_for_edited_outfit.append(item_candidates[0]) #이미 있는 item임을 확인했으니 그냥 그 친구를 넣어준다
+                    #item을 포함하고 있는 outfit이 1개이고, item_candidate[0]의 id가 지금보고있는 item의 id가 다르면 지금 item을 지우자
+                    
+
                 else :
                     new_item = Item(category=item["category"], user=user1)
                     new_item.save()
@@ -307,12 +310,31 @@ def specificOutfit(request, outfit_id):
                         new_item.tags.add(tag)
                     new_item.save()
                     items_for_edited_outfit.append(new_item)
+                    #item을 포함하고 있는 outfit이 1개였다면 바로 지운다.
+                
 
             outfit.dateWithTime = date
             outfit.date = change_date_format(date)
             outfit.satisfaction = satisfaction
             outfit.tempIcon = tempIcon
             outfit.tempAvg = tempAvg
+            for prev_item in outfit.items.all() :
+                if prev_item in items_for_edited_outfit :
+                    pass
+                else :
+                    if prev_item.outfits_having_this_item.all().count() ==1 :
+                        for prev_tag in prev_item.tags.all() :
+                            if prev_tag.items_with_this_tag.all().count() == 1 :
+                                prev_tag.delete()
+                        prev_item.delete()
+
+                #만약에 prev_item이 items_for_edited_outfit 에 들어있지 않고, 
+                # prev_item.outfits_having_this_item의 길이가  1이라면
+                    #for prev_tag in prev_item.tags.all()
+                        #if prev_tag.items_with_this_tag.all().count == 1 
+                            #prev_tag.delete()
+                #    prev_item.delete()
+                #'''
             outfit.items.clear() #기존에 있던 모든 item관게를 끊어준다
 
             for item in items_for_edited_outfit :

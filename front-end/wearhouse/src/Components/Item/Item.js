@@ -144,6 +144,8 @@ class Item extends Component {
             tags: op.tags,
         });
         this.setState({ preventBlur: false });
+        this.input_bar.value = null;
+        if (op.tags.length >= 3) this.setState({ todo: "editDisabled" });
     }
 
     show = false;
@@ -204,7 +206,10 @@ class Item extends Component {
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    <span id="item-delete" data-tooltip-text="Delete Item">
+                    <span
+                        className="item-delete"
+                        data-tooltip-text="Delete Item"
+                    >
                         <FontAwesomeIcon icon={faTimes} />
                     </span>
                 </div>
@@ -232,7 +237,9 @@ class Item extends Component {
 
                         <div id="options">
                             {this.state.show &&
-                            this.state.option_list.length >= 1
+                            this.state.option_list.length >= 1 &&
+                            (this.input_bar.value.length >= 1 ||
+                                this.state.tags.length >= 1)
                                 ? auto_complete
                                 : null}
                         </div>
