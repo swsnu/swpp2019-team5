@@ -81,9 +81,13 @@ class OutfitDetail extends Component {
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <label id="date">
-                            {this.state.outfit.date
-                                ? moment(this.state.outfit.date).format("LL")
-                                : "Date is not selected"}
+                            <div>
+                                {this.state.outfit.date
+                                    ? moment(this.state.outfit.date).format(
+                                          "LL",
+                                      )
+                                    : "Date is not selected"}
+                            </div>
 
                             {this.state.outfit.date && (
                                 <div id="weather-icon">
