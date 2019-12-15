@@ -242,7 +242,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -270,7 +270,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -420,11 +420,11 @@ class Browse extends React.Component {
                                 onChange={e => this.onSearchInput(e)}
                                 placeholder="Search by tag..."
                             />
-                            <div id="options">
-                                {this.state.option_list.length >= 1
-                                    ? auto_complete
-                                    : null}
-                            </div>
+                        </div>
+                        <div id="options">
+                            {this.state.option_list.length >= 1
+                                ? auto_complete
+                                : null}
                         </div>
                         <button id="search-button">
                             <FontAwesomeIcon icon={faSearch} />

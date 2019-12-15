@@ -108,7 +108,7 @@ def outfit(request):
                                     print("item_candidate, tag: ")
                                     print(item_candidate, tag.name)
                                     itemExists = tag in item_candidate.tags.all()
-
+                                    
                                     print("itemExists_in item candidate: ")
                                     print(itemExists)
 
@@ -242,10 +242,10 @@ def specificOutfit(request, outfit_id):
     elif request.method == 'DELETE':
         for item in outfit.items.all() :
             # print("item list in this outfit : "+list(outfit.items))
-            for tag in item.tags.all() :
-                if tag.items_with_this_tag.all().count() == 1:
-                    tag.delete()
             if item.outfits_having_this_item.all().count() == 1:
+                for tag in item.tags.all() :
+                    if tag.items_with_this_tag.all().count == 1:
+                        tag.delete()
                 item.delete()
         # if item.outfits_having_this_item 의 length가 1이면. item도 지워줘
             # if tag.items_with_this_tag의 length가 1이면 tag도 지워줘
