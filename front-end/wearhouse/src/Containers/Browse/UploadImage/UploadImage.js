@@ -63,6 +63,8 @@ class UploadImage extends React.Component {
         form_data.append("image", this.state.selectedImageFile);
         //console.log(this.state.selectedImageFile);
         //  send image to backend
+
+        form_data.append("ml", this.checkbox.checked);
         this.props.onPostImage(form_data);
 
         //this.props.outfitData
@@ -76,6 +78,7 @@ class UploadImage extends React.Component {
         let confirmImageButton = null;
         let chooseFileButton = null;
         let previewImage = null;
+        let chooseMLButton = null;
         let alertMessage = null;
         let loading = null;
 
@@ -99,6 +102,22 @@ class UploadImage extends React.Component {
                     src={this.state.selectedImageURL}
                     alt="selected file"
                 />
+            );
+            chooseMLButton = (
+                <div id="choose-ml">
+                    <input
+                        type="checkbox"
+                        ref={input => {
+                            this.checkbox = input;
+                        }}
+                    />
+                    <label>
+                        <div>Automatically detect items</div>
+                        <div id="warning-message">
+                            This may take some time up to 5 seconds!
+                        </div>
+                    </label>
+                </div>
             );
             // console.log(this.state.isPreviewMode);
             // console.log(previewImage);
@@ -162,6 +181,7 @@ class UploadImage extends React.Component {
                         </div>
                         {chooseFileButton}
                         {previewImage}
+                        {chooseMLButton}
                         {alertMessage}
                         <div className="buttons">
                             {chooseOtherImageButton}
