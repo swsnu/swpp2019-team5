@@ -30,7 +30,7 @@ class Item extends Component {
         preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
-        todo: "editEnabled",
+        todo: this.props.item.tags.length <= 2 ? "editEnabled" : "editDisabled",
         item_list: this.props.item_list,
         option_list: this.props.option_list,
     };
