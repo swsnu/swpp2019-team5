@@ -9,6 +9,8 @@ import Spinner from "react-spinner-material";
 import "./UploadImage.scss";
 import { connect } from "react-redux";
 
+var MAX_SIZE = 5 * 1024 * 1024; // 5MB
+
 class UploadImage extends React.Component {
     state = {
         selectedImageFile: null, // binary file to send to backend
@@ -23,7 +25,14 @@ class UploadImage extends React.Component {
     };
 
     isImageFile = file => {
-        return file && file["type"].split("/")[0] === "image";
+        // console.log(file.size);
+
+        return (
+            file &&
+            file["type"].split("/")[0] === "image" &&
+            file.size < MAX_SIZE &&
+            file.size > 0
+        );
     };
 
     onFileChanged = event => {
@@ -135,7 +144,7 @@ class UploadImage extends React.Component {
             alertMessage = (
                 <div id="alert-message">
                     Uploaded file is not a valid image. Only JPG, JPEG, and PNG
-                    are allowed
+                    are allowed and file should be no bigger than 5MB.
                 </div>
             );
         }
@@ -146,6 +155,8 @@ class UploadImage extends React.Component {
             chooseFileButton = null;
             alertMessage = null;
             previewImage = null;
+            chooseMLButton = null;
+
             loading = (
                 <Spinner
                     id="loading"
