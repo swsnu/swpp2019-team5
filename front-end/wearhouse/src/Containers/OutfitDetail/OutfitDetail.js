@@ -95,7 +95,7 @@ class OutfitDetail extends Component {
                             <Satisfaction
                                 value={this.state.outfit.satisfactionValue}
                             />
-                            <img src={this.state.image} alt="outfit" />
+                            <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}

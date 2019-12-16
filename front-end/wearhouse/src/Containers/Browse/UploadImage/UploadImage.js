@@ -9,6 +9,8 @@ import Spinner from "react-spinner-material";
 import "./UploadImage.scss";
 import { connect } from "react-redux";
 
+var MAX_SIZE = 5 * 1024 * 1024; // 5MB
+
 class UploadImage extends React.Component {
     state = {
         selectedImageFile: null, // binary file to send to backend
@@ -23,7 +25,14 @@ class UploadImage extends React.Component {
     };
 
     isImageFile = file => {
-        return file && file["type"].split("/")[0] === "image";
+        // console.log(file.size);
+
+        return (
+            file &&
+            file["type"].split("/")[0] === "image" &&
+            file.size < MAX_SIZE &&
+            file.size > 0
+        );
     };
 
     onFileChanged = event => {
@@ -63,6 +72,8 @@ class UploadImage extends React.Component {
         form_data.append("image", this.state.selectedImageFile);
         //console.log(this.state.selectedImageFile);
         //  send image to backend
+
+        form_data.append("ml", this.checkbox.checked);
         this.props.onPostImage(form_data);
 
         //this.props.outfitData
@@ -76,6 +87,7 @@ class UploadImage extends React.Component {
         let confirmImageButton = null;
         let chooseFileButton = null;
         let previewImage = null;
+        let chooseMLButton = null;
         let alertMessage = null;
         let loading = null;
 
@@ -100,6 +112,22 @@ class UploadImage extends React.Component {
                     alt="selected file"
                 />
             );
+            chooseMLButton = (
+                <div id="choose-ml">
+                    <input
+                        type="checkbox"
+                        ref={input => {
+                            this.checkbox = input;
+                        }}
+                    />
+                    <label>
+                        <div>Automatically detect items</div>
+                        <div id="warning-message">
+                            This may take some time up to 5 seconds!
+                        </div>
+                    </label>
+                </div>
+            );
             // console.log(this.state.isPreviewMode);
             // console.log(previewImage);
         } else {
@@ -116,7 +144,7 @@ class UploadImage extends React.Component {
             alertMessage = (
                 <div id="alert-message">
                     Uploaded file is not a valid image. Only JPG, JPEG, and PNG
-                    are allowed
+                    are allowed and file should be no bigger than 5MB.
                 </div>
             );
         }
@@ -127,6 +155,8 @@ class UploadImage extends React.Component {
             chooseFileButton = null;
             alertMessage = null;
             previewImage = null;
+            chooseMLButton = null;
+
             loading = (
                 <Spinner
                     id="loading"
@@ -162,6 +192,7 @@ class UploadImage extends React.Component {
                         </div>
                         {chooseFileButton}
                         {previewImage}
+                        {chooseMLButton}
                         {alertMessage}
                         <div className="buttons">
                             {chooseOtherImageButton}
