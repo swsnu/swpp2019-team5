@@ -146,6 +146,7 @@ class UploadImage extends React.Component {
             chooseFileButton = null;
             alertMessage = null;
             previewImage = null;
+            chooseMLButton = null;
             loading = (
                 <Spinner
                     id="loading"
