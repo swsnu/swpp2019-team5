@@ -33,13 +33,14 @@
             height: 15px;
             padding: 10px;
             font-size: 14px;
-            width: 140px;
+            min-width: 160px;
             display: flex;
             text-align: center;
             justify-self: center;
+            justify-content: center;
             align-self: center;
             #weather-icon {
-                margin-left: 5px;
+                margin-left: 15px;
             }
         }
         overflow: hidden;

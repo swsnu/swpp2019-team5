@@ -77,6 +77,9 @@
                     justify-content: center;
                     z-index: 10;
 
+                    .fa-meh-blank {
+                        opacity: 0;
+                    }
                     .emoticon-on-calendar-cell {
                         width: 100%;
                         max-width: 40px;
@@ -89,7 +92,43 @@
                         font-size: 20px;
 
                         .fa-sun {
-                            color: #f2c629 !important;
+                            color: #f2c629;
+                        }
+
+                        .fa-moon {
+                            color: silver;
+                        }
+
+                        .fa-umbrella {
+                            color: rosybrown;
+                        }
+
+                        .fa-snowflake {
+                            color: paleturquoise;
+                        }
+
+                        .fa-cloud-showers-heavy {
+                            color: darkblue;
+                        }
+
+                        .fa-wind {
+                            color: lightskyblue;
+                        }
+
+                        .fa-smog {
+                            color: lightsteelblue;
+                        }
+
+                        .fa-cloud {
+                            color: palevioletred;
+                        }
+
+                        .fa-cloud-sun {
+                            color: mistyrose;
+                        }
+
+                        .fa-cloud-moon {
+                            color: goldenrod;
                         }
                     }
                 }

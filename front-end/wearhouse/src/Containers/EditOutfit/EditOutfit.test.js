@@ -16,22 +16,22 @@ let stubInitialState_item = {
         {
             id: 1,
             category: "UpperBody",
-            tags: ["T-shirt", "2019"],
+            tags: ["red", "sheep-fur", "11"],
         },
         {
             id: 2,
             category: "UpperBody",
-            tags: ["fall", "stripe", "blue"],
+            tags: ["red", "sheep-fur", "12"],
         },
         {
             id: 3,
             category: "UpperBody",
-            tags: ["coat", "wool", "pink"],
+            tags: ["red", "sheep-fur", "13"],
         },
         {
             id: 4,
             category: "UpperBody",
-            tags: ["mom", "hand-made", "check-shirt"],
+            tags: ["red", "sheep-fur", "14"],
         },
     ],
 };
@@ -132,7 +132,7 @@ describe("<EditOutfit />", () => {
         const component = mount(editOutfit);
         let wrapper = component.find(".EditOutfit");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(5);
     });
 
     it("edit satisfaction valaue", () => {
@@ -250,9 +250,7 @@ describe("<EditOutfit />", () => {
         wrapper.simulate("focus");
         wrapper.simulate("blur");
         wrapper.simulate("focus");
-        component.update();
         //Option component comes out again
-
         wrapper = component.find("Option");
         expect(wrapper.length).toBe(4);
         wrapper = component.find("#options-container");

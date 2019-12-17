@@ -4,6 +4,7 @@ import Tag from "../Tag/Tag";
 import Option from "../Option/Option";
 import "./Item.scss";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import * as actionCreators from "../../store/actions/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { itemStyles, itemOptions } from "./SelectStyle";
 import Select from "react-select";
@@ -29,15 +30,13 @@ class Item extends Component {
         preventBlur: false,
         category: this.props.item.category,
         tags: this.props.item.tags,
-        todo: "editEnabled",
-        item_list: this.props.item_list,
+        todo: this.props.item.tags.length <= 2 ? "editEnabled" : "editDisabled",
         option_list: this.props.option_list,
     };
 
     componentDidMount() {
-        if (this.state.tags.length >= 3) {
-            this.setState({ todo: "editDisabled" });
-        }
+        this.props.getAllItems();
+
         this.setState({
             category: this.props.item.category,
             tags: this.props.item.tags,
@@ -126,11 +125,40 @@ class Item extends Component {
             tags: tags,
         });
     }
+
+    isSubSet = (array1, array2) => {
+        return array2.every(function(value) {
+            return array1.indexOf(value) >= 0;
+        });
+    };
+
     handleAutoComplete = e => {
-        console.log(e.target.value);
-        //let option_list = this.state.tags.concat(e.target.value);
-        //should implement autocomplete feature (from TaeWon's work)
-        //autocomplete candidates should be set in option list
+        let tag_list = this.state.tags;
+        let e_value = e.target.value;
+
+        let temp_list = [];
+        let response_list = [];
+        this.props.items.forEach(item => {
+            if (this.isSubSet(item.tags, tag_list)) {
+                let sug = item.tags.filter(x => !tag_list.includes(x));
+                if (sug.length !== 0) {
+                    temp_list.push(item);
+                }
+            }
+        });
+        console.log(temp_list);
+        temp_list.forEach(item => {
+            item.tags.forEach(tag => {
+                if (tag.includes(e_value)) {
+                    response_list.push(item);
+                }
+            });
+        });
+
+        this.setState({ option_list: Array.from(new Set(response_list)) });
+
+        temp_list = [];
+        response_list = [];
     };
 
     handleBlur = () => {
@@ -144,6 +172,8 @@ class Item extends Component {
             tags: op.tags,
         });
         this.setState({ preventBlur: false });
+        this.input_bar.value = null;
+        if (op.tags.length >= 3) this.setState({ todo: "editDisabled" });
     }
 
     show = false;
@@ -160,6 +190,7 @@ class Item extends Component {
                 />
             );
         });
+
         auto_complete = <div id="option-group">{auto_complete}</div>;
         let option = itemOptions.find(
             c => c.value === this.props.item.category,
@@ -204,7 +235,10 @@ class Item extends Component {
                     className="item-deleter"
                     onClick={this.handleItemDelete.bind(this)}
                 >
-                    <span id="item-delete" data-tooltip-text="Delete Item">
+                    <span
+                        className="item-delete"
+                        data-tooltip-text="Delete Item"
+                    >
                         <FontAwesomeIcon icon={faTimes} />
                     </span>
                 </div>
@@ -232,7 +266,12 @@ class Item extends Component {
 
                         <div id="options">
                             {this.state.show &&
-                            this.state.option_list.length >= 1
+                            this.state.option_list.length >= 1 &&
+                            ((this.state.todo === "editEnabled" &&
+                                this.input_bar &&
+                                this.input_bar.value.length >= 1) ||
+                                (this.state.tags.length >= 1 &&
+                                    this.state.tags.length <= 2))
                                 ? auto_complete
                                 : null}
                         </div>
@@ -247,9 +286,15 @@ class Item extends Component {
 const mapStateToProps = state => {
     return {
         option_list: state.item.option_list,
+        items: state.item.items,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllItems: () => dispatch(actionCreators.getItems()),
     };
 };
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(Item);

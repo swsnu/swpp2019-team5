@@ -1,7 +1,6 @@
 #options-container {
-    width: 530px;
+    width: 100%;
     display: flex;
-    z-index: 1;
     background-color: white;
     &:hover {
         background-color: adjust-hue($color: rgb(255, 245, 247), $degrees: 4);

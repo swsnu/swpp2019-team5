@@ -46,7 +46,7 @@
                     width: 100%;
                     flex-wrap: wrap;
                     flex-direction: column;
-                    overflow: scroll;
+                    overflow-x: scroll;
                 }
             }
         }
@@ -70,6 +70,35 @@
                 #weather-summary {
                     margin: 10px 0;
                 }
+            }
+        }
+    }
+    @media (max-width: 600px) {
+        #recommendation-wrapper {
+            #recommendation-container {
+                grid-template-rows: 70px auto;
+                grid-template-columns: 1fr;
+                #weather-info {
+                    display: flex;
+                    margin-top: -5px;
+                    #weather-icon {
+                        font-size: 40px;
+                        height: 50px;
+                    }
+                    #weather-text {
+                        text-align: center;
+                        #weather-temp {
+                            font-size: 17px;
+                        }
+                        #weather-summary {
+                            font-size: 15px;
+                            margin: 3px 0;
+                        }
+                    }
+                }
+            }
+            .outfit-preview {
+                width: 90%;
             }
         }
     }

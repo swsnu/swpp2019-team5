@@ -79,7 +79,6 @@ let mockStore = getMockStore(
 
 describe("<OutfitDetail />", () => {
     let outfitDetail, spyHistoryPush, spyAxios_delete;
-    let spyAxios_get;
     beforeEach(() => {
         outfitDetail = (
             <Provider store={mockStore}>
@@ -100,10 +99,6 @@ describe("<OutfitDetail />", () => {
         spyAxios_delete = jest
             .spyOn(axios, "delete")
             .mockImplementation(() => Promise.resolve({}));
-
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -114,7 +109,6 @@ describe("<OutfitDetail />", () => {
         const component = mount(outfitDetail);
         let wrapper = component.find("#outfit-detail");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should call onEdit", () => {

@@ -8,14 +8,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.CREATE_ITEM: {
-            const new_item = {
-                id: action.id,
-                tags: action.tag,
-                category: action.category,
-            };
-            const new_items = state.items.concat(new_item);
-            return { ...state, items: new_items };
+        case actionTypes.GET_ITEMS: {
+            return { ...state, items: action.items };
         }
         default:
             break;

@@ -89,6 +89,15 @@
             }
         }
     }
+    #content-3 {
+        grid-template-rows: 20% 80%;
+        iframe {
+            justify-self: center;
+            width: 90%;
+            height: 80%;
+            max-height: 90%;
+        }
+    }
 
     footer {
         height: 15vh;

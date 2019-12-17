@@ -69,7 +69,7 @@ class OutfitDetail extends Component {
 
     onDelete = () => {
         this.props.deleteOutfit(this.props.match.params.id);
-        this.props.history.push("/browse");
+        this.props.history.push("/main");
     };
     render() {
         let items = this.state.outfit.items.map((item, index) => {
@@ -81,9 +81,13 @@ class OutfitDetail extends Component {
                 <div id="detail-outfit-window">
                     <div id="image-window">
                         <label id="date">
-                            {this.state.outfit.date
-                                ? moment(this.state.outfit.date).format("LL")
-                                : "Date is not selected"}
+                            <div>
+                                {this.state.outfit.date
+                                    ? moment(this.state.outfit.date).format(
+                                          "LL",
+                                      )
+                                    : "Date is not selected"}
+                            </div>
 
                             {this.state.outfit.date && (
                                 <div id="weather-icon">
@@ -95,7 +99,7 @@ class OutfitDetail extends Component {
                             <Satisfaction
                                 value={this.state.outfit.satisfactionValue}
                             />
-                            <img src={this.state.image} alt="outfit" />
+                            <img src={this.props.outfit.image} alt="outfit" />
                         </div>
                     </div>
                     {/*originally it should be proped image.. this is just for testing due to unimplementation of DB*/}

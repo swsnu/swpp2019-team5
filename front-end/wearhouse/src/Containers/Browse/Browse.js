@@ -53,7 +53,7 @@ class Browse extends React.Component {
             this.setState({
                 mode: "browse",
                 searchOptions: {
-                    searchMode: "Outfit",
+                    searchMode: this.state.searchOptions.searchMode,
                     searchArray: [],
                     tempMax: 50,
                     tempMin: -30,
@@ -108,7 +108,7 @@ class Browse extends React.Component {
                 tags.indexOf(this.state.search_query) === -1 &&
                 this.state.search_query.trim() !== ""
             ) {
-                tags.push(this.state.search_query);
+                tags.push(this.state.search_query.toLowerCase());
                 this.setState({
                     searchOptions: {
                         ...this.state.searchOptions,
@@ -165,10 +165,20 @@ class Browse extends React.Component {
         //return true;
     };
 
+    //auto-complete
+    setItem(op) {
+        this.setState({ show: false });
+        this.props.applyEdit({
+            category: this.state.category,
+            tags: op.tags,
+        });
+        this.setState({ preventBlur: false });
+    }
+
     render() {
         let container = null;
 
-        const outfits = this.props.outfits.reverse().map(outfit => {
+        const outfits = this.props.outfits.map(outfit => {
             return (
                 <Outfit
                     key={outfit.id}
@@ -201,7 +211,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -229,7 +239,7 @@ class Browse extends React.Component {
                 return (
                     <Outfit
                         key={outfit.id}
-                        image={outfit.imageUrl}
+                        image={outfit.image}
                         satisfactionValue={outfit.satisfactionValue}
                         date={outfit.date}
                         clicked={() => this.onClickOutfit(outfit)}
@@ -400,11 +410,13 @@ const mapStateToProps = state => {
     return {
         outfits: state.outfit.outfits,
         selectedOutfit: state.outfit.selectedOutfit,
+        items: state.item.items,
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
         getAllOutfits: () => dispatch(actionCreators.getOutfits()),
+        getAllItems: () => dispatch(actionCreators.getItems()),
     };
 };
 export default connect(

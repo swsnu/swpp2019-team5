@@ -25,6 +25,11 @@ $templatecolor: rgba(127, 255, 212, 0.3);
                 top: 14vh;
                 left: 10%;
             }
+            @media (min-width: 768px) {
+                position: absolute;
+                top: 14vh;
+                left: 10%;
+            }
         }
 
         #search-container {

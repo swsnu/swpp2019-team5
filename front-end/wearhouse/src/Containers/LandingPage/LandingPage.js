@@ -65,9 +65,18 @@ class LandingPage extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <div className="intro-content" id="content-3">
-                    <h1>How WearHouse works</h1>
-                </div> */}
+                <div className="intro-content" id="content-3">
+                    <h1>Demo video</h1>
+                    <iframe
+                        // width="560"
+                        // height="315"
+                        src="https://www.youtube.com/embed/4IT6CQgjgUo"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="demo-video"
+                    ></iframe>
+                </div>
                 <footer>
                     <div id="footericon"></div>
                     <div id="footertext">
