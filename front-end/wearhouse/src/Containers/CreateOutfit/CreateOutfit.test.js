@@ -128,7 +128,7 @@ describe("<CreateOutfit />", () => {
         const component = mount(createOutfit);
         let wrapper = component.find("#create-outfit").at(0);
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(2);
     });
 
     it("set date properly", () => {
