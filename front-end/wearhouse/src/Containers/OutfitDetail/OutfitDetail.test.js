@@ -79,7 +79,6 @@ let mockStore = getMockStore(
 
 describe("<OutfitDetail />", () => {
     let outfitDetail, spyHistoryPush, spyAxios_delete;
-    let spyAxios_get;
     beforeEach(() => {
         outfitDetail = (
             <Provider store={mockStore}>
