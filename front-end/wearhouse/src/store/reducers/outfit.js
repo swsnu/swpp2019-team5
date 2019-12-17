@@ -15,7 +15,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_OUTFITS:
-            return { ...state, outfits: action.outfits };
+            return { ...state, outfits: action.outfits.reverse() };
         case actionTypes.GET_SPECIFIC_OUTFIT:
             return { ...state, selectedOutfit: action.target };
         case actionTypes.CREATE_OUTFIT: {

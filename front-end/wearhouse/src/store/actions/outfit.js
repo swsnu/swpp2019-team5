@@ -3,7 +3,7 @@ import axios from "axios";
 import { push } from "connected-react-router";
 
 export const getOutfits_ = outfits => {
-    return { type: actionTypes.GET_OUTFITS, outfits: outfits.reverse() };
+    return { type: actionTypes.GET_OUTFITS, outfits: outfits };
 };
 
 export const getOutfits = () => {

@@ -146,7 +146,6 @@ class Item extends Component {
                 }
             }
         });
-        console.log(temp_list);
         temp_list.forEach(item => {
             item.tags.forEach(tag => {
                 if (tag.includes(e_value)) {
