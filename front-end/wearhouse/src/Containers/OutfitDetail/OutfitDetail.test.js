@@ -114,7 +114,6 @@ describe("<OutfitDetail />", () => {
         const component = mount(outfitDetail);
         let wrapper = component.find("#outfit-detail");
         expect(wrapper.length).toBe(1);
-        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should call onEdit", () => {
