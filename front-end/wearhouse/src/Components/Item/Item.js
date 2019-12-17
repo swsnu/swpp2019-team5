@@ -31,7 +31,6 @@ class Item extends Component {
         category: this.props.item.category,
         tags: this.props.item.tags,
         todo: this.props.item.tags.length <= 2 ? "editEnabled" : "editDisabled",
-        item_list: this.props.item_list,
         option_list: this.props.option_list,
     };
 
@@ -191,6 +190,7 @@ class Item extends Component {
                 />
             );
         });
+
         auto_complete = <div id="option-group">{auto_complete}</div>;
         let option = itemOptions.find(
             c => c.value === this.props.item.category,
@@ -271,7 +271,7 @@ class Item extends Component {
                                 this.input_bar &&
                                 this.input_bar.value.length >= 1) ||
                                 (this.state.tags.length >= 1 &&
-                                    this.state.tags <= 2))
+                                    this.state.tags.length <= 2))
                                 ? auto_complete
                                 : null}
                         </div>
