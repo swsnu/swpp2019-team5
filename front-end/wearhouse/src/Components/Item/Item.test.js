@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { getMockStore } from "../../test-utils/mocks_specific";
 import { history } from "../../store/store";
 import { ConnectedRouter } from "connected-react-router";
+import axios from "axios";
 
 import Item from "./Item";
 
@@ -44,7 +45,7 @@ let mockStore = getMockStore(
 );
 
 describe("<Item/>", () => {
-    let item;
+    let item, spyAxios_get;
     beforeEach(() => {
         item = (
             <Provider store={mockStore}>
@@ -58,6 +59,10 @@ describe("<Item/>", () => {
                 </ConnectedRouter>
             </Provider>
         );
+
+        spyAxios_get = jest
+            .spyOn(axios, "get")
+            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
@@ -93,6 +98,7 @@ describe("<Item/>", () => {
         const component = mount(item);
 
         expect(component.find(".Item").length).toBe(1);
+        expect(spyAxios_get).toHaveBeenCalledTimes(1);
     });
 
     it("should edit item values", () => {

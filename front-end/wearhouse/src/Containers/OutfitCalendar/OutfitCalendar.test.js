@@ -136,7 +136,6 @@ describe("<OutfitCalendar />", () => {
         const component = mount(outfitCalendar);
 
         let wrapper = component.find(".has-outfit").first();
-        console.log(wrapper.debug());
         wrapper.simulate("click");
 
         expect(spyHistoryPush).toHaveBeenCalledTimes(1);
@@ -145,7 +144,6 @@ describe("<OutfitCalendar />", () => {
     it("should not redirect to outfitDetail page", () => {
         const component = mount(outfitCalendar);
         const wrapper = component.find("td").first();
-        console.log(wrapper.debug());
         wrapper.simulate("click");
         expect(spyHistoryPush).toHaveBeenCalledTimes(0);
     });

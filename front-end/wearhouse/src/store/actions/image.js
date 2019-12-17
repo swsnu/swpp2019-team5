@@ -9,7 +9,6 @@ var axiosConfig = {
 };
 
 export const postImage_ = outfit_metadata => {
-    //console.log("outfit_metadata", outfit_metadata);
     return {
         type: actionTypes.POST_IMAGE,
         image: outfit_metadata.image,
@@ -27,7 +26,6 @@ export const postImage = image => {
                 .post("/api/image/", image, axiosConfig)
                 //.post("/api/image/", image)
                 .then(res => {
-                    //console.log(res.data);
                     dispatch(postImage_(res.data));
                 })
                 .catch(error => {
