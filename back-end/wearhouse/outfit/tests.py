@@ -11,7 +11,8 @@ class OutfitTestCase(TestCase):
     def setUp(self):
         # create user
         self.client = Client(enforce_csrf_checks=False)
-        user = User.objects.create_user(username="test", email="test", password="test")
+        user = User.objects.create_user(
+            username="test", email="test", password="test")
 
         # create Tags
         tag_black = Tag(name="black", user=user)
@@ -40,7 +41,8 @@ class OutfitTestCase(TestCase):
         item4.tags.add(tag_verypretty)
 
         # create Outfit
-        outfit1 = Outfit(user=user, image_link="", date="2019-11-11", tempAvg=3, tempIcon="happy", satisfaction=5)
+        outfit1 = Outfit(user=user, image_link="", date="2019-11-11",
+                         tempAvg=3, tempIcon="happy", satisfaction=5)
         outfit1.save()
         outfit1.items.add(item1, item2, item3, item4)
         outfit1.save()
@@ -126,7 +128,7 @@ class OutfitTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Outfit.objects.all().count(), 0)
         self.assertEqual(Item.objects.all().count(), 0)
-        self.assertEqual(Tag.objects.all().count(), 0)
+        self.assertEqual(Tag.objects.all().count(), 5)
 
     def test_edit_outfit1(self):
         self.client.login(username='test', password='test')
@@ -149,7 +151,8 @@ class OutfitTestCase(TestCase):
 
         self.assertEqual(Outfit.objects.get(pk=1).items.count(), 4)
 
-        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        response = self.client.put(
+            '/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Outfit.objects.get(pk=1).items.count(), 1)
 
@@ -174,7 +177,8 @@ class OutfitTestCase(TestCase):
 
         self.assertEqual(Outfit.objects.get(pk=1).items.count(), 4)
 
-        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        response = self.client.put(
+            '/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Outfit.objects.get(pk=1).items.count(), 1)
 
@@ -184,5 +188,6 @@ class OutfitTestCase(TestCase):
         edited_outfit = {}
 
         # wrong key input
-        response = self.client.put('/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
+        response = self.client.put(
+            '/api/outfit/1/', json.dumps(edited_outfit), content_type='application/json')
         self.assertEqual(response.status_code, 400)
