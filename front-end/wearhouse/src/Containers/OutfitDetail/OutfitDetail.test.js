@@ -99,10 +99,6 @@ describe("<OutfitDetail />", () => {
         spyAxios_delete = jest
             .spyOn(axios, "delete")
             .mockImplementation(() => Promise.resolve({}));
-
-        spyAxios_get = jest
-            .spyOn(axios, "get")
-            .mockImplementation(() => Promise.resolve({}));
     });
 
     afterEach(() => {
