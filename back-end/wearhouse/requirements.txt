@@ -1,5 +1,5 @@
 coverage==4.5.4
-Django==2.2.6
+Django==2.2.22
 pylint==2.4.3
 mysqlclient==1.4.4
 coveralls==1.8.2
